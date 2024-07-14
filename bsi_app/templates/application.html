@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+        <!-- End Responsive Navbar Area -->
+
+        <!-- Start Pages Banner Area -->
+        <div class="pages-banner-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="pages-title">
+                            <h2>Application Form</h2>
+                            <ul class="list-unstyled ps-0 mb-0">
+                                <li class="d-inline-block">
+                                    <a class="text-decoration-none" href="index.html">
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="d-inline-block">
+                                    Application Form
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pages-image">
+                            <img src="assets/img/pages/pages-11.jpg" alt="pages-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shape-7">
+                <img src="assets/img/shape/shape-7.png" alt="shape">
+            </div>
+        </div>
+        <!-- End Pages Banner Area -->
+        
+        <!-- Start Application Area -->
+        <div class="application-details-area ptb-100">
+            <div class="container">
+                <form class="application-form-details">
+                    <h3>Applicant Details</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" placeholder="First name here">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last name here">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Email address</label>
+                                <input type="text" class="form-control" placeholder="Email address here">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Phone number</label>
+                                <input type="text" class="form-control" placeholder="Phone number here">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">State name</label>
+                                <input type="text" class="form-control" placeholder="State name here">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Zip code</label>
+                                <input type="text" class="form-control" placeholder="Zip code here">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Date of birth</label>
+                                <input type="text" class="form-control" placeholder="Date of birth here">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Student type</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Student type here</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-30"></div>
+                    <h3>Education Details</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Select area of study</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Please select subject</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Degree level</label>
+                                <input type="text" class="form-control" placeholder="Bachelor’s Degree">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Additional information</label>
+                        <textarea class="form-control textarea" placeholder="Questions? Anything you’d like to know or ask..."></textarea>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            By submitting this form, you agree to the Adma University <a class="text-decoration-none" href="#">privacy</a> notice.
+                        </label>
+                    </div>
+                    <button type="submit" class="default-btn border-0">
+                        Submit Application
+                        <i class="flaticon-right-arrow"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- End Application Area -->
+
+        {% endblock %}   

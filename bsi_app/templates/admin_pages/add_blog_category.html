@@ -1,0 +1,51 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+      
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Add Blog Category</h4>
+                      <!-- <p class="card-description">
+                        Basic form layout
+                      </p> -->
+                      <form class="forms-sample" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <div class="form-group">
+                          <label for="CategoryName">Category Name</label>
+                          <input type="text" class="form-control" id="CategoryName" name="category_name" placeholder="Category Name">
+                        </div>
+                        <div class="form-group">
+                          <label for="BlogHeading">Blog Heading</label>
+                          <input type="text" class="form-control" id="BlogHeading" name="blog_heading" placeholder="Blog Heading">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" id="date" name="date" placeholder="">
+                          </div>
+                        
+                
+                      <div class="form-group">
+                        <label for="imageFile">Blog Image</label>
+                        <input type="file" class="form-control-file" id="imageFile" name="main_image" accept="image/*">
+                    </div>
+
+                        <div class="form-check form-check-flat form-check-primary">
+                          <label class="form-check-label">
+                            <!-- <input type="checkbox" class="form-check-input">
+                            Remember me -->
+                          </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <!-- <button class="btn btn-light">Cancel</button> -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          
+            {% endblock %}

@@ -1,0 +1,201 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+ 
+<style>
+
+
+
+  @media (max-width: 575.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 150px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* Small (SM) */
+  @media (min-width: 576px) and (max-width: 767.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* Medium (MD) */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 300px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* Large (LG) */
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 400px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* Extra Large (XL) */
+  @media (min-width: 1200px) and (max-width: 1399.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 500px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* Larger Screens */
+  @media (min-width: 1400px) and (max-width: 1599.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 600px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* Extra Larger Screens */
+  @media (min-width: 1600px) and (max-width: 1799.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 700px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* Ultra Large Screens */
+  @media (min-width: 1800px) and (max-width: 1999.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 800px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* 4K Screens */
+  @media (min-width: 2000px) and (max-width: 2199.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 900px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* 5K Screens */
+  @media (min-width: 2200px) and (max-width: 2399.98px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 1000px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  
+  /* 8K Screens */
+  @media (min-width: 2400px) {
+      .table-responsive {
+          overflow-x: auto;
+      }
+      .card-body td:nth-child(2) {
+          max-width: 1200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+  }
+  </style>
+  
+  <div class="col-lg-10 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Blog Details</h4>
+        <div class="table-responsive">
+          <div style="overflow-x: auto;">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Blog Category</th>
+                  <th>Blog Description</th>
+                  <th>Blog Image</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for blog_details in blog_details %}
+                  <tr>
+                    <td style="width: 150px;">{{ blog_details.category }}</td>
+                    <td style="width: 600px; height: 200px;  white-space: inherit; word-wrap: break-word;">{{ blog_details.blog_description | safe }}</td>
+                    <td style="width: 150px;">
+                      {% if blog_details.blog_image %}
+                        <img src="{{ blog_details.blog_image.url }}" alt="Current Image" style="width: 80px; height: 80px;">
+                        <br>
+                        <!-- <input type="checkbox" name="remove_image"> Remove Current Image -->
+                      {% else %}
+                        <p>No image available</p>
+                      {% endif %}
+                    </td>
+                    <td style="width: 150px;">
+                      <a href="{% url 'update_blog_details' blog_details.id  %}"><button><i class="mdi mdi-cloud-upload" aria-hidden="true"></i> </button></a>
+                    </td>
+                    <td style="width: 150px;">
+                      <a href="{% url 'delete_blog_details' blog_details.id  %}"><button><i class="mdi mdi-delete" aria-hidden="true"></i> </button></a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+{% endblock %} 
