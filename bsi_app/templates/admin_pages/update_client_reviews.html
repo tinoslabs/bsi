@@ -8,13 +8,13 @@
                 <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Update Client Review</h4>
+                      <h4 class="card-title">Update Student Review</h4>
                       <!-- <p class="card-description">
                         Basic form layout
                       </p> -->
                       <form class="forms-sample" method="POST" enctype="multipart/form-data"> {% csrf_token %}
                         <div class="form-group">
-                          <label for="ClientName">Client Name</label>
+                          <label for="ClientName">Student Name</label>
                           <input type="text" class="form-control" id="ClientName" name="client_name" value="{{client_reviews.client_name}}" placeholder="Client Name">
                         </div>
                         <div class="form-group">
@@ -28,7 +28,7 @@
                       </div>
                     
                     <div class="form-group">
-                      <label>Current Client Image</label><br>
+                      <label>Current Student Image</label><br>
                       {% if client_reviews.client_image %}
                           <img src="{{ client_reviews.client_image.url }}" alt="Current Image" style="width: 150px; height: 150px;">
                           <br>
@@ -39,7 +39,7 @@
                   </div>
                   <!-- New Client Image -->
                   <div class="form-group">
-                      <label for="imageFile">Upload New Client Image</label><br>
+                      <label for="imageFile">Upload New Student Image</label><br>
                       <input type="file" class="form-control-file" id="imageFile" name="client_image" accept="image/*">
                   </div>
                   <!-- Current Review Video -->
