@@ -24,6 +24,10 @@ urlpatterns = [
     path('logout_user', views.logout_user, name='logout_user'),
     path('admin_dashboard',views.admin_dashboard,name='admin_dashboard'),
 
+    path('submit_query/',views.submit_query, name='submit_query'),
+    path('chatbot_message_view',views.chatbot_message_view,name='chatbot_message_view'),
+    path('delete_message/<int:id>/',views.delete_message,name='delete_message'),
+
     path('contact_view', views.contact_view, name='contact_view'),
     path('delete_contact/<int:id>/',views.delete_contact,name='delete_contact'),
     path('contact', views.contact, name='contact'),
@@ -46,8 +50,16 @@ urlpatterns = [
     path('blog_details',views.blog_details, name='blog_details'),
     path('blog_details/<str:blog_heading>/',views.blog_details,name='blog_details'),
 
+    path('add_clients_logo',views.add_clients_logo,name='add_clients_logo'),
+    path('view_clients_logo',views.view_clients_logo,name='view_clients_logo'),
+    path('update_clients_logo/<int:id>/',views.update_clients_logo,name='update_clients_logo'),
+    path('delete_clients_logo/<int:id>/',views.delete_clients_logo,name='delete_clients_logo'),
 
-    path('service',views.service,name='service')
-    
+    path('service', views.service, name='service'),
+    path('programs', views.programs, name='programs'),
+    path('program_details', views.program_details, name='program_details'),
+    path('about', views.about, name='about'),
+    path('application', views.application, name='application'),
+    path('apply', views.apply, name='apply'),
  
 ]

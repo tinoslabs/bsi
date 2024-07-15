@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details
-from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo
+from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form
 # Create your views here.
 
 def user_login(request):
@@ -33,7 +33,8 @@ def admin_dashboard(request):
 
 def index(request):
     clients_review = ClientReview.objects.all()
-    return render(request,'index.html',{'clients_review':clients_review})
+    client_logo = Client_Logo.objects.all()
+    return render(request,'index.html',{'clients_review':clients_review,'client_logo':client_logo})
 
 
 from django.http import JsonResponse
@@ -180,6 +181,41 @@ def update_blog_details(request, id):
     return render(request, 'admin_pages/update_blog_details.html', {'form': form, 'blog_details': blog_details,'categories':categories})
 
 @login_required(login_url='user_login')
+def add_clients_logo(request):
+    if request.method == 'POST':
+        form = Client_Logo_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_clients_logo') 
+    else:
+        form = Client_Logo_Form()
+
+    return render(request, 'admin_pages/add_clients_logo.html', {'form': form})
+
+@login_required(login_url='user_login')
+def view_clients_logo(request):
+    logo = Client_Logo.objects.all().order_by('-id')
+    return render(request,'admin_pages/view_clients_logo.html',{'logo':logo})
+
+@login_required(login_url='user_login')
+def update_clients_logo(request,id):
+    logos = get_object_or_404(Client_Logo, id=id)
+    if request.method == 'POST':
+        form = Client_Logo_Form(request.POST, request.FILES, instance=logos)
+        if form.is_valid():
+            form.save()
+            return redirect('view_clients_logo')
+    else:
+        form = Client_Logo_Form(instance=logos)
+    return render(request, 'admin_pages/update_clients_logo.html', {'form': form, 'logos': logos})
+
+@login_required(login_url='user_login')
+def delete_clients_logo(request,id):
+    logos = Client_Logo.objects.get(id=id)
+    logos.delete()
+    return redirect('view_clients_logo')
+
+@login_required(login_url='user_login')
 def delete_blog_details(request,id):
     blog_details = Blog_Details.objects.get(id=id)
     blog_details.delete()
@@ -226,3 +262,18 @@ def submit_query(request):
 
 def service(request):
     return render(request,'service.html')
+
+def programs(request):
+    return render(request,'programs.html')
+
+def program_details(request):
+    return render(request,'program-details.html')
+
+def about(request):
+    return render(request,'about.html')
+
+def application(request):
+    return render(request,'application.html')
+
+def apply(request):
+    return render(request,'apply.html')

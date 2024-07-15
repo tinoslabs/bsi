@@ -163,22 +163,22 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
-    <li class="nav-item nav-category">Client Reviews</li>
+    <li class="nav-item nav-category">Student Reviews</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <i class="menu-icon mdi mdi-floor-plan"></i>
-        <span class="menu-title">Client Reviews</span>
+        <span class="menu-title">Student Reviews</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="">Add Client Reviews</a></li>
-          <li class="nav-item"> <a class="nav-link" href="">View Client Reviews</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_reviews' %}">Add Student Reviews</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_reviews' %}">View Student Reviews</a></li>
           <!-- <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/typography.html">Typography</a></li> -->
         </ul>
       </div>
     </li>
-    <li class="nav-item nav-category">Projects</li>
+    <!-- <li class="nav-item nav-category">Projects</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
         aria-controls="form-elements">
@@ -192,10 +192,10 @@
           <li class="nav-item"><a class="nav-link" href="">View Projects</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
 
 
-    <li class="nav-item nav-category">Team</li>
+    <!-- <li class="nav-item nav-category">Team</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#team1" aria-expanded="false" aria-controls="team">
         <i class="menu-icon mdi mdi-account-multiple-plus"></i>
@@ -210,7 +210,7 @@
           <li class="nav-item"> <a class="nav-link" href=""> View Team Details</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
 
     <li class="nav-item nav-category">Blog</li>
     <li class="nav-item">
@@ -221,10 +221,10 @@
       </a>
       <div class="collapse" id="blog">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href=""> Add Blog Category</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Blog Category</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> Add Blog Details</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Blog Details</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog_category' %}"> Add Blog Category</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_blog_category' %}"> View Blog Category</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_blog_details' %}"> Add Blog Details</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_blog_details' %}"> View Blog Details</a></li>
         </ul>
       </div>
     </li>
@@ -239,13 +239,13 @@
       </a>
       <div class="collapse" id="client">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href=""> Add Clients Logo </a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Clients Logo </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_clients_logo' %}"> Add Clients Logo </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_clients_logo' %}"> View Clients Logo </a></li>
         </ul>
       </div>
     </li>
 
-    <li class="nav-item nav-category">Expertised Technologies</li>
+    <!-- <li class="nav-item nav-category">Expertised Technologies</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#technologies" aria-expanded="false" aria-controls="technologies">
         <i class="menu-icon mdi mdi-lumx"></i>
@@ -258,9 +258,9 @@
           <li class="nav-item"> <a class="nav-link" href=""> View Technology Logo </a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
 
-    <li class="nav-item nav-category">Upload Service Videos</li>
+    <!-- <li class="nav-item nav-category">Upload Service Videos</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#service" aria-expanded="false" aria-controls="service">
         <i class="menu-icon mdi mdi mdi-play-circle"></i>
@@ -275,10 +275,10 @@
           
         </ul>
       </div>
-    </li>
+    </li> -->
 
 
-    <li class="nav-item nav-category">Certificate</li>
+    <!-- <li class="nav-item nav-category">Certificate</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#certificate" aria-expanded="false" aria-controls="certificate">
         <i class="menu-icon mdi mdi-view-agenda"></i>
@@ -291,9 +291,9 @@
           <li class="nav-item"> <a class="nav-link" href=""> View Certificates</a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
 
-    <li class="nav-item nav-category">Job Details</li>
+    <!-- <li class="nav-item nav-category">Job Details</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#job" aria-expanded="false" aria-controls="job">
         <i class="menu-icon mdi mdi mdi-book-open"></i>
@@ -306,8 +306,8 @@
           <li class="nav-item"> <a class="nav-link" href=""> View Job Details </a></li>
         </ul>
       </div>
-    </li>
-    <li class="nav-item nav-category">Candidate Details</li>
+    </li> -->
+    <!-- <li class="nav-item nav-category">Candidate Details</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#candidate" aria-expanded="false" aria-controls="candidate">
         <i class="menu-icon mdi mdi-account-box"></i>
@@ -320,7 +320,7 @@
           <li class="nav-item"> <a class="nav-link" href=""> View Candidate Details </a></li>
         </ul>
       </div>
-    </li>
+    </li> -->
 
     
     <li class="nav-item nav-category">Contact US</li>
@@ -332,7 +332,7 @@
       </a>
       <div class="collapse" id="contact">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="">Contact US</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'contact_view' %}">Contact US</a></li>
         </ul>
       </div>
     </li>
@@ -345,7 +345,7 @@
       </a>
       <div class="collapse" id="chatbot">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="">Chatbot Messages</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'chatbot_message_view' %}">Chatbot Messages</a></li>
           <!-- <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/dropdowns.html">Dropdowns</a></li>
           <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/typography.html">Typography</a></li> -->
         </ul>

@@ -8,14 +8,14 @@
                 <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Add Client Reviews</h4>
+                      <h4 class="card-title">Add Student Reviews</h4>
                       <!-- <p class="card-description">
                         Basic form layout
                       </p> -->
                       <form class="forms-sample" method="POST" enctype="multipart/form-data"> {% csrf_token %}
                         <div class="form-group">
-                          <label for="ClientName">Client Name</label>
-                          <input type="text" class="form-control" id="ClientName" name="client_name" placeholder="Client Name" required>
+                          <label for="ClientName">Student Name</label>
+                          <input type="text" class="form-control" id="ClientName" name="client_name" placeholder="Student Name" required>
                         </div>
                         <div class="form-group">
                           <label for="designation">Designation</label>
@@ -28,7 +28,7 @@
                       </div>
                       
                       <div class="form-group">
-                        <label for="imageFile">Client Image</label>
+                        <label for="imageFile">Student Image</label>
                         <input type="file" class="form-control-file" id="imageFile" name="client_image" accept="image/*">
                     </div>
 
