@@ -15,7 +15,7 @@
                             <h2>Log In Now</h2>
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="index.html">
+                                    <a class="text-decoration-none" href="{% url 'index' %}">
                                         Home
                                     </a>
                                 </li>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="pages-image">
-                            <img src="assets/img/pages/pages-10.jpg" alt="pages-image">
+                            <img src="{% static 'assets/img/pages/pages-10.jpg' %}" alt="pages-image">
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                             <i class="flaticon-right-arrow"></i>
                         </button>
                     </form>
-                    <p>Don't have an account? <a class="text-decoration-none" href="application.html">Sign Up</a></p>
+                    <p>Don't have an account? <a class="text-decoration-none" href="{% url 'application' %}">Sign Up</a></p>
                 </div>
             </div>
         </div>
