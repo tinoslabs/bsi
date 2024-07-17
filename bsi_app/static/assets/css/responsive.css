@@ -108,14 +108,8 @@
     padding-top: 70px;
     padding-bottom: 70px;
   }
-  .hero-area .container-fluid {
-    max-width: 540px;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .hero-area::after {
-    background: linear-gradient(90deg, rgba(0, 9, 41, 0.9) 31.2%, rgba(0, 9, 41, 0) 309.89%);
-  }
+
+
   .hero-content {
     margin-bottom: 25px;
   }
@@ -1338,14 +1332,7 @@
     padding-top: 70px;
     padding-bottom: 70px;
   }
-  .hero-area .container-fluid {
-    max-width: 720px;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .hero-area::after {
-    background: linear-gradient(90deg, rgba(0, 9, 41, 0.9) 31.2%, rgba(0, 9, 41, 0) 309.89%);
-  }
+
   .hero-content {
     max-width: 100%;
     margin-bottom: 25px;
@@ -1848,14 +1835,7 @@
     padding-top: 130px;
     padding-bottom: 100px;
   }
-  .hero-area .container-fluid {
-    max-width: 960px;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .hero-area::after {
-    background: linear-gradient(90deg, rgba(0, 9, 41, 0.9) 31.2%, rgba(0, 9, 41, 0) 309.89%);
-  }
+ 
   .hero-content {
     max-width: 100%;
     margin-bottom: 25px;

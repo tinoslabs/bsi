@@ -50,14 +50,17 @@
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
                                     <ul class="list-unstyled ps-0 mb-0 pages-link">
-                                        <li class="d-inline-block">
+                                        <!-- <li class="d-inline-block">
                                             <a class="text-decoration-none" href="">Faculty</a>
                                         </li>
                                         <li class="d-inline-block">
                                             <a class="text-decoration-none" href="">Community</a>
-                                        </li>
+                                        </li> -->
                                         <li class="d-inline-block">
                                             <a class="text-decoration-none" href="">Log in</a>
+                                        </li>
+                                        <li class="d-inline-block">
+                                            <a class="text-decoration-none" href="">Sign Up</a>
                                         </li>
                                         <li class="d-inline-block">
                                             <a class="text-decoration-none" href="">Register</a>
@@ -97,15 +100,15 @@
         <!-- End Top Header Area -->
 
         <!-- Start Navbar Area --> 
-        <nav class="navbar navbar-expand-lg pages-style" id="navbar">
+        <nav class="navbar navbar-expand-lg" id="navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'index' %}">
+                <a class="navbar-brand" href="index.html">
                     <img class="black-logo" src="{% static 'assets/img/BSI_LOGO.png' %}" alt="black-logo">
                 </a>
                 <a class="navbar-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                     <span class="burger-menu">
                         <span class="top-bar"></span>
-                        <span class="middle-bar"></span>
+                        <span class="middle-bar"></span> 
                         <span class="bottom-bar"></span>
                     </span>
                 </a>
@@ -113,19 +116,137 @@
                     <ul class="navbar-nav ms-auto">
 
                         <li class="nav-item">
-                            <a href="{% url 'index' %}" class="nav-link">
+                            <a href="{% url 'index' %}" class=" nav-link ">
                                 Home
                             </a>
-                           
+                            <!-- <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="index.html" class="nav-link active">
+                                        Home Demo - One
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="index-2.html" class="nav-link">
+                                        Home Demo - Two
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="index-3.html" class="nav-link">
+                                        Home Demo - Three
+                                    </a>
+                                </li>
+                            </ul> -->
                         </li>
 
-                        <!-- <li class="nav-item">
-                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                Pages
+                        <li class="nav-item">
+                            <a href="#" class="dropdown-toggle nav-link">
+                                MBA
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
-                                    <a href="university-overview.html" class="nav-link">
+                                    <a href="#" class="nav-link">
+                                        University Overview
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>                
+                                <li class="nav-item">
+                                    <a href="#" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                            </ul>
+                        </li>
+                        
+                       
+                        <li class="nav-item">
+                            <a href="" class="dropdown-toggle nav-link">
+                                ENGINEERING
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
                                         University Overview
                                     </a>
                                 </li>
@@ -135,61 +256,250 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a href="blog-style-one.html" class="nav-link">
+                                            <a href="" class="nav-link">
                                                 Blog Style One
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-style-two.html" class="nav-link">
+                                            <a href="" class="nav-link">
                                                 Blog Style Two
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="blog-details.html" class="nav-link">
+                                            <a href="" class="nav-link">
                                                 Blog Details
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>                
                                 <li class="nav-item">
-                                    <a href="register.html" class="nav-link">
-                                        Register Now
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                            </ul>
+                        </li>
+
+                        
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                MEDICAL
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        University Overview
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="login.html" class="nav-link">
-                                        Log In Now
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
                                     </a>
-                                </li>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>                
                                 <li class="nav-item">
-                                    <a href="application.html" class="nav-link">
-                                        Application Form
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
                                     </a>
-                                </li>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
                                 <li class="nav-item">
-                                    <a href="faculty.html" class="nav-link">
-                                        Faculty
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
                                     </a>
-                                </li>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
                                 <li class="nav-item">
-                                    <a href="guidance-support.html" class="nav-link">
-                                        Support & Guidance
+                                    <a href="" class="dropdown-toggle nav-link">
+                                        Blog
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="privacy-policy.html" class="nav-link">
-                                        Privacy Policy
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="terms-conditions.html" class="nav-link">
-                                        Terms & Conditions
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="dropdown-toggle nav-link">
+                                DESIGNING
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item ">
+                                    <a href="" class="nav-link">
+                                        Fitness & Athletics
                                     </a>
                                 </li>
                             </ul>
-                        </li> -->
-                        
+                        </li>
+
                         <li class="nav-item">
+                            <a href="" class="dropdown-toggle nav-link">
+                                STUDY ABROAD
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item ">
+                                    <a href="" class="nav-link">
+                                        University Life
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                MORE 
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="others-option">
+                        <div class="d-flex align-items-center">
+                            <div class="option-item">
+                                <form class="search-form">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Search Programs">
+                                        <button type="submit"><i class="ri-search-line"></i></button>
+                                    </div>
+                                </form>
+                                <button type="button" class="search-btn d-none bg-transparent border-0 lh-1 p-0 position-relative" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                    <i class="flaticon-search-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>  
+                   
+                       
+                                
+                                
+                          
+                      
+                        <!-- <li class="nav-item">
                             <a href="{% url 'about' %}" class=" nav-link">
                                 About Us
                             </a>
@@ -211,16 +521,7 @@
                                         Program Details
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item ">
-                                    <a href="events.html" class="nav-link">
-                                        All Events
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a href="event-details.html" class="nav-link">
-                                        Event Details
-                                    </a>
-                                </li> -->
+                                
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -241,7 +542,7 @@
                             <a href="{% url 'contact' %}" class="nav-link">
                                 Contact <span>Us</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                     <!-- <div class="others-option">
                         <div class="d-flex align-items-center">
@@ -258,7 +559,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="others-option">
+                    <!-- <div class="others-option">
                         <div class="d-flex align-items-center">
                             <div class="option-item">
                                 <a class="text-decoration-none default-btn" href="{% url 'application' %}">
@@ -275,7 +576,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                     -->
                 </div>
             </div>
         </nav>
@@ -749,114 +1050,7 @@
 
 
 <script>
-    jQuery(document).ready(function($) {
-    var chatStarted = false;
-    var name = '';
-    var phone = '';
-    var email = '';
-
-    function appendMsg(msg) {
-        $('.Messages_list').append('<div class="msg"><span class="avtr"><figure style="background-image: url(https://mrseankumar25.github.io/Sandeep-Kumar-Frontend-Developer-UI-Specialist/images/avatar.png)"></figure></span><span class="responsText">' + msg + '</span></div>');
-        $("[name='msg']").val("");
-    }
-    jQuery(document).on('click', '.iconInner', function(e) {
-
-        jQuery(this).parents('.botIcon').addClass('showBotSubject');
-        $("[name='msg']").focus();
-
-        if (!chatStarted) {
-            appendMsg("Hi there!!! Welcome to Badger Skills International , May I know your good name?");
-        
-            chatStarted = true;
-        }
-    });
-
-    // Function to handle closing the chatbox
-    jQuery(document).on('click', '.closeBtn, .chat_close_icon', function(e) {
-        jQuery(this).parents('.botIcon').removeClass('showBotSubject');
-        jQuery(this).parents('.botIcon').removeClass('showMessenger');
     
-        chatStarted = false;
-        name = '';
-        phone = '';
-        email = '';
-    });
-
-// Function to handle form submission
-
-$(document).on("submit", "#messenger", function(e) {
-    e.preventDefault();
-
-    var mainval = $("[name=msg]").val();
-
-    if (!mainval.trim()) {
-        appendMsg("Please enter a valid response.");
-    } else if (!name) {
-        name = mainval;
-        appendMsg("Thank you, " + name + ". Please provide your phone number:");
-    } else if (!isValidPhoneNumber(mainval) && !phone) {
-        appendMsg("Please enter a valid phone number.");
-    } else if (!phone) {
-        phone = mainval;
-        appendMsg("Thank you for providing your phone number. Please provide your email address:");
-    } else if (!isValidEmail(mainval) && !email) {
-        appendMsg("Please enter a valid email address.");
-    } else if (!email) {
-        email = mainval;
-        appendMsg("Thank you for providing your email address. Please enter your message:");
-    } else {
-    
-        appendMsg("Thank you for your message. Our admin will contact you soon. Have a great day!");
-        
-        submitQuery(name, phone, email, mainval);
-    
-        chatStarted = false;
-        name = '';
-        phone = '';
-        email = '';
-        
-    
-        setTimeout(function() {
-            $('.Messages_list').empty(); 
-            $('.botIcon').removeClass('showBotSubject'); 
-        }, Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000); 
-    }
-
-    var lastMsg = $('.Messages_list').find('.msg').last().offset().top;
-    $('.Messages').animate({scrollTop: lastMsg}, 'slow');
-});
-
-function isValidPhoneNumber(phone) {
-
-    return /^\d{10}$/.test(phone); 
-}
-
-function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); 
-}
-
-// Ajax
-
-function submitQuery(name, phone, email, message) {
-    $.ajax({
-        url: '/submit_query/',
-        method: 'POST',
-        data: {
-            'name': name,
-            'phone_number': phone,
-            'email': email,
-            'message': message,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() // Add CSRF token
-        },
-        success: function(response) {
-            console.log(response); // Handle success response
-        },
-        error: function(xhr, status, error) {
-            console.error(xhr.responseText); // Handle error response
-        }
-    });
-}
-});
 </script>
     </body>
 
@@ -867,6 +1061,7 @@ function submitQuery(name, phone, email, message) {
 <script src="{% static 'assets/js/fslightbox.js' %}"></script>
 <script src="{% static 'assets/js/scrollCue.min.js' %}"></script>
 <script src="{% static 'assets/js/custom.js' %}"></script>
+<script src="{% static 'assets/js/messenger.js' %}"></script>
 
     
 </html>

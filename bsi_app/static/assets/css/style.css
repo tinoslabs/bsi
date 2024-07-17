@@ -271,24 +271,7 @@ Top Header Area Style
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.top-header-area .container-fluid {
-  max-width: 1680px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-.top-header-area.style-2 {
-  background-color: #002a5c;
-}
-.top-header-area.style-3 .container-fluid {
-  max-width: 1520px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-.top-header-area.pages-style .container-fluid {
-  max-width: 1480px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
+
 
 .top-header-list ul li {
   margin-right: 13px;
@@ -1046,25 +1029,13 @@ Hero Area Style
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url(../img/bg/Yeldo-Mar.jpg);
+  /* background-image: url(../img/bg/Yeldo-Mar.jpg); */
+  
   padding-top: 190px;
   padding-bottom: 225px;
 }
-.hero-area .container-fluid {
-  max-width: 1680px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-.hero-area::after {
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  content: "";
-  z-index: -1;
-  position: absolute;
-  background: linear-gradient(90deg, rgba(0, 9, 41, 0.9) 31.2%, rgba(0, 9, 41, 0) 65.89%);
-}
+
+
 
 .hero-content {
   max-width: 835px;
