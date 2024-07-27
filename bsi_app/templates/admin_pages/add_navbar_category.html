@@ -1,0 +1,30 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Add Navbar Items</h4>
+                      <!-- <p class="card-description">
+                        Basic form layout
+                      </p> -->
+                      <form class="forms-sample" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <div class="form-group">
+                          <label for="NavbarName">Name</label>
+                          <input type="text" class="form-control" id="NavbarName" name="category_name" placeholder="Name">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <!-- <button class="btn btn-light">Cancel</button> -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {% endblock %}

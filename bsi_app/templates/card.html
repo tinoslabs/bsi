@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .card:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .card img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .card p {
+            color: #888;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .card .details {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .card .details div {
+            font-size: 14px;
+        }
+        .card .details a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .card .details a:hover {
+            text-decoration: underline;
+        }
+        .card .actions {
+            margin-top: 20px;
+        }
+        .card .actions .btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .card .actions .btn:hover {
+            background-color: #218838;
+        }
+        .card:hover .details a {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <img src="https://via.placeholder.com/50" alt="Online Manipal">
+    <h3>Online Manipal</h3>
+    <p>Bangalore</p>
+    <div class="details">
+        <div>Course Offered<br><a href="#">1 course</a></div>
+        <div>Total Fees<br>₹1.35 L</div>
+    </div>
+    <div class="actions">
+        <a href="#" class="btn">Brochure</a>
+    </div>
+</div>
+
+</body>
+</html>

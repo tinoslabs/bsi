@@ -196,6 +196,34 @@
     </div>
   </div>
   
-
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+    .table-responsive {
+        overflow-x: auto;
+    }
+  
+    @media (max-width: 575.98px) {
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .card-body td:nth-child(2) {
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    /* Other media queries here */
+  </style>
 
 {% endblock %} 
