@@ -1,0 +1,42 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Create Course SubCategory</h4>
+                    <form class="forms-sample" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_course">Course Name</label>
+                            <select name="course" id="id_course" class="form-control">
+                                <option value="">Select Course</option>
+                                {% for course in form.fields.course.queryset %}
+                                    <option value="{{ course.id }}">{{ course.course_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_sub_course">Sub Course</label>
+                            <select name="sub_course" id="id_sub_course" class="form-control">
+                                <option value="">Select Sub Course</option>
+                                {% for sub_course in form.fields.sub_course.queryset %}
+                                    <option value="{{ sub_course.id }}">{{ sub_course }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_sub_category_name">Sub Course SubCategory Name</label>
+                            <input type="text" name="sub_category_name" id="id_sub_category_name" class="form-control" value="{{ form.sub_category_name.value }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

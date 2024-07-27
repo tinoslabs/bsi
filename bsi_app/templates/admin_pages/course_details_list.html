@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Details List</title>
+</head>
+<body>
+    <h1>Course Details List</h1>
+    <ul>
+        {% for detail in course_details %}
+            <li>{{ detail }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_course_details' %}">Add Course Details</a>
+</body>
+</html>

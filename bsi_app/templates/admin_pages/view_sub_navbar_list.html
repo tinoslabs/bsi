@@ -1,0 +1,48 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="col-lg-10 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sub Category View</h4>
+            <a href="{% url 'add_navbar_list' %}">
+                <button class="btn btn-primary">Add Sub Category</button>
+            </a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Navbar List</th>
+                            <th>Sub List</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for details in sub_navbar_items %}
+                        <tr>
+                            <td style="width: 150px;">{{ details.category.category_name }}</td>
+                            <td style="width: 150px;">{{ details.list_category.list_item }}</td>
+                            <td style="width: 150px;">{{ details.sub_list }}</td>
+                            <td style="width: 150px;">
+                                <a href="{% url 'update_sub_navbar_list' details.id %}">
+                                    <button><i class="mdi mdi-cloud-upload" aria-hidden="true"></i></button>
+                                </a>
+                            </td>
+                            <td style="width: 150px;">
+                                <a href="{% url 'delete_sub_navbar_list' details.id %}">
+                                    <button><i class="mdi mdi-delete" aria-hidden="true"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

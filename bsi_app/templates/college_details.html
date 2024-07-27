@@ -1,0 +1,397 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+        <!-- End Responsive Navbar Area -->
+
+        <!-- Start Pages Banner Area -->
+        <div class="pages-banner-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="pages-title">
+                            <h2>Blog Details</h2>
+                            <ul class="list-unstyled ps-0 mb-0">
+                                <li class="d-inline-block">
+                                    <a class="text-decoration-none" href="index.html">
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="d-inline-block">
+                                    Blog Details
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pages-image">
+                            <img src="{% static 'assets/img/pages/pages-2.jpg' %}" alt="pages-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shape-7">
+                <img src="{% static 'assets/img/shape/shape-7.png' %}" alt="shape">
+            </div>
+        </div>
+        <!-- End Pages Banner Area -->
+
+        <!-- Start Blog Pages Area -->
+        <div class="blog-pages-area pt-100 pb-75">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="blog-left-sidebar">
+                            <div class="single-blog-card">
+                                
+                            </div>
+                           
+                            <div class="leading-management">
+                                <h1>{{college.college_name}}</h1>
+                                <div class="image">
+                                    <img src="{{college.college_image.url}}" alt="applications-image">
+                                </div>
+                                <p>{{college.college_description | safe }}</p>
+                            </div>
+                            
+                            <div class="video-image">
+                                <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
+                                <div class="video-btn">
+                                    <a class="text-decoration-none icon" data-fslightbox="gallery" href="{{college.youtube_videos}}">
+                                        <i class="flaticon-play"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- <blockquote>
+                                <i class="flaticon-quote"></i>
+                                <p>“Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc eleifend, augue vitae dictum accumsan, ligula est interdum dui, eu interdum nisi ex et erat”.</p>
+                            </blockquote> -->
+                            <br>
+                            <p>{{college.more_details | safe}}</p>
+                            <!-- <p>I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees.</p> -->
+                            <!-- <div class="pages-share-and-tags">
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        <div class="share">
+                                            <ul class="list-unstyled ps-0 mb-0 d-flex align-items-center">
+                                                <li class="d-inline-block">Share:</li>
+                                                <li class="d-inline-block">
+                                                    <a class="text-decoration-none" href="https://www.facebook.com/" target="_blank">
+                                                        <i class="flaticon-facebook-app-symbol"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="d-inline-block">
+                                                    <a class="text-decoration-none" href="https://www.pinterest.com/" target="_blank">
+                                                        <i class="flaticon-pinterest"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="d-inline-block">
+                                                    <a class="text-decoration-none" href="https://www.instagram.com/" target="_blank">
+                                                        <i class="flaticon-instagram"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="d-inline-block">
+                                                    <a class="text-decoration-none" href="https://twitter.com/" target="_blank">
+                                                        <i class="flaticon-twitter"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>  
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        <div class="tags text-end">
+                                            <ul class="list-unstyled ps-0 mb-0">
+                                                <li class="d-inline-block">Tags:</li>
+                                                <li class="d-inline-block">
+                                                    <a class="text-decoration-none" href="tag.html">Business</a>
+                                                </li>
+                                                <li class="d-inline-block">
+                                                    <a class="text-decoration-none" href="tag.html">Graduates</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="events-area pb-75">
+                            <div class="container">
+                                <div class="section-title text-center m-auto" data-cues="slideInUp">
+                                    <h4>Top Colleges in your region</h4>
+                                </div>
+                                <div class="row justify-content-center" data-cues="slideInUp">  
+                                    {% for college in colleges %}    
+                                    <div class="card">
+                                        <img src="{{college.logo.url}}" alt="Online Manipal">
+                                        <a href="{% url 'college_details' college.college_name %}">
+                                        <h3>{{college.college_name}}</h3>
+                                        </a>
+                                        <p>{{college.place}}</p>
+                                        <div class="details">
+                                            <div>Course Offered<br><a href="#">{{college.total_course}} course</a></div>
+                                            <div>Total Fees<br>₹{{college.min_fee}} L</div>
+                                        </div>
+                                        <div class="actions">
+                                            <a href="{{ college.college_brochure.url }}" class="btn">Brochure</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <style>
+                            
+                            .card {
+                            background-color: #fff;
+                            border-radius: 10px;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            width: 300px;
+                            padding: 20px;
+                            margin: 10px; /* Adds gap between card */
+                            text-align: center;
+                            transition: background-color 0.3s ease;
+                        }
+                        
+                        .card img {
+                            border-radius: 50%;
+                            width: 50px;
+                            height: 50px;
+                        }
+                        .card h3 {
+                            font-size: 18px;
+                            margin: 10px 0;
+                        }
+                        .card p {
+                            color: #888;
+                            font-size: 14px;
+                            margin: 5px 0;
+                        }
+                        .card .details {
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 10px 0;
+                        }
+                        .card .details div {
+                            font-size: 14px;
+                        }
+                        .card .details a {
+                            color: #007bff;
+                            text-decoration: none;
+                        }
+                        .card .details a:hover {
+                            text-decoration: underline;
+                        }
+                        .card .actions {
+                            margin-top: 20px;
+                        }
+                        .card .actions .btn {
+                            background-color: #28a745;
+                            color: #fff;
+                            padding: 10px 20px;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            text-decoration: none;
+                            display: inline-block;
+                        }
+                        .card .actions .btn:hover {
+                            background-color: #218838;
+                        }
+                        .card:hover .details a {
+                            color: #fff;
+                        }
+                        </style>
+                             
+                            <div class="pages-leave-reply">
+                                <h1>Leave A Reply</h1>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Your name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Your email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control textarea" placeholder="Your comments..."></textarea>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Save my name, email, and website in this browser for the next time I comment.
+                                        </label>
+                                    </div>
+                                    <button type="submit">
+                                        Post A Comment
+                                        <i class="flaticon-right-arrow"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="blog-right-sidebar">
+                            <div class="single-pages-widget form">
+                                <h3>Search</h3>
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search"> 
+                                        <button type="submit"><i class="ri-search-line"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- <div class="single-pages-widget latest">
+                                <h3>Latest News</h3>
+                                <div class="latest-card d-flex align-items-center">
+                                    <div class="image">
+                                        <a href="blog-details.html">
+                                            <img src="{% static 'assets/img/pages/pages-12.jpg' %}" alt="latest-image">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h3>
+                                            <a class="text-decoration-none" href="blog-details.html">
+                                                Professor Albert joint research on mobile money in Tanzania
+                                            </a>
+                                        </h3>
+                                        <p class="d-flex align-items-center">
+                                            <i class="ri-calendar-line"></i>
+                                            October 08, 2024
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="latest-card d-flex align-items-center">
+                                    <div class="image">
+                                        <a href="blog-details.html">
+                                            <img src="{% static 'assets/img/pages/pages-13.jpg' %}" alt="latest-image">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h3>
+                                            <a class="text-decoration-none" href="blog-details.html">
+                                                A wonderful serenity has taken possession of my entire soul
+                                            </a>
+                                        </h3>
+                                        <p class="d-flex align-items-center">
+                                            <i class="ri-calendar-line"></i>
+                                            October 08, 2024
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="latest-card d-flex align-items-center">
+                                    <div class="image">
+                                        <a href="blog-details.html">
+                                            <img src="{% static 'assets/img/pages/pages-14.jpg' %}" alt="latest-image">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h3>
+                                            <a class="text-decoration-none" href="blog-details.html">
+                                                The Florida Project: Taking Action to Help Kids Like Moonee
+                                            </a>
+                                        </h3>
+                                        <p class="d-flex align-items-center">
+                                            <i class="ri-calendar-line"></i>
+                                            October 08, 2024
+                                        </p>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="single-pages-widget categories">
+                                <h3>Categories</h3>
+                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                    Education
+                                    <span>(07)</span>
+                                </a>
+                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                    Learning
+                                    <span>(02)</span>
+                                </a>
+                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                    University
+                                    <span>(04)</span>
+                                </a>
+                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                    Online Education
+                                    <span>(06)</span>
+                                </a>
+                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                    Graduates
+                                    <span>(02)</span>
+                                </a>
+                            </div> -->
+                            <!-- <div class="single-pages-widget gallery">
+                                <h3>Student’s Gallery</h3>
+                                <ul class="list-unstyled ps-0 mb-0">
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-15.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-16.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-17.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-18.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-19.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-20.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-21.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none" href="#">
+                                            <img src="{% static 'assets/img/pages/pages-22.jpg' %}" alt="gallery-image">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                            <div class="single-pages-widget tags style-2">
+                                <h3>Popular Courses</h3>
+                                <ul class="list-unstyled ps-0 mb-0">
+                                    {% for course in courses %}
+                                        <li class="d-inline-block">
+                                            <a class="text-decoration-none d-inline-block" href="#">
+                                                {{ course.course_name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- End Blog Pages Area -->
+
+        <!-- Start Newsletter Area -->
+        
+        <!-- End Newsletter Area -->
+
+        {% endblock %}
