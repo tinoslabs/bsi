@@ -178,40 +178,7 @@
         </ul>
       </div>
     </li>
-    <!-- <li class="nav-item nav-category">Projects</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
-        aria-controls="form-elements">
-        <i class="menu-icon mdi mdi-card-text-outline"></i>
-        <span class="menu-title">Projects</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="form-elements">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="">Add Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="">View Projects</a></li>
-        </ul>
-      </div>
-    </li> -->
-
-
-    <!-- <li class="nav-item nav-category">Team</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#team1" aria-expanded="false" aria-controls="team">
-        <i class="menu-icon mdi mdi-account-multiple-plus"></i>
-        <span class="menu-title">Team</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="team1">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href=""> Add Team Category</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Team Category</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> Add Team Details</a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Team Details</a></li>
-        </ul>
-      </div>
-    </li> -->
-
+    
     <li class="nav-item nav-category">Blog</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#blog" aria-expanded="false" aria-controls="blog">
@@ -229,100 +196,90 @@
       </div>
     </li>
 
-
-    <li class="nav-item nav-category">Client Logo</li>
+    <li class="nav-item nav-category">Colleges</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#client" aria-expanded="false" aria-controls="client">
-        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
-        <span class="menu-title">Client Logo</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#college" aria-expanded="false" aria-controls="college">
+        <i class="menu-icon mdi mdi-card-text-outline"></i>
+        <span class="menu-title">Colleges</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="client">
+      <div class="collapse" id="college">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add_clients_logo' %}"> Add Clients Logo </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_clients_logo' %}"> View Clients Logo </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_college' %}"> Add Colleges</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_college' %}"> View Colleges</a></li>
+         
         </ul>
       </div>
     </li>
 
-    <!-- <li class="nav-item nav-category">Expertised Technologies</li>
+
+    <li class="nav-item nav-category">Courses</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#technologies" aria-expanded="false" aria-controls="technologies">
-        <i class="menu-icon mdi mdi-lumx"></i>
-        <span class="menu-title">Expertised Technologies</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#course" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
+        <span class="menu-title">Courses</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="technologies">
+      <div class="collapse" id="course">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href=""> Add Technology Logo </a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Technology Logo </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_course' %}"> Add Course </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_course' %}"> View Course </a></li>
         </ul>
       </div>
-    </li> -->
+    </li>
 
-    <!-- <li class="nav-item nav-category">Upload Service Videos</li>
+    <li class="nav-item nav-category">Course Collection</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#service" aria-expanded="false" aria-controls="service">
-        <i class="menu-icon mdi mdi mdi-play-circle"></i>
-        <span class="menu-title">Upload Service Videos</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#course" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
+        <span class="menu-title">Courses</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="service">
+      <div class="collapse" id="course">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="">Add Youtube Links </a></li>
-          <li class="nav-item"> <a class="nav-link" href="">View Youtube Links </a></li>
-
-          
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_course' %}"> Add Course </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_course' %}"> View Course </a></li>
         </ul>
       </div>
-    </li> -->
+    </li>
 
-
-    <!-- <li class="nav-item nav-category">Certificate</li>
+    <li class="nav-item nav-category">Course Collection</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#certificate" aria-expanded="false" aria-controls="certificate">
-        <i class="menu-icon mdi mdi-view-agenda"></i>
-        <span class="menu-title">Certificate</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#collection" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
+        <span class="menu-title">Courses</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="certificate">
+      <div class="collapse" id="collection">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href=""> Add Certificates </a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Certificates</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_course' %}"> Add Course </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_course' %}"> View Course </a></li>
+
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_sub_collection' %}">Add Sub Collections </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_sub_collection' %}">View Sub Collections </a></li>
+
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_subcollection_category' %}">Add Sub Category </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_subcollection_category' %}">View Sub Category </a></li>
+         
         </ul>
       </div>
-    </li> -->
+    </li>
 
-    <!-- <li class="nav-item nav-category">Job Details</li>
+    <li class="nav-item nav-category">Details</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#job" aria-expanded="false" aria-controls="job">
-        <i class="menu-icon mdi mdi mdi-book-open"></i>
-        <span class="menu-title">Job Details</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#details" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
+        <span class="menu-title">Courses</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="job">
+      <div class="collapse" id="details">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href=""> Add Job Details </a></li>
-          <li class="nav-item"> <a class="nav-link" href=""> View Job Details </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_details' %}"> Add Details </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_details' %}"> View Details </a></li>
         </ul>
       </div>
-    </li> -->
-    <!-- <li class="nav-item nav-category">Candidate Details</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#candidate" aria-expanded="false" aria-controls="candidate">
-        <i class="menu-icon mdi mdi-account-box"></i>
-        <span class="menu-title">Candidate Details</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="candidate">
-        <ul class="nav flex-column sub-menu">
-          
-          <li class="nav-item"> <a class="nav-link" href=""> View Candidate Details </a></li>
-        </ul>
-      </div>
-    </li> -->
+    </li>
 
-    
     <li class="nav-item nav-category">Contact US</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#contact" aria-expanded="false" aria-controls="contact">

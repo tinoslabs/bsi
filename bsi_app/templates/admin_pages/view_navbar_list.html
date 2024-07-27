@@ -1,0 +1,47 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="col-lg-10 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sub Category View</h4>
+            <a href="{% url 'add_navbar_list' %}">
+                <button class="btn btn-primary">Add Sub Category</button>
+            </a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Product Name</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for details in data %}
+                        <tr>
+                            <td style="width: 150px;">{{ details.category.category_name }}</td>
+                            {% if details.list_item %}
+                            <td style="width: 150px;">{{ details.list_item }}</td>
+                            {% else %}
+                            <td>Data Not Found</td>
+                            {% endif %}
+                            <td style="width: 150px; ">
+                                <a href="{% url 'update_navbar_list' details.id  %}"><button><i class="mdi mdi-cloud-upload" aria-hidden="true"></i> </button></a>
+                            </td>
+                            <td style="width: 150px; ">
+                                <a href="{% url 'delete_navbar_list' details.id  %}"><button><i class="mdi mdi-delete" aria-hidden="true"></i> </button></a> 
+                            </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

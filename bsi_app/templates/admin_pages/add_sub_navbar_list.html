@@ -1,0 +1,61 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Navbar Item</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="mainHeading">Main Heading</label>
+                            <select name="category" id="id_category" class="form-control" onchange="fetchNavbarItems(this.value)">
+                                <option value="">Select a category</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="navbarList">Navbar List</label>
+                            <select name="list_category" id="id_navbar_list" class="form-control">
+                                <option value="">Select a navbar item</option>
+                                <!-- This will be populated via AJAX -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="newsHeading">Navbar Sub Item</label>
+                            <input type="text" class="form-control" id="newsHeading" name="sub_list" placeholder="Navbar list name">
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function fetchNavbarItems(categoryId) {
+    const navbarListSelect = document.getElementById('id_navbar_list');
+    navbarListSelect.innerHTML = '<option value="">Select a navbar item</option>';  // Reset options
+
+    if (categoryId) {
+        fetch(`/fetch-navbar-items?category_id=${categoryId}`)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.list_item;
+                    navbarListSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching navbar items:', error));
+    }
+}
+</script>
+{% endblock %}

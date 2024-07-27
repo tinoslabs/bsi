@@ -1,68 +1,61 @@
 {% extends "admin_pages/base.html" %}
 {% load static %}
-
 {% block content %}
-      
 
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-md-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title">Add Blog Details</h4>
-                      <!-- <p class="card-description">
-                        Basic form layout
-                      </p> -->
-                      <form class="forms-sample" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-                        <div class="form-group">
-                            <div class="input-box">
-                                <label for="id_category">Blog Category</label>
-                                <select name="category" id="id_category" class="form-control">
-                                    {% for category in categories %}
-                                        <option value="{{ category.id }}">{{ category.category_name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        
-                        <div class="form-group">
-                          <label for="exampleDescription">Blog Description</label>
-                          <textarea class="form-control" name="blog_description" id="addblogDescription" rows="3" style="height: 150px;" placeholder="Enter Your Description">
-                            </textarea>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label for="imageFile">Blog Image</label>
-                        <input type="file" class="form-control-file" id="imageFile" name="blog_image" accept="image/*">
-                    </div>
-
-                        <div class="form-check form-check-flat form-check-primary">
-                          <label class="form-check-label">
-                            <!-- <input type="checkbox" class="form-check-input">
-                            Remember me -->
-                          </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary me-2">Submit</button>
-                        <!-- <button class="btn btn-light">Cancel</button> -->
-                      </form>
-                    </div>
-                  </div>
-                </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Add Blog Details</h4>
+          <form class="forms-sample" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="input-box">
+                <label for="id_category">Blog Category</label>
+                <select name="category" id="id_category" class="form-control">
+                  {% for category in categories %}
+                  <option value="{{ category.id }}">{{ category.category_name }}</option>
+                  {% endfor %}
+                </select>
               </div>
             </div>
-            
-            <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
-            <script>
-              document.addEventListener('DOMContentLoaded', function() {
-      // Initialize CKEditor
-      ClassicEditor
-          .create(document.querySelector('#addblogDescription'))
-          .then(editor => {
-              console.log(editor);
-          })
-          .catch(error => {
-              console.error(error);
-          });
+            <div class="form-group">
+              <label for="addblogDescription">Blog Description</label>
+              <textarea class="form-control" name="blog_description" id="addblogDescription" rows="3" style="height: 150px;" placeholder="Enter Your Description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="imageFile">Blog Image</label>
+              <input type="file" class="form-control-file" id="imageFile" name="blog_image" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    CKEDITOR.replace('addblogDescription', {
+      extraPlugins: 'uploadimage,image2',
+      
+      height: 300,
+      toolbar: [
+        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+        { name: 'tools', items: ['Maximize'] },
+        { name: 'document', items: ['Source'] }
+      ],
+    });
   });
-  
-            </script>
-            {% endblock %}
+</script>
+{% endblock %}
+
+

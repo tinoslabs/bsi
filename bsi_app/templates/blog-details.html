@@ -205,51 +205,7 @@
                                     <span>(02)</span>
                                 </a>
                             </div>
-                            <!-- <div class="single-pages-widget gallery">
-                                <h3>Student’s Gallery</h3>
-                                <ul class="list-unstyled ps-0 mb-0">
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-15.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-16.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-17.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-18.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-19.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-20.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-21.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-22.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> -->
+                            
                             <div class="single-pages-widget tags style-2">
                                 <h3>Popular Tag’s</h3>
                                 <ul class="list-unstyled ps-0 mb-0">
@@ -302,52 +258,35 @@
         </div>
         <!-- End Blog Pages Area -->
 
-        <!-- Start Newsletter Area -->
-        <!-- <div class="newsletter-area pb-75">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="newsletter-content">
-                            <div class="title">
-                                <h2>Are You Ready To Build Up Your Career </h2>
-                                <p>We are proud of our alumni network, which spans across industries and continents. Our graduates are equipped with the skills, values knowledge, anda  to excel in their chosen fields and make positive impact on society.</p>
-                            </div>
-                            <ul class="list-unstyled ps-0 mb-0 subscribe-btn">
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none default-btn" href="application.html">
-                                        Application Form
-                                        <i class="flaticon-right-arrow"></i>
-                                    </a>
-                                </li>
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none arrow-btn" href="apply.html">
-                                        How To Apply
-                                        <i class="flaticon-right-arrow"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="newsletter-form">
-                            <div class="title">
-                                <h3>Subscribe To Our Newsletter</h3>
-                                <p>Stay informed about the latest developments, breakthroughs, and trends in our industry. Our team of experts scours the web to bring you the most relevant and engaging news articles.</p>
-                            </div>
-                            <form>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your email">
-                                </div>
-                                <button type="submit" class="text-decoration-none border-0 default-btn">
-                                    Subscribe Now
-                                    <i class="flaticon-right-arrow"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- End Newsletter Area -->
+        
 
     {% endblock %}   
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+      
+        @media (max-width: 575.98px) {
+            .table-responsive {
+                overflow-x: auto;
+            }
+            .card-body td:nth-child(2) {
+                max-width: 150px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        /* Other media queries here */
+      </style>

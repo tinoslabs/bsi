@@ -1,0 +1,114 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Create College</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="CollegeName">College Name</label>
+                            <input type="text" class="form-control" id="CollegeName" name="college_name" placeholder="College Name" value="{{ form.college_name.value|default_if_none:'' }}">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="Place">Place</label>
+                            <input type="text" class="form-control" id="Place" name="place" placeholder="Place">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="TotalCourse">Total Course</label>
+                            <input type="text" class="form-control" id="TotalCourse" name="total_course" placeholder="Total Course" >
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="LogoFile">College Logo</label>
+                            <input type="file" class="form-control-file" id="LogoFile" name="logo">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="CollegeImageFile">College Images</label>
+                            <input type="file" class="form-control-file" id="CollegeImageFile" name="college_image">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="MinFee">Minimum Fee</label>
+                            <input type="text" class="form-control" id="MinFee" name="min_fee" placeholder="Minimum Fee" >
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="MaxFee">Maximum Fee</label>
+                            <input type="text" class="form-control" id="MaxFee" name="max_fee" placeholder="Maximum Fee" >
+                            
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="CollegeDescription">College Description</label>
+                            <textarea class="form-control" id="CollegeDescription" name="college_description" rows="3" placeholder="College Description"></textarea>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="exampleDescription">College Description</label>
+                            <textarea class="form-control" name="college_description" id="addblogDescription" rows="3" style="height: 150px;" placeholder="Enter Your Description">
+                              </textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="YouTubeVideos">YouTube Videos</label>
+                            <input type="text" class="form-control" id="YouTubeVideos" name="youtube_videos" placeholder="YouTube Videos">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="CollegeBrochure">College Brochure</label>
+                            <input type="file" class="form-control-file" id="CollegeBrochure" name="college_brochure">
+                            
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="MoreDetails">More Details</label>
+                            <textarea class="form-control" id="MoreDetails" name="more_details" rows="3" placeholder="More Details"></textarea>   
+                        </div> -->
+                        <div class="form-group">
+                            <label for="MoreDetails">More Description</label>
+                            <textarea class="form-control" name="more_details" id="MoreDetails" rows="3" style="height: 150px;" placeholder="Enter Your Description">
+                            </textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+// Initialize CKEditor
+ClassicEditor
+.create(document.querySelector('#addblogDescription'))
+.then(editor => {
+  console.log(editor);
+})
+.catch(error => {
+  console.error(error);
+});
+});
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Initialize CKEditor
+  ClassicEditor
+  .create(document.querySelector('#MoreDetails'))
+  .then(editor => {
+    console.log(editor);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  });
+  
+  </script>
+{% endblock %}

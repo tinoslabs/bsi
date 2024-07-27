@@ -1,0 +1,31 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Sub Courses</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <!-- <th>Collection Name</th> -->
+                <th>Course Name</th>
+                <th>Sub Course Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sub_course in sub_courses %}
+                <tr>
+                    <!-- <td>{{ sub_course.course }}</td> -->
+                    <td>{{ sub_course.course.courses.all|join:", " }}</td>
+                    <td>{{ sub_course.get_course_type_display }}</td>
+                    <td>
+                        <a href="{% url 'update_sub_collection' sub_course.pk %}" class="btn btn-primary btn-sm">Update</a>
+                        <a href="{% url 'delete_sub_collection' sub_course.pk %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this sub course?');">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Details</h4>
+          <form class="forms-sample" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="id_sub_collection_category">Sub Collection Category</label>
+              <select name="sub_collection_category" id="id_sub_collection_category" class="form-control">
+                {% for category in sub_collection_categories %}
+                <option value="{{ category.id }}" {% if form.instance.sub_collection_category.id == category.id %}selected{% endif %}>
+                  {{ category }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="id_details">Details</label>
+              <textarea class="form-control" name="details" id="id_details" rows="3" style="height: 150px;" placeholder="Enter Details">{{ form.instance.details }}</textarea>
+            </div>
+            <div class="form-group">
+              <label for="id_videos">YouTube Video URL</label>
+              <input type="url" class="form-control" id="id_videos" name="videos" value="{{ form.instance.videos }}" placeholder="Enter YouTube Video URL">
+            </div>
+            <div class="form-group">
+              <label for="id_more_details">More Details</label>
+              <textarea class="form-control" name="more_details" id="id_more_details" rows="3" style="height: 150px;" placeholder="Enter More Details">{{ form.instance.more_details }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary me-2">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    CKEDITOR.replace('id_details', {
+      extraPlugins: 'uploadimage,image2',
+      height: 300,
+      toolbar: [
+        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+        { name: 'tools', items: ['Maximize'] },
+        { name: 'document', items: ['Source'] }
+      ],
+    });
+    CKEDITOR.replace('id_more_details', {
+      extraPlugins: 'uploadimage,image2',
+      height: 300,
+      toolbar: [
+        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+        { name: 'tools', items: ['Maximize'] },
+        { name: 'document', items: ['Source'] }
+      ],
+    });
+  });
+</script>
+{% endblock %}

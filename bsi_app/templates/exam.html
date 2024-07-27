@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container-1 {
+            width: 80%;
+            position: relative;
+        }
+        .header-1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card-container-1 {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+            width: 100%;
+        }
+        .card {
+            flex: 0 0 23%; /* Display 4 cards in the visible area */
+            margin: 0 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card img {
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .card p {
+            color: #888;
+            font-size: 14px;
+            margin: 5px 0;
+            padding-bottom: 10px;
+        }
+        .nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+        .nav:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .nav.left {
+            left: 0;
+        }
+        .nav.right {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-1">
+    <div class="header-1">
+        <h2>Predict Colleges based on exams you have taken</h2>
+    </div>
+    <!-- <button class="nav left" onclick="scrollLeft()">&#10094;</button> -->
+    <div class="card-container-1" id="cardContainer">
+        <div class="card">
+            <img src="https://via.placeholder.com/200x100" alt="B. Tech">
+            <h3>B. Tech</h3>
+            <p>38 Exams</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/200x100" alt="MBA">
+            <h3>MBA</h3>
+            <p>30 Exams</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/200x100" alt="Medical">
+            <h3>Medical</h3>
+            <p>85 Exams</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/200x100" alt="M. Tech">
+            <h3>M. Tech</h3>
+            <p>29 Exams</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/200x100" alt="Design">
+            <h3>Design</h3>
+            <p>10 Exams</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/200x100" alt="Law">
+            <h3>Law</h3>
+            <p>29 Exams</p>
+        </div>
+    </div>
+    <!-- <button class="nav right" onclick="scrollRight()">&#10095;</button> -->
+</div>
+
+<script>
+    const container = document.getElementById('cardContainer');
+    const cardWidth = document.querySelector('.card').offsetWidth + 20; // 20px is the combined margin
+
+    function scrollLeft() {
+        container.scrollBy({
+            left: -cardWidth,
+            behavior: 'smooth' 
+        });
+    }
+
+    function scrollRight() {
+        container.scrollBy({
+            left: cardWidth,
+            behavior: 'smooth'
+        });
+    }
+
+    function autoScroll() {
+        scrollRight();
+        setTimeout(() => {
+            if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            }
+        }, 500); // Adjust this timeout if necessary to ensure it only triggers after the scrollRight function completes
+    }
+
+    setInterval(autoScroll, 3000); // Adjust the interval as needed
+</script>
+
+</body>
+</html>
