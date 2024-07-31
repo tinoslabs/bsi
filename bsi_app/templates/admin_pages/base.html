@@ -280,6 +280,21 @@
       </div>
     </li>
 
+    <li class="nav-item nav-category">Add Exams</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#exam" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
+        <span class="menu-title">Add Exam</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="exam">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_exam' %}"> Add Exam </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_exam' %}"> View Exam </a></li>
+        </ul>
+      </div>
+    </li>
+
     <li class="nav-item nav-category">Contact US</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#contact" aria-expanded="false" aria-controls="contact">
