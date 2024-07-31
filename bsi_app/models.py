@@ -67,10 +67,10 @@ class College_Model(models.Model):
     total_course = models.PositiveIntegerField(null=True, blank=True)
     min_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     max_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    college_description  = models.CharField(max_length=80000, null=True, blank=True) 
+    college_description  = models.TextField() 
     youtube_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
     college_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-    more_details = RichTextField(max_length=80000, null=True, blank=True)
+    more_details = models.TextField()
 
     def __str__(self):
         return self.college_name
@@ -92,12 +92,12 @@ class Course_Model(models.Model):
     college = models.ForeignKey(College_Model, on_delete=models.CASCADE, related_name='courses')
     course_name = models.CharField(max_length=100, null=True, blank=True)
     course_type = models.CharField(max_length=15, choices=COURSE_TYPE_CHOICES, default=PROFESSIONAL_COURSE)
-    course_description = RichTextField(max_length=80000, null=True, blank=True)
+    course_description = models.TextField()
     course_fees = models.CharField(max_length=100, null=True, blank=True)
     course_duration = models.CharField(max_length=100, null=True, blank=True)
     brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
     course_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
-    additional_details = RichTextField(max_length=80000, null=True, blank=True)
+    additional_details = models.TextField()
     
     def __str__(self):
         return self.course_name or 'Unnamed Course'
@@ -184,6 +184,72 @@ class DetailsModel(models.Model):
     class Meta:
         verbose_name = "Details Model"
         verbose_name_plural = "Details Models"
+
+
+
+class ExamModel(models.Model):
+    exam_name = models.CharField(max_length=200)
+    status = models.BooleanField(default=False,help_text="0-default,1-Hidden")
+    
+    def __str__(self):
+        return self.exam_name
+
+
+class ExamCategory(models.Model):
+    OVERVIEW = 'Overview'
+    QUESTION_PAPERS = 'Question Papers'
+    DATE = 'Date'
+    RESULTS = 'Results'
+    CUT_OFF = 'Cut Off'
+    ANSWER_KEY = 'Answer Key'
+    ANALYSIS = 'Analysis'
+    ADMIT_CARD = 'Admit Card'
+    CENTER = 'Center'
+    SYLLABUS = 'Syllabus'
+    MOCK_TEST = 'Mock Test'
+    
+    EXAM_TYPE_CHOICES = [
+        (OVERVIEW, 'Overview'),
+        (QUESTION_PAPERS, 'Question Papers'),
+        (DATE, 'Date'),
+        (RESULTS, 'Results'),
+        (CUT_OFF, 'Cut Off'),
+        (ANSWER_KEY, 'Answer Key'),
+        (ANALYSIS, 'Analysis'),
+        (ADMIT_CARD, 'Admit Card'),
+        (CENTER, 'Center'),
+        (SYLLABUS, 'Syllabus'),
+        (MOCK_TEST, 'Mock Test'),
+    ]
+    
+    exam_name = models.ForeignKey('ExamModel', on_delete=models.CASCADE)
+    exam_type = models.CharField(max_length=50, choices=EXAM_TYPE_CHOICES, default=OVERVIEW)
+    status = models.BooleanField(default=False,help_text="0-default,1-Hidden")
+    
+    def __str__(self):
+        return f"{self.exam_name} - {self.exam_type}"
+
+
+class ExamDetails(models.Model):
+    exam = models.ForeignKey('ExamModel', on_delete=models.CASCADE)
+    category = models.ForeignKey('ExamCategory', on_delete=models.CASCADE)
+    details = models.TextField()
+    videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
+    exam_image = models.ImageField(upload_to='exam_image/', null=True, blank=True)
+    sample_papers = models.FileField(upload_to='pdf/', null=True, blank=True)
+    guide = models.FileField(upload_to='pdf/', null=True, blank=True)
+    brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+    more_details = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.exam} - {self.category}"
+
+    class Meta:
+        verbose_name_plural = "Exam Details"
+
+
+   
+    
 
 
 

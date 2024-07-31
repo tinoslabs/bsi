@@ -97,6 +97,7 @@ urlpatterns = [
     path('card', views.card,name='card'),
     path('exam', views.exam, name='exam'),
     path('college_details/<str:college_name>/', views.college_details, name='college_details'),
+    
     path('add_details',views.add_details,name='add_details'),
     path('view_details', views.view_details, name='view_details'),
     path('update-details/<int:pk>/', views.update_details, name='update_details'),
@@ -105,4 +106,24 @@ urlpatterns = [
     path('details/<int:id>/', views.details_display, name='details_display'),
 
     path('animation', views.animation, name='animation'),
+
+    path('slider',views.slider, name='slider'),
+
+
+    path('create_exam', views.create_exam, name='create_exam'),
+    path('view_exam', views.view_exam, name='view_exam'),
+    path('update_exam/<int:id>/', views.update_exam, name='update_exam'),
+    path('delete_exam/<int:id>/', views.delete_exam, name='delete_exam'),
+
+    path('create_exam_category', views.create_exam_category, name='create_exam_category'),
+    path('view_exam_category', views.view_exam_category, name='view_exam_category'),
+    path('update_exam_category/<int:pk>/', views.update_exam_category, name='update_exam_category'),
+    path('delete_exam_category/<int:pk>/', views.delete_exam_category, name='delete_exam_category'),
+    path('create_exam_details', views.create_exam_details, name='create_exam_details'),
+    path('view_exam_details', views.view_exam_details, name='view_exam_details'),
+    path('update_exam_details/<int:id>/', views.update_exam_details, name='update_exam_details'),
+    path('delete_exam_details/<int:id>/', views.delete_exam_details, name='delete_exam_details'),
+
+     path('exam_detail/<int:id>/', views.exam_detail, name='exam_detail'),
+
 ]

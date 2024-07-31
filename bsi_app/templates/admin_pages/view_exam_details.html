@@ -1,0 +1,139 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+/* Responsive CSS styles for the table */
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+img {
+  width: 80px;
+  height: 80px;
+}
+</style>
+
+<div class="col-lg-10 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">View Exam Details</h4>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Exam Name</th>
+              <th>Category</th>
+              <th>Details</th>
+              <th>Video</th>
+              <th>Image</th>
+              <th>Sample Papers</th>
+              <th>Guide</th>
+              <th>Brochure</th>
+              <th>More Details</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in category %}
+            <tr>
+              <td>{{ data.exam }}</td>
+              <td>{{ data.category }}</td>
+              <td>{{ data.details | safe }}</td>
+              <td>
+                {% if data.videos %}
+                <a href="{{ data.videos }}" target="_blank">Video Link</a>
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if data.exam_image %}
+                <img src="{{ data.exam_image.url }}" alt="Exam Image">
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if data.sample_papers %}
+                <a href="{{ data.sample_papers.url }}" target="_blank">Sample Paper</a>
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if data.guide %}
+                <a href="{{ data.guide.url }}" target="_blank">Guide</a>
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>
+                {% if data.brochure %}
+                <a href="{{ data.brochure.url }}" target="_blank">Brochure</a>
+                {% else %}
+                N/A
+                {% endif %}
+              </td>
+              <td>{{ data.more_details | safe }}</td>
+              <td>
+                <a href="{% url 'update_exam_details' data.id %}" class="btn btn-primary btn-sm">
+                  <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Update
+                </a>
+                <a href="{% url 'delete_exam_details' data.id %}" class="btn btn-danger btn-sm">
+                  <i class="mdi mdi-delete" aria-hidden="true"></i> Delete
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+    .table-responsive {
+        overflow-x: auto;
+    }
+  
+    @media (max-width: 575.98px) {
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .card-body td:nth-child(2) {
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    /* Other media queries here */
+  </style>
+{% endblock %}

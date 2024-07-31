@@ -82,10 +82,10 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-// Initialize CKEditor
+
 ClassicEditor
 .create(document.querySelector('#addblogDescription'))
 .then(editor => {
@@ -99,7 +99,7 @@ ClassicEditor
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-  // Initialize CKEditor
+
   ClassicEditor
   .create(document.querySelector('#MoreDetails'))
   .then(editor => {
@@ -110,5 +110,30 @@ ClassicEditor
   });
   });
   
+  </script> -->
+
+  <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+  <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function initializeCKEditor(selector) {
+        CKEDITOR.replace(selector, {
+          extraPlugins: 'uploadimage,image2',
+          height: 300,
+          toolbar: [
+            { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+            { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+            { name: 'tools', items: ['Maximize'] },
+            { name: 'document', items: ['Source'] }
+          ]
+        });
+      }
+  
+      initializeCKEditor('addblogDescription');
+      initializeCKEditor('MoreDetails');
+    });
   </script>
 {% endblock %}

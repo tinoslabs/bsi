@@ -8,15 +8,15 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="pages-title">
-                            <h2>Blog Details</h2>
+                            <h2>Details</h2>
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="index.html">
+                                    <a class="text-decoration-none" href="{% url 'index' %}">
                                         Home
                                     </a>
                                 </li>
                                 <li class="d-inline-block">
-                                    Blog Details
+                                    Details
                                 </li>
                             </ul>
                         </div>
@@ -430,5 +430,36 @@
             </div>
         </div>
         <!-- End Newsletter Area -->
+
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+            .table-responsive {
+                overflow-x: auto;
+            }
+          
+            @media (max-width: 575.98px) {
+                .table-responsive {
+                    overflow-x: auto;
+                }
+                .card-body td:nth-child(2) {
+                    max-width: 150px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            /* Other media queries here */
+          </style>
+
 
 {% endblock %}

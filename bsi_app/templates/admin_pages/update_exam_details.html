@@ -1,0 +1,122 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+/* Responsive CSS styles for the form */
+.container {
+  margin-top: 20px;
+}
+
+.card-title {
+  margin-bottom: 20px;
+}
+
+.input-box label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control-file {
+  margin-top: 5px;
+}
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Update Exam Details</h4>
+            <form class="forms-sample" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="id_exam">Exam</label>
+                <select name="exam" id="id_exam" class="form-control">
+                  {% for exam in exams %}
+                  <option value="{{ exam.id }}" {% if exam.id == exam_detail.exam.id %}selected{% endif %}>{{ exam.exam_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="id_category">Category</label>
+                <select name="category" id="id_category" class="form-control">
+                  {% for category in categories %}
+                  <option value="{{ category.id }}" {% if category.id == exam_detail.category.id %}selected{% endif %}>{{ category.exam_type }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="id_details">Details</label>
+                <textarea class="form-control" name="details" id="id_details" rows="3" style="height: 150px;">{{ form.instance.details }}</textarea>
+              </div>
+              <div class="form-group">
+                <label for="id_videos">Video URL</label>
+                <input type="url" class="form-control" id="id_videos" name="videos" value="{{ form.instance.videos }}">
+              </div>
+              <div class="form-group">
+                <label for="id_exam_image">Exam Image</label>
+                <input type="file" class="form-control-file" id="id_exam_image" name="exam_image" accept="image/*">
+                {% if form.instance.exam_image %}
+                <img src="{{ form.instance.exam_image.url }}" alt="Exam Image">
+                {% endif %}
+              </div>
+              <div class="form-group">
+                <label for="id_sample_papers">Sample Papers</label>
+                <input type="file" class="form-control-file" id="id_sample_papers" name="sample_papers" accept=".pdf">
+                {% if form.instance.sample_papers %}
+                <a href="{{ form.instance.sample_papers.url }}" target="_blank">View Current Sample Paper</a>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                <label for="id_guide">Guide</label>
+                <input type="file" class="form-control-file" id="id_guide" name="guide" accept=".pdf">
+                {% if form.instance.guide %}
+                <a href="{{ form.instance.guide.url }}" target="_blank">View Current Guide</a>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                <label for="id_brochure">Brochure</label>
+                <input type="file" class="form-control-file" id="id_brochure" name="brochure" accept=".pdf">
+                {% if form.instance.brochure %}
+                <a href="{{ form.instance.brochure.url }}" target="_blank">View Current Brochure</a>
+                {% endif %}
+              </div>
+              <div class="form-group">
+                <label for="id_more_details">More Details</label>
+                <textarea class="form-control" name="more_details" id="id_more_details" rows="3" style="height: 150px;">{{ form.instance.more_details }}</textarea>
+              </div>
+              <button type="submit" class="btn btn-primary me-2">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+  <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function initializeCKEditor(selector) {
+        CKEDITOR.replace(selector, {
+          extraPlugins: 'uploadimage,image2',
+          height: 300,
+          toolbar: [
+            { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+            { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+            { name: 'tools', items: ['Maximize'] },
+            { name: 'document', items: ['Source'] }
+          ]
+        });
+      }
+  
+      initializeCKEditor('id_details');
+      initializeCKEditor('id_more_details');
+    });
+  </script>
+{% endblock %}

@@ -19,6 +19,16 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="NEW_SRI_HASH" crossorigin="anonymous">
         <link href="{% static 'assets/img/BSI_LOGO.png' %}" type="image/x-icon" rel="icon">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="{% static 'assets/css/exam.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/card2.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/card3.css' %}">
+<!-- 
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/> -->
+
+        
+
+
         <style>
             
         .card {
@@ -202,7 +212,7 @@
                         <span class="bottom-bar"></span>
                     </span>
                 </a>
-                <div class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse" style="margin-right: 300px;">
                     <ul class="navbar-nav ms-auto">
                         {% for course_collection in course_collections %}
                         <li class="nav-item dropdown">
@@ -237,9 +247,9 @@
                     <div class="others-option">
                         <div class="d-flex align-items-center">
                             <div class="option-item">
-                                <form class="search-form">
+                                <form class="search-form" method="GET" action="{% url 'index' %}">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Search Programs">
+                                        <input class="form-control" type="text" name="q" placeholder="Search Programs">
                                         <button type="submit"><i class="ri-search-line"></i></button>
                                     </div>
                                 </form>

@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails
 
 class ContactModelForm(forms.ModelForm):
     class Meta:
@@ -55,6 +55,7 @@ class Sub_Collection_Form(forms.ModelForm):
         model = Sub_Collection
         fields = ['course', 'course_type']
 
+
 class SubCollectionCategoryForm(forms.ModelForm):
     class Meta:
          model = SubCollectionCategory
@@ -65,3 +66,20 @@ class DetailsModelForm(forms.ModelForm):
     class Meta:
          model = DetailsModel
          fields = '__all__'
+
+class ExamForm(forms.ModelForm):
+    class Meta:
+         model = ExamModel
+         fields = '__all__'
+
+
+class ExamCategoryForm(forms.ModelForm):
+    class Meta:
+         model = ExamCategory
+         fields = '__all__'
+
+class ExamDetailsForm(forms.ModelForm):
+    class Meta:
+         model = ExamDetails
+         fields = '__all__'
+

@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+
+
+<div class="pages-banner-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="pages-title">
+                    <h2>{{ exam.exam_name }}</h2>
+                    <ul class="list-unstyled ps-0 mb-0">
+                        <li class="d-inline-block">
+                            <a class="text-decoration-none" href="">
+                                Home
+                            </a>
+                        </li>
+                        <li class="d-inline-block">
+                            Exam Details
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="pages-image">
+                    <img src="{% static 'assets/img/pages/pages-2.jpg' %}" alt="pages-image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape-7">
+        <img src="{% static 'assets/img/shape/shape-7.png' %}" alt="shape">
+    </div>
+</div>
+
+<div class="graduets-area pb-75">
+    <div class="container">
+        <div class="section-title text-center m-auto" data-cues="slideInUp">
+            <h2>{{ exam.exam_name }} Details</h2>
+        </div>
+        <div class="graduets-tab-info">
+            <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+                {% for category in categories %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {% if forloop.first %}active{% endif %}" id="pills-{{ category.exam_type|slugify }}-tab" data-bs-toggle="pill" data-bs-target="#pills-{{ category.exam_type|slugify }}" type="button" role="tab" aria-controls="pills-{{ category.exam_type|slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ category.exam_type }}</button>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content" id="pills-tabContent" style="margin-top: -50px;">
+                {% for category in categories %}
+                    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="pills-{{ category.exam_type|slugify }}" role="tabpanel" aria-labelledby="pills-{{ category.exam_type|slugify }}-tab" tabindex="0">
+                        <div class="blog-pages-area pt-100 pb-75">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="blog-left-sidebar">
+                                            <div class="leading-management">
+                                                <h1>{{ exam.exam_name }} - {{ category.exam_type }}</h1>
+                                                <p>Status: {{ category.status|yesno:"Active,Hidden" }}</p>
+                                            </div>
+                                            <div class="applications-info">
+                                                <h3>Information about {{ category.exam_type }}</h3>
+                                                <!-- Add specific content related to each exam type here -->
+                                                {% for detail in details|get_item:category.exam_type %}
+                                                    <div class="exam-detail">
+                                                        <p>{{ detail.details }}</p>
+                                                        {% if detail.videos %}
+                                                            <p>Video: <a href="{{ detail.videos }}" target="_blank">{{ detail.videos }}</a></p>
+                                                        {% endif %}
+                                                        {% if detail.exam_image %}
+                                                            <img src="{{ detail.exam_image.url }}" alt="Exam Image" style="max-width: 100%; height: auto;">
+                                                        {% endif %}
+                                                        {% if detail.sample_papers %}
+                                                            <p>Sample Papers: <a href="{{ detail.sample_papers.url }}" target="_blank">Download PDF</a></p>
+                                                        {% endif %}
+                                                        {% if detail.guide %}
+                                                            <p>Guide: <a href="{{ detail.guide.url }}" target="_blank">Download PDF</a></p>
+                                                        {% endif %}
+                                                        {% if detail.brochure %}
+                                                            <p>Brochure: <a href="{{ detail.brochure.url }}" target="_blank">Download Brochure</a></p>
+                                                        {% endif %}
+                                                        <p>More Details: {{ detail.more_details }}</p>
+                                                    </div>
+                                                {% empty %}
+                                                    <p>No details available for this category.</p>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="blog-right-sidebar">
+                                            <div class="single-pages-widget form">
+                                                <h3>Search</h3>
+                                                <form>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Search"> 
+                                                        <button type="submit"><i class="ri-search-line"></i></button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="single-pages-widget categories">
+                                                <h3>Categories</h3>
+                                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                                    Education
+                                                    <span>(07)</span>
+                                                </a>
+                                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                                    Learning
+                                                    <span>(02)</span>
+                                                </a>
+                                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                                    University
+                                                    <span>(04)</span>
+                                                </a>
+                                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                                    Online Education
+                                                    <span>(06)</span>
+                                                </a>
+                                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
+                                                    Graduates
+                                                    <span>(02)</span>
+                                                </a>
+                                            </div>
+                                            <div class="single-pages-widget tags style-2">
+                                                <h3>Popular Tag’s</h3>
+                                                <ul class="list-unstyled ps-0 mb-0">
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            Education
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            University
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            Online
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            Graduates
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            Programs
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            Sports
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            Admission
+                                                        </a>
+                                                    </li>
+                                                    <li class="d-inline-block">
+                                                        <a class="text-decoration-none d-inline-block" href="tag.html">
+                                                            Academics
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    table {
+       width: 100%;
+       border-collapse: collapse;
+   }
+   table, th, td {
+       border: 1px solid black;
+   }
+   th, td {
+       padding: 8px;
+       text-align: left;
+   }
+   .table-responsive {
+       overflow-x: auto;
+   }
+   @media (max-width: 575.98px) {
+       .table-responsive {
+           overflow-x: auto;
+       }
+       .card-body td:nth-child(2) {
+           max-width: 150px;
+           white-space: nowrap;
+           overflow: hidden;
+           text-overflow: ellipsis;
+       }
+   }
+ </style>
+
+{% endblock %}
