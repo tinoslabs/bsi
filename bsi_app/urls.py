@@ -124,6 +124,13 @@ urlpatterns = [
     path('update_exam_details/<int:id>/', views.update_exam_details, name='update_exam_details'),
     path('delete_exam_details/<int:id>/', views.delete_exam_details, name='delete_exam_details'),
 
-     path('exam_detail/<int:id>/', views.exam_detail, name='exam_detail'),
+    path('exam_detail/<int:id>/', views.exam_detail, name='exam_detail'),
+    path('logo', views.logo, name='logo'),
+
+    path('enquiry_view',views.enquiry_view, name='enquiry_view'),
+    path('delete_enquiry/<int:id>/', views.delete_enquiry, name='delete_enquiry'),
+    path('course_details/<int:id>/',views.course_details, name='course_details'),
+
+    path('exam_detail/<str:exam_name>/', views.exam_detail, name='exam_detail'),
 
 ]

@@ -135,11 +135,20 @@
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                  
-                        <div class="search-box">
-                            <form>
+                        <!-- <div class="search-box">
+                            <form method="get" action="{% url 'index' %}">
                                 <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search Colleges, Courses, Exams, QnA, & Articles">
+                                    <input type="text" class="form-control" name="query" placeholder="Search Colleges, Courses, Exams, QnA, & Articles">
+                                    <button type="submit"><i class="ri-search-line"></i></button>
+                                </div>
+                            </form>
+                        </div> -->
+                        <div class="search-box">
+                            <form method="get" action="{% url 'index' %}">
+                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="q" placeholder="Search Colleges, Courses, Exams, QnA, & Articles">
                                     <button type="submit"><i class="ri-search-line"></i></button>
                                 </div>
                             </form>
@@ -163,7 +172,7 @@
                     <div class="swiper partner-slider">
                         <div class="swiper-wrapper" data-cues="slideInUp">
                             <div class="swiper-slide">
-                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                <a href="" class="card-link3">
                                     <div class="card3">
                                         <div class="card-header3">
                                             <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
@@ -201,12 +210,13 @@
                                     </div>
                                 </a>
                             </div>
+                            
                             <div class="swiper-slide">
                                 <a href="http://highereducation.kerala.gov.in" class="card-link3">
                                     <div class="card3">
                                         <div class="card-header3">
                                             <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            <!-- <span>Kochi</span> -->
+                                           
                                         </div>
                                         <div class="card-body3">
                                             <p>Jagdish Sheth School of Management</p>
@@ -232,33 +242,7 @@
                                     <div class="card3">
                                         <div class="card-header3">
                                             <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            <!-- <span>Kochi</span> -->
-                                        </div>
-                                        <div class="card-body3">
-                                            <p>Jagdish Sheth School of Management</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
-                                    <div class="card3">
-                                        <div class="card-header3">
-                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            <!-- <span>Kochi</span> -->
-                                        </div>
-                                        <div class="card-body3">
-                                            <p>Jagdish Sheth School of Management</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
-                                    <div class="card3">
-                                        <div class="card-header3">
-                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            <!-- <span>Kochi</span> -->
+                                            
                                         </div>
                                         <div class="card-body3">
                                             <p>Jagdish Sheth School of Management</p>
@@ -280,6 +264,21 @@
         <!-- Start Graduets Area -->
 
         
+        <style>
+            .card a {
+                text-decoration: none;
+                color: inherit;
+            }
+            
+            .card a:hover h3 {
+                color: white; /* Change h3 color to white on hover */
+            }
+            
+            .card a:hover {
+                color: inherit; /* Ensure link color doesn't change unless specified */
+            }
+            </style>
+        
         <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
             <div class="container">
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
@@ -294,7 +293,7 @@
                         </a>
                         <p>{{college.place}}</p>
                         <div class="details">
-                            <div>Course Offered<br><a href="#">{{college.total_course}} course</a></div>
+                            <div>Course Offered<br><a href="{% url 'college_details' college.college_name %}">{{college.total_course}} course</a></div>
                             <div>Total Fees<br>₹{{college.min_fee}} L</div>
                         </div>
                         <div class="actions">
@@ -438,38 +437,9 @@
        
         
         <div class="exam-list">
-            <a href="#" class="exam-button">CTET</a>
-            
-            <a href="#" class="exam-button">CUET</a>
-            <a href="#" class="exam-button">TS EAMCET</a>
-            <a href="#" class="exam-button">NEET</a>
-            <a href="#" class="exam-button">CAT</a>
-            <a href="#" class="exam-button">PTET</a>
-            <a href="#" class="exam-button">PGIMER Nursing</a>
-            <a href="#" class="exam-button">MHCET Law</a>
-            <a href="#" class="exam-button">CA Foundation</a>
-            <a href="#" class="exam-button">NIMCET</a>
-            <a href="#" class="exam-button">CPGET</a>
-            <a href="#" class="exam-button">CT SET</a>
-            <a href="#" class="exam-button">JAC Delhi</a>
-            <a href="#" class="exam-button">JMI Entrance Exam</a>
-            <a href="#" class="exam-button">PUBDET</a>
-            <a href="#" class="exam-button">CFA Exam</a>
-            <a href="#" class="exam-button">SSAT</a>
-            <a href="#" class="exam-button">SSC CGL</a>
-            <a href="#" class="exam-button">OUAT Entrance Exam</a>
-            <a href="#" class="exam-button">MHT CET</a>
-            <a href="#" class="exam-button">NEET PG</a>
-            <a href="#" class="exam-button">APICET</a>
-            <a href="#" class="exam-button">MAH B.Ed CET</a>
-            <a href="#" class="exam-button">AIIMS Nursing</a>
-            <a href="#" class="exam-button">CLAT</a>
-            <a href="#" class="exam-button">CA Final</a>
-            <a href="#" class="exam-button">CDAC C-CAT</a>
-            <a href="#" class="exam-button">NIFT Entrance Exam</a>
-            <a href="#" class="exam-button">JoSAA</a>
-            <a href="#" class="exam-button">NCHMCT JEE</a>
-            <a href="#" class="exam-button">NCHMCT JEE shdfgeyfgeyw sfgweyugrfywefr hfdwgeyfg</a>
+            {% for data in courses %}
+            <a href="{% url 'course_details' data.id %}" class="exam-button">{{ data.course_name }}</a>   
+            {% endfor %}
             
         </div>
     </div>  
@@ -510,12 +480,21 @@
         </div>
         <br><br>
         <!-- End Events Area -->
+        <style>
+            .card-container1 a {
+                text-decoration: none;
+            }
+
+            .card-container1 a:hover {
+                text-decoration: none;
+            }
+        </style>
         <div >
-            <h1 style="margin-top: -80px;text-align: center;">Top Exams this month</h1>
+            <h1 style="margin-top: -80px;text-align: center;">Top Exams </h1>
             <br>  
             <div class="card-container1">
                 {% for exam in exam %}
-                <a href="{% url 'exam_detail' exam.id %}" class="card">{{ exam.exam_name }}</a>
+                <a href="{% url 'exam_detail' exam.exam_name %}" class="card">{{ exam.exam_name }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -527,7 +506,7 @@
                 <div class="video-image">
                     <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
                     <div class="video-btn">
-                        <a class="text-decoration-none icon" data-fslightbox="gallery" href="https://www.youtube.com/watch?v=3nQNiWdeH2Q">
+                        <a class="text-decoration-none icon" data-fslightbox="gallery" href="https://www.youtube.com/watch?v=7TVm_ETzoUM">
                             <i class="flaticon-play"></i>
                         </a>
                     </div>
@@ -545,7 +524,7 @@
                     {% for college in colleges %}
                         <div class="col-lg-4 col-md-6">
                             <div class="single-events-card">
-                                <a class="text-decoration-none d-block image" href="">
+                                <a class="text-decoration-none d-block image" href="{% url 'college_details' college.college_name %}">
                                     {% if college.college_image %}
                                         <img src="{{ college.college_image.url }}" alt="{{ college.college_name }}">
                                     {% else %}
@@ -555,7 +534,7 @@
                                 <div class="content d-flex align-items-top">
                                     <div class="title">
                                         <h3 style="text-align: center;">
-                                            <a class="text-decoration-none" href="">{{ college.college_name }}</a>
+                                            <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
                                         </h3>   
                                     </div>
                                 </div>

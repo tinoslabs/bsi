@@ -101,24 +101,24 @@
                             </div>
                            
                             <div class="leading-management">
-                                <h1>{{college.college_name}}</h1>
-                                <div class="image">
+                                <h1>{{course.course_name}}</h1>
+                                <!-- <div class="image">
                                     <img src="{{college.college_image.url}}" alt="applications-image">
-                                </div>
-                                <p style="font-family: arial;">{{college.college_description | safe }}</p>
+                                </div> -->
+                                <p style="font-family: arial;">{{course.course_description | safe }}</p>
                             </div>
                             
                             <div class="video-image">
                                 <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
                                 <div class="video-btn">
-                                    <a class="text-decoration-none icon" data-fslightbox="gallery" href="{{college.youtube_videos}}">
+                                    <a class="text-decoration-none icon" data-fslightbox="gallery" href="{{course.course_videos}}">
                                         <i class="flaticon-play"></i>
                                     </a>
                                 </div>
                             </div>
                            
                             <br>
-                            <p>{{college.more_details | safe}}</p>
+                            <p>{{course.additional_details | safe}}</p>
                             <div class="events-area pb-75">
                         </div>
                         <style>
@@ -189,9 +189,9 @@
                     <div class="col-lg-4">
                         <div class="blog-right-sidebar">
                             <div class="button-container">
-                                <a href="{{ college.college_brochure.url }}" class="btn download-guide">
+                                <a href="{{ course.brochure.url }}" class="btn download-guide">
                                     <i class="icon-download"></i>
-                                    Download Brochure
+                                    Course Brochure
                                 </a>
                                 <!-- <a href="#" class="btn sample-papers">
                                     <i class="icon-sample"></i>
@@ -200,7 +200,7 @@
                             </div>
                             <br><br>
                            
-                            <div class="single-pages-widget tags style-2">
+                            <!-- <div class="single-pages-widget tags style-2">
                                 <h3>Popular Courses</h3>
                                 <ul class="list-unstyled ps-0 mb-0">
                                     {% for course in courses %}
@@ -211,7 +211,7 @@
                                         </li>
                                     {% endfor %}
                                 </ul>
-                            </div>
+                            </div> -->
                             
                             <div class="pages-leave-reply" id="contactForm">
                                 {% if messages %}

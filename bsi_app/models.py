@@ -195,6 +195,40 @@ class ExamModel(models.Model):
         return self.exam_name
 
 
+class ExamDetails(models.Model):
+    exam = models.ForeignKey(ExamModel, on_delete=models.CASCADE)
+    details = models.TextField()
+    videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
+    exam_image = models.ImageField(upload_to='exam_image/', null=True, blank=True)
+    sample_papers = models.FileField(upload_to='pdf/', null=True, blank=True)
+    guide = models.FileField(upload_to='pdf/', null=True, blank=True)
+    brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+    more_details = models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.exam} Details"
+
+    class Meta:
+        verbose_name_plural = "Exam Details"
+
+
+# class ExamDetails(models.Model):
+#     exam = models.ForeignKey(ExamModel, on_delete=models.CASCADE)
+#     details = models.TextField()
+#     videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
+#     exam_image = models.ImageField(upload_to='exam_image/', null=True, blank=True)
+#     sample_papers = models.FileField(upload_to='pdf/', null=True, blank=True)
+#     guide = models.FileField(upload_to='pdf/', null=True, blank=True)
+#     brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+#     more_details = models.TextField(null=True, blank=True)
+    
+#     def __str__(self):
+#         return f"{self.exam} Details"
+
+#     class Meta:
+#         verbose_name_plural = "Exam Details"
+
+
 class ExamCategory(models.Model):
     OVERVIEW = 'Overview'
     QUESTION_PAPERS = 'Question Papers'
@@ -230,25 +264,19 @@ class ExamCategory(models.Model):
         return f"{self.exam_name} - {self.exam_type}"
 
 
-class ExamDetails(models.Model):
-    exam = models.ForeignKey('ExamModel', on_delete=models.CASCADE)
-    category = models.ForeignKey('ExamCategory', on_delete=models.CASCADE)
-    details = models.TextField()
-    videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
-    exam_image = models.ImageField(upload_to='exam_image/', null=True, blank=True)
-    sample_papers = models.FileField(upload_to='pdf/', null=True, blank=True)
-    guide = models.FileField(upload_to='pdf/', null=True, blank=True)
-    brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-    more_details = models.TextField(null=True, blank=True)
-    
+
+
+
+
+class EnquiryModel(models.Model):  
+    name = models.CharField(max_length=100, blank=True, null=True)   
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    Place = models.CharField(max_length=20, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+
     def __str__(self):
-        return f"{self.exam} - {self.category}"
-
-    class Meta:
-        verbose_name_plural = "Exam Details"
-
-
-   
+        return self.name
     
 
 

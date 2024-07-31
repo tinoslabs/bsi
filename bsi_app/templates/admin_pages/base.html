@@ -280,31 +280,33 @@
       </div>
     </li>
 
-    <li class="nav-item nav-category">Add Exams</li>
+    <li class="nav-item nav-category">Add Exams Details</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#exam" aria-expanded="false" aria-controls="client">
+      <a class="nav-link" data-bs-toggle="collapse" href="#examDetails" aria-expanded="false" aria-controls="client">
         <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
-        <span class="menu-title">Add Exam</span>
+        <span class="menu-title">Add Exams Details</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="exam">
+      <div class="collapse" id="examDetails">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{% url 'create_exam' %}"> Add Exam </a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'view_exam' %}"> View Exam </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_exam_details' %}"> Add Exam Details</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_exam_details' %}"> View Exam Details</a></li>
         </ul>
       </div>
     </li>
 
-    <li class="nav-item nav-category">Contact US</li>
+    <li class="nav-item nav-category">Student Enquiry</li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#contact" aria-expanded="false" aria-controls="contact">
+      <a class="nav-link" data-bs-toggle="collapse" href="#student" aria-expanded="false" aria-controls="contact">
         <i class="menu-icon mdi mdi-phone-log"></i>
-        <span class="menu-title">Contact US</span>
+        <span class="menu-title">Student Enquiry</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="contact">
+      <div class="collapse" id="student">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'contact_view' %}">Contact US</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'enquiry_view' %}">Contact US</a></li>
         </ul>
       </div>
     </li>

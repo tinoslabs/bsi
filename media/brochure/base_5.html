@@ -19,106 +19,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="NEW_SRI_HASH" crossorigin="anonymous">
         <link href="{% static 'assets/img/BSI_LOGO.png' %}" type="image/x-icon" rel="icon">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="{% static 'assets/css/exam.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/css/card2.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/css/card3.css' %}">
-        <link rel="stylesheet" href="{% static 'assets/css/button.css' %}">
-<!-- 
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/> -->
-
-        
-
-
-        <style>
-            
-        .card {
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            padding: 20px;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            overflow: hidden;
-            position: relative;
-        }
-        .card:hover {
-            background-color: navy;
-            color: #fff;
-            transform: translateY(-10px);
-        }
-        .card img {
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            margin-bottom: 10px;
-            transition: transform 0.3s ease;
-        }
-        .card:hover img {
-            transform: scale(1.1);
-        }
-        .card h3 {
-            font-size: 22px;
-            margin: 10px 0;
-        }
-        .card p {
-            color: #888;
-            font-size: 16px;
-            margin: 5px 0;
-        }
-        .card .details {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-        }
-        .card .details div {
-            font-size: 16px;
-        }
-        .card .details a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .card .details a:hover {
-            text-decoration: underline;
-        }
-        .card .actions {
-            margin-top: 20px;
-        }
-        .card .actions .btn {
-            background-color: #28a745;
-            color: #fff;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        .card .actions .btn:hover {
-            background-color: #218838;
-        }
-        .card:hover .details a {
-            color: #fff;
-        }
-        .card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at top left, #003366, #000080);
-            transition: transform 0.5s ease;
-            transform: scale(0);
-            z-index: -1;
-        }
-        .card:hover::before {
-            transform: scale(1);
-        }
-        </style>
     </head>
 
     <body>
@@ -150,12 +50,12 @@
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
                                     <ul class="list-unstyled ps-0 mb-0 pages-link">
-                                        <!-- <li class="d-inline-block">
+                                        <li class="d-inline-block">
                                             <a class="text-decoration-none" href="">Faculty</a>
                                         </li>
                                         <li class="d-inline-block">
                                             <a class="text-decoration-none" href="">Community</a>
-                                        </li> -->
+                                        </li>
                                         <li class="d-inline-block">
                                             <a class="text-decoration-none" href="">Log in</a>
                                         </li>
@@ -202,8 +102,7 @@
         <!-- Start Navbar Area --> 
         <nav class="navbar navbar-expand-lg" id="navbar">
             <div class="container-fluid">
-                
-                <a class="navbar-brand" href="{% url 'index' %}">
+                <a class="navbar-brand" href="index.html">
                     <img class="black-logo" src="{% static 'assets/img/BSI_LOGO.png' %}" alt="black-logo">
                 </a>
                 <a class="navbar-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
@@ -213,44 +112,375 @@
                         <span class="bottom-bar"></span>
                     </span>
                 </a>
-                <div class="collapse navbar-collapse" style="margin-right: 300px;">
+                <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto">
-                        {% for course_collection in course_collections %}
-                        <li class="nav-item dropdown">
-                            <a href="#" class="dropdown-toggle nav-link">
-                                {{ course_collection }}
+
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link active">
+                                Home
                             </a>
                             <ul class="dropdown-menu">
-                                {% for sub_collection in sub_collections %}
-                                    {% if sub_collection.course.id == course_collection.id %}
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            {{ sub_collection.get_course_type_display }}
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            {% for sub_category in sub_categories %}
-                                                {% if sub_category.sub_collection.id == sub_collection.id %}
-                                                <li class="nav-item">
-                                                    <a href="{% url 'details_display' sub_category.id %}" class="nav-link">
-                                                        {{ sub_category.sub_category }}
-                                                    </a>
-                                                </li>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                    {% endif %}
-                                {% endfor %}
+                                <li class="nav-item">
+                                    <a href="index.html" class="nav-link active">
+                                        Home Demo - One
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="index-2.html" class="nav-link">
+                                        Home Demo - Two
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="index-3.html" class="nav-link">
+                                        Home Demo - Three
+                                    </a>
+                                </li>
                             </ul>
                         </li>
-                        {% endfor %}
+
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                Pages
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="university-overview.html" class="nav-link">
+                                        University Overview
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>                
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                            </ul>
+                        </li>
+                        
+                       
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                Pages
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="university-overview.html" class="nav-link">
+                                        University Overview
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>                
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                            </ul>
+                        </li>
+
+                        
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                Pages
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a href="university-overview.html" class="nav-link">
+                                        University Overview
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>                
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                                <li class="nav-item">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                        Blog
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="blog-style-one.html" class="nav-link">
+                                                Blog Style One
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-style-two.html" class="nav-link">
+                                                Blog Style Two
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="blog-details.html" class="nav-link">
+                                                Blog Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>     
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                Health Care
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item ">
+                                    <a href="fitness-athletics.html" class="nav-link">
+                                        Fitness & Athletics
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                Student Life
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item ">
+                                    <a href="university-life.html" class="nav-link">
+                                        University Life
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="contact.html" class="nav-link">
+                                Contact <span>Us</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="others-option">
                         <div class="d-flex align-items-center">
                             <div class="option-item">
-                                <form class="search-form" method="GET" action="{% url 'index' %}">
+                                <form class="search-form">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" name="q" placeholder="Search Programs">
+                                        <input class="form-control" type="text" placeholder="Search Programs">
                                         <button type="submit"><i class="ri-search-line"></i></button>
                                     </div>
                                 </form>
@@ -263,7 +493,93 @@
                 </div>
             </div>
         </nav>  
-                
+                   
+                       
+                                
+                                
+                          
+                      
+                        <!-- <li class="nav-item">
+                            <a href="{% url 'about' %}" class=" nav-link">
+                                About Us
+                            </a>
+                            
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                Academics
+                            </a>
+                            <ul class="dropdown-menu">
+                                    <li class="nav-item ">
+                                    <a href="{% url 'programs' %}" class="nav-link">
+                                        All Programs
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a href="{% url 'program_details' %}" class="nav-link">
+                                        Program Details
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'service' %}" class=" nav-link">
+                                Service
+                            </a>
+                            
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'blog' %}" class=" nav-link">
+                                Blog
+                            </a>
+                            
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{% url 'contact' %}" class="nav-link">
+                                Contact <span>Us</span>
+                            </a>
+                        </li> -->
+                    </ul>
+                    <!-- <div class="others-option">
+                        <div class="d-flex align-items-center">
+                            <div class="option-item">
+                                <form class="search-form">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" placeholder="Search Colleges & Courses">
+                                        <button type="submit"><i class="ri-search-line"></i></button>
+                                    </div>
+                                </form>
+                                <button type="button" class="search-btn d-none bg-transparent border-0 lh-1 p-0 position-relative" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                    <i class="flaticon-search-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="others-option">
+                        <div class="d-flex align-items-center">
+                            <div class="option-item">
+                                <a class="text-decoration-none default-btn" href="{% url 'application' %}">
+                                    Application Form
+                                    <i class="flaticon-right-arrow"></i>
+                                </a>
+                            </div>
+                            <div class="option-item">
+                                <div class="responsive-icon d-none">
+                                    <a class="text-decoration-none" href="{% url 'application' %}">
+                                        <i class="ri-arrow-right-up-line"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     -->
+                </div>
+            </div>
+        </nav>
 
         <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -289,7 +605,7 @@
         <!-- Start Responsive Navbar Area -->
         <div class="responsive-navbar offcanvas offcanvas-end border-0" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
             <div class="offcanvas-header">
-                <a href="index.html" class="logo d-inline-block">
+                <a href="{% url 'index' %}" class="logo d-inline-block">
                     <img src="{% static 'assets/img/BSI_LOG_WHITE.png' %}" alt="logo">
                 </a>
                 <button type="button" class="close-btn bg-transparent position-relative lh-1 p-0 border-0" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -298,32 +614,79 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="responsive-menu">
-                    <li class="responsive-menu-list"><a href="javascript:void(0);">Pages</a>
+
+                    <li class="responsive-menu-list active"><a href="{% url 'index' %}">Home</a>
+                    </li>
+                    
+                    
+
+                    <!-- <li class="responsive-menu-list"><a href="javascript:void(0);">Admissions</a>
                         <ul class="responsive-menu-items">
-                            
-                            <li class="responsive-menu-list"><a href="javascript:void(0);">Blog</a> 
-                                <ul class="responsive-menu-items">
-                                    <li class="nav-item">
-                                        <a href="blog-style-one.html" class="nav-link">
-                                            Blog & News 01
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-style-two.html" class="nav-link">
-                                            Blog & News 02
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-details.html" class="nav-link">
-                                            Blog Details
-                                        </a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item">
+                                <a href="apply.html" class="nav-link">
+                                    How To Apply
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="tuition-fees.html" class="nav-link">
+                                    Tuition & Fees
+                                </a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <li class="responsive-menu-list without-icon">
+                        <a href="{% url 'about' %}" class="nav-link">
+                            About <span>Us</span>
+                        </a>
+                    </li>
+
+                    <li class="responsive-menu-list"><a href="javascript:void(0);">Academics</a>
+                        <ul class="responsive-menu-items">
+                            <li class="nav-item ">
+                                <a href="{% url 'programs' %}" class="nav-link">
+                                    All Programs
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="{% url 'program_details' %}" class="nav-link">
+                                    Program Details
+                                </a>
                             </li>
                             
                         </ul>
                     </li>
+
+                    
+                    <li class="responsive-menu-list without-icon">
+                        <a href="{% url 'service' %}" class="nav-link">
+                            Service
+                        </a>
+                    </li>
+                    
+                    <li class="responsive-menu-list without-icon">
+                        <a href="{% url 'blog' %}" class="nav-link">
+                            Blog
+                        </a>
+                    </li>
+
+                    <li class="responsive-menu-list without-icon">
+                        <a href="{% url 'contact' %}" class="nav-link">
+                            Contact <span>Us</span>
+                        </a>
+                    </li>
                 </ul>
+
+                <div class="others-option d-md-flex align-items-center">
+                    <div class="option-item">
+                        <form class="search-form">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Search Programs">
+                                <button type="submit"><i class="ri-search-line"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
             </div>
         </div>
 

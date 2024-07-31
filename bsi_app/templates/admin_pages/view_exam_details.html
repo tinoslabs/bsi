@@ -36,8 +36,9 @@ img {
         <table class="table table-striped">
           <thead>
             <tr>
+
               <th>Exam Name</th>
-              <th>Category</th>
+              <!-- <th>Category</th> -->
               <th>Details</th>
               <th>Video</th>
               <th>Image</th>
@@ -52,7 +53,7 @@ img {
             {% for data in category %}
             <tr>
               <td>{{ data.exam }}</td>
-              <td>{{ data.category }}</td>
+              <!-- <td>{{ data.category }}</td> -->
               <td>{{ data.details | safe }}</td>
               <td>
                 {% if data.videos %}
