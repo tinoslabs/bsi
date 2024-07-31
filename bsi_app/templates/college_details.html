@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
         <!-- End Responsive Navbar Area -->
 
         <!-- Start Pages Banner Area -->
@@ -10,15 +12,15 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="pages-title">
-                            <h2>Blog Details</h2>
+                            <h2>College Details</h2>
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="index.html">
+                                    <a class="text-decoration-none" href="{% url 'index' %}">
                                         Home
                                     </a>
                                 </li>
                                 <li class="d-inline-block">
-                                    Blog Details
+                                    College Details
                                 </li>
                             </ul>
                         </div>
@@ -51,7 +53,7 @@
                                 <div class="image">
                                     <img src="{{college.college_image.url}}" alt="applications-image">
                                 </div>
-                                <p>{{college.college_description | safe }}</p>
+                                <p style="font-family: arial;">{{college.college_description | safe }}</p>
                             </div>
                             
                             <div class="video-image">
@@ -114,7 +116,7 @@
                                 </div>
                             </div> -->
                             <div class="events-area pb-75">
-                            <div class="container">
+                            <!-- <div class="container">
                                 <div class="section-title text-center m-auto" data-cues="slideInUp">
                                     <h4>Top Colleges in your region</h4>
                                 </div>
@@ -136,7 +138,7 @@
                                     </div>
                                     {% endfor %}
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <style>
                             
@@ -201,6 +203,63 @@
                         }
                         </style>
                              
+                            <!-- <div class="pages-leave-reply">
+                                <h1>Leave A Reply</h1>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Your name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="Your email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control textarea" placeholder="Your comments..."></textarea>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Save my name, email, and website in this browser for the next time I comment.
+                                        </label>
+                                    </div>
+                                    <button type="submit">
+                                        Post A Comment
+                                        <i class="flaticon-right-arrow"></i>
+                                    </button>
+                                </form>
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="blog-right-sidebar">
+                            <div class="single-pages-widget form">
+                                <h3>Search</h3>
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search"> 
+                                        <button type="submit"><i class="ri-search-line"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                           
+                            <div class="single-pages-widget tags style-2">
+                                <h3>Popular Courses</h3>
+                                <ul class="list-unstyled ps-0 mb-0">
+                                    {% for course in courses %}
+                                        <li class="d-inline-block">
+                                            <a class="text-decoration-none d-inline-block" href="#">
+                                                {{ course.course_name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                             <div class="pages-leave-reply">
                                 <h1>Leave A Reply</h1>
                                 <form>
@@ -234,157 +293,6 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-4">
-                        <div class="blog-right-sidebar">
-                            <div class="single-pages-widget form">
-                                <h3>Search</h3>
-                                <form>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search"> 
-                                        <button type="submit"><i class="ri-search-line"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- <div class="single-pages-widget latest">
-                                <h3>Latest News</h3>
-                                <div class="latest-card d-flex align-items-center">
-                                    <div class="image">
-                                        <a href="blog-details.html">
-                                            <img src="{% static 'assets/img/pages/pages-12.jpg' %}" alt="latest-image">
-                                        </a>
-                                    </div>
-                                    <div class="content">
-                                        <h3>
-                                            <a class="text-decoration-none" href="blog-details.html">
-                                                Professor Albert joint research on mobile money in Tanzania
-                                            </a>
-                                        </h3>
-                                        <p class="d-flex align-items-center">
-                                            <i class="ri-calendar-line"></i>
-                                            October 08, 2024
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="latest-card d-flex align-items-center">
-                                    <div class="image">
-                                        <a href="blog-details.html">
-                                            <img src="{% static 'assets/img/pages/pages-13.jpg' %}" alt="latest-image">
-                                        </a>
-                                    </div>
-                                    <div class="content">
-                                        <h3>
-                                            <a class="text-decoration-none" href="blog-details.html">
-                                                A wonderful serenity has taken possession of my entire soul
-                                            </a>
-                                        </h3>
-                                        <p class="d-flex align-items-center">
-                                            <i class="ri-calendar-line"></i>
-                                            October 08, 2024
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="latest-card d-flex align-items-center">
-                                    <div class="image">
-                                        <a href="blog-details.html">
-                                            <img src="{% static 'assets/img/pages/pages-14.jpg' %}" alt="latest-image">
-                                        </a>
-                                    </div>
-                                    <div class="content">
-                                        <h3>
-                                            <a class="text-decoration-none" href="blog-details.html">
-                                                The Florida Project: Taking Action to Help Kids Like Moonee
-                                            </a>
-                                        </h3>
-                                        <p class="d-flex align-items-center">
-                                            <i class="ri-calendar-line"></i>
-                                            October 08, 2024
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="single-pages-widget categories">
-                                <h3>Categories</h3>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
-                                    Education
-                                    <span>(07)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
-                                    Learning
-                                    <span>(02)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
-                                    University
-                                    <span>(04)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
-                                    Online Education
-                                    <span>(06)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="categorie.html">
-                                    Graduates
-                                    <span>(02)</span>
-                                </a>
-                            </div> -->
-                            <!-- <div class="single-pages-widget gallery">
-                                <h3>Student’s Gallery</h3>
-                                <ul class="list-unstyled ps-0 mb-0">
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-15.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-16.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-17.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-18.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-19.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-20.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-21.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none" href="#">
-                                            <img src="{% static 'assets/img/pages/pages-22.jpg' %}" alt="gallery-image">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> -->
-                            <div class="single-pages-widget tags style-2">
-                                <h3>Popular Courses</h3>
-                                <ul class="list-unstyled ps-0 mb-0">
-                                    {% for course in courses %}
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none d-inline-block" href="#">
-                                                {{ course.course_name }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
         </div>
@@ -393,5 +301,37 @@
         <!-- Start Newsletter Area -->
         
         <!-- End Newsletter Area -->
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+            .table-responsive {
+                overflow-x: auto;
+            }
+          
+            @media (max-width: 575.98px) {
+                .table-responsive {
+                    overflow-x: auto;
+                }
+                .card-body td:nth-child(2) {
+                    max-width: 150px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            /* Other media queries here */
+          </style>
 
         {% endblock %}
+        
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+          <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>

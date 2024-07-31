@@ -1,0 +1,27 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Update Exams</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exam">Name Of The Exam</label>
+                            <input type="text" class="form-control" id="Place" name="exam_name" placeholder="Place" value="{{exams.exam_name}}">
+                            
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

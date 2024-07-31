@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
-
+<!-- <link rel="stylesheet" href="{% static 'assets/css/button.css' %}"> -->
+         <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/> -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'assets/css/button.css' %}">
+
+
+
+
 <style>
 .hero-area {
     z-index: 1;
@@ -146,117 +151,136 @@
             </div>
         </div>
         
+
+        
         
         <div class="partner-area ptb-100 pb-75" style="margin-top: -50px;">
+            <div class="section-title text-center m-auto" data-cues="slideInUp">
+                <h4>Featured Colleges</h4>
+            </div>
             <div class="container">
                 <div class="partner-slider-info">
                     <div class="swiper partner-slider">
                         <div class="swiper-wrapper" data-cues="slideInUp">
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-1.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        <!-- <h7 style="font-size: 13px;"><b>Ganga Institute Of Technology</b></h7> -->
-                                        <!-- <p>Location 1</p> -->
-                                        
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management (JAGSoM)</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        <!-- <h7 style="font-size: 13px;">Lovely Professional University</h7> -->
-                                        <!-- <p>Location 2</p> -->
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-3.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        <!-- <h7 style="font-size: 13px;">Ganga Institute of technology</h7> -->
-                                        <!-- <p>Location 3</p> -->
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-4.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        <!-- <h7 style="font-size: 13px;">Ganga Institute of technology</h7> -->
-                                        <!-- <p>Location 4</p> -->
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-5.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        <!-- <h7 style="font-size: 13px;">Ganga Institute of technology</h7> -->
-                                        <!-- <p>Location 5</p> -->
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-1.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        <!-- <h7 style="font-size: 13px;">Ganga Institute of technology</h7> -->
-                                        <!-- <p>Location 1</p> -->
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        <!-- <h7 style="font-size: 13px;">Ganga Institute of technology</h7> -->
-                                        <!-- <p>Location 2</p> -->
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-3.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                    
-                                        <!-- <p>Location 3</p> -->
+                                <a href="http://highereducation.kerala.gov.in" class="card-link3">
+                                    <div class="card3">
+                                        <div class="card-header3">
+                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
+                                            <!-- <span>Kochi</span> -->
+                                        </div>
+                                        <div class="card-body3">
+                                            <p>Jagdish Sheth School of Management</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
-                            <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-4.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        
-                                        <!-- <p>Location 4</p> -->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="single-partner-logo">
-                                    <img src="{% static 'assets/img/partner/partner-5.png' %}" alt="partner-logo">
-                                    <div class="partner-info">
-                                        
-                                        <!-- <p>Location 5</p> -->
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+       
         
         
         <!-- End About Area -->
 
         <!-- Start Graduets Area -->
 
-
-        <div class="events-area pb-75">
+        
+        <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
             <div class="container">
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
                     <h4>Top Colleges in your region</h4>
@@ -281,6 +305,7 @@
                 </div>
             </div>
         </div>
+        
         <style>
             
             .card {
@@ -404,41 +429,51 @@
         <!-- End Funfact Area -->
 
         <!-- Start Apply Area -->
-        <div class='container'>
-            <h1>
-                Trending Courses
-            </h1>
-            <p>
-              Random selection of button styles. May change over time as I get alot of stupid ideas. Feel free to follow me on 
-            <div class="button-container">
-              <div class='button -regular center'>After 12th - Science</div>
+        
 
-              <div class='button -regular center'>After 12th - Arts</div>
 
-              <div class='button -regular center'>After 12th - Commerce</div>
-
-              <div class='button -regular center'>BCA</div>
-
-              <div class='button -regular center'>B.Sc Nursing</div>
-
-              <div class='button -regular center'>ECCE</div>
-
-              <div class='button -regular center'>D.El.Ed</div>
-              <div class='button -regular center'>MBA</div>
-              <div class='button -regular center'>Bsc</div>
-              <div class='button -regular center'>BEd</div>
-              <div class='button -regular center'>LL.B.</div>
-              <div class='button -regular center'>GNM Course</div>
-              <div class='button -regular center'>Charterd Accountancy</div>
-              <div class='button -regular center'>B Pharmacy</div>
-              <div class='button -regular center'>BA</div>
-              <div class='button -regular center'>NTT</div>
-              <div class='button -regular center'>B Tech</div>
-              <div class='button -regular center'>GNM Course</div>
-              <div class='button -regular center'>GNM Course</div>
-              
-            </div>
-          </div>
+        <div class='container'  >
+            <h1 style="margin-top: -100;text-align: center;">Trending Courses</h1>
+            <br>
+       
+        
+        <div class="exam-list">
+            <a href="#" class="exam-button">CTET</a>
+            
+            <a href="#" class="exam-button">CUET</a>
+            <a href="#" class="exam-button">TS EAMCET</a>
+            <a href="#" class="exam-button">NEET</a>
+            <a href="#" class="exam-button">CAT</a>
+            <a href="#" class="exam-button">PTET</a>
+            <a href="#" class="exam-button">PGIMER Nursing</a>
+            <a href="#" class="exam-button">MHCET Law</a>
+            <a href="#" class="exam-button">CA Foundation</a>
+            <a href="#" class="exam-button">NIMCET</a>
+            <a href="#" class="exam-button">CPGET</a>
+            <a href="#" class="exam-button">CT SET</a>
+            <a href="#" class="exam-button">JAC Delhi</a>
+            <a href="#" class="exam-button">JMI Entrance Exam</a>
+            <a href="#" class="exam-button">PUBDET</a>
+            <a href="#" class="exam-button">CFA Exam</a>
+            <a href="#" class="exam-button">SSAT</a>
+            <a href="#" class="exam-button">SSC CGL</a>
+            <a href="#" class="exam-button">OUAT Entrance Exam</a>
+            <a href="#" class="exam-button">MHT CET</a>
+            <a href="#" class="exam-button">NEET PG</a>
+            <a href="#" class="exam-button">APICET</a>
+            <a href="#" class="exam-button">MAH B.Ed CET</a>
+            <a href="#" class="exam-button">AIIMS Nursing</a>
+            <a href="#" class="exam-button">CLAT</a>
+            <a href="#" class="exam-button">CA Final</a>
+            <a href="#" class="exam-button">CDAC C-CAT</a>
+            <a href="#" class="exam-button">NIFT Entrance Exam</a>
+            <a href="#" class="exam-button">JoSAA</a>
+            <a href="#" class="exam-button">NCHMCT JEE</a>
+            <a href="#" class="exam-button">NCHMCT JEE shdfgeyfgeyw sfgweyugrfywefr hfdwgeyfg</a>
+            
+        </div>
+    </div>  
+    <br><br>
         <!-- End Apply Area -->
 
         <!-- Start Events Area -->
@@ -461,7 +496,7 @@
                                 </div>
                                 <div class="title">
                                     <h3>
-                                        <a class="text-decoration-none" href="">{{details.category_name}}</a>
+                                        <a class="text-decoration-none" href="{% url 'blog_details' details.blog_heading %}">{{details.category_name}}</a>
                                     </h3>
                                     
                                    
@@ -473,9 +508,19 @@
                 </div>
             </div>
         </div>
+        <br><br>
         <!-- End Events Area -->
+        <div >
+            <h1 style="margin-top: -80px;text-align: center;">Top Exams this month</h1>
+            <br>  
+            <div class="card-container1">
+                {% for exam in exam %}
+                <a href="{% url 'exam_detail' exam.id %}" class="card">{{ exam.exam_name }}</a>
+                {% endfor %}
+            </div>
+        </div>
 
-        
+        <br><br>
 
         <div class="video-area">
             <div class="container">
@@ -490,32 +535,7 @@
             </div>
         </div><br><br>
 
-        <!-- <div class="events-area pb-75">
-            <div class="container">
-                <div class="section-title text-center m-auto" data-cues="slideInUp">
-                    <h4>Top Colleges</h4>
-                </div>
-                <div class="row justify-content-center" data-cues="slideInUp">
-                    <div class="col-lg-4 col-md-6">
-                         
-                        <div class="single-events-card">
-                            <a class="text-decoration-none d-block image" href="">
-                                <img src="{% static 'assets/img/college-7.jpg' %}" alt="events-image">
-                            </a>
-                            <div class="content d-flex align-items-top">
-                                
-                                <div class="title">
-                                    <h3 style="text-align: center;">
-                                        <a class="text-decoration-none" href="">YeldhoMar</a>
-                                    </h3>   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div> -->
+        
         <div class="events-area pb-75">
             <div class="container">
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
@@ -546,196 +566,33 @@
             </div>
         </div>
         
-        <!-- Start Facilities Area -->
-        <div class='container'>
-            <h1>
-                Trending Colleges & Universities
-            </h1>
-            <p>
-              Random selection of button styles. May change over time as I get alot of stupid ideas. Feel free to follow me on 
-            <div class="button-container">
-              <div class='button -regular center'>Amity University Noida</div>
-
-              <div class='button -regular center'>Delhi University</div>
-
-              <div class='button -regular center'>BHU</div>
-
-              <div class='button -regular center'>LPU</div>
-
-              <div class='button -regular center'>MIT-WPU</div>
-
-              <div class='button -regular center'>IGNOU</div>
-
-              <div class='button -regular center'>Chandigarh University (CU)</div>
-              <div class='button -regular center'>Jadavpur University</div>
-              <div class='button -regular center'>Galgotias University</div>
-              <div class='button -regular center'>NIT Trichy</div>
-              <div class='button -regular center'>YCMOU Nashik</div>
-              <div class='button -regular center'>NSUT</div>
-              <div class='button -regular center'>Lucknow University</div>
-              <div class='button -regular center'>Jamia Millia Islamia</div>
-              <div class='button -regular center'>Lucknow University</div>
-              <div class='button -regular center'>GL Bajaj Noida</div>
-              <div class='button -regular center'>Mumbai University</div>
-              <div class='button -regular center'>YCMOU Nashik</div>
-              <div class='button -regular center'>Jadavpur University</div>
-              
-            </div>
-          </div>
-        <!-- End Facilities Area -->
-
         
-        <!-- <div class="testimonial-area pb-75">
-            <div class="container">
-                <div class="section-title text-center m-auto">
-                    <h2>What Student’s Say</h2>
-                </div>
-                <div class="row align-items-center" data-cues="slideInUp">
-                    <div class="col-lg-4">
-                        <div class="testimonial-image">
-                            <img src="{% static 'assets/img/testimonial/testimonial-1.jpg' %}" alt="testimonial-image">
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="testimonial-slider-info">
-                            <div class="swiper testimonial2">
-                                <div class="swiper-wrapper">
-                                    {% for review in clients_review %}
-                                    <div class="swiper-slide">
-                                        <div class="testimonial-slider-item">
-                                            <ul class="list-unstyled ps-0 star-icon">
-                                                <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                                <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                                <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                                <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                                <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                            </ul>
-                                            <p>{{ review.review }}</p>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="user d-flex align-items-center">
-                                                    <div class="image">
-                                                        <img src="{{ review.client_image.url }}" alt="testimonial-image">
-                                                    </div>
-                                                    <div class="content">
-                                                        <h3>{{ review.client_name }}</h3>
-                                                        <span>{{ review.designation }}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="quote-icon">
-                                                    <i class="flaticon-quote"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="thumbs-arrow d-flex align-items-center justify-content-between">
-                                <div class="next-prev-arrow d-flex align-items-center">
-                                    <div class="next">
-                                        <i class="flaticon-left-arrow"></i>
-                                    </div>
-                                    <div class="prev">
-                                        <i class="flaticon-right-arrow"></i>
-                                    </div>
-                                </div>
-                                <div thumbsSlider="" class="swiper testimonial">
-                                    <div class="swiper-wrapper justify-content-end">
-                                        {% for review in clients_review %}
-                                        <div class="swiper-slide">
-                                            <div class="testimonial-item-image">
-                                                <img src="{{ review.client_image.url }}" alt="testimonial-image">
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- End Testimonial Area -->
-
-        <!-- Start Partner Area -->
-        <!-- <div class="partner-area pb-75">
-            <div class="container">
-                <div class="partner-slider-info">
-                    <div class="swiper partner-slider">
-                        <div class="swiper-wrapper" data-cues="slideInUp">
-                            {% for logo in client_logo %}
-                                <div class="swiper-slide">
-                                    <div class="single-partner-logo">
-                                        <img src="{{ logo.logo.url }}" alt="{{ logo.name }}">
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- End Partner Area -->
-
-        <!-- Start Subscribe Area -->
-        <div class="subscribe-area pb-75">
-            <div class="container">
-                <div class="row align-items-center" data-cues="slideInUp">
-                    <div class="col-xl-8">
-                        <div class="subscribe-image-info">
-                            <div class="row align-items-center" >
-                                <div class="col-lg-5">
-                                    <div class="subscribe-item">
-                                        <h3>Subscribe To Our Newsletter</h3>
-                                        <p>Stay up-to-date with the latest news, trends, & exclusive offers by subscribe to our newsletter.</p>
-                                        <form>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" placeholder="Your email">
-                                            </div>
-                                            <button type="submit" class="text-decoration-none border-0 default-btn">
-                                                Subscribe Now
-                                                <i class="flaticon-right-arrow"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="subscribe-image">
-                                        <img src="{% static 'assets/img/subscribe/subscribe-2.jpg' %}" alt="subscribe-image">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="subscribe-content">
-                            <div class="title">
-                                <h2>Are You Ready To Build Up Your Career </h2>
-                                <p>Explore endless possibilities with BSI's tailored programs and expert guidance. Whether you're starting out or aiming for advancement, we provide the tools and support to help you succeed. Join us and take the next step towards a fulfilling career path.</p>
-                            </div>
-                            <ul class="list-unstyled ps-0 mb-0 subscribe-btn">
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none default-btn" href="">
-                                        Application Form
-                                        <i class="flaticon-right-arrow"></i>
-                                    </a>
-                                </li>
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none arrow-btn" href="">
-                                        How To Apply
-                                        <i class="flaticon-right-arrow"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
+        <br><br>
+        <!-- <div >
+            <h1 style="margin-top: -80px;text-align: center;">Top Exams this month</h1>
+            <br>
+       
+         
+        <div class="card-container1">
+            <a href="#" class="card">DEPARTMENT PORTAL</a>
+            <a href="#" class="card">E PAYMENT</a>
+            <a href="#" class="card">STUDENT PORTAL</a>
+            <a href="#" class="card">ONLINE CERTIFICATE PORTAL</a>
+            <a href="#" class="card">CENTRALIZED COLLEGE PORTAL</a>
+            <a href="#" class="card">SB COLLECT</a>
+            <a href="#" class="card">SUVEGA STUDENTS SERVICE</a>
+            <a href="#" class="card">CERTIFICATE VERIFICATION</a>
+            <a href="#" class="card">SB COLLECT</a>
+            <a href="#" class="card">SUVEGA STUDENTS SERVICE</a>
+            <a href="#" class="card">SB COLLECT</a>
+            <a href="#" class="card">SUVEGA STUDENTS SERVICE</a>
         </div>
-        
-        
+    </div> -->
+       
+  
         <!-- End Subscribe Area -->
+       
         
         <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -762,6 +619,22 @@
 
         </script>
         
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const query = "{{ query }}";
+                if (query) {
+                    if (document.querySelector('#colleges-section')) {
+                        window.location.hash = '#colleges-section';
+                    } else if (document.querySelector('#courses-section')) {
+                        window.location.hash = '#courses-section';
+                    } else if (document.querySelector('#blog-category-section')) {
+                        window.location.hash = '#blog-category-section';
+                    }
+                }
+            });
+        </script>
 
+  
+        
 <script src="{% static 'assets/js/buttons.js' %}"></script>
         {% endblock %}
