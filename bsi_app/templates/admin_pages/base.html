@@ -243,6 +243,40 @@
       </div>
     </li> -->
 
+    
+    <li class="nav-item nav-category">Header Details</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#details" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
+        <span class="menu-title">Header Details</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="details">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_details' %}"> Add  Details </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_details' %}"> View  Details </a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item nav-category">Add Exams Details</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#examDetails" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
+        <span class="menu-title">Add Exams Details</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="examDetails">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_exam' %}"> Add Exam </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_exam' %}"> View Exam </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_exam_details' %}"> Add Exam Details</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_exam_details' %}"> View Exam Details</a></li>
+        </ul>
+      </div>
+    </li>
+
+
     <li class="nav-item nav-category">Course Collection</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#collection" aria-expanded="false" aria-controls="client">
@@ -261,38 +295,6 @@
           <li class="nav-item"> <a class="nav-link" href="{% url 'create_subcollection_category' %}">Add Sub Category </a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'view_subcollection_category' %}">View Sub Category </a></li>
          
-        </ul>
-      </div>
-    </li>
-
-    <li class="nav-item nav-category">Details</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#details" aria-expanded="false" aria-controls="client">
-        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
-        <span class="menu-title">Details</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="details">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add_details' %}"> Add Details </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_details' %}"> View Details </a></li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="nav-item nav-category">Add Exams Details</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#examDetails" aria-expanded="false" aria-controls="client">
-        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
-        <span class="menu-title">Add Exams Details</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="examDetails">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'create_exam' %}"> Add Exam </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_exam' %}"> View Exam </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'create_exam_details' %}"> Add Exam Details</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_exam_details' %}"> View Exam Details</a></li>
         </ul>
       </div>
     </li>
