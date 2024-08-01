@@ -32,8 +32,6 @@ def admin_dashboard(request):
 
 from django.db.models import Q
 
-
-
 def index(request):
     
     colleges = College_Model.objects.all()
@@ -60,74 +58,7 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-# def index(request):
-#     query = request.GET.get('q', '')
-#     context = {
-#         'query': query,
-#         'colleges': [],
-#         'courses': [],
-#         'blog_category': [],
-#         'show_colleges': False,
-#         'show_courses': False,
-#         'show_blog_category': False,
-#         'no_results': False
-#     }
 
-#     if query:
-#         colleges = College_Model.objects.filter(
-#             Q(college_name__icontains=query) |
-#             Q(place__icontains=query) |
-#             Q(college_description__icontains=query)
-#         )
-#         courses = Course_Model.objects.filter(
-#             Q(course_name__icontains=query) |
-#             Q(course_description__icontains=query) |
-#             Q(course_fees__icontains=query)
-#         )
-#         blog_category = Blog_Category.objects.filter(
-#             Q(category_name__icontains=query) |
-#             Q(blog_heading__icontains=query)
-#         )
-
-#         if colleges.exists():
-#             context['colleges'] = colleges
-#             context['show_colleges'] = True
-#         if courses.exists():
-#             context['courses'] = courses
-#             context['show_courses'] = True
-#         if blog_category.exists():
-#             context['blog_category'] = blog_category
-#             context['show_blog_category'] = True
-        
-#         if not (context['show_colleges'] or context['show_courses'] or context['show_blog_category']):
-#             context['no_results'] = True
-#     else:
-#         # Load default data if no query
-#         context['colleges'] = College_Model.objects.all()
-#         context['courses'] = Course_Model.objects.all()
-#         context['blog_category'] = Blog_Category.objects.filter(status=0)
-
-#     clients_review = ClientReview.objects.all()
-#     client_logo = Client_Logo.objects.all()
-#     course_collections = Course_Collection.objects.all()
-#     sub_collections = Sub_Collection.objects.all()
-#     sub_categories = SubCollectionCategory.objects.all()
-#     details = DetailsModel.objects.all()
-#     exam = ExamModel.objects.all()
-
-#     context.update({
-#         'clients_review': clients_review,
-#         'client_logo': client_logo,
-#         'course_collections': course_collections,
-#         'sub_collections': sub_collections,
-#         'sub_categories': sub_categories,
-#         'details': details,
-#         'exam': exam
-#     })
-    
-#     return render(request, 'index.html', context)
-
-# blog_category = Blog_Category.objects.filter(status=0)
 
 from django.http import JsonResponse
 from .models import ChatMessage
@@ -917,29 +848,6 @@ def course_details(request, id):
 
 
 
-# def exam_detail(request, exam_name):
-#     courses = Course_Model.objects.all()
-#     course_collections = Course_Collection.objects.all()
-#     sub_collections = Sub_Collection.objects.all()
-#     sub_categories = SubCollectionCategory.objects.all()
-#     exam = ExamModel.objects.filter(status=False)
-#     category = get_object_or_404(ExamModel, exam_name=exam_name, status=False)
-
-#     exam_details = ExamDetails.objects.filter(exam=category)
-#     context = {
-#         'exam_details': exam_details,
-#         'category_name': category,
-#         'exam': exam,
-#         'courses': courses,
-#         'course_collections': course_collections,
-#         'sub_collections': sub_collections,
-#         'sub_categories': sub_categories
-#     }
-
-#     return render(request, "exam_detail.html", context)
-
-
-
 def exam_detail(request, exam_name):
     if request.method == 'POST':
         form = EnquiryForm(request.POST)
@@ -972,17 +880,26 @@ def exam_detail(request, exam_name):
     return render(request, "exam_detail.html", context)
 
 
-    
-
-
 def animation(request):
     return render(request,'animation.html')
 
-
 def details_display(request, id):
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Our team will contact you soon.')
+            return redirect('details_display', id=id)  # Redirect to the same college details page
+    else:
+        form = EnquiryForm()
+        
+    courses = Course_Model.objects.all()
+    course_collections = Course_Collection.objects.all()
+    sub_collections = Sub_Collection.objects.all()
+    sub_categories = SubCollectionCategory.objects.all()
     sub_collection_category = get_object_or_404(SubCollectionCategory, id=id)
     data = DetailsModel.objects.filter(sub_collection_category=sub_collection_category)
-    return render(request, 'details_display.html', {'data': data, 'sub_collection_category': sub_collection_category})
+    return render(request, 'details_display.html', {'data': data, 'sub_collection_category': sub_collection_category,'courses':courses, 'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'form':form})
 
 
 # def course_details(request, id):
