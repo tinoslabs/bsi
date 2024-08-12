@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Search Results for "{{ query }}"</h2>
+    
+    {% if colleges.exists or courses.exists or exams.exists %}
+        <h3>Colleges</h3>
+        <ul>
+            {% for college in colleges %}
+                <li>{{ college.college_name }} - {{ college.place }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h3>Courses</h3>
+        <ul>
+            {% for course in courses %}
+                <li>{{ course.course_name }} - {{ course.college.college_name }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h3>Exams</h3>
+        <ul>
+            {% for exam in exams %}
+                <li>{{ exam.exam_name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found for your query.</p>
+    {% endif %}
+</div>

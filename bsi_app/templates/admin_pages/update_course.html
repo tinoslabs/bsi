@@ -66,19 +66,44 @@
 </div>
 
 <!-- CKEditor Script -->
-<script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const editors = ['#courseDescription', '#additionalDetails'];
-    editors.forEach(selector => {
-        ClassicEditor
-        .create(document.querySelector(selector))
-        .then(editor => {
-            console.log(`CKEditor instance created for ${selector}`);
-        })
-        .catch(error => {
-            console.error(`Error initializing CKEditor for ${selector}:`, error);
-        });
+    CKEDITOR.replace('courseDescription', {
+      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
+      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
+      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
+      height: 300,
+      toolbar: [
+        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
+        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
+        { name: 'tools', items: ['Maximize'] },
+        { name: 'document', items: ['Source'] },
+        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
+      ],
+      removePlugins: 'easyimage,cloudservices',
+    });
+
+    CKEDITOR.replace('additionalDetails', {
+      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
+      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
+      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
+      height: 300,
+      toolbar: [
+        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
+        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
+        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
+        { name: 'tools', items: ['Maximize'] },
+        { name: 'document', items: ['Source'] },
+        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
+      ],
+      removePlugins: 'easyimage,cloudservices',
     });
   });
 </script>

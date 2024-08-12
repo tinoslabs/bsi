@@ -67,12 +67,13 @@
                                     </div>
                                 {% endfor %}
                             </div>
+                            
                             <div class="pages-share-and-tags">
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         <div class="share">
                                             <ul class="list-unstyled ps-0 mb-0 d-flex align-items-center">
-                                                <li class="d-inline-block">Share:</li>
+                                                <!-- <li class="d-inline-block">Share:</li>
                                                 <li class="d-inline-block">
                                                     <a class="text-decoration-none" href="" target="_blank">
                                                         <i class="flaticon-facebook-app-symbol"></i>
@@ -92,11 +93,11 @@
                                                     <a class="text-decoration-none" href="" target="_blank">
                                                         <i class="flaticon-twitter"></i>
                                                     </a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                    <!-- <div class="col-lg-6 col-sm-6 col-md-6">
                                         <div class="tags text-end">
                                             <ul class="list-unstyled ps-0 mb-0">
                                                 <li class="d-inline-block">Tags:</li>
@@ -108,24 +109,17 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                     
+                    
                     <div class="col-lg-4">
                         <div class="blog-right-sidebar">
-                            <div class="single-pages-widget form">
-                                <h3>Search</h3>
-                                <form>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search"> 
-                                        <button type="submit"><i class="ri-search-line"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="single-pages-widget latest">
+                            
+                            <!-- <div class="single-pages-widget latest">
                                 <h3>Latest News</h3>
                                 <div class="latest-card d-flex align-items-center">
                                     <div class="image">
@@ -181,81 +175,67 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="single-pages-widget categories">
-                                <h3>Categories</h3>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="">
-                                    Education
-                                    <span>(07)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="">
-                                    Learning
-                                    <span>(02)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="">
-                                    University
-                                    <span>(04)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="">
-                                    Online Education
-                                    <span>(06)</span>
-                                </a>
-                                <a class="d-flex align-items-center justify-content-between text-decoration-none" href="">
-                                    Graduates
-                                    <span>(02)</span>
-                                </a>
-                            </div>
-                            
-                            <div class="single-pages-widget tags style-2">
-                                <h3>Popular Tag’s</h3>
-                                <ul class="list-unstyled ps-0 mb-0">
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            Education
+                            </div> -->
+
+                            <div class="single-pages-widget latest">
+                                <h3>Latest News</h3>
+                                {% for blog in blog %}
+                                <div class="latest-card d-flex align-items-center">
+                                    <div class="image">
+                                        <a href="{% url 'blog_details' blog.blog_heading %}">
+                                            <img src="{{ blog.main_image.url }}" alt="{{ blog.category_name }}">
                                         </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            University
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            Online
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            Graduates
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            Programs
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            Sports
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            Admission
-                                        </a>
-                                    </li>
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="">
-                                            Academics
-                                        </a>
-                                    </li>
-                                </ul>
+                                    </div>
+                                    <div class="content">
+                                        <h3>
+                                            <a class="text-decoration-none" href="{% url 'blog_details' blog.blog_heading %}">
+                                                {{ blog.blog_heading }}
+                                            </a>
+                                        </h3>
+                                        <p class="d-flex align-items-center">
+                                            <i class="ri-calendar-line"></i>
+                                            {{ blog.date|date:"F d, Y" }}
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
+        <style>
+            .latest {
+            width: 500px; /* Adjust the width according to your layout */
+            z-index: 1000; /* Ensure it's above other content */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+            padding: 15px; /* Optional: Add padding */
+            background-color: #fff;
+        }
+        .latest.fixed {
+            position: fixed;
+            top: 150px; 
+            right: 30px; /* Adjust as needed */
+        }
+        </style>
+        <script>
+            $(document).ready(function() {
+            var latestSection = $('.latest');
+            var originalOffsetTop = latestSection.offset().top;
+
+            $(window).scroll(function() {
+                var scrollTop = $(window).scrollTop();
+
+                if (scrollTop > originalOffsetTop - 50) { 
+                    latestSection.addClass('fixed');
+                } else {
+                    latestSection.removeClass('fixed');
+                }
+            });
+        });
+        </script>
         <!-- End Blog Pages Area -->
 
         

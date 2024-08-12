@@ -15,11 +15,9 @@
                       <thead>
                         <tr>
                           <th>
-                            First Name
+                             Name
                           </th>
-                          <th>
-                            Last Name
-                          </th>
+                          
                           <th>
                             
                             Phone
@@ -40,10 +38,7 @@
                       {% for contact in contacts %}
                         <tr>
                           <td style="width: 150px; ">
-                            {{ contact.first_name }}
-                          </td>
-                          <td style="width: 150px; ">
-                            {{ contact.last_name }}
+                            {{ contact.name }}
                           </td>
                           <td style="width: 150px; ">
                             {{ contact.phone }}
@@ -51,6 +46,9 @@
                           <td style="width: 150px; ">
                             {{ contact.email }}
                           </td>
+                          <!-- <td style="width: 150px; ">
+                            {{ contact.email }}
+                          </td> -->
                           <td style="width: 600px; word-wrap: break-word; white-space: inherit; height: 100px; overflow: auto;">
                             {{ contact.message }}
                         </td>

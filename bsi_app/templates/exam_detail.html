@@ -132,11 +132,40 @@
                 </div>
             </div>
             
+            <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="brochureForm" method="post" action="{% url 'download_brochure' %}">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="brochureModalLabel">Download Brochure</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="college_id" id="college_id">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Your email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Phone Number" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-4">
                 <div class="blog-right-sidebar">
                     {% for details in exam_details %}
                     <div class="button-container">
-                        <a href="{{ details.guide.url }}" class="btn download-guide">
+                        <a href="{{ details.brochure.url }}" class="btn download-guide">
                             <i class="icon-download"></i>
                             Download Guide
                         </a>
@@ -146,6 +175,7 @@
                         </a>
                     </div>
                     {% endfor %}
+                    
                     <br><br>
                     
                     <div class="pages-leave-reply" id="contactForm">
@@ -165,7 +195,9 @@
                         <br>
                         <form method="post">
                             {% csrf_token %}
+                            
                             <div class="row">
+                                
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Your name" name="name">
@@ -188,7 +220,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control textarea" placeholder="Your comments..." name="message"></textarea>
+                                <textarea class="form-control textarea" placeholder="Your comments..." name="message" style="height: 100px;"></textarea>
                             </div>
                             
                             <button type="submit">
@@ -265,6 +297,45 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var brochureModal = document.getElementById('brochureModal');
+        brochureModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var collegeId = button.getAttribute('data-college-id');
+            var modalCollegeIdInput = document.getElementById('college_id');
+            modalCollegeIdInput.value = collegeId;
+        });
+    
+        var brochureForm = document.getElementById('brochureForm');
+        brochureForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(brochureForm);
+    
+            fetch(brochureForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.brochure_url;
+                } else {
+                    alert('There was an error. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error. Please try again.');
+            });
+        });
+    });
+    </script>
+
 {% endblock %}
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>

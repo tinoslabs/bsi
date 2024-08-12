@@ -55,6 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bsi_project.urls'
+from django.conf.urls import handler404
 
 TEMPLATES = [
     {
@@ -78,10 +79,17 @@ WSGI_APPLICATION = 'bsi_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -120,11 +128,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static'),
 # ]
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+# ////////
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -134,14 +151,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+# CKEditor settings
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+# Allow file types to be uploaded
+CKEDITOR_ALLOW_NONIMAGE_FILES = True
+
+
 
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'extraPlugins': ','.join([
-            'uploadimage',
-            'image2',
+            'uploadimage', 'image2', 'colorbutton', 'colordialog', 'table', 'tabletools', 'filebrowser', 'embed', 'embedbase', 'uploadwidget', 'uploadimage', 'videoembed',
         ]),
+        'removePlugins': 'easyimage,cloudservices',
     },
 }
+

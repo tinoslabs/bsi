@@ -118,10 +118,9 @@
     }
 }
 
-
-
-
 </style>
+
+
         <!-- End Responsive Navbar Area -->
 
         <div class="hero-area">
@@ -131,36 +130,87 @@
                 <div class="slide" style="background-image: url('{% static 'assets/img/9.jpg' %}');"></div>
                 <div class="slide" style="background-image: url('{% static 'assets/img/10.jpg' %}');"></div>
             </div>
-            <div class="container">
+            
+            <!-- <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                 
-                        <!-- <div class="search-box">
-                            <form method="get" action="{% url 'index' %}">
-                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="query" placeholder="Search Colleges, Courses, Exams, QnA, & Articles">
-                                    <button type="submit"><i class="ri-search-line"></i></button>
-                                </div>
-                            </form>
-                        </div> -->
                         <div class="search-box">
-                            <form method="get" action="{% url 'index' %}">
+                            <form method="get" action="{% url 'search' %}">
                                 <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="q" placeholder="Search Colleges, Courses, Exams, QnA, & Articles">
+                                    <input type="text" class="form-control" placeholder="Search Colleges, Courses, Exams, QnA, & Articles">
                                     <button type="submit"><i class="ri-search-line"></i></button>
                                 </div>
                             </form>
-                        </div>
-                        
-                        
+                        </div>    
                     </div>
                 </div>
+            </div> -->
+            <!-- <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="search-box">
+                            <form method="get" action="{% url 'search' %}">
+                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Search Colleges, Courses, Exams, QnA, & Articles">
+                                    <button type="submit"><i class="ri-search-line"></i></button>
+                                </div>
+                            </form>
+                        </div>    
+                    </div>
+                </div>
+            </div> -->
+            <div class="search-box">
+                <form method="get" action="{% url 'index' %}">
+                    <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
+                    <div class="form-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search Colleges, Courses, Exams, QnA, & Articles" value="{{ request.GET.q|default:'' }}">
+                        <button type="submit"><i class="ri-search-line"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
         
 
+        <style>
+    @media (max-width: 500px) {
+    .swiper {
+        width: 100%; /* Ensure the swiper takes full width */
+    }
+
+    .swiper-slide {
+        width: 100% !important; /* Force each slide to take up full width */
+    }
+
+    .card3 {
+        width: 100%; /* Make the card take up the full width of its container */
+        margin: 10px 0; /* Ensure spacing between cards */
+    }
+
+    .card-header3 {
+        padding: 5px; /* Reduce padding for smaller screens */
+    }
+
+    .card-header3 .logo {
+        height: 25px; /* Adjust logo size for smaller screens */
+        margin-right: 5px; /* Adjust spacing */
+    }
+
+    .card-header3 span {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+
+    .card-body3 {
+        padding: 5px; /* Adjust padding */
+    }
+
+    .card-body3 p {
+        font-size: 12px; /* Adjust font size */
+        white-space: normal; /* Allow text to wrap */
+    }
+}
+        </style>
         
         
         <div class="partner-area ptb-100 pb-75" style="margin-top: -50px;">
@@ -171,80 +221,33 @@
                 <div class="partner-slider-info">
                     <div class="swiper partner-slider">
                         <div class="swiper-wrapper" data-cues="slideInUp">
-                            <div class="swiper-slide">
-                                <a href="" class="card-link3">
-                                    <div class="card3">
-                                        <div class="card-header3">
-                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            <!-- <span>Kochi</span> -->
+                            {% for featured in featured_colleges %}
+                                <div class="swiper-slide">
+                                    <a href="{% url 'college_details' featured.college_details %}" class="card-link3">
+                                        <div class="card3">
+                                            <div class="card-header3">
+                                                {% if featured.college_details.logo %}
+                                                    <img src="{{ featured.college_details.logo.url }}" alt="{{ featured.college_details.college_name }} Logo" class="logo">
+                                                {% else %}
+                                                    <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Default Logo" class="logo">
+                                                {% endif %}
+                                            </div>
+                                            <div class="card-body3">
+                                                <p>{{ featured.college_details.college_name }}</p>
+                                            </div>
                                         </div>
-                                        <div class="card-body3">
-                                            <p>Jagdish Sheth School of Management (JAGSoM)</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="" class="card-link3">
-                                    <div class="card3">
-                                        <div class="card-header3">
-                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            <!-- <span>Kochi</span> -->
-                                        </div>
-                                        <div class="card-body3">
-                                            <p>Jagdish Sheth School of Management</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            
-                            
-                            <div class="swiper-slide">
-                                <a href="" class="card-link3">
-                                    <div class="card3">
-                                        <div class="card-header3">
-                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                           
-                                        </div>
-                                        <div class="card-body3">
-                                            <p>Jagdish Sheth School of Management</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="" class="card-link3">
-                                    <div class="card3">
-                                        <div class="card-header3">
-                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            <!-- <span>Kochi</span> -->
-                                        </div>
-                                        <div class="card-body3">
-                                            <p>Jagdish Sheth School of Management</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="" class="card-link3">
-                                    <div class="card3">
-                                        <div class="card-header3">
-                                            <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Logo" class="logo">
-                                            
-                                        </div>
-                                        <div class="card-body3">
-                                            <p>Jagdish Sheth School of Management</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            
+                                    </a>
+                                </div>
+                            {% empty %}
+                                
+                                <p style="margin-left: 530px;">No featured colleges available.</p>
+                                        
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       
         
         
         <!-- End About Area -->
@@ -267,7 +270,42 @@
             }
             </style>
         
-        <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
+        
+ 
+        <!-- Modal for brochure form -->
+         
+        <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="brochureForm" method="post" action="{% url 'download_brochure' %}">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="brochureModalLabel">Download Brochure</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="college_id" id="college_id">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Phone Number" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Existing content -->
+        <!-- <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
             <div class="container">
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
                     <h4>Top Colleges in your region</h4>
@@ -285,13 +323,39 @@
                             <div>Total Fees<br>₹{{college.min_fee}} L</div>
                         </div>
                         <div class="actions">
-                            <a href="{{ college.college_brochure.url }}" class="btn">Brochure</a>
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">Brochure</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div> -->
+        <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
+            <div class="container">
+                <div class="section-title text-center m-auto" data-cues="slideInUp">
+                    <h4>Top Colleges in your region</h4>
+                </div>
+                <div class="row justify-content-center" data-cues="slideInUp">
+                    {% for college in colleges %}
+                    <div class="card">
+                        <img src="{{college.logo.url}}" alt="{{college.college_name}}">
+                        <a href="{% url 'college_details' college.college_name %}">
+                            <h3>{{college.college_name}}</h3>
+                        </a>
+                        <p>{{college.place}}</p>
+                        <div class="details">
+                            <div>Course Offered<br><a href="{% url 'college_details' college.college_name %}">{{college.total_course}} course</a></div>
+                            <div>Total Fees<br>₹{{college.min_fee}} L</div>
+                        </div>
+                        <div class="actions">
+                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">Brochure</button>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
+                
         
         <style>
             
@@ -305,10 +369,7 @@
             text-align: center;
             transition: background-color 0.3s ease;
         }
-        /* .card:hover {
-            background-color: navy;
-            color: #fff;
-        } */
+        
         .card img {
             border-radius: 50%;
             width: 50px;
@@ -358,7 +419,110 @@
             color: #fff;
         }
         </style>
+        <style>
+    
+        @media (max-width: 300px) {
+            .card {
+                width: 100%; /* Make the card take full width of the container */
+                padding: 10px;
+                height: 100%;
+            }
 
+            .card img {
+                width: 30px; /* Further reduces the image size */
+                height: 30px;
+            }
+
+            .card h3 {
+                font-size: 14px;
+                margin: 6px 0;
+            }
+
+            .card p {
+                font-size: 10px;
+            }
+
+            .card .details div {
+                font-size: 10px;
+            }
+
+            .card .actions .btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (min-width: 300px) and (max-width: 500px) {
+        .card {
+            width: 90%; /* Adjusts the card width to 90% of the container */
+            padding: 15px;
+            height: auto;
+            margin: 10px auto; /* Centers the cards and provides a margin */
+        }
+
+        .card img {
+            width: 40px; /* Adjusts the image size */
+            height: 40px;
+        }
+
+        .card h3 {
+            font-size: 16px; /* Slightly larger font size */
+            margin: 8px 0;
+        }
+
+        .card p {
+            font-size: 12px; /* Adjusts the font size */
+        }
+
+        .card .details div {
+            font-size: 12px; /* Adjusts the font size */
+        }
+
+        .card .actions .btn {
+            padding: 8px 16px; /* Adjusts button padding */
+            font-size: 14px; /* Slightly larger font size */
+        }
+    }
+
+    @media (min-width: 500px) and (max-width: 769px) {
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        width: 45%; /* Sets each card to 45% of the container width */
+        padding: 15px;
+        height: auto;
+        margin: 10px; /* Adds space between cards */
+        box-sizing: border-box; /* Ensures padding and border are included in the width */
+    }
+
+    .card img {
+        width: 50px; /* Adjusts the image size */
+        height: 50px;
+    }
+
+    .card h3 {
+        font-size: 18px; /* Slightly larger font size */
+        margin: 10px 0;
+    }
+
+    .card p {
+        font-size: 14px; /* Adjusts the font size */
+    }
+
+    .card .details div {
+        font-size: 14px; /* Adjusts the font size */
+    }
+
+    .card .actions .btn {
+        padding: 10px 20px; /* Adjusts button padding */
+        font-size: 16px; /* Slightly larger font size */
+    }
+}
+        </style>
         
         <!-- End Graduets Area -->
 
@@ -374,10 +538,7 @@
                                 +
                             </h2>
                             <p>We Have online Programs</p>
-                            <a class="text-decoration-none arrow-btn" href="">
-                                Know More
-                                <i class="flaticon-right-arrow"></i>
-                            </a>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 col-md-6">
@@ -388,10 +549,7 @@
                                 +
                             </h2>
                             <p>We have the best Courses</p>
-                            <a class="text-decoration-none arrow-btn" href="">
-                                Know More
-                                <i class="flaticon-right-arrow"></i>
-                            </a>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 col-md-6">
@@ -402,23 +560,15 @@
                                 +
                             </h2>
                             <p>BSI Has Professional Teacher</p>
-                            <a class="text-decoration-none arrow-btn" href="">
-                                Know More
-                                <i class="flaticon-right-arrow"></i>
-                            </a>
+                          
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        
+  
         <!-- End Funfact Area -->
-
         <!-- Start Apply Area -->
-        
-
-
         <div class='container'>
             <h1 style="margin-top: -100;text-align: center;">Trending Courses</h1>
             <br>
@@ -448,9 +598,10 @@
                                 <img src="{{details.main_image.url}}" alt="events-image">
                             </a>
                             <div class="content d-flex align-items-top">
+                               
                                 <div class="date">
-                                    <h2>24</h2>
-                                    <span>Jan</span>
+                                    <h2>{{ details.date|date:"d" }}</h2>
+                                    <span>{{ details.date|date:"M" }}</span>
                                 </div>
                                 <div class="title">
                                     <h3>
@@ -489,18 +640,27 @@
 
         <br><br>
 
+
         <div class="video-area">
             <div class="container">
-                <div class="video-image">
-                    <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
-                    <div class="video-btn">
-                        <a class="text-decoration-none icon" data-fslightbox="gallery" href="https://www.youtube.com/watch?v=7TVm_ETzoUM">
-                            <i class="flaticon-play"></i>
-                        </a>
-                    </div>
+                <div class="video-wrapper">
+                    {% for video in about %}
+                        {% if video.video_link %}
+                            {% with video_id=video.video_link|slice:"-11:" %}
+                                <iframe class="background-video" 
+                                        src="https://www.youtube.com/embed/{{ video_id }}" 
+                                        frameborder="0" 
+                                        allowfullscreen></iframe>
+                            {% endwith %}
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
-        </div><br><br>
+        </div>
+
+        
+              
+        <br><br>
 
         
         <div class="events-area pb-75">
@@ -532,35 +692,92 @@
                 </div>
             </div>
         </div>
-        
-        
-        
+            
         <br><br>
-        <!-- <div >
-            <h1 style="margin-top: -80px;text-align: center;">Top Exams this month</h1>
-            <br>
-       
-         
-        <div class="card-container1">
-            <a href="#" class="card">DEPARTMENT PORTAL</a>
-            <a href="#" class="card">E PAYMENT</a>
-            <a href="#" class="card">STUDENT PORTAL</a>
-            <a href="#" class="card">ONLINE CERTIFICATE PORTAL</a>
-            <a href="#" class="card">CENTRALIZED COLLEGE PORTAL</a>
-            <a href="#" class="card">SB COLLECT</a>
-            <a href="#" class="card">SUVEGA STUDENTS SERVICE</a>
-            <a href="#" class="card">CERTIFICATE VERIFICATION</a>
-            <a href="#" class="card">SB COLLECT</a>
-            <a href="#" class="card">SUVEGA STUDENTS SERVICE</a>
-            <a href="#" class="card">SB COLLECT</a>
-            <a href="#" class="card">SUVEGA STUDENTS SERVICE</a>
-        </div>
-    </div> -->
-       
-  
-        <!-- End Subscribe Area -->
-       
         
+
+        <div class="apply-area style-2 pb-75">
+            <div class="container">
+                <div class="section-title text-center m-auto">
+                    <h2>What Student’s Say</h2>
+                </div>
+                <div class="testimonial-slider-info-2">
+                    <div class="swiper testimonial-slider-2">
+                        <div class="swiper-wrapper">
+                            {% for review in clients_review %}
+                                <div class="swiper-slide">
+                                    <div class="testimonial-slider-item">
+                                        <ul class="list-unstyled ps-0 star-icon">
+                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
+                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
+                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
+                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
+                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
+                                        </ul>
+                                        <p>{{ review.review }}</p>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="user d-flex align-items-center">
+                                                <div class="image">
+                                                    {% if review.client_image %}
+                                                        <img src="{{ review.client_image.url }}" alt="{{ review.client_name }}">
+                                                    {% else %}
+                                                        <img src="{% static 'assets/img/default_user.jpg' %}" alt="Default Image">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="content">
+                                                    <h3>{{ review.client_name }}</h3>
+                                                    <span>{{ review.designation }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="quote-icon">
+                                                <i class="flaticon-quote"></i>
+                                            </div>
+                                        </div>
+                                        {% if review.review_video %}
+                                            <div class="video-wrapper">
+                                                <video controls>
+                                                    <source src="{{ review.review_video.url }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="swiper-btn">
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            .video-area {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none; /* Remove border from iframe */
+        }
+
+        </style>
+          
         <script>
             document.addEventListener("DOMContentLoaded", function() {
             const slides = document.querySelectorAll('.image-slider .slide');
@@ -600,8 +817,47 @@
                 }
             });
         </script>
-
-  
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var brochureModal = document.getElementById('brochureModal');
+            brochureModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var collegeId = button.getAttribute('data-college-id');
+                var modalCollegeIdInput = document.getElementById('college_id');
+                modalCollegeIdInput.value = collegeId;
+            });
         
-<script src="{% static 'assets/js/buttons.js' %}"></script>
+            var brochureForm = document.getElementById('brochureForm');
+            brochureForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                var formData = new FormData(brochureForm);
+        
+                fetch(brochureForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = data.brochure_url;
+                    } else {
+                        alert('There was an error. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error. Please try again.');
+                });
+            });
+        });
+        </script>
+
+
+       
+        <script src="{% static 'assets/js/buttons.js' %}"></script>
         {% endblock %}

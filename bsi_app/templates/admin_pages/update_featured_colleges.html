@@ -1,0 +1,27 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Featured College</h4>
+          <form class="forms-sample" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="input-box">
+                {{ form.college_details.label_tag }}
+                {{ form.college_details }}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary me-2">Update Featured College</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

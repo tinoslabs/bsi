@@ -64,117 +64,34 @@
                             <div class="applications-info">
                                 <!-- <h3>Applications are like the lifeblood of mobile phones and tablets today!!!</h3> -->
                                 <p>{{ detail.more_details | safe }}</p>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="applications-card d-flex align-items-center">
-                                            <i class="ri-check-line"></i>
-                                            <p>Far far away, behind the word mountain</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="applications-card d-flex align-items-center">
-                                            <i class="ri-check-line"></i>
-                                            <p>When she reached the first hills</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="applications-card d-flex align-items-center">
-                                            <i class="ri-check-line"></i>
-                                            <p>A small river named Duden flows</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="applications-card d-flex align-items-center">
-                                            <i class="ri-check-line"></i>
-                                            <p>A small river named Duden flows by their plat</p>
-                                        </div>
-                                    </div>
-                                </div>
                                 
-                                <h3>When, while the lovely valley teems with</h3>
+                                
                                 
                             </div>
                             {% endfor %}
-                            <blockquote>
-                                <i class="flaticon-quote"></i>
-                                
-                            </blockquote>
+                            
                             <p>I sink under the weight of the splendour of these visions!A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquis</p>
                             <p>I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees.</p>
                             <div class="pages-share-and-tags">
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         <div class="share">
-                                            <ul class="list-unstyled ps-0 mb-0 d-flex align-items-center">
-                                                <li class="d-inline-block">Share:</li>
-                                                <li class="d-inline-block">
-                                                    <a class="text-decoration-none" href="" target="_blank">
-                                                        <i class="flaticon-facebook-app-symbol"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="d-inline-block">
-                                                    <a class="text-decoration-none" href="" target="_blank">
-                                                        <i class="flaticon-pinterest"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="d-inline-block">
-                                                    <a class="text-decoration-none" href="" target="_blank">
-                                                        <i class="flaticon-instagram"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="d-inline-block">
-                                                    <a class="text-decoration-none" href="" target="_blank">
-                                                        <i class="flaticon-twitter"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            
                                         </div>
                                     </div>  
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        <div class="tags text-end">
-                                            <ul class="list-unstyled ps-0 mb-0">
-                                                <li class="d-inline-block">Tags:</li>
-                                                <li class="d-inline-block">
-                                                    <a class="text-decoration-none" href="">Business</a>
-                                                </li>
-                                                <li class="d-inline-block">
-                                                    <a class="text-decoration-none" href="">Graduates</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    
+
                     <div class="col-lg-4">
-                        <div class="blog-right-sidebar">
-                            <!-- <div class="single-pages-widget form">
-                                
-                                <form>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search"> 
-                                        <button type="submit"><i class="ri-search-line"></i></button>
-                                    </div>
-                                </form>
-                            </div> -->
+                        <div class="blog-right-sidebar"> 
                             <div class="col-lg-4">
-                                <div class="blog-right-sidebar">
+                                <div class="blog-right-sidebar"> 
                                     
-                                    <br><br>
-                                   
-                                    <!-- <div class="single-pages-widget tags style-2">
-                                        <h3>Popular Courses</h3>
-                                        <ul class="list-unstyled ps-0 mb-0">
-                                            {% for course in courses %}
-                                                <li class="d-inline-block">
-                                                    <a class="text-decoration-none d-inline-block" href="#">
-                                                        {{ course.course_name }}
-                                                    </a>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div> -->
                                     
                                     <div class="pages-leave-reply" id="contactForm">
                                         {% if messages %}
@@ -193,7 +110,9 @@
                                         <br>
                                         <form method="post">
                                             {% csrf_token %}
+                                            
                                             <div class="row">
+                                                
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control" placeholder="Your name" name="name">
@@ -216,7 +135,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <textarea class="form-control textarea" placeholder="Your comments..." name="message"></textarea>
+                                                <textarea class="form-control textarea" placeholder="Your comments..." name="message" style="height: 100px;"></textarea>
                                             </div>
                                             
                                             <button type="submit">
@@ -224,6 +143,7 @@
                                                 <i class="flaticon-right-arrow"></i>
                                             </button>
                                         </form>
+                                        
                                     </div>
                                     
                                 </div>
@@ -235,52 +155,7 @@
         </div>
         <!-- End Blog Pages Area -->
 
-        <!-- Start Newsletter Area -->
-        <!-- <div class="newsletter-area pb-75">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="newsletter-content">
-                            <div class="title">
-                                <h2>Are You Ready To Build Up Your Career </h2>
-                                <p>We are proud of our alumni network, which spans across industries and continents. Our graduates are equipped with the skills, values knowledge, anda  to excel in their chosen fields and make positive impact on society.</p>
-                            </div>
-                            <ul class="list-unstyled ps-0 mb-0 subscribe-btn">
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none default-btn" href="">
-                                        Application Form
-                                        <i class="flaticon-right-arrow"></i>
-                                    </a>
-                                </li>
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none arrow-btn" href="">
-                                        How To Apply
-                                        <i class="flaticon-right-arrow"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="newsletter-form">
-                            <div class="title">
-                                <h3>Subscribe To Our Newsletter</h3>
-                                <p>Stay informed about the latest developments, breakthroughs, and trends in our industry. Our team of experts scours the web to bring you the most relevant and engaging news articles.</p>
-                            </div>
-                            <form>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your email">
-                                </div>
-                                <button type="submit" class="text-decoration-none border-0 default-btn">
-                                    Subscribe Now
-                                    <i class="flaticon-right-arrow"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        
         <!-- End Newsletter Area -->
         <style>
             .pages-leave-reply {
@@ -342,6 +217,58 @@
                 });
             });
         </script>
+
+<script>
+    $(document).ready(function() {
+    $('#brochureModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var collegeId = button.data('college-id'); // Extract info from data-* attributes
+
+        var modal = $(this);
+        modal.find('#college_id').val(collegeId); // Set the college_id in the hidden input field
+        modal.find('#otp_college_id').val(collegeId); // Set the college_id in OTP form as well
+    });
+
+    
+
+        $('#sendOtpButton').on('click', function() {
+        var formData = $('#brochureForm').serialize();
+        $.post("{% url 'request_brochure' %}", formData, function(data) {
+            if (data.success) {
+                $('#brochureForm').hide();
+                $('#otpForm').show();
+                $('#otp_college_id').val($('#college_id').val());
+                $('#otp_name').val($('[name="name"]').val());
+                $('#otp_email').val($('[name="email"]').val());
+                $('#otp_phone').val($('[name="phone"]').val()); // Ensure phone number is included
+            } else {
+                alert(data.message);
+            }
+        });
+    });
+
+    $('#otpForm').on('submit', function(e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        console.log("OTP Form Data:", formData);  // Debugging line
+        
+        $.post("{% url 'verify_otp' %}", formData, function(data) {
+            if (data.success) {
+                window.location.href = data.brochure_url;
+            } else {
+                alert(data.message);
+            }
+        });
+    });
+
+    $('#brochureModal').on('hidden.bs.modal', function () {
+        $('#brochureForm').show();
+        $('#otpForm').hide();
+        $('#otpForm')[0].reset();  // Clear the OTP form fields
+    });
+});
+
+</script>
 
 
 {% endblock %}

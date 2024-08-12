@@ -1,6 +1,9 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
+
+
+
 # Create your models here.
 class ChatMessage(models.Model):
     name = models.CharField(max_length=100)
@@ -81,6 +84,17 @@ class College_Model(models.Model):
             return f"₹{self.min_fee} L - ₹{self.max_fee} L"
         return None
     
+
+class FeaturedColleges(models.Model):
+    college_details = models.ForeignKey(College_Model, on_delete=models.CASCADE, related_name='featured_in')
+    def __str__(self):
+        return f"{self.college_details.college_name} (Featured)"
+
+    class Meta:
+        verbose_name = "Featured College"
+        verbose_name_plural = "Featured Colleges"
+
+
 class Course_Model(models.Model):
     PROFESSIONAL_COURSE = 'Professional'
     OPEN_COURSE = 'Open'
@@ -212,23 +226,6 @@ class ExamDetails(models.Model):
         verbose_name_plural = "Exam Details"
 
 
-# class ExamDetails(models.Model):
-#     exam = models.ForeignKey(ExamModel, on_delete=models.CASCADE)
-#     details = models.TextField()
-#     videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
-#     exam_image = models.ImageField(upload_to='exam_image/', null=True, blank=True)
-#     sample_papers = models.FileField(upload_to='pdf/', null=True, blank=True)
-#     guide = models.FileField(upload_to='pdf/', null=True, blank=True)
-#     brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-#     more_details = models.TextField(null=True, blank=True)
-    
-#     def __str__(self):
-#         return f"{self.exam} Details"
-
-#     class Meta:
-#         verbose_name_plural = "Exam Details"
-
-
 class ExamCategory(models.Model):
     OVERVIEW = 'Overview'
     QUESTION_PAPERS = 'Question Papers'
@@ -262,11 +259,7 @@ class ExamCategory(models.Model):
     
     def __str__(self):
         return f"{self.exam_name} - {self.exam_type}"
-
-
-
-
-
+    
 
 class EnquiryModel(models.Model):  
     name = models.CharField(max_length=100, blank=True, null=True)   
@@ -277,6 +270,49 @@ class EnquiryModel(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Enquiry_Model(models.Model):  
+    college = models.ForeignKey(College_Model, on_delete=models.CASCADE)
+    course = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=True, null=True)   
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    Place = models.CharField(max_length=20, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+    def __str__(self):
+        return self.name
+    
+    
+class About_Video(models.Model):
+    video_link = models.URLField(max_length=200, unique=True, null=True, blank=True)
+
+    
+from django.utils import timezone
+from datetime import timedelta
+
+class OTPVerification(models.Model):
+    phone = models.CharField(max_length=15)
+    otp = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def is_valid(self):
+        return self.created_at >= timezone.now() - timedelta(minutes=5) 
+    
+class EnquirySubmission(models.Model):
+    college = models.ForeignKey(College_Model, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15) 
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.college.college_name}"
+    
+
+
+
+
     
 
 

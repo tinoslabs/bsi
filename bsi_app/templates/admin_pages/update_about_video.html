@@ -1,0 +1,21 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-lg-10 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Update About Video</h4>
+            <form class="forms-sample" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_video_link">Video Link</label>
+                    <input type="text" class="form-control" id="id_video_link" name="video_link" value="{{ form.video_link.value }}">
+                </div>
+                <button type="submit" class="btn btn-primary me-2">Update Video</button>
+                <a href="{% url 'view_about_video' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

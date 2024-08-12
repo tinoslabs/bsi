@@ -3,9 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel
-from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm
-# Create your views here.
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges
+from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm
+from django.http import HttpResponseNotFound
+
 
 def user_login(request):
     if request.method == "POST":
@@ -30,10 +31,17 @@ def logout_user(request):
 def admin_dashboard(request):
     return render(request, 'admin_pages/admin_dashboard.html')
 
-from django.db.models import Q
+
 
 def index(request):
-    
+    search_query = request.GET.get('q', '')  # Get the search query from the input field
+    if search_query:
+        colleges = College_Model.objects.filter(
+            college_name__icontains=search_query
+        )  # Filter colleges by name based on the search query
+    else:
+        colleges = College_Model.objects.all() 
+    # colleges = College_Model.objects.all().order_by('-id')[:5]
     colleges = College_Model.objects.all()
     clients_review = ClientReview.objects.all()
     client_logo = Client_Logo.objects.all()
@@ -44,6 +52,8 @@ def index(request):
     details = DetailsModel.objects.all()
     blog_category = Blog_Category.objects.filter(status=0)
     exam = ExamModel.objects.all()
+    about = About_Video.objects.all()
+    featured_colleges = FeaturedColleges.objects.all()
     context = {
         'clients_review': clients_review,
         'client_logo': client_logo,
@@ -54,10 +64,33 @@ def index(request):
         'colleges': colleges,
         'details' : details,
         'blog_category' : blog_category,
-        'exam' : exam
+        'exam' : exam,
+        'about' : about,
+        'featured_colleges' : featured_colleges
     }
     return render(request, 'index.html', context)
 
+
+from django.db.models import Q
+
+def search(request):
+    query = request.GET.get('query')
+    if query:
+        colleges = College_Model.objects.filter(Q(college_name__icontains=query) | Q(place__icontains=query))
+        courses = Course_Model.objects.filter(Q(course_name__icontains=query) | Q(course_type__icontains=query))
+        exams = ExamModel.objects.filter(exam_name__icontains=query)
+    else:
+        colleges = College_Model.objects.all()
+        courses = Course_Model.objects.all()
+        exams = ExamModel.objects.all()
+
+    context = {
+        'colleges': colleges,
+        'courses': courses,
+        'exams': exams,
+        'query': query,
+    }
+    return render(request, 'search_results.html', context)
 
 
 from django.http import JsonResponse
@@ -74,29 +107,40 @@ def delete_message(request,id):
     chatbot.delete()
     return redirect('chatbot_message_view')
 
+
+
+
 @login_required(login_url='user_login')
 def contact_view(request):
-    contacts = ContactModel.objects.all().order_by('-id')
-    return render(request,'admin_pages/contact_view.html',{'contacts':contacts})
-
+    contacts = EnquiryModel.objects.all().order_by('-id')
+    return render(request, 'admin_pages/contact_view.html', {'contacts': contacts})
 
 
 @login_required(login_url='user_login')
 def delete_contact(request,id):
-    contact = ContactModel.objects.get(id=id)
+    contact = EnquiryModel.objects.get(id=id)
     contact.delete()
     return redirect('contact_view')
 
+
 @login_required(login_url='user_login')
 def enquiry_view(request):
-    enquiry = EnquiryModel.objects.all().order_by('-id')
+    enquiry = Enquiry_Model.objects.all().order_by('-id')
     return render(request,'admin_pages/enquiry_view.html',{'enquiry':enquiry})
+
+
+@login_required(login_url='user_login')
+def demo(request):
+    enquiry = Enquiry_Model.objects.all().order_by('-id')
+    return render(request,'admin_pages/demo.html',{'enquiry':enquiry})
+
 
 @login_required(login_url='user_login')
 def delete_enquiry(request,id):
     enquiry = EnquiryModel.objects.get(id=id)
     enquiry.delete()
     return redirect('enquiry_view')
+
 
 @login_required(login_url='user_login')
 def add_client_reviews(request):
@@ -149,10 +193,12 @@ def create_exam(request):
 
     return render(request, 'admin_pages/create_exam.html', {'form': form})
 
+
 @login_required(login_url='user_login')
 def view_exam(request):
     exams = ExamModel.objects.all().order_by('-id')
     return render(request, 'admin_pages/view_exam.html', {'exams': exams})
+
 
 @login_required(login_url='user_login')
 def update_exam(request, id):
@@ -166,11 +212,13 @@ def update_exam(request, id):
         form = ExamForm(instance=exams)
     return render(request, 'admin_pages/update_exam.html', {'form': form, 'exams': exams})
 
+
 @login_required(login_url='user_login')
 def delete_exam(request,id):
     exams = ExamModel.objects.get(id=id)
     exams.delete()
     return redirect('view_exam')
+
 
 @login_required(login_url='user_login')
 def create_exam_category(request):
@@ -288,10 +336,12 @@ def delete_exam_details(request, id):
 
 
 def exam_detail(request, id):
+    courses = Course_Model.objects.all()
+    
     exam = get_object_or_404(ExamModel, id=id)
     categories = ExamCategory.objects.filter(exam_name=exam)
     details = ExamDetails.objects.filter(exam=exam)
-    return render(request, 'exam_details.html', {'exam': exam, 'categories': categories, 'details':details})
+    return render(request, 'exam_details.html', {'exam': exam, 'categories': categories, 'details':details,'courses':courses})
 
 
 def contact(request):
@@ -336,11 +386,13 @@ def update_blog_category(request,id):
         form = Blog_Category_Form(instance=blog_category)
     return render(request, 'admin_pages/update_blog_category.html', {'form': form, 'blog_category': blog_category})
 
+
 @login_required(login_url='user_login')
 def delete_blog_category(request,id):
     blog_category = Blog_Category.objects.get(id=id)
     blog_category.delete()
     return redirect('view_blog_category')
+
 
 @login_required(login_url='user_login')
 def add_blog_details(request):
@@ -360,6 +412,7 @@ def add_blog_details(request):
 def view_blog_details(request):
     blog_details = Blog_Details.objects.all().order_by('-id')
     return render(request,'admin_pages/view_blog_details.html',{'blog_details':blog_details})
+
 
 @login_required(login_url='user_login')
 def update_blog_details(request, id):
@@ -420,6 +473,7 @@ def blog(request):
     return render(request,'blog.html',{'blog_category':blog_category})
 
 def blog_details(request, blog_heading):
+    exam = ExamModel.objects.all()
     courses = Course_Model.objects.all()
     course_collections = Course_Collection.objects.all()
     sub_collections = Sub_Collection.objects.all()
@@ -428,7 +482,7 @@ def blog_details(request, blog_heading):
     category = get_object_or_404(Blog_Category, blog_heading=blog_heading, status=False)
     if category:
         blog_details = Blog_Details.objects.filter(category=category, status=False)
-        context = {'blog_details': blog_details, 'category_name': category,'blog':blog,'courses':courses,'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories}
+        context = {'blog_details': blog_details, 'category_name': category,'blog':blog,'courses':courses,'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'exam':exam}
         return render(request, "blog-details.html", context)
     else:
         messages.warning(request, "No such category found")
@@ -527,7 +581,6 @@ def load_courses(request):
     return JsonResponse(list(courses.values('id', 'course_name')), safe=False)
 
 
-
 @login_required(login_url='user_login')
 def create_course_collection(request):
     if request.method == 'POST':
@@ -548,6 +601,7 @@ def view_course_collection(request):
     return render(request,'admin_pages/view_course_collection.html',{'collections':collections})
 
 
+
 @login_required(login_url='user_login')
 def update_course_collection(request, id):
     print(f"Fetching Course_Collection with id: {id}")  # Debugging statement
@@ -564,11 +618,12 @@ def update_course_collection(request, id):
     
     return render(request, 'admin_pages/update_course_collection.html', {'form': form, 'collection': collection})
 
+
 @login_required(login_url='user_login')
 def delete_course_collection(request, id):
     collection = get_object_or_404(Course_Collection, id=id)
     collection.delete()
-    return redirect('view_course_collection')  # Ensure this view exists and is correctly named
+    return redirect('view_course_collection')
     
 
 
@@ -616,7 +671,7 @@ def update_sub_collection(request, pk):
         form = Sub_Collection_Form(request.POST, instance=sub_collection)
         if form.is_valid():
             form.save()
-            return redirect('view_sub_collections')  # Replace with your view name
+            return redirect('view_sub_collection')  # Replace with your view name
     else:
         form = Sub_Collection_Form(instance=sub_collection)
 
@@ -772,40 +827,21 @@ def card(request):
 def exam(request):
     return render(request,'exam.html')
 
-# def college_details(request, college_name):
-#     college = get_object_or_404(College_Model, college_name=college_name)
-#     return render(request, 'college_details.html', {'college': college})
-
-# def college_details(request, college_name):
-#     if request.method == 'POST':
-#         form = EnquiryForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('college_details')
-#     else:
-#         form = EnquiryForm()
-        
-#     college = get_object_or_404(College_Model, college_name=college_name)
-#     colleges = College_Model.objects.all()
-#     courses = college.courses.all()
-   
-#     course_collections = Course_Collection.objects.all()
-#     sub_collections = Sub_Collection.objects.all()
-#     sub_categories = SubCollectionCategory.objects.all()  # Fetch related courses
-#     return render(request, 'college_details.html', {'form':form,'college': college, 'courses': courses,'colleges':colleges,'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories})
 
 def college_details(request, college_name):
+    college = get_object_or_404(College_Model, college_name=college_name)
     if request.method == 'POST':
-        form = EnquiryForm(request.POST)
+        form = Enquiry_Form(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Our team will contact you soon.')
-            return redirect('college_details', college_name=college_name)  # Redirect to the same college details page
+            return redirect('college_details', college_name=college_name)
     else:
-        form = EnquiryForm()
+        form = Enquiry_Form()
 
-    college = get_object_or_404(College_Model, college_name=college_name)
+    exam = ExamModel.objects.all()
     colleges = College_Model.objects.all()
+    course = Course_Model.objects.all()
     courses = college.courses.all()
     course_collections = Course_Collection.objects.all()
     sub_collections = Sub_Collection.objects.all()
@@ -817,35 +853,87 @@ def college_details(request, college_name):
         'colleges': colleges,
         'course_collections': course_collections,
         'sub_collections': sub_collections,
-        'sub_categories': sub_categories
+        'sub_categories': sub_categories,
+        'courses' : courses,
+        'exam' : exam,
+        'course' : course
     })
 
-def course_details(request, id):
+
+
+
+
+def download_brochure(request):
     if request.method == 'POST':
-        form = EnquiryForm(request.POST)
+        college_id = request.POST.get('college_id')
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+
+        try:
+            college = College_Model.objects.get(id=college_id)
+            EnquirySubmission.objects.create(
+                college=college,
+                name=name,
+                email=email,
+                phone=phone
+            )
+            brochure_url = college.college_brochure.url
+            return JsonResponse({'success': True, 'brochure_url': brochure_url})
+        except College_Model.DoesNotExist:
+            return JsonResponse({'success': False, 'message': 'College not found'})
+
+    return JsonResponse({'success': False, 'message': 'Invalid request'})
+
+
+
+
+def enquiry_submition_view(request):
+    data = EnquirySubmission.objects.all()
+    return render(request,'admin_pages/enquiry_submition_view.html',{'data':data})
+
+
+@login_required(login_url='user_login')
+def delete_enquiry_submition(request, pk):
+    data = get_object_or_404(EnquirySubmission, id=pk)
+    data.delete()
+    return redirect('enquiry_submition_view') 
+
+
+def course_details(request, id):
+    course = get_object_or_404(Course_Model, id=id)
+    
+    if request.method == 'POST':
+        form = Enquiry_Form(request.POST)
         if form.is_valid():
-            form.save()
+            enquiry = form.save(commit=False)
+            enquiry.course = course.course_name
+            enquiry.college = College_Model.objects.get(id=request.POST.get('college'))
+            enquiry.save()
             messages.success(request, 'Our team will contact you soon.')
             return redirect('course_details', id=id)  # Redirect to the same college details page
     else:
-        form = EnquiryForm()
+        form = Enquiry_Form()
 
-    
-    course = get_object_or_404(Course_Model, id=id)
+    clients_review = ClientReview.objects.all() 
+    exam = ExamModel.objects.all()   
     colleges = College_Model.objects.all()
-    
+    college = College_Model.objects.filter(courses=course)
     course_collections = Course_Collection.objects.all()
     sub_collections = Sub_Collection.objects.all()
     sub_categories = SubCollectionCategory.objects.all()
+    
     return render(request, 'course_details.html', {
         'form': form,
         'colleges': colleges,
         'course': course,
         'course_collections': course_collections,
         'sub_collections': sub_collections,
-        'sub_categories': sub_categories
+        'sub_categories': sub_categories,
+        'college':college,
+        'clients_review':clients_review,
+        'exam' : exam
     })
-
 
 
 def exam_detail(request, exam_name):
@@ -858,6 +946,7 @@ def exam_detail(request, exam_name):
     else:
         form = EnquiryForm()
 
+    exam = ExamModel.objects.all()  
     courses = Course_Model.objects.all()
     course_collections = Course_Collection.objects.all()
     sub_collections = Sub_Collection.objects.all()
@@ -892,21 +981,58 @@ def details_display(request, id):
             return redirect('details_display', id=id)  # Redirect to the same college details page
     else:
         form = EnquiryForm()
-        
+
+    colleges = College_Model.objects.all()
+    exam = ExamModel.objects.all() 
     courses = Course_Model.objects.all()
     course_collections = Course_Collection.objects.all()
     sub_collections = Sub_Collection.objects.all()
     sub_categories = SubCollectionCategory.objects.all()
     sub_collection_category = get_object_or_404(SubCollectionCategory, id=id)
     data = DetailsModel.objects.filter(sub_collection_category=sub_collection_category)
-    return render(request, 'details_display.html', {'data': data, 'sub_collection_category': sub_collection_category,'courses':courses, 'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'form':form})
+    return render(request, 'details_display.html', {'data': data, 'sub_collection_category': sub_collection_category,'courses':courses, 'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'form':form,'exam':exam, 'colleges':colleges})
 
 
-# def course_details(request, id):
+@login_required(login_url='user_login')
+def create_about_video(request):
+    if request.method == 'POST':
+        form = AboutVideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_about_video') 
+    else:
+        form = AboutVideoForm()
+
+    return render(request, 'admin_pages/create_about_video.html', {'form': form})
     
-#     data = get_object_or_404(College_Model, id=id)
-#     return render(request, 'course_deatils.html', {'data': data})
 
+def view_about_video(request):
+    links = About_Video.objects.all()
+    return render(request,'admin_pages/view_about_video.html',{'links':links})
+    
+
+@login_required(login_url='user_login')
+def update_about_video(request, id):
+    video = get_object_or_404(About_Video, id=id)
+
+    if request.method == 'POST':
+        form = AboutVideoForm(request.POST, instance=video)
+        if form.is_valid():
+            form.save()
+            return redirect('view_about_video')
+    else:
+        form = AboutVideoForm(instance=video)
+
+    return render(request, 'admin_pages/update_about_video.html', {'form': form})
+
+@login_required(login_url='user_login')
+def delete_about_video(request, id):
+    video = get_object_or_404(About_Video, id=id)
+    video.delete()
+    return redirect('view_about_video')
+# def contact_view(request):
+#     details = EnquiryModel.objects.all()
+#     return render(request,'admin/contact_view.html',{'details':details})
 
 def slider(request):
     return render(request,'slider.html')
@@ -917,3 +1043,72 @@ def exam_details(request):
 
 def logo(request):
     return render(request,'logo.html')
+
+# def page_not_found(request):
+#     return render(request,'404.html')
+
+def page_404(request):
+    return render(request, '404.html', status=404)
+
+def home(request):
+    
+    colleges = College_Model.objects.all()
+    clients_review = ClientReview.objects.all()
+    client_logo = Client_Logo.objects.all()
+    courses = Course_Model.objects.all()
+    course_collections = Course_Collection.objects.all()
+    sub_collections = Sub_Collection.objects.all()
+    sub_categories = SubCollectionCategory.objects.all()
+    details = DetailsModel.objects.all()
+    blog_category = Blog_Category.objects.filter(status=0)
+    exam = ExamModel.objects.all()
+    context = {
+        'clients_review': clients_review,
+        'client_logo': client_logo,
+        'courses': courses,
+        'course_collections': course_collections,
+        'sub_collections': sub_collections,
+        'sub_categories': sub_categories,
+        'colleges': colleges,
+        'details' : details,
+        'blog_category' : blog_category,
+        'exam' : exam
+    }
+    return render(request, 'index-2.html', context)
+
+@login_required(login_url='user_login')
+def create_featured_colleges(request):
+    if request.method == 'POST':
+        form = FeaturedCollegesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_featured_colleges')  # Redirect to the view after saving
+    else:
+        form = FeaturedCollegesForm()
+    return render(request, 'admin_pages/create_featured_colleges.html', {'form': form})
+
+@login_required(login_url='user_login')
+def view_featured_colleges(request):
+    featured_colleges = FeaturedColleges.objects.all()
+    return render(request, 'admin_pages/view_featured_colleges.html', {'featured_colleges': featured_colleges})
+
+def update_featured_colleges(request, pk):
+    college = get_object_or_404(FeaturedColleges, pk=pk)
+    if request.method == 'POST':
+        form = FeaturedCollegesForm(request.POST, instance=college)
+        if form.is_valid():
+            form.save()
+            return redirect('view_featured_colleges')  # Redirect to the view after saving
+    else:
+        form = FeaturedCollegesForm(instance=college)
+    return render(request, 'admin_pages/update_featured_colleges.html', {'form': form})
+
+
+def delete_featured_colleges(request, pk):
+    college = get_object_or_404(FeaturedColleges, pk=pk)
+    
+    college.delete()
+    return redirect('view_featured_colleges')  # Redirect to the view after deletion
+   
+def notification(request):
+    return render(request,'notification.html')
