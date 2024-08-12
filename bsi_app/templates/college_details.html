@@ -4,6 +4,12 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7S5DO5E5r9E5Y2lDeSfjJfG4ll5XB7Fj5/S" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/> -->
+
+
 <style>
     .button-container {
     display: flex;
@@ -101,11 +107,15 @@
                             </div>
                            
                             <div class="leading-management">
+                                {% if college.college_name %}
                                 <h1>{{college.college_name}}</h1>
+                                {% endif %}
                                 <div class="image">
                                     <img src="{{college.college_image.url}}" alt="applications-image">
                                 </div>
+                                {% if college.college_description %}
                                 <p style="font-family: arial;">{{college.college_description | safe }}</p>
+                                {% endif %}
                             </div>
                             
                             <div class="video-image">
@@ -116,10 +126,42 @@
                                     </a>
                                 </div>
                             </div>
-                           
+                            
                             <br>
+                            {% if college.more_details %}
                             <p>{{college.more_details | safe}}</p>
+                            {% endif %}
                             <div class="events-area pb-75">
+                                <div class="events-area pb-75">
+                                    <div class="container">
+                                        <div class="section-title text-center m-auto" data-cues="slideInUp">
+                                            <h4>Top Colleges</h4>
+                                        </div>
+                                        <div class="row justify-content-center" data-cues="slideInUp">
+                                            {% for college in colleges %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    <div class="single-events-card">
+                                                        <a class="text-decoration-none d-block image" href="{% url 'college_details' college.college_name %}">
+                                                            {% if college.college_image %}
+                                                                <img src="{{ college.college_image.url }}" alt="{{ college.college_name }}">
+                                                            {% else %}
+                                                                <img src="{% static 'assets/img/college-7.jpg' %}" alt="events-image">
+                                                            {% endif %}
+                                                        </a>
+                                                        <div class="content d-flex align-items-top">
+                                                            <div class="title">
+                                                                <h3 style="text-align: center;">
+                                                                    <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
+                                                                </h3>   
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            
                         </div>
                         <style>
                             
@@ -186,17 +228,45 @@
                         </div>
                     </div>
                     
+                    <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form id="brochureForm" method="post" action="{% url 'download_brochure' %}">
+                                    {% csrf_token %}
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="brochureModalLabel">Download Brochure</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="college_id" id="college_id">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Your name" name="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Your email" name="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Phone Number" name="phone" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            
                     <div class="col-lg-4">
                         <div class="blog-right-sidebar">
                             <div class="button-container">
-                                <a href="{{ college.college_brochure.url }}" class="btn download-guide">
+                                {% if college.college_brochure %}
+                                <a href="{{ college.college_brochure.url }}" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
                                     <i class="icon-download"></i>
                                     Download Brochure
                                 </a>
-                                <!-- <a href="#" class="btn sample-papers">
-                                    <i class="icon-sample"></i>
-                                    Sample Papers
-                                </a> -->
+                                {% endif %}
                             </div>
                             <br><br>
                            
@@ -205,7 +275,7 @@
                                 <ul class="list-unstyled ps-0 mb-0">
                                     {% for course in courses %}
                                         <li class="d-inline-block">
-                                            <a class="text-decoration-none d-inline-block" href="#">
+                                            <a class="text-decoration-none d-inline-block" href="{% url 'course_details' course.id %}">
                                                 {{ course.course_name }}
                                             </a>
                                         </li>
@@ -230,7 +300,16 @@
                                 <br>
                                 <form method="post">
                                     {% csrf_token %}
+                                    <input type="hidden" name="college" value="{{ college.id }}">
                                     <div class="row">
+                                        <div class="form-group">
+                                            <select class="form-control" name="course">
+                                                <option value="" disabled selected>Select A course</option>
+                                                {% for course in courses %}
+                                                    <option value="{{ course.course_name }}">{{ course.course_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Your name" name="name">
@@ -244,6 +323,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Phone Number" name="phone">
+                                                {% if form.phone.errors %}
+                                                    <div class="text-danger">
+                                                        {% for error in form.phone.errors %}
+                                                            <p>{{ error }}</p>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -253,14 +339,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control textarea" placeholder="Your comments..." name="message"></textarea>
+                                        <textarea class="form-control textarea" placeholder="Your comments..." name="message" style="height: 100px;"></textarea>
                                     </div>
-                                    
                                     <button type="submit">
                                         Submit
                                         <i class="flaticon-right-arrow"></i>
                                     </button>
                                 </form>
+                                
                             </div>
                             
                         </div>
@@ -292,10 +378,11 @@
 
             .pages-leave-reply.fixed {
                 position: fixed;
-                top: 150px; /* Adjust as needed */
+                top: 130px; /* Adjust as needed */
                 right: 70px; /* Adjust as needed */
                 z-index: 950;
             }
+            
         </style>
         <!-- End Blog Pages Area -->
 
@@ -345,7 +432,85 @@
                 });
             });
         </script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                    const slides = document.querySelectorAll('.image-slider .slide');
+                    let currentSlide = 0;
+        
+                    function showSlide(index) {
+                        slides.forEach((slide, i) => {
+                            slide.classList.toggle('active', i === index);
+                        });
+                    }
+        
+                    function nextSlide() {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        showSlide(currentSlide);
+                    }
+        
+                    // Initial display
+                    showSlide(currentSlide);
+        
+                    // Change slide every 5 seconds
+                    setInterval(nextSlide, 5000);
+                });
+        
+                </script>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const query = "{{ query }}";
+                        if (query) {
+                            if (document.querySelector('#colleges-section')) {
+                                window.location.hash = '#colleges-section';
+                            } else if (document.querySelector('#courses-section')) {
+                                window.location.hash = '#courses-section';
+                            } else if (document.querySelector('#blog-category-section')) {
+                                window.location.hash = '#blog-category-section';
+                            }
+                        }
+                    });
+                </script>
+            
+            
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var brochureModal = document.getElementById('brochureModal');
+                    brochureModal.addEventListener('show.bs.modal', function(event) {
+                        var button = event.relatedTarget;
+                        var collegeId = button.getAttribute('data-college-id');
+                        var modalCollegeIdInput = document.getElementById('college_id');
+                        modalCollegeIdInput.value = collegeId;
+                    });
+                
+                    var brochureForm = document.getElementById('brochureForm');
+                    brochureForm.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        var formData = new FormData(brochureForm);
+                
+                        fetch(brochureForm.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = data.brochure_url;
+                            } else {
+                                alert('There was an error. Please try again.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('There was an error. Please try again.');
+                        });
+                    });
+                });
+                </script>
         
 
         {% endblock %}

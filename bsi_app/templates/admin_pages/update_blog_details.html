@@ -1,53 +1,49 @@
-{% extends "admin_pages/base.html" %}
-{% load static %}
 
-{% block content %}
-      
 
+            <!-- -------------------   -------------------- -->
+
+            {% extends "admin_pages/base.html" %}
+            {% load static %}
+            {% block content %}
+            
             <div class="container">
               <div class="row justify-content-center">
                 <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Update Blog Details</h4>
-                      
-                      <form class="forms-sample" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                      <h4 class="card-title">Add Blog Details</h4>
+                      <form class="forms-sample" method="POST" enctype="multipart/form-data"> 
+                        {% csrf_token %}
                         <div class="form-group">
-                            <div class="input-box">
-                                <label for="id_category">Blog Category</label>
-                               
-                              <select name="category" id="id_category" class="form-control">
-                                {% for category in categories %}
-                                    <option value="{{ category.id }}" {% if category.id == blog_details.category.id %}selected{% endif %}>{{ category.category_name }}</option>
-                                {% endfor %}
+                          <div class="input-box">
+                            <label for="id_category">Blog Category</label>
+                            <!-- <select name="category" id="id_category" class="form-control">
+                              {% for category in categories %}
+                              <option value="{{ category.id }}">{{ category.category_name }}</option>
+                              {% endfor %}
+                            </select> -->
+                            <select name="category" id="id_category" class="form-control">
+                              {% for category in categories %}
+                                  <option value="{{ category.id }}" {% if category.id == blog_details.category.id %}selected{% endif %}>{{ category.category_name }}</option>
+                              {% endfor %}
                             </select>
-                            </div>
-                    
-                        <div class="form-group">
-                          <label for="updateblogDescription">Blog Description</label>
-                          <textarea class="form-control" id="updateblogDescription" name="blog_description" rows="4" style="height: 150px;" placeholder="blog details">{{blog_details.blog_description|safe}}</textarea>
-
+                          </div>
                         </div>
-                         
-                     
                         <div class="form-group">
-                            <label>Current Blog Image</label><br>
-                            {% if blog_details.blog_image %}
-                                <img src="{{ blog_details.blog_image.url }}" alt="Current Image" style="width: 150px; height: 150px;">
-                                <br>
-                                <!-- <input type="checkbox" name="remove_image"> Remove Current Image -->
-                            {% else %}
-                                <p>No image available</p>
-                            {% endif %}
+                          <label for="addblogDescription">Blog Description</label>
+                          <textarea class="form-control" name="blog_description" id="addblogDescription" rows="3" style="height: 150px;" placeholder="Enter Your Description">{{blog_details.blog_description|safe}}</textarea>
                         </div>
-                        <!-- New Client Image -->
                         <div class="form-group">
-                            <label for="imageFile">Upload New Blog Image</label><br>
-                            <input type="file" class="form-control-file" id="imageFile" name="blog_image" accept="image/*">
+                          <label>Current Blog Image</label><br>
+                          {% if blog_details.blog_image %}
+                              <img src="{{ blog_details.blog_image.url }}" alt="Current Image" style="width: 150px; height: 150px;">
+                              <br>
+                             
+                          {% else %}
+                              <p>No image available</p>
+                          {% endif %}
                         </div>
-    
-                      <button type="submit" class="btn btn-primary me-2">Submit</button>
-                        <!-- <button class="btn btn-light">Cancel</button> -->
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
                       </form>
                     </div>
                   </div>
@@ -55,26 +51,28 @@
               </div>
             </div>
             
-            
             <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
             <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
             <script>
               document.addEventListener('DOMContentLoaded', function() {
-                CKEDITOR.replace('updateblogDescription', {
-                  extraPlugins: 'uploadimage,image2',
-                  
+                CKEDITOR.replace('addblogDescription', {
+                  extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
+                  filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
+                  filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
                   height: 300,
                   toolbar: [
                     { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
                     { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
-                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
                     { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-                    { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+                    { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
                     { name: 'tools', items: ['Maximize'] },
-                    { name: 'document', items: ['Source'] }
+                    { name: 'document', items: ['Source'] },
+                    { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
                   ],
+                  removePlugins: 'easyimage,cloudservices',
                 });
               });
             </script>
-            
             {% endblock %}
+            

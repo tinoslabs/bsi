@@ -23,9 +23,12 @@
         <link rel="stylesheet" href="{% static 'assets/css/card2.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/card3.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/button.css' %}">
-<!-- 
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/card2.css' %}">
+
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/> -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+
+        
         <style>
             
         .card {
@@ -115,6 +118,8 @@
             transform: scale(1);
         }
         </style>
+        
+
     </head>
 
     <body>
@@ -127,16 +132,16 @@
                         <div class="top-header-list">
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
-                                    <a class="text-decoration-none d-flex align-items-center" href="tel:45993939990">
+                                    <!-- <a class="text-decoration-none d-flex align-items-center" href="tel:45993939990">
                                         <i class="flaticon-call"></i>
                                         +459 9393 9990
-                                    </a>
+                                    </a> -->
                                 </li>
                                 <li class="d-inline-block">
-                                    <a class="text-decoration-none d-flex align-items-center" href="mailto:helloadma@gmail.com">
+                                    <!-- <a class="text-decoration-none d-flex align-items-center" href="mailto:helloadma@gmail.com">
                                         <i class="ri-message-line"></i>
                                         helloadma@gmail.com
-                                    </a>
+                                    </a> -->
                                 </li>
                             </ul>
                         </div>
@@ -144,25 +149,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="top-header-social-list text-end">
                             <ul class="list-unstyled ps-0 mb-0">
-                                <li class="d-inline-block">
-                                    <ul class="list-unstyled ps-0 mb-0 pages-link">
-                                        <!-- <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="">Faculty</a>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="">Community</a>
-                                        </li> -->
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="">Log in</a>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="">Sign Up</a>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="">Register</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                
                                 <li class="d-inline-block">
                                     <ul class="list-unstyled ps-0 mb-0 social-link">
                                         <li class="d-inline-block">
@@ -170,11 +157,7 @@
                                                 <i class="flaticon-facebook-app-symbol"></i>
                                             </a>
                                         </li>
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="" target="_blank">
-                                                <i class="flaticon-pinterest"></i>
-                                            </a>
-                                        </li>
+                                       
                                         <li class="d-inline-block">
                                             <a class="text-decoration-none" href="" target="_blank">
                                                 <i class="flaticon-instagram"></i>
@@ -210,7 +193,7 @@
                     </span>
                 </a>
                 
-                <div class="collapse navbar-collapse" style="margin-right: 300px;">
+                <div class="collapse navbar-collapse" style="margin-right: 410px;">
                     <ul class="navbar-nav ms-auto">
                         {% for course_collection in course_collections %}
                         <li class="nav-item dropdown">
@@ -242,7 +225,7 @@
                         </li>
                         {% endfor %}
                     </ul>
-                    <div class="others-option">
+                    <!-- <div class="others-option">
                         <div class="d-flex align-items-center">
                             <div class="option-item">
                                 <form class="search-form" method="GET" action="{% url 'index' %}">
@@ -256,7 +239,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </nav>  
@@ -324,10 +307,11 @@
             </div>
         </div>
 
-
-
+        
         {% block content%}
+
         {% endblock %}
+        
 
         <div class="botIcon">
             <div class="botIconContainer">
@@ -382,31 +366,27 @@
                                     <h6>Follow BSI</h6>
                                     <ul class="list-unstyled ps-0 mb-0 social-link">
                                         <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="https://www.facebook.com/" target="_blank">
+                                            <a class="text-decoration-none" href="" target="_blank">
                                                 <i class="flaticon-facebook-app-symbol"></i>
                                             </a>
                                         </li>
+                                        
                                         <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="https://www.pinterest.com/" target="_blank">
-                                                <i class="flaticon-pinterest"></i>
-                                            </a>
-                                        </li>
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="https://www.instagram.com/" target="_blank">
+                                            <a class="text-decoration-none" href="" target="_blank">
                                                 <i class="flaticon-instagram"></i>
                                             </a>
                                         </li>
                                         <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="https://twitter.com/" target="_blank">
+                                            <a class="text-decoration-none" href="" target="_blank">
                                                 <i class="flaticon-twitter"></i>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-4">
+                            <!-- <div class="col-lg-4 col-sm-4">
                                 <div class="single-footer-widget">
-                                    <h3>Academics</h3>
+                                    <h3>Colleges</h3>
                                     <ul class="list-unstyled ps-0 mb-0">
                                         <li>
                                             <a class="text-decoration-none" href="">Undergraduates</a>
@@ -418,11 +398,23 @@
                                             <a class="text-decoration-none" href="#">Online Education</a>
                                         </li>
                                         <li>
-                                            <a class="text-decoration-none" href="apply.html">How To Apply</a>
+                                            <a class="text-decoration-none" href="#">How To Apply</a>
                                         </li>
                                         <li>
                                             <a class="text-decoration-none" href="#">Graduates</a>
                                         </li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-4 col-sm-4">
+                                <div class="single-footer-widget">
+                                    <h3>Colleges</h3>
+                                    <ul class="list-unstyled ps-0 mb-0">
+                                        {% for college in colleges %}
+                                            <li>
+                                                <a class="text-decoration-none" href="#">{{ college.college_name }}</a>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
@@ -432,34 +424,47 @@
                         <div class="row" data-cues="slideInUp">
                             <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget quick">
-                                    <h3>Quick Links</h3>
+                                    <h3>Courses</h3>
+                                    
                                     <ul class="list-unstyled ps-0 mb-0">
-                                        <li>
-                                            <a class="text-decoration-none" href="#">Student Activities</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="text-decoration-none" href="#">Apply From</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="text-decoration-none" href="#">Schedule A Tour</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="text-decoration-none" href="#">News & Blog</a>
-                                        </li>
-                                        
-                                        <li>
-                                            <a class="text-decoration-none" href="#">About Adma</a>
-                                        </li>
+                                        {% for course in courses %}
+                                            <li>
+                                                <a class="text-decoration-none" href="#">{{ course.course_name }}</a>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             </div>
+                            <!-- <div class="col-lg-4 col-sm-6 col-md-4">
+                                <div class="single-footer-widget contact">
+                                    <h3>Exam</h3>
+                                    <ul class="list-unstyled ps-0 mb-0">
+                                        {% for exams in exam %}
+                                            <li>
+                                                <a class="text-decoration-none" href="#">{{ exams.exam_name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-4 col-sm-6 col-md-4">
+                                <div class="single-footer-widget quick">
+                                    <h3>Courses</h3>
+                                    
+                                    <ul class="list-unstyled ps-0 mb-0">
+                                        {% for exams in exam %}
+                                            <li>
+                                                <a class="text-decoration-none" href="#">{{ exams.exam_name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+
                             <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget contact">
-                                    <h3>Contact Us</h3>
-                                    <ul class="list-unstyled ps-0 mb-0">
+                                    <h3>Contact</h3>
+                                    <!-- <ul class="list-unstyled ps-0 mb-0">
                                         <li>
                                             <a class="text-decoration-none" href="tel:45993939990">
                                                 +459 9393 9990
@@ -484,24 +489,7 @@
                                             <i class="flaticon-placeholder"></i>
                                             <p>3001810 Campus Way IUTothell WA 98011-8246</p>
                                         </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6 col-md-4">
-                                <div class="single-footer-widget mobile">
-                                    <h3>Mobile App</h3>
-                                    <ul class="list-unstyled ps-0 mb-0">
-                                        <li>
-                                            <a class="text-decoration-none" href="" target="_blank">
-                                                <img src="{% static 'assets/img/footer/footer-1.svg' %}" alt="footer-svg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="text-decoration-none" href="">
-                                                <img src="{% static 'assets/img/footer/footer-2.svg' %}" alt="footer-svg">
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </div>
                         </div>
@@ -517,17 +505,17 @@
                 <div class="row align-items-center" data-cues="slideInUp">
                     <div class="col-lg-2 col-sm-12">
                         <div class="copyright-logo">
-                            <a class="text-decoration-none" href="index.html">
+                            <a class="text-decoration-none" href="{% url 'index' %}">
                                 <img src="{% static 'assets/img/BSI_LOGO.png' %}" alt="black-logo">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-5 col-sm-6">
                         <div class="copyright-title text-end">
-                            <p>© <strong>Tinos</strong> is Proudly Owned by HiboTheme</p>
+                            <p>© <strong>Tinos</strong> All Rights Reserved</p>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-sm-6">
+                    <!-- <div class="col-lg-5 col-sm-6">
                         <div class="copyright-list text-end">
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
@@ -544,7 +532,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -683,9 +671,7 @@
                 </style>                  
 
 
-<script>
-    
-</script>
+
     </body>
 
 

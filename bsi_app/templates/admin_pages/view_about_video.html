@@ -1,0 +1,50 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-lg-10 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">About Video Links</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Video Link</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for video in links %}
+                            <tr>
+                                <td style="width: 300px; word-wrap: break-word; white-space: inherit;">
+                                    <a href="{{ video.video_link }}" target="_blank">{{ video.video_link }}</a>
+                                </td>
+                                <td style="width: 100px;">
+                                    <a href="{% url 'update_about_video' video.id %}">
+                                        <button class="btn btn-warning">
+                                            <i class="mdi mdi-cloud-upload" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td style="width: 100px;">
+                                    <a href="{% url 'delete_about_video' video.id %}">
+                                        <button class="btn btn-danger">
+                                            <i class="mdi mdi-delete" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">No video links available.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

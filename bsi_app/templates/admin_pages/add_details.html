@@ -43,31 +43,41 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     CKEDITOR.replace('id_details', {
-      extraPlugins: 'uploadimage,image2',
+      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
+      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
+      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
       height: 300,
       toolbar: [
         { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
         { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
         { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
         { name: 'tools', items: ['Maximize'] },
-        { name: 'document', items: ['Source'] }
+        { name: 'document', items: ['Source'] },
+        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
       ],
+      removePlugins: 'easyimage,cloudservices',
     });
+
     CKEDITOR.replace('id_more_details', {
-      extraPlugins: 'uploadimage,image2',
+      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
+      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
+      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
       height: 300,
       toolbar: [
         { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
         { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
         { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule'] },
+        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
         { name: 'tools', items: ['Maximize'] },
-        { name: 'document', items: ['Source'] }
+        { name: 'document', items: ['Source'] },
+        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
       ],
+      removePlugins: 'easyimage,cloudservices',
     });
   });
 </script>
 {% endblock %}
+

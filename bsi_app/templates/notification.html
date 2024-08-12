@@ -1,0 +1,104 @@
+
+<style>
+ /* Notification Bar Container */
+.notification {
+  width: 300px;
+  background-color: white;
+  border: 1px solid navy;
+  border-radius: 3px;
+  position: relative;
+  display: inline-block;
+}
+
+/* Header */
+.notification-header {
+  background-color: navy;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d9534f;
+}
+
+/* Title */
+.notification-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Close Button */
+.close-notification {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Body */
+.notification-body {
+  padding: 10px;
+  font-size: 12px;
+  color: #721c24;
+}
+
+/* Footer */
+.notification-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid navy;
+}
+
+/* Footer Buttons */
+.notification-footer button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.notification-footer button:hover {
+  color: #b52b2b;
+}
+
+.notification-footer .act-on-this {
+  display: flex;
+  align-items: center;
+}
+</style>
+<div id="notification-bar" class="notification">
+    <div class="notification-header">
+      <span class="notification-title">This is bad shit</span>
+      <button class="close-notification"><span>&times;</span></button>
+    </div>
+    <div class="notification-body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing.. sdhfgyfhszfeswrhwe dhfgsyfdgayduawdq bwhyegryahwawudr bvfcdsfgthyujhygf gfdfghjuhygtbfvrdgv ygtfsdrftgyuhji</p>
+    </div>
+    <div class="notification-footer">
+      <button class="close-notification">Close &#10006;</button>
+      <button class="act-on-this">Act on this &#9998;</button>
+    </div>
+</div>
+  <script>
+// Close notification functionality
+document.querySelectorAll('.close-notification').forEach(function(button) {
+  button.addEventListener('click', function() {
+    const notification = this.closest('.notification');
+    notification.style.opacity = '0';
+    setTimeout(function() {
+      notification.style.display = 'none';
+    }, 300); // Adjust time if necessary
+  });
+});
+
+// Example "Act on this" button event listener
+document.querySelector('.act-on-this').addEventListener('click', function() {
+  alert('Action button clicked!');
+});
+  </script>

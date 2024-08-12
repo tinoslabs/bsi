@@ -23,6 +23,11 @@
   <link rel="stylesheet" href="{% static 'admin_static/assets/css/vertical-layout-light/style.css' %}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{% static 'assets/img/BSI_LOGO.png' %}">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+
   <style>
     * {
   margin:0px;
@@ -212,6 +217,22 @@
       </div>
     </li>
 
+    <li class="nav-item nav-category">Featured Colleges</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#featured" aria-expanded="false" aria-controls="college">
+        <i class="menu-icon mdi mdi-card-text-outline"></i>
+        <span class="menu-title">Featured Colleges</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="featured">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_featured_colleges' %}"> Add Featured Colleges</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_featured_colleges' %}"> View Featured Colleges</a></li>
+         
+        </ul>
+      </div>
+    </li>
+
 
     <li class="nav-item nav-category">Courses</li>
     <li class="nav-item">
@@ -228,22 +249,7 @@
       </div>
     </li>
 
-    <!-- <li class="nav-item nav-category">Course Collection</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#courseCollection" aria-expanded="false" aria-controls="client">
-        <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
-        <span class="menu-title">Course Collection</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="courseCollection">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'create_course' %}"> Add Course </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_course' %}"> View Course </a></li>
-        </ul>
-      </div>
-    </li> -->
 
-    
     <li class="nav-item nav-category">Header Details</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#details" aria-expanded="false" aria-controls="client">
@@ -277,23 +283,23 @@
     </li>
 
 
-    <li class="nav-item nav-category">Course Collection</li>
+    <li class="nav-item nav-category">Header Headings</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#collection" aria-expanded="false" aria-controls="client">
         <i class="menu-icon mdi mdi-arrow-right-bold-circle"></i>
-        <span class="menu-title">Course Collection</span>
+        <span class="menu-title">Header Headings</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="collection">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'create_course' %}"> Add Course </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_course' %}"> View Course </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_course_collection' %}"> Main Heading</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_course_collection' %}"> View Heading</a></li>
 
-          <li class="nav-item"> <a class="nav-link" href="{% url 'create_sub_collection' %}">Add Sub Collections </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_sub_collection' %}">View Sub Collections </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_sub_collection' %}"> Sub Section</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_sub_collection' %}">View Sub Section</a></li>
 
-          <li class="nav-item"> <a class="nav-link" href="{% url 'create_subcollection_category' %}">Add Sub Category </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_subcollection_category' %}">View Sub Category </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'create_subcollection_category' %}">Final Section</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_subcollection_category' %}">View Final Section</a></li>
          
         </ul>
       </div>
@@ -312,6 +318,35 @@
         </ul>
       </div>
     </li>
+
+    <li class="nav-item nav-category">Brochure Download History</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#brochure" aria-expanded="false" aria-controls="contact">
+        <i class="menu-icon mdi mdi-phone-log"></i>
+        <span class="menu-title">Brochure Download History</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="brochure">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'enquiry_submition_view' %}">Brochure Download History</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item nav-category">Contact View</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#contact" aria-expanded="false" aria-controls="contact">
+        <i class="menu-icon mdi mdi-phone-log"></i>
+        <span class="menu-title">Contact View</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="contact">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'contact_view' %}">Contact Views</a></li>
+        </ul>
+      </div>
+    </li>
+
     <li class="nav-item nav-category">Chatbot Messages</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#chatbot" aria-expanded="false" aria-controls="chatbot">
@@ -322,8 +357,7 @@
       <div class="collapse" id="chatbot">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{% url 'chatbot_message_view' %}">Chatbot Messages</a></li>
-          <!-- <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/dropdowns.html">Dropdowns</a></li>
-          <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/typography.html">Typography</a></li> -->
+         
         </ul>
       </div>
     </li>
@@ -358,6 +392,9 @@
   <script src="{% static 'admin_static/assets/js/dashboard.js' %}"></script>
   <script src="{% static 'admin_static/assets/js/proBanner.js' %}"></script>
   <script src="{% static 'admin_static/assets/js/preload.js' %}"></script>
+
+  <!--  -->
+
   <!-- <script src="../../assets/js/Chart.roundedBarCharts.js"></script> -->
   <!-- End custom js for this page-->
 
@@ -370,6 +407,15 @@
      }, 2500); 
     })
       </script> -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>

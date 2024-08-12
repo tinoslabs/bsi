@@ -186,32 +186,62 @@
                         </div>
                     </div>
                     
+                    
+
+                    <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form id="brochureForm" method="post" action="{% url 'download_brochure' %}">
+                                    {% csrf_token %}
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="brochureModalLabel">Download Brochure</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="college_id" id="college_id">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Your name" name="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Your email" name="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Phone Number" name="phone" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="col-lg-4">
                         <div class="blog-right-sidebar">
                             <div class="button-container">
-                                <a href="{{ course.brochure.url }}" class="btn download-guide">
+                                {% for college in college %}
+                                <a href="{{ course.brochure.url }}" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
                                     <i class="icon-download"></i>
                                     Course Brochure
                                 </a>
-                                <!-- <a href="#" class="btn sample-papers">
-                                    <i class="icon-sample"></i>
-                                    Sample Papers
-                                </a> -->
+                                {% endfor %}
                             </div>
                             <br><br>
-                           
-                            <!-- <div class="single-pages-widget tags style-2">
-                                <h3>Popular Courses</h3>
+                            
+                            <div class="single-pages-widget tags style-2">
+                                <h3>Popular Colleges</h3>
                                 <ul class="list-unstyled ps-0 mb-0">
-                                    {% for course in courses %}
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none d-inline-block" href="#">
-                                                {{ course.course_name }}
-                                            </a>
-                                        </li>
+                                    {% for college in college %}
+                                    <li class="d-inline-block">
+                                        <a class="text-decoration-none d-inline-block" href="{% url 'college_details' college.college_name %}">
+                                            {{ college.college_name }}
+                                        </a>
+                                    </li>
                                     {% endfor %}
                                 </ul>
-                            </div> -->
+                            </div>
                             
                             <div class="pages-leave-reply" id="contactForm">
                                 {% if messages %}
@@ -230,7 +260,16 @@
                                 <br>
                                 <form method="post">
                                     {% csrf_token %}
+                                    <input type="hidden" name="course" value="{{ course.id }}">
                                     <div class="row">
+                                        <div class="form-group">
+                                            <select class="form-control" name="college">
+                                                <option value="" disabled selected>Select A College</option>
+                                                {% for college in college %}
+                                                    <option value="{{ college.id }}">{{ college.college_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Your name" name="name">
@@ -253,7 +292,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control textarea" placeholder="Your comments..." name="message"></textarea>
+                                        <textarea class="form-control textarea" placeholder="Your comments..." name="message" style="height: 100px;"></textarea>
                                     </div>
                                     
                                     <button type="submit">
@@ -261,6 +300,7 @@
                                         <i class="flaticon-right-arrow"></i>
                                     </button>
                                 </form>
+                                
                             </div>
                             
                         </div>
@@ -292,7 +332,7 @@
 
             .pages-leave-reply.fixed {
                 position: fixed;
-                top: 150px; /* Adjust as needed */
+                top: 130px; /* Adjust as needed */
                 right: 70px; /* Adjust as needed */
                 z-index: 950;
             }
@@ -346,6 +386,43 @@
             });
         </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var brochureModal = document.getElementById('brochureModal');
+        brochureModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var collegeId = button.getAttribute('data-college-id');
+            var modalCollegeIdInput = document.getElementById('college_id');
+            modalCollegeIdInput.value = collegeId;
+        });
+    
+        var brochureForm = document.getElementById('brochureForm');
+        brochureForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(brochureForm);
+    
+            fetch(brochureForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.brochure_url;
+                } else {
+                    alert('There was an error. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error. Please try again.');
+            });
+        });
+    });
+    </script>
         
 
         {% endblock %}
