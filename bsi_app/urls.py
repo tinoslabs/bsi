@@ -56,11 +56,7 @@ urlpatterns = [
     path('delete_clients_logo/<int:id>/',views.delete_clients_logo, name='delete_clients_logo'),
 
     path('service', views.service, name='service'),
-    path('programs', views.programs, name='programs'),
-    path('program_details', views.program_details, name='program_details'),
-    path('about', views.about, name='about'),
-    path('application', views.application, name='application'),
-    path('apply', views.apply, name='apply'),
+
 
     path('create_college', views.create_college, name='create_college'),
     path('view_college', views.view_college, name='view_college'),
@@ -74,8 +70,6 @@ urlpatterns = [
 
     path('create_course_collection', views.create_course_collection, name='create_course_collection'),
     path('view_course_collection',views.view_course_collection, name='view_course_collection'),
-    # path('update_course_collection/<int:id>/', views.update_course_collection, name='update_course_collection'),
-    # path('delete_course_collection/<int:id>/', views.delete_course_collection, name='delete_course_collection'),
     path('update_course_collection/<int:id>/', views.update_course_collection, name='update_course_collection'),
     path('delete_course_collection/<int:id>/', views.delete_course_collection, name='delete_course_collection'),
 
@@ -89,15 +83,12 @@ urlpatterns = [
     path('view_subcollection_category/', views.view_subcollection_category, name='view_subcollection_category'),
     path('update-subcollection-category/<int:pk>/', views.update_subcollection_category, name='update_subcollection_category'),
     path('delete_subcollection_category/<int:pk>/', views.delete_subcollection_category, name='delete_subcollection_category'),
-    # path('load_sub_collections/', views.load_sub_collections, name='load_sub_collections'),
 
-    path('card', views.card,name='card'),
+
     path('exam', views.exam, name='exam'),
     path('college_details/<str:college_name>/', views.college_details, name='college_details'),
    
     path('download-brochure/', views.download_brochure, name='download_brochure'),
-    # path('request-brochure/', views.request_brochure, name='request_brochure'),
-    # path('verify-otp/', views.verify_otp, name='verify_otp'),
     path('enquiry_submition_view', views.enquiry_submition_view, name='enquiry_submition_view'),
     path('delete_enquiry_submition/<int:pk>/', views.delete_enquiry_submition, name='delete_enquiry_submition'),
     
@@ -108,9 +99,6 @@ urlpatterns = [
 
     path('details/<int:id>/', views.details_display, name='details_display'),
 
-    path('animation', views.animation, name='animation'),
-
-    path('slider',views.slider, name='slider'),
 
     path('create_exam', views.create_exam, name='create_exam'),
     path('view_exam', views.view_exam, name='view_exam'),
@@ -127,7 +115,7 @@ urlpatterns = [
     path('delete_exam_details/<int:id>/', views.delete_exam_details, name='delete_exam_details'),
 
     path('exam_detail/<int:id>/', views.exam_detail, name='exam_detail'),
-    path('logo', views.logo, name='logo'),
+
 
     path('enquiry_view',views.enquiry_view, name='enquiry_view'),
     path('delete_enquiry/<int:id>/', views.delete_enquiry, name='delete_enquiry'),
