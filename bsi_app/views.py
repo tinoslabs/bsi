@@ -845,25 +845,6 @@ def submit_query(request):
 def service(request):
     return render(request,'service.html')
 
-def programs(request):
-    return render(request,'programs.html')
-
-def program_details(request):
-    return render(request,'program-details.html')
-
-def about(request):
-    return render(request,'about.html')
-
-def application(request):
-    return render(request,'application.html')
-
-def apply(request):
-    return render(request,'apply.html')
-
-
-def card(request):
-    return render(request,'card.html')
-
 def exam(request):
     return render(request,'exam.html')
 
@@ -1084,18 +1065,14 @@ def details_display(request, id):
     return render(request, 'details_display.html', {'data': data, 'sub_collection_category': sub_collection_category,'courses':courses, 'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'form':form,'exam':exam, 'colleges':colleges, 'footer_colleges': footer_colleges, 'footer_courses':footer_courses, 'footer_exams':footer_exams})
 
 
-def slider(request):
-    return render(request,'slider.html')
+# def slider(request):
+#     return render(request,'slider.html')
 
 
-def exam_details(request):
-    return render(request,'exam_details.html')
+# def exam_details(request):
+#     return render(request,'exam_details.html')
 
-def logo(request):
-    return render(request,'logo.html')
 
-# def page_not_found(request):
-#     return render(request,'404.html')
 
 def page_404(request):
     return render(request, '404.html', status=404)
