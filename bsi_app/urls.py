@@ -150,6 +150,6 @@ urlpatterns = [
     path('delete_featured_colleges/<int:pk>/', views.delete_featured_colleges, name='delete_featured_colleges'),
     path('notification', views.notification, name='notification'),
 
-    path('search', views.search, name='search'),
+    
 
 ]

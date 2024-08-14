@@ -102,8 +102,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="blog-left-sidebar">
-                            <div class="single-blog-card">
-                                
+                            <div class="single-blog-card">   
                             </div>
                            
                             <div class="leading-management">
@@ -126,11 +125,12 @@
                                     </a>
                                 </div>
                             </div>
-                            
                             <br>
+
                             {% if college.more_details %}
                             <p>{{college.more_details | safe}}</p>
                             {% endif %}
+
                             <div class="events-area pb-75">
                                 <div class="events-area pb-75">
                                     <div class="container">
@@ -160,71 +160,10 @@
                                             {% endfor %}
                                         </div>
                                     </div>
-                                </div>
-                            
+                                </div>        
                         </div>
-                        <style>
-                            
-                            .card {
-                            background-color: #fff;
-                            border-radius: 10px;
-                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                            width: 300px;
-                            padding: 20px;
-                            margin: 10px; /* Adds gap between card */
-                            text-align: center;
-                            transition: background-color 0.3s ease;
-                        }
                         
-                        .card img {
-                            border-radius: 50%;
-                            width: 50px;
-                            height: 50px;
-                        }
-                        .card h3 {
-                            font-size: 18px;
-                            margin: 10px 0;
-                        }
-                        .card p {
-                            color: #888;
-                            font-size: 14px;
-                            margin: 5px 0;
-                        }
-                        .card .details {
-                            display: flex;
-                            justify-content: space-between;
-                            margin: 10px 0;
-                        }
-                        .card .details div {
-                            font-size: 14px;
-                        }
-                        .card .details a {
-                            color: #007bff;
-                            text-decoration: none;
-                        }
-                        .card .details a:hover {
-                            text-decoration: underline;
-                        }
-                        .card .actions {
-                            margin-top: 20px;
-                        }
-                        .card .actions .btn {
-                            background-color: #28a745;
-                            color: #fff;
-                            padding: 10px 20px;
-                            border: none;
-                            border-radius: 5px;
-                            cursor: pointer;
-                            text-decoration: none;
-                            display: inline-block;
-                        }
-                        .card .actions .btn:hover {
-                            background-color: #218838;
-                        }
-                        .card:hover .details a {
-                            color: #fff;
-                        }
-                        </style>
+                        
                         </div>
                     </div>
                     
@@ -355,18 +294,7 @@
                 </div>
             </div>
         </div>
-        <!-- <style>
-            .pages-leave-reply {
-            position: fixed;
-            top: 150px; /* Adjust as needed */
-            right: 70px; /* Adjust as needed */
-            width: 400px; /* Adjust as needed */
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-}
-        </style> -->
+        
         <style>
             .pages-leave-reply {
                 width: 450px; /* Adjust as needed */
@@ -384,11 +312,7 @@
             }
             
         </style>
-        <!-- End Blog Pages Area -->
-
-        <!-- Start Newsletter Area -->
         
-        <!-- End Newsletter Area -->
         <style>
             table {
                 width: 100%;
@@ -418,7 +342,69 @@
             }
             /* Other media queries here */
           </style>
-          <script>
+          <style>
+                            
+            .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            margin: 10px; 
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .card img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .card p {
+            color: #888;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .card .details {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .card .details div {
+            font-size: 14px;
+        }
+        .card .details a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .card .details a:hover {
+            text-decoration: underline;
+        }
+        .card .actions {
+            margin-top: 20px;
+        }
+        .card .actions .btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .card .actions .btn:hover {
+            background-color: #218838;
+        }
+        .card:hover .details a {
+            color: #fff;
+        }
+        </style>
+        <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const form = document.getElementById('contactForm');
                 const originalPosition = form.offsetTop;
@@ -433,6 +419,7 @@
             });
         </script>
                 <script>
+
                     document.addEventListener("DOMContentLoaded", function() {
                     const slides = document.querySelectorAll('.image-slider .slide');
                     let currentSlide = 0;
@@ -448,10 +435,7 @@
                         showSlide(currentSlide);
                     }
         
-                    // Initial display
                     showSlide(currentSlide);
-        
-                    // Change slide every 5 seconds
                     setInterval(nextSlide, 5000);
                 });
         
@@ -472,8 +456,6 @@
                     });
                 </script>
             
-            
-
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     var brochureModal = document.getElementById('brochureModal');
@@ -510,9 +492,8 @@
                         });
                     });
                 });
-                </script>
+            </script>
         
-
         {% endblock %}
         
           <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>

@@ -225,21 +225,7 @@
                         </li>
                         {% endfor %}
                     </ul>
-                    <!-- <div class="others-option">
-                        <div class="d-flex align-items-center">
-                            <div class="option-item">
-                                <form class="search-form" method="GET" action="{% url 'index' %}">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="q" placeholder="Search Programs">
-                                        <button type="submit"><i class="ri-search-line"></i></button>
-                                    </div>
-                                </form>
-                                <button type="button" class="search-btn d-none bg-transparent border-0 lh-1 p-0 position-relative" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                    <i class="flaticon-search-1"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div> -->
+                    
                 </div>
             </div>
         </nav>  
@@ -267,7 +253,7 @@
         <!-- End Search Modal -->
         
         <!-- Start Responsive Navbar Area -->
-        <div class="responsive-navbar offcanvas offcanvas-end border-0" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
+        <!-- <div class="responsive-navbar offcanvas offcanvas-end border-0" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
             <div class="offcanvas-header">
                 <a href="index.html" class="logo d-inline-block">
                     <img src="{% static 'assets/img/BSI_LOG_WHITE.png' %}" alt="logo">
@@ -305,7 +291,47 @@
                     </li>
                 </ul>
             </div>
+        </div> -->
+        <div class="responsive-navbar offcanvas offcanvas-end border-0" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
+            <div class="offcanvas-header">
+                <a href="{% url 'index' %}" class="logo d-inline-block">
+                    <img src="{% static 'assets/img/BSI_LOG_WHITE.png' %}" alt="logo">
+                </a>
+                <button type="button" class="close-btn bg-transparent position-relative lh-1 p-0 border-0" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <i class="ri-close-fill"></i>
+                </button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="responsive-menu">
+                    {% for course_collection in course_collections %}
+                    <li class="responsive-menu-list">
+                        <a href="javascript:void(0);">{{ course_collection }}</a>
+                        <ul class="responsive-menu-items">
+                            {% for sub_collection in sub_collections %}
+                            {% if sub_collection.course == course_collection %}
+                            <li class="responsive-menu-list">
+                                <a href="javascript:void(0);">{{ sub_collection.get_course_type_display }}</a>
+                                <ul class="responsive-menu-items">
+                                    {% for sub_category in sub_categories %}
+                                    {% if sub_category.sub_collection == sub_collection %}
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            {{ sub_category.sub_category }}
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
+        
 
         
         {% block content%}
@@ -384,40 +410,20 @@
                                     </ul>
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-4 col-sm-4">
-                                <div class="single-footer-widget">
-                                    <h3>Colleges</h3>
-                                    <ul class="list-unstyled ps-0 mb-0">
-                                        <li>
-                                            <a class="text-decoration-none" href="">Undergraduates</a>
-                                        </li>
-                                        <li>
-                                            <a class="text-decoration-none" href="">About Us</a>
-                                        </li>
-                                        <li>
-                                            <a class="text-decoration-none" href="#">Online Education</a>
-                                        </li>
-                                        <li>
-                                            <a class="text-decoration-none" href="#">How To Apply</a>
-                                        </li>
-                                        <li>
-                                            <a class="text-decoration-none" href="#">Graduates</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> -->
+                           
                             <div class="col-lg-4 col-sm-4">
                                 <div class="single-footer-widget">
                                     <h3>Colleges</h3>
                                     <ul class="list-unstyled ps-0 mb-0">
-                                        {% for college in colleges %}
+                                        {% for college in footer_colleges %}
                                             <li>
-                                                <a class="text-decoration-none" href="#">{{ college.college_name }}</a>
+                                                <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -427,34 +433,23 @@
                                     <h3>Courses</h3>
                                     
                                     <ul class="list-unstyled ps-0 mb-0">
-                                        {% for course in courses %}
+                                        {% for course in footer_courses %}
                                             <li>
-                                                <a class="text-decoration-none" href="#">{{ course.course_name }}</a>
+                                                <a class="text-decoration-none" href="{% url 'course_details' course.id %}">{{ course.course_name }}</a>
                                             </li>
                                         {% endfor %}
                                     </ul>
                                 </div>
                             </div>
-                            <!-- <div class="col-lg-4 col-sm-6 col-md-4">
-                                <div class="single-footer-widget contact">
-                                    <h3>Exam</h3>
-                                    <ul class="list-unstyled ps-0 mb-0">
-                                        {% for exams in exam %}
-                                            <li>
-                                                <a class="text-decoration-none" href="#">{{ exams.exam_name }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div> -->
+                            
                             <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget quick">
                                     <h3>Courses</h3>
                                     
                                     <ul class="list-unstyled ps-0 mb-0">
-                                        {% for exams in exam %}
+                                        {% for exams in footer_exams %}
                                             <li>
-                                                <a class="text-decoration-none" href="#">{{ exams.exam_name }}</a>
+                                                <a class="text-decoration-none" href="{% url 'exam_detail' exams.exam_name %}">{{ exams.exam_name }}</a>
                                             </li>
                                         {% endfor %}
                                     </ul>
@@ -464,32 +459,6 @@
                             <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget contact">
                                     <h3>Contact</h3>
-                                    <!-- <ul class="list-unstyled ps-0 mb-0">
-                                        <li>
-                                            <a class="text-decoration-none" href="tel:45993939990">
-                                                +459 9393 9990
-                                                <i class="ri-phone-line"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="text-decoration-none" href="mailto:helloadma@gmail.com">
-                                                helloadma@gmail.com
-                                                <i class="ri-message-line"></i>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a class="text-decoration-none" href="mailto:helloadma@gmail.com">
-                                                adma@gmail.com
-                                                <i class="ri-message-line"></i>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <i class="flaticon-placeholder"></i>
-                                            <p>3001810 Campus Way IUTothell WA 98011-8246</p>
-                                        </li>
-                                    </ul> -->
                                 </div>
                             </div>
                         </div>
@@ -515,24 +484,6 @@
                             <p>© <strong>Tinos</strong> All Rights Reserved</p>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-5 col-sm-6">
-                        <div class="copyright-list text-end">
-                            <ul class="list-unstyled ps-0 mb-0">
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="#">Students</a>
-                                </li>
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="#">Faculty</a>
-                                </li>
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="#">Research</a>
-                                </li>
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="#">Community</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>

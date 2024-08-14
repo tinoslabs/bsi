@@ -200,7 +200,6 @@ class DetailsModel(models.Model):
         verbose_name_plural = "Details Models"
 
 
-
 class ExamModel(models.Model):
     exam_name = models.CharField(max_length=200)
     status = models.BooleanField(default=False,help_text="0-default,1-Hidden")
