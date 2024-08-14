@@ -64,9 +64,7 @@
                             <div class="applications-info">
                                 <!-- <h3>Applications are like the lifeblood of mobile phones and tablets today!!!</h3> -->
                                 <p>{{ detail.more_details | safe }}</p>
-                                
-                                
-                                
+                               
                             </div>
                             {% endfor %}
                             
@@ -83,16 +81,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    
+                    </div>     
 
                     <div class="col-lg-4">
                         <div class="blog-right-sidebar"> 
                             <div class="col-lg-4">
-                                <div class="blog-right-sidebar"> 
-                                    
-                                    
+                                <div class="blog-right-sidebar">  
                                     <div class="pages-leave-reply" id="contactForm">
                                         {% if messages %}
                                         <div class="alert alert-success" role="alert">
@@ -218,57 +212,7 @@
             });
         </script>
 
-<script>
-    $(document).ready(function() {
-    $('#brochureModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var collegeId = button.data('college-id'); // Extract info from data-* attributes
 
-        var modal = $(this);
-        modal.find('#college_id').val(collegeId); // Set the college_id in the hidden input field
-        modal.find('#otp_college_id').val(collegeId); // Set the college_id in OTP form as well
-    });
-
-    
-
-        $('#sendOtpButton').on('click', function() {
-        var formData = $('#brochureForm').serialize();
-        $.post("{% url 'request_brochure' %}", formData, function(data) {
-            if (data.success) {
-                $('#brochureForm').hide();
-                $('#otpForm').show();
-                $('#otp_college_id').val($('#college_id').val());
-                $('#otp_name').val($('[name="name"]').val());
-                $('#otp_email').val($('[name="email"]').val());
-                $('#otp_phone').val($('[name="phone"]').val()); // Ensure phone number is included
-            } else {
-                alert(data.message);
-            }
-        });
-    });
-
-    $('#otpForm').on('submit', function(e) {
-        e.preventDefault();
-        var formData = $(this).serialize();
-        console.log("OTP Form Data:", formData);  // Debugging line
-        
-        $.post("{% url 'verify_otp' %}", formData, function(data) {
-            if (data.success) {
-                window.location.href = data.brochure_url;
-            } else {
-                alert(data.message);
-            }
-        });
-    });
-
-    $('#brochureModal').on('hidden.bs.modal', function () {
-        $('#brochureForm').show();
-        $('#otpForm').hide();
-        $('#otpForm')[0].reset();  // Clear the OTP form fields
-    });
-});
-
-</script>
 
 
 {% endblock %}
