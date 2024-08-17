@@ -174,7 +174,7 @@ def demo(request):
 
 @login_required(login_url='user_login')
 def delete_enquiry(request,id):
-    enquiry = EnquiryModel.objects.get(id=id)
+    enquiry = Enquiry_Model.objects.get(id=id)
     enquiry.delete()
     return redirect('enquiry_view')
 
