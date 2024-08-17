@@ -58,7 +58,7 @@
                 <label for="id_exam_image">Exam Image</label>
                 <input type="file" class="form-control-file" id="id_exam_image" name="exam_image" accept="image/*">
                 {% if form.instance.exam_image %}
-                <img src="{{ form.instance.exam_image.url }}" alt="Exam Image">
+                <img src="{{ form.instance.exam_image.url }}" alt="Exam Image" style="height: 100px;width:100px">
                 {% endif %}
               </div>
               <div class="form-group">

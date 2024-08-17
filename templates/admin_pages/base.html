@@ -162,27 +162,6 @@
       <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'admin_dashboard'%}">
-        <i class="mdi mdi-grid-large menu-icon"></i>
-        <span class="menu-title">Dashboard</span>
-      </a>
-    </li>
-    <li class="nav-item nav-category">Student Reviews</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-        <i class="menu-icon mdi mdi-plus-box"></i>
-        <span class="menu-title">Student Reviews</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="ui-basic">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_reviews' %}">Add Student Reviews</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_reviews' %}">View Student Reviews</a></li>
-          <!-- <li class="nav-item"> <a class="nav-link" href="../pages/ui-features/typography.html">Typography</a></li> -->
-        </ul>
-      </div>
-    </li>
     
     <li class="nav-item nav-category">Blog</li>
     <li class="nav-item">
@@ -250,20 +229,7 @@
     </li>
 
 
-    <li class="nav-item nav-category">Header Details</li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#details" aria-expanded="false" aria-controls="client">
-        <i class="menu-icon mdi mdi-clipboard-text"></i>
-        <span class="menu-title">Header Details</span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse" id="details">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add_details' %}"> Add  Details </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'view_details' %}"> View  Details </a></li>
-        </ul>
-      </div>
-    </li>
+    
 
     <li class="nav-item nav-category">Add Exams Details</li>
     <li class="nav-item">
@@ -301,6 +267,21 @@
           <li class="nav-item"> <a class="nav-link" href="{% url 'create_subcollection_category' %}">Final Section</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'view_subcollection_category' %}">View Final Section</a></li>
          
+        </ul>
+      </div>
+    </li>
+    
+    <li class="nav-item nav-category">Header Details</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#details" aria-expanded="false" aria-controls="client">
+        <i class="menu-icon mdi mdi-clipboard-text"></i>
+        <span class="menu-title">Header Details</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="details">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_details' %}"> Add  Details </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_details' %}"> View  Details </a></li>
         </ul>
       </div>
     </li>

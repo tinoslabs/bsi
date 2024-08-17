@@ -1,0 +1,95 @@
+.notifications {
+    position: absolute;
+    top: calc(50% + 1em);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .notification {
+    position: relative;
+    width: 20em;
+    padding: 0 1em;
+    font-size: 0.8em;
+    line-height: 3.125;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(hsl(0, 0%, 17%), hsl(0, 0%, 15%));
+    box-shadow: 0 0 0 0.5em hsla(0, 0%, 0%, 0.1);
+    border-radius: 0.25em;
+    margin: 0.5em 0;
+    transition: background 0.3s;
+  }
+  
+  .notification:hover {
+    background: linear-gradient(tomato, darken(tomato, 20%));
+  }
+  
+  .notification.notify::after {
+    content: '1';
+    display: block;
+    position: absolute;
+    top: -0.75em;
+    right: -0.75em;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    font-size: 0.75em;
+    line-height: 2;
+    text-align: center;
+    background: hsl(0, 90%, 60%);
+    color: white;
+    box-shadow: 0 0 0 0.25em hsl(0, 90%, 40%);
+    animation: pulse 0.75s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0.2em hsl(0, 90%, 40%);
+    }
+    25% {
+      box-shadow: 0 0 0 0.05em hsl(0, 90%, 40%);
+    }
+    50% {
+      box-shadow: 0 0 0 0.375em hsl(0, 90%, 40%);
+    }
+    75% {
+      box-shadow: 0 0 0 0.2em hsl(0, 90%, 40%);
+    }
+    100% {
+      box-shadow: 0 0 0 0.3em hsl(0, 90%, 40%);
+    }
+  }
+  
+  /** PAGE STYLES **/
+  @import url('https://fonts.googleapis.com/css?family=Lato:300|Oswald');
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+
+  html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    /* background: hsl(120, 70%, 70%); */
+    font-family: 'Lato', sans-serif;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    margin: 0;
+    padding: 1em;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2em;
+    text-transform: uppercase;
+    text-align: center;
+    color: hsl(120, 70%, 70%);
+  }

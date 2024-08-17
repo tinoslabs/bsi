@@ -337,12 +337,13 @@ def update_exam_details(request, id):
     }
     return render(request, 'admin_pages/update_exam_details.html', context)
 
-@login_required(login_url='user_login')
-def delete_exam_details(request, id):
-    exam_detail = get_object_or_404(id, id=id)
-    exam_detail.delete()
-    return redirect('view_exam_details') 
+ 
 
+@login_required(login_url='user_login')
+def delete_exam_details(request,id):
+    exam_detail = ExamDetails.objects.get(id=id)
+    exam_detail.delete()
+    return redirect('view_exam_details')
 
 @login_required(login_url='user_login')
 def add_blog_category(request):
