@@ -1,0 +1,46 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Update Slider Image</h4>
+
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Display current image -->
+                        <div class="form-group">
+                            <label>Current Slider Image</label><br>
+                            {% if slider_image.image %}
+                                <img src="{{ slider_image.image.url }}" alt="Current Image" style="width: 150px; height: 150px;">
+                                <br>
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- File input for new image -->
+                        <div class="form-group">
+                            <label for="imageFile">Upload New Slider Image (Optional)</label>
+                            <input type="file" class="form-control-file" id="imageFile" name="image" accept="image/*">
+                        </div>
+
+                        <!-- Text input for caption -->
+                        <div class="form-group">
+                            <label for="caption">Caption (Optional)</label>
+                            <input type="text" class="form-control" id="caption" name="caption" value="{{ form.caption.value }}" placeholder="Enter caption">
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary me-2">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

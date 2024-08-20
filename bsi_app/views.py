@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges
-from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage
+from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm
 from django.http import HttpResponseNotFound
 
 
@@ -34,49 +34,6 @@ def admin_dashboard(request):
 
 from django.db.models import Q
 
-# def index(request):
-#     search_query = request.GET.get('query', '')
-#     colleges = College_Model.objects.all()
-#     courses = Course_Model.objects.all()
-#     exams = ExamModel.objects.all()
-
-#     if search_query:
-#         colleges = colleges.filter(Q(college_name__icontains=search_query) | Q(place__icontains=search_query))
-#         courses = courses.filter(Q(course_name__icontains=search_query))
-#         exams = exams.filter(Q(exam_name__icontains=search_query))
-
-#     clients_review = ClientReview.objects.all()
-#     client_logo = Client_Logo.objects.all()
-#     course_collections = Course_Collection.objects.all()
-#     sub_collections = Sub_Collection.objects.all()
-#     sub_categories = SubCollectionCategory.objects.all()
-#     details = DetailsModel.objects.all()
-#     blog_category = Blog_Category.objects.filter(status=0)
-#     about = About_Video.objects.all()
-#     featured_colleges = FeaturedColleges.objects.all()
-#     footer_colleges = College_Model.objects.order_by('-id')[:5]
-#     footer_courses = Course_Model.objects.order_by('-id')[:7]
-#     footer_exams = ExamModel.objects.order_by('-id')[:7]
-#     context = {
-#         'clients_review': clients_review,
-#         'client_logo': client_logo,
-#         'courses': courses,
-#         'course_collections': course_collections,
-#         'sub_collections': sub_collections,
-#         'sub_categories': sub_categories,
-#         'colleges': colleges,
-#         'details' : details,
-#         'blog_category' : blog_category,
-#         'exam' : exams,
-#         'about' : about,
-#         'featured_colleges' : featured_colleges,
-#         'search_query': search_query,
-#         'footer_colleges' : footer_colleges,
-#         'footer_courses' : footer_courses,
-#         'footer_exams' : footer_exams
-            
-#     }
-#     return render(request, 'index.html', context)
 
 def index(request):
     search_query = request.GET.get('query','')
@@ -105,6 +62,7 @@ def index(request):
     blog_category = Blog_Category.objects.filter(status=0)
     about = About_Video.objects.all()
     featured_colleges = FeaturedColleges.objects.all()
+    slider_images = SliderImage.objects.all()
     footer_colleges = College_Model.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -126,7 +84,8 @@ def index(request):
         'no_results': no_results,  # Pass the flag to the context
         'footer_colleges' : footer_colleges,
         'footer_courses' : footer_courses,
-        'footer_exams' : footer_exams
+        'footer_exams' : footer_exams,
+        'slider_images' : slider_images,
     }
     
     return render(request, 'index.html', context)
@@ -174,7 +133,7 @@ def demo(request):
 
 @login_required(login_url='user_login')
 def delete_enquiry(request,id):
-    enquiry = EnquiryModel.objects.get(id=id)
+    enquiry = Enquiry_Model.objects.get(id=id)
     enquiry.delete()
     return redirect('enquiry_view')
 
@@ -338,10 +297,10 @@ def update_exam_details(request, id):
     return render(request, 'admin_pages/update_exam_details.html', context)
 
 @login_required(login_url='user_login')
-def delete_exam_details(request, id):
-    exam_detail = get_object_or_404(id, id=id)
+def delete_exam_details(request,id):
+    exam_detail = ExamDetails.objects.get(id=id)
     exam_detail.delete()
-    return redirect('view_exam_details') 
+    return redirect('view_exam_details')
 
 
 @login_required(login_url='user_login')
@@ -753,6 +712,8 @@ def view_featured_colleges(request):
     featured_colleges = FeaturedColleges.objects.all()
     return render(request, 'admin_pages/view_featured_colleges.html', {'featured_colleges': featured_colleges})
 
+
+
 def update_featured_colleges(request, pk):
     college = get_object_or_404(FeaturedColleges, pk=pk)
     if request.method == 'POST':
@@ -770,6 +731,45 @@ def delete_featured_colleges(request, pk):
     
     college.delete()
     return redirect('view_featured_colleges')  # Redirect to the view after deletion
+
+
+@login_required(login_url='user_login')
+def create_slider(request):
+    if request.method == 'POST':
+        form = SliderImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('create_slider')
+    else:
+        form = SliderImageForm()
+
+    slider_images = SliderImage.objects.all()
+    return render(request, 'admin_pages/create_slider.html', {'form': form, 'slider_images': slider_images})
+
+
+@login_required(login_url='user_login')
+def update_slider(request, pk):
+    slider_image = get_object_or_404(SliderImage, pk=pk)
+    if request.method == 'POST':
+        form = SliderImageForm(request.POST, request.FILES, instance=slider_image)
+        if form.is_valid():
+            form.save()
+            return redirect('view_slider')  # Redirect to the view page after updating
+    else:
+        form = SliderImageForm(instance=slider_image)
+    return render(request, 'admin_pages/update_slider.html', {'form': form, 'slider_image': slider_image})
+
+
+@login_required(login_url='user_login')
+def delete_slider(request, pk):
+    slider_image = get_object_or_404(SliderImage, pk=pk)
+    slider_image.delete()
+    return redirect('view_slider')
+
+@login_required(login_url='user_login')
+def view_slider(request):
+    slider = SliderImage.objects.all()
+    return render(request, 'admin_pages/view_slider.html', {'slider': slider})
 
 def exam_detail(request, id):
     courses = Course_Model.objects.all()   
@@ -1102,6 +1102,37 @@ def home(request):
         'exam' : exam
     }
     return render(request, 'index-2.html', context)
-   
+
+
+
+from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+import os
+
+@csrf_exempt
+def ckeditor_upload(request):
+    if request.method == 'POST' and request.FILES.get('upload'):
+        upload = request.FILES['upload']
+        file_extension = os.path.splitext(upload.name)[1].lower()
+        
+        # Check if the uploaded file is an image or a PDF
+        if file_extension in ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff']:
+            folder = 'images'
+        elif file_extension == '.pdf':
+            folder = 'pdfs'
+        else:
+            return JsonResponse({'uploaded': False, 'error': 'Unsupported file type.'})
+
+        # Save the file in the appropriate folder
+        file_name = default_storage.save(f'{folder}/{upload.name}', ContentFile(upload.read()))
+        file_url = default_storage.url(file_name)
+        return JsonResponse({
+            'uploaded': True,
+            'url': file_url
+        })
+    
+    return JsonResponse({'uploaded': False, 'error': 'No file was uploaded.'})
+
 def notification(request):
     return render(request,'notification.html')

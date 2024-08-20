@@ -5,7 +5,10 @@ admin.site.register(Course_Collection)
 admin.site.register(Sub_Collection)
 admin.site.register(Course_Model)
 admin.site.register(SubCollectionCategory)
+admin.site.register(SliderImage)
 
+class SliderImageAdmin(admin.ModelAdmin):
+    list_display = ['caption', 'image']
 
 @admin.register(EnquirySubmission)
 class EnquirySubmissionAdmin(admin.ModelAdmin):

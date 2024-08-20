@@ -38,7 +38,7 @@
   </div>
 </div>
 
-<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<!-- <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
 <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -77,6 +77,57 @@
       ],
       removePlugins: 'easyimage,cloudservices',
     });
+  });
+</script> -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector('#id_details'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+          'bulletedList', 'numberedList', 'blockQuote', '|',
+          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+        ],
+        ckfinder: {
+          uploadUrl: '{% url "ckeditor_upload" %}'
+        },
+        simpleUpload: {
+          uploadUrl: '{% url "ckeditor_upload" %}',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector('#id_more_details'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+          'bulletedList', 'numberedList', 'blockQuote', '|',
+          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+        ],
+        ckfinder: {
+          uploadUrl: '{% url "ckeditor_upload" %}'
+        },
+        simpleUpload: {
+          uploadUrl: '{% url "ckeditor_upload" %}',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
   });
 </script>
 {% endblock %}

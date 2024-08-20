@@ -62,45 +62,55 @@
     </div>
 </div>
 
-<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    CKEDITOR.replace('courseDescription', {
-      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
-      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
-      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
-      height: 300,
-      toolbar: [
-        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
-        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
-        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
-        { name: 'tools', items: ['Maximize'] },
-        { name: 'document', items: ['Source'] },
-        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
-      ],
-      removePlugins: 'easyimage,cloudservices',
-    });
-
-    CKEDITOR.replace('additionalDetails', {
-      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
-      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
-      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
-      height: 300,
-      toolbar: [
-        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
-        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
-        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
-        { name: 'tools', items: ['Maximize'] },
-        { name: 'document', items: ['Source'] },
-        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
-      ],
-      removePlugins: 'easyimage,cloudservices',
-    });
+    ClassicEditor
+      .create(document.querySelector('#courseDescription'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+          'bulletedList', 'numberedList', 'blockQuote', '|',
+          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+        ],
+        ckfinder: {
+          uploadUrl: '{% url "ckeditor_upload" %}'
+        },
+        simpleUpload: {
+          uploadUrl: '{% url "ckeditor_upload" %}',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
   });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      ClassicEditor
+        .create(document.querySelector('#additionalDetails'), {
+          toolbar: [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+            'bulletedList', 'numberedList', 'blockQuote', '|',
+            'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+          ],
+          ckfinder: {
+            uploadUrl: '{% url "ckeditor_upload" %}'
+          },
+          simpleUpload: {
+            uploadUrl: '{% url "ckeditor_upload" %}',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}'
+            }
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+  </script>
 {% endblock %}
