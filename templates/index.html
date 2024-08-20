@@ -21,7 +21,6 @@
 
 }
 
-
 .hero-area::after {
     left: 0;
     top: 0;
@@ -124,11 +123,20 @@
         <!-- End Responsive Navbar Area -->
 
         <div class="hero-area">
-   
-            <div class="image-slider">
+
+            <!-- <div class="image-slider">
                 <div class="slide" style="background-image: url('{% static 'assets/img/DJI_0056.JPG' %}');"></div>
                 <div class="slide" style="background-image: url('{% static 'assets/img/DJI_0057.JPG' %}');"></div>
                 <div class="slide" style="background-image: url('{% static 'assets/img/DJI_0058.JPG' %}');"></div>
+            </div> -->
+            <div class="image-slider">
+                {% for image in slider_images %}
+                    <div class="slide" style="background-image: url('{{ image.image.url }}');">
+                        {% if image.caption %}
+                            <div class="caption">{{ image.caption }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
             
             <div class="container">

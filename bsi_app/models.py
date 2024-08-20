@@ -309,6 +309,14 @@ class EnquirySubmission(models.Model):
         return f"{self.name} - {self.college.college_name}"
     
 
+class SliderImage(models.Model):
+    image = models.ImageField(upload_to='slider_images/')
+    caption = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.caption if self.caption else "Slider Image"
+    
+
 
 
 

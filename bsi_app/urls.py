@@ -137,6 +137,13 @@ urlpatterns = [
     path('update_featured_colleges/<int:pk>/', views.update_featured_colleges, name='update_featured_colleges'),
     path('delete_featured_colleges/<int:pk>/', views.delete_featured_colleges, name='delete_featured_colleges'),
     path('notification', views.notification, name='notification'),
+    
+    path('create_slider/', views.create_slider, name='create_slider'),
+    path('view_slider', views.view_slider, name='view_slider'),
+    path('update_slider/<int:pk>/', views.update_slider, name='update_slider'),
+    path('delete_slider/<int:pk>/', views.delete_slider, name='delete_slider'),
+
+    path('ckeditor_upload/', views.ckeditor_upload, name='ckeditor_upload'),
 
     
 

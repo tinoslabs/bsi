@@ -1,0 +1,46 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-lg-11 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">View Image Slider</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Slider Image</th>
+                            <th>Caption</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for image in slider %}
+                        <tr>
+                            <td style="width: 150px;">
+                                {% if image.image %}
+                                <img src="{{ image.image.url }}" alt="Slider Image" style="width: 80px; height: 80px;">
+                                {% else %}
+                                <p>No image available</p>
+                                {% endif %}
+                            </td>
+                            <td style="width: 150px;">
+                                {{ image.caption }}
+                            </td>
+                            <td style="width: 150px;">
+                                <a href="{% url 'update_slider' image.pk %}"><button><i class="mdi mdi-cloud-upload" aria-hidden="true"></i></button></a>
+                            </td>
+                            <td style="width: 150px;">
+                                <a href="{% url 'delete_slider' image.pk %}"><button><i class="mdi mdi-delete" aria-hidden="true"></i></button></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

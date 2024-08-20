@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage
 from django.core.exceptions import ValidationError
 import re
 
@@ -102,6 +102,11 @@ class EnquiryForm(forms.ModelForm):
 class AboutVideoForm(forms.ModelForm):
     class Meta:
          model = About_Video
+         fields = '__all__'
+
+class SliderImageForm(forms.ModelForm):
+    class Meta:
+         model = SliderImage
          fields = '__all__'
 
 # class Enquiry_Form(forms.ModelForm):
