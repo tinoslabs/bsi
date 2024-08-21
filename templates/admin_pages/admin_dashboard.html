@@ -2,8 +2,435 @@
 {% load static %}
 
 {% block content %}
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* BEGIN: section title */
+.section-title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title:before,
+.section-title:after{
+    content: "";
+    display: block;
+    height: 1px;
+    border-top: 4px dotted #000;
+    flex: 1;
+    transition: 150ms;
+}
+.section-title:hover:before{
+    flex: 0;
+}
+/* END: section title */
+/* BEGIN : Dashboard Cards  */
+.app-card {
+  background: #ffffff;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+.app-card-title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: #272727;
+}
+.statistics-card-row {
+  margin-left: -6px;
+  margin-right: -6px;
+}
+.statistics-card-col {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.statistics-card {
+  padding: 10px 15px;
+  background: #eee;
+  border-radius: 10px;
+}
+.statistics-card .icon-box {
+  height: 50px;
+  width: 50px;
+  min-height: 50px;
+  min-width: 50px;
+  background-color: rgba(255, 255, 255, 0.82);
+  font-size: 25px;
+  color: currentColor;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.statistics-card .text-content {
+  color: #fff;
+}
+.statistics-card .text-content h2 {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 28px;
+  margin-bottom: 0px;
+}
+.statistics-card .text-content p {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+  margin-bottom: 0px;
+}
+
+/* END : Dashboard Cards */
+/* BEGIN: Dashboard card light colors */
+.statistics-card.with-red-bg {
+  color: #c0392b;
+  background: currentColor;
+}
+.statistics-card.with-yellow-bg {
+  color: #f39c12;
+  background: currentColor;
+}
+.statistics-card.with-green-bg {
+  color: #16a085;
+  background: currentColor;
+}
+.statistics-card.with-blue-bg {
+  color: #2980b9;
+  background: currentColor;
+}
+.statistics-card.with-orange-bg {
+  color: #d35400;
+  background: currentColor;
+}
+.statistics-card.with-purple-bg {
+  color: #6751c1;
+  background: currentColor;
+}
+.statistics-card.with-pink-bg {
+  color: #D36D88;
+  background: currentColor;
+}
+.statistics-card.with-green-dusty-bg {
+  color: #787D46;
+  background: currentColor;
+}
+/* END: Dashboard card light colors */
+/* BEGIN: Dashboard card dark colors */
+.statistics-card.with-red-dark-bg {
+  color: #7a0c00;
+  background: currentColor;
+}
+.statistics-card.with-blue-dark-bg {
+  color: #02315E;
+  background: currentColor;
+}
+.statistics-card.with-purple-dark-bg {
+  color: #482058;
+  background: currentColor;
+}
+.statistics-card.with-coffee-bg {
+  color: #4a331e;
+  background: currentColor;
+}
+.statistics-card.with-green-dark-bg {
+  color: #344C11;
+  background: currentColor;
+}
+.statistics-card.with-pink-dark-bg {
+  color: #BC2041;
+  background: currentColor;
+}
+/* END: Dashboard card dark colors */
+
+/*---------BEGIN : KJV logo ------------*/
+.kjv-logo-link {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+.kjv-logo {
+  --kjvBgColor: #000;
+  --kjvFgColor: #fff;
+  --kjvTransition: 300ms;
+  --kjvLogoSize: 70px;
+  height: var(--kjvLogoSize);
+  width: var(--kjvLogoSize);
+  transition: var(--kjvTransition);
+  transform: rotate(-180deg);
+}
+.kjv-logo path,
+.kjv-logo g,
+.kjv-logo rect {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+#kjvOuterFill {
+  fill: var(--kjvBgColor);
+}
+#kjvTringleLeft,
+#kjvTringleRight {
+  stroke: var(--kjvFgColor);
+  fill: var(--kjvFgColor);
+}
+#kjvLetters path {
+  stroke: var(--kjvFgColor);
+  fill: var(--kjvBgColor);
+}
+#kjvTringleRight {
+  transform: translateX(-347px);
+  transition: var(--kjvTransition);
+}
+#kjvTringleLeft {
+  transform: translateX(347px);
+  transition: var(--kjvTransition);
+}
+#kjvLetters {
+  transform: scale(0);
+  transition: var(--kjvTransition);
+}
+.kjv-logo-link:hover .kjv-logo {
+  transform: rotate(0deg);
+}
+.kjv-logo-link:hover #kjvTringleRight,
+.kjv-logo-link:hover #kjvTringleLeft {
+  transition-delay: var(--kjvTransition);
+  transform: translateX(0px);
+}
+.kjv-logo-link:hover #kjvLetters {
+  transition-delay: calc(var(--kjvTransition) * 2);
+  transform: scale(1);
+}
+/*---------END : KJV logo ------------*/
+
+</style>
 
 
+<div class="container mt-5">
+  <!-- BEGIN: dashboard cards -->
+  <h2 class="section-title">Header Section</h2>
+  <div class="app-card container-fluid pt-3 pb-2 mb-4">
+    <div class="row statistics-card-row ">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-green-bg d-flex align-items-center  mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-check"></i> </div>
+          <a href="create_course_collection" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Main Header Heading</h2>
+           
+          </div>
+        </a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-red-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center">
+            <!-- <i class="fas fa-solid fa-user-pen"></i> --> <i class="fas fa-user-edit"></i>
+          </div>
+          <a href="view_course_collection" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Display Main Header Heading</h2>
+           
+          </div>
+        </a>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-yellow-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center">
+            <!-- <i class="fas fa-solid fa-file-check"></i> --> <i class="fas fa-file-alt"></i>
+          </div>
+          <a href="create_sub_collection" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2> Sub Heading</h2>
+            <!-- <p>Information Forms Filled</p> -->
+          </div>
+        </a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-blue-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user"></i> </div>
+          <a href="view_sub_collection" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Display Sub Heading</h2>
+            <!-- <p>Display Sub Heading</p> -->
+          </div>
+        </a>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-orange-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+          <a href="create_subcollection_category" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Final Header Heading</h2> 
+          </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-purple-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+          <a href="view_subcollection_category" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Display Final Header Heading</h2>
+           
+          </div>
+        </a>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-green-dusty-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+          <a href="add_details" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Header Details Page</h2>
+           
+          </div>
+        </a>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-pink-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+          <a href="view_details" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Display Details</h2>
+            
+          </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-blue-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user"></i> </div>
+          <a href="{% url 'create_slider' %}" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>Add Slider Image</h2>
+            <!-- <p>Display Sub Heading</p> -->
+          </div>
+        </a>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+        <div class="statistics-card with-orange-bg d-flex align-items-center app-pad-20px mb-2">
+          <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+          <a href="{% url 'view_slider' %}" style="text-decoration-line: none;">
+          <div class="text-content">
+            <h2>View Slider Image</h2> 
+          </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <h2 class="section-title">Colleges And Courses</h2>
+  <div class="app-card container-fluid pt-3 pb-2 mb-4">
+    <div class="w-100 d-flex flex-wrap flex-column flex-sm-row">
+      <div class="row statistics-card-row">
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+          <div class="statistics-card with-red-dark-bg d-flex align-items-center app-pad-20px mb-2">
+            <div class="icon-box d-flex align-items-center justify-content-center">
+              <!-- <i class="fas fa-solid fa-user-pen"></i> --> <i class="fas fa-user-edit"></i>
+            </div>
+            <a href="create_college" style="text-decoration-line: none;">
+            <div class="text-content">
+              <h2>Add Colleges</h2>
+              
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+          <div class="statistics-card with-blue-dark-bg d-flex align-items-center app-pad-20px mb-2">
+            <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+            <a href="view_college" style="text-decoration-line: none;">
+            <div class="text-content">
+              <h2>View Colleges</h2>
+              
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+          <div class="statistics-card with-purple-dark-bg d-flex align-items-center app-pad-20px mb-2">
+            <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+            <a href="{% url 'create_featured_colleges' %}" style="text-decoration-line: none;">
+            <div class="text-content">
+              <h2>Featured Colleges</h2>
+              
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+          <div class="statistics-card with-coffee-bg d-flex align-items-center app-pad-20px mb-2">
+            <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+            <a href="{% url 'view_featured_colleges' %}" style="text-decoration-line: none;">
+            <div class="text-content">
+              <h2>View Featured Colleges</h2>
+             
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+          <div class="statistics-card with-green-dark-bg d-flex align-items-center app-pad-20px mb-2">
+            <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+            <a href="create_course" style="text-decoration-line: none;">
+            <div class="text-content">
+              <h2>Add Courses</h2>
+              
+            </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 statistics-card-col">
+          <div class="statistics-card with-pink-dark-bg d-flex align-items-center app-pad-20px mb-2">
+            <div class="icon-box d-flex align-items-center justify-content-center"> <i class="fas fa-solid fa-user-graduate"></i> </div>
+            <a href="view_course" style="text-decoration-line: none;">
+            <div class="text-content">
+              <h2>View Courses</h2>
+              
+            </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- END: dashboard cards -->
+</div>
+<!-- BEGIN : kjv logo -->
+<a href="https://codepen.io/krunal5281" class="kjv-logo-link" target="_blank" title="My Codepen Profile">
+  <svg xmlns="http://www.w3.org/2000/svg" width="3096" height="3096" viewBox="0 0 3096 3096" fill="none" class="kjv-logo">
+    <rect width="3096" height="3096" fill="black" id="kjvOuterFill" />
+    <g id="kjvMainGroup">
+      <path id="kjvTringleRight" d="M2811 1573.5L1977 2408V745L2811 1573.5Z" fill="white" stroke="white" stroke-width="172" />
+      <path id="kjvTringleLeft" d="M285 1578L1115 748V2408L285 1578Z" fill="white" stroke="white" stroke-width="172" />
+      <g id="kjvLetters">
+        <path d="M1344 909.304V571H1710L1344 909.304ZM1344 909.304V1124H1731L1502.5 783.094" stroke="white" stroke-width="62" />
+        <path d="M1345 1643.11V1847H1759V1304H1394L1759 1626.5" stroke="white" stroke-width="62" />
+        <path id="Vector 8" d="M1743.5 2017H1356.5L1552.5 2526L1743.5 2017Z" fill="#000" stroke="white" stroke-width="62" />
+      </g>
+    </g>
+  </svg>
+</a><!-- BEGIN : kjv logo -->
 
 
 
