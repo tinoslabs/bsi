@@ -19,6 +19,7 @@
                             <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 Form Errors
                             </button>
+                            
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 {% for field, errors in form.errors.items %}
                                     <li class="dropdown-item"><strong>{{ field }}:</strong> {{ errors }}</li>

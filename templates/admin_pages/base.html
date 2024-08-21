@@ -179,6 +179,21 @@
       </div>
     </li>
 
+    <li class="nav-item nav-category">Student Review</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#review" aria-expanded="false" aria-controls="blog">
+        <i class="menu-icon mdi mdi-card-text-outline"></i>
+        <span class="menu-title">Student Review</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="review">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_reviews' %}"> Add Student Review</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_reviews' %}"> View Student Review</a></li>
+        </ul>
+      </div>
+    </li>
+
     <li class="nav-item nav-category">Colleges</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#college" aria-expanded="false" aria-controls="college">
@@ -243,11 +258,11 @@
     </li>
     
 
-    <li class="nav-item nav-category">Add Exams Details</li>
+    <li class="nav-item nav-category">Exam Details</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#examDetails" aria-expanded="false" aria-controls="client">
         <i class="menu-icon mdi mdi-box-cutter"></i>
-        <span class="menu-title">Add Exams Details</span>
+        <span class="menu-title">Exam Details</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="examDetails">
