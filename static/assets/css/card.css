@@ -61,7 +61,9 @@
     color: #fff;
 } */
 
-.card {
+
+
+/* .card {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -71,10 +73,7 @@
     text-align: center;
     transition: background-color 0.3s ease;
 }
-/* .card:hover {
-    background-color: navy;
-    color: #fff;
-} */
+
 .card img {
     border-radius: 50%;
     width: 50px;
@@ -122,4 +121,4 @@
 }
 .card:hover .details a {
     color: #fff;
-}
+} */

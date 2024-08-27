@@ -27,6 +27,8 @@
 
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/7.2.96/css/materialdesignicons.min.css">
 
         
         <style>
@@ -118,6 +120,131 @@
             transform: scale(1);
         }
         </style>
+
+        {% comment %} <style>
+            .notification-icon {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .material-icons {
+            font-size: 48px;
+            background: linear-gradient(to bottom, #7befff, #6e8cff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .num-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        </style> {% endcomment %}
+        <style>
+            .notification-container {
+                position: relative;
+            }
+            
+            .notification-icon {
+                position: relative;
+                display: inline-block;
+                cursor: pointer;
+            }
+            
+            .material-icons {
+                font-size: 48px;
+                background: linear-gradient(to bottom, #7befff, #6e8cff);
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            
+            .num-count {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                background-color: #e74c3c;
+                color: white;
+                border-radius: 50%;
+                padding: 2px 6px;
+                font-size: 12px;
+                font-weight: bold;
+            }
+            
+            .notifications {
+                display: none;
+                position: absolute;
+                top: 50px;
+                right: 0;
+                width: 400px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+            
+            .notification-header {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                background-color: #f7f7f7;
+                font-weight: bold;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .settings-icon {
+                font-size: 18px;
+                color: #999;
+                cursor: pointer;
+            }
+            
+            .notification-item {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .notification-item:last-child {
+                border-bottom: none;
+            }
+            
+            .notification-item .count {
+                color: #3498db;
+                font-weight: bold;
+            }
+            
+            .notification-item .close {
+                cursor: pointer;
+                color: #999;
+                font-size: 16px;
+            }
+            
+            .notification-item:hover {
+                background-color: #f9f9f9;
+            }
+        </style>
+        <style>
+            .your-container-class p {
+                font-family: Arial, sans-serif !important;
+            }
+        </style>
+        <style>
+            .your-container-class li,ul,a {
+                font-family: Arial, sans-serif !important;
+            }
+        </style>
         
 
     </head>
@@ -129,19 +256,19 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12">
-                        <div class="top-header-list">
+                        <div class="top-header-list" >
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
-                                    <!-- <a class="text-decoration-none d-flex align-items-center" href="tel:45993939990">
+                                     <a class="text-decoration-none d-flex align-items-center" href="tel:45993939990">
                                         <i class="flaticon-call"></i>
-                                        +459 9393 9990
-                                    </a> -->
+                                        +91 8089887444
+                                    </a>
                                 </li>
                                 <li class="d-inline-block">
-                                    <!-- <a class="text-decoration-none d-flex align-items-center" href="mailto:helloadma@gmail.com">
+                                     <a class="text-decoration-none d-flex align-items-center" href="mailto:helloadma@gmail.com">
                                         <i class="ri-message-line"></i>
-                                        helloadma@gmail.com
-                                    </a> -->
+                                        support@badgerskillsinternational.com
+                                    </a>  
                                 </li>
                             </ul>
                         </div>
@@ -159,7 +286,7 @@
                                         </li>
                                        
                                         <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="" target="_blank">
+                                            <a class="text-decoration-none" href="https://www.instagram.com/badger.skills.international?igsh=MXVmNWxzNDRjb21vMQ==" target="_blank">
                                                 <i class="flaticon-instagram"></i>
                                             </a>
                                         </li>
@@ -168,7 +295,9 @@
                                                 <i class="flaticon-twitter"></i>
                                             </a>
                                         </li>
+                                        
                                     </ul>
+                                    
                                 </li>
                             </ul>
                         </div>
@@ -182,18 +311,10 @@
         <nav class="navbar navbar-expand-lg" id="navbar">
             <div class="container-fluid">
                 
-                <a class="navbar-brand" href="{% url 'index' %}">
-                    <img class="black-logo" src="{% static 'assets/img/BSI_LOGO.png' %}" alt="black-logo">
-                </a>
-                <a class="navbar-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
-                    <span class="burger-menu">
-                        <span class="top-bar"></span>
-                        <span class="middle-bar"></span> 
-                        <span class="bottom-bar"></span>
-                    </span>
-                </a>
                 
-                <div class="collapse navbar-collapse" style="margin-right: 420px;">
+            
+                
+                {% comment %} <div class="collapse navbar-collapse" style="margin-right: 420px;">
                     <ul class="navbar-nav ms-auto">
                         {% for course_collection in course_collections %}
                         <li class="nav-item dropdown">
@@ -227,7 +348,112 @@
                     </ul>
                     
                 </div>
+            </div> {% endcomment %}
+
+            {% comment %} <div class="collapse navbar-collapse" style="margin-right: 420px;">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                            Pages
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                            <li class="nav-item">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                    Blog
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a href="blog-style-one.html" class="nav-link">
+                                            Blog Style One
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>                
+                        </ul>
+                    </li>
+                </ul>
+                
+            </div> {% endcomment %}
+            <div class="collapse navbar-collapse" style="margin-right: 250px;">
+                <ul class="navbar-nav ms-auto your-container-class">
+                    {% for main in main_header %}
+                        <li class="nav-item your-container-class">
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                {{ main.main_heading }}
+                            </a>
+                            <ul class="dropdown-menu your-container-class">
+                                {% for sub in sub_headers %}
+                                    {% if sub.main_header == main %}
+                                        <li class="nav-item your-container-class">
+                                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                                {{ sub.sub_header }}
+                                            </a>
+                                            <ul class="dropdown-menu your-container-class">
+                                                {% for sub_heading in sub_headings %}
+                                                    {% if sub_heading.sub_header == sub %}
+                                                        <li class="nav-item your-container-class">
+                                                            <a href="{% url 'header_details' sub_heading.id %}" class="nav-link">
+                                                                {{ sub_heading.sub_heading }}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% comment %} <div class="notification-icon">
+                    <i class="material-icons dp48">notifications</i>
+                    <span class="num-count">3</span>
+                </div> {% endcomment %}
+                <div class="notification-container">
+                    <div class="notification-icon" onclick="toggleNotifications()">
+                        <i class="material-icons dp48">notifications</i>
+                        <span class="num-count">{{ notifications.count }}</span>
+                    </div>
+                    <div class="notifications" id="notificationDropdown">
+                        <div class="notification-header">
+                            <span>NOTIFICATIONS</span>
+                            <i class="material-icons settings-icon">settings</i>
+                        </div>
+                    
+                        {% for notification in notifications %}
+                            <div class="notification-item your-container-class">
+                                <span class="count">{{ forloop.counter }}</span>
+                                <a href="{% url 'notification_details' message=notification.message %}">{{ notification.message }}</a>
+                                <span class="close" onclick="removeNotification({{ notification.id }})">&times;</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
+            <style>
+                .notification-item a {
+                    text-decoration: none;
+                    color: inherit; /* Optional: ensures the link color matches the surrounding text */
+                }
+                
+                .notification-item a:hover {
+                    text-decoration: none; /* Optional: adds underline on hover for better UX */
+                }
+            </style>
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img class="black-logo" src="{% static 'assets/img/BSI_LOGO.png' %}" alt="black-logo">
+            </a>
+            <a class="navbar-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <span class="burger-menu">
+                    <span class="top-bar"></span>
+                    <span class="middle-bar"></span> 
+                    <span class="bottom-bar"></span>
+                </span>
+            </a>
+        </div>
         </nav>  
                 
 
@@ -261,24 +487,42 @@
                 <button type="button" class="close-btn bg-transparent position-relative lh-1 p-0 border-0" data-bs-dismiss="offcanvas" aria-label="Close">
                     <i class="ri-close-fill"></i>
                 </button>
+                <div class="notification-container">
+                    <div class="notification-icon" onclick="toggleNotifications()">
+                        <i class="material-icons dp48">notifications</i>
+                        <span class="num-count">{{ notifications.count }}</span>
+                    </div>
+                    <div class="notifications" id="notificationDropdown">
+                        <div class="notification-header">
+                            <span>NOTIFICATIONS</span>
+                            <i class="material-icons settings-icon">settings</i>
+                        </div>
+                        {% for notification in notifications %}
+                        <div class="notification-item">
+                            <span class="count">{{ forloop.counter }}</span> {{ notification.message }}</span> 
+                            <span class="close" onclick="removeNotification({{ notification.id }})">&times;</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
+            
+            <!-- Offcanvas Menu Section -->
             <div class="offcanvas-body">
                 <ul class="responsive-menu">
-                    {% for course_collection in course_collections %}
+                    {% for main_header in main_header %}
                     <li class="responsive-menu-list">
-                        <a href="javascript:void(0);">{{ course_collection }}</a>
+                        <a href="javascript:void(0);">{{ main_header.main_heading }}</a>
                         <ul class="responsive-menu-items">
-                            {% for sub_collection in sub_collections %}
-                            {% if sub_collection.course == course_collection %}
+                            {% for sub_header in sub_headers %}
+                            {% if sub_header.main_header == main_header %}
                             <li class="responsive-menu-list">
-                                <a href="javascript:void(0);">{{ sub_collection.get_course_type_display }}</a>
+                                <a href="javascript:void(0);">{{ sub_header.sub_header }}</a>
                                 <ul class="responsive-menu-items">
-                                    {% for sub_category in sub_categories %}
-                                    {% if sub_category.sub_collection == sub_collection %}
+                                    {% for sub_heading in sub_headings %}
+                                    {% if sub_heading.sub_header == sub_header %}
                                     <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link">
-                                            {{ sub_category.sub_category }}
-                                        </a>
+                                        <a href="#" class="nav-link">{{ sub_heading.sub_heading }}</a>
                                     </li>
                                     {% endif %}
                                     {% endfor %}
@@ -290,7 +534,9 @@
                     </li>
                     {% endfor %}
                 </ul>
+                
             </div>
+
         </div>
         
 
@@ -338,7 +584,11 @@
                 </div>
             </div>
         </div>
-        
+        <style>
+            .your-container-class p {
+                font-family: Arial, sans-serif !important;
+            }
+        </style>
 
         <!-- footer start -->
         <div class="footer-area pt-100 pb-75">
@@ -347,9 +597,9 @@
                     <div class="col-lg-5">
                         <div class="row" data-cues="slideInUp">
                             <div class="col-lg-8 col-sm-8">
-                                <div class="single-footer-widget about">
+                                <div class="single-footer-widget about your-container-class">
                                     <h3>About BSI</h3>
-                                    <p>Badger skills international focuses on offering a wide range of courses to help students excel in their academics and achieve their career goals.</p>
+                                    <p >Badger skills international focuses on offering a wide range of courses to help students excel in their academics and achieve their career goals.</p>
                                     <h6>Follow BSI</h6>
                                     <ul class="list-unstyled ps-0 mb-0 social-link">
                                         <li class="d-inline-block">
@@ -373,9 +623,9 @@
                             </div>
                            
                             <div class="col-lg-4 col-sm-4">
-                                <div class="single-footer-widget">
+                                <div class="single-footer-widget your-container-class">
                                     <h3>Colleges</h3>
-                                    <ul class="list-unstyled ps-0 mb-0">
+                                    <ul class="list-unstyled ps-0 mb-0 your-container-class">
                                         {% for college in footer_colleges %}
                                             <li>
                                                 <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
@@ -393,7 +643,7 @@
                                 <div class="single-footer-widget quick">
                                     <h3>Courses</h3>
                                     
-                                    <ul class="list-unstyled ps-0 mb-0">
+                                    <ul class="list-unstyled ps-0 mb-0 your-container-class">
                                         {% for course in footer_courses %}
                                             <li>
                                                 <a class="text-decoration-none" href="{% url 'course_details' course.id %}">{{ course.course_name }}</a>
@@ -407,7 +657,7 @@
                                 <div class="single-footer-widget quick">
                                     <h3>Exams</h3>
                                     
-                                    <ul class="list-unstyled ps-0 mb-0">
+                                    <ul class="list-unstyled ps-0 mb-0 your-container-class">
                                         {% for exams in footer_exams %}
                                             <li>
                                                 <a class="text-decoration-none" href="{% url 'exam_detail' exams.exam_name %}">{{ exams.exam_name }}</a>
@@ -420,7 +670,7 @@
                             <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget contact">
                                     <h3>Contact</h3>
-                                    <ul class="list-unstyled ps-0 mb-0">
+                                    <ul class="list-unstyled ps-0 mb-0 your-container-class">
                                         <li>
                                             <a class="text-decoration-none" href="tel:+918089218594">
                                                 +91 80892 18594
@@ -438,7 +688,7 @@
 
                                         <li>
                                             <i class="flaticon-placeholder"></i>
-                                            <p>2nd Floor, KJK BUILDING, BASIL JUNCTION, Kothamangalam, Ernakulam, Kerala 686691</p>
+                                            <p class="your-container-class">2nd Floor, KJK BUILDING, BASIL JUNCTION, Kothamangalam, Ernakulam, Kerala 686691</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -603,7 +853,62 @@
     }
                 </style>                  
 
-
+                <script>
+                    function toggleNotifications() {
+                        const notificationDropdown = document.getElementById('notificationDropdown');
+                        notificationDropdown.style.display = notificationDropdown.style.display === 'block' ? 'none' : 'block';
+                    }
+                    
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const closeButtons = document.querySelectorAll('.close');
+                    
+                        closeButtons.forEach(button => {
+                            button.addEventListener('click', function() {
+                                const notification = this.parentElement;
+                                notification.style.display = 'none';
+                            });
+                        });
+                    });
+                    
+                    window.onclick = function(event) {
+                        if (!event.target.matches('.notification-icon') && !event.target.closest('.notification-icon')) {
+                            const notificationDropdown = document.getElementById('notificationDropdown');
+                            if (notificationDropdown.style.display === 'block') {
+                                notificationDropdown.style.display = 'none';
+                            }
+                        }
+                    }
+                    
+                </script>
+                {% comment %} <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const notificationIcon = document.querySelector('.notification-icon');
+                        const notificationDropdown = document.getElementById('notificationDropdown');
+                    
+                        notificationIcon.addEventListener('click', function(event) {
+                            event.stopPropagation();  // Prevent the event from bubbling up
+                            if (notificationDropdown.style.display === 'block') {
+                                notificationDropdown.style.display = 'none';
+                            } else {
+                                notificationDropdown.style.display = 'block';
+                            }
+                        });
+                    
+                        document.addEventListener('click', function(event) {
+                            if (!notificationDropdown.contains(event.target) && event.target !== notificationIcon) {
+                                notificationDropdown.style.display = 'none';
+                            }
+                        });
+                    
+                        const closeButtons = document.querySelectorAll('.close');
+                        closeButtons.forEach(button => {
+                            button.addEventListener('click', function() {
+                                const notification = this.parentElement;
+                                notification.style.display = 'none';
+                            });
+                        });
+                    });
+                </script> {% endcomment %}
 
     </body>
 

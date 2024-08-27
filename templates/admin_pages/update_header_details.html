@@ -1,0 +1,77 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Header Details</h4>
+          <form class="forms-sample" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Sub Heading Field -->
+            <div class="form-group">
+              <label for="id_sub_heading">Sub Heading</label>
+              <select name="sub_heading" id="id_sub_heading" class="form-control">
+                {% for heading in sub_headings %}
+                <option value="{{ heading.id }}" {% if heading.id == header_detail.sub_heading.id %}selected{% endif %}>
+                  {{ heading.text }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- Details Field -->
+            <div class="form-group">
+              <label for="id_details">Details</label>
+              <textarea class="form-control" name="details" id="id_details" rows="3" style="height: 150px;" placeholder="Enter Details">{{ header_detail.details }}</textarea>
+            </div>
+
+            <!-- Brochure Field -->
+            <div class="form-group">
+              <label for="id_brochure">Brochure (Optional)</label>
+              <input type="file" class="form-control" id="id_brochure" name="brochure">
+              {% if header_detail.brochure %}
+              <a href="{{ header_detail.brochure.url }}" target="_blank">Current Brochure</a>
+              {% endif %}
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary me-2">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CKEditor Integration -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector('#id_details'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+          'bulletedList', 'numberedList', 'blockQuote', '|',
+          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+        ],
+        ckfinder: {
+          uploadUrl: '{% url "ckeditor_upload" %}'
+        },
+        simpleUpload: {
+          uploadUrl: '{% url "ckeditor_upload" %}',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+</script>
+{% endblock %}

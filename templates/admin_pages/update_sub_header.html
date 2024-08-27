@@ -1,0 +1,37 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Sub Header</h4>
+          <form class="forms-sample" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="input-box">
+                <label for="id_main_header">Main Header</label>
+                <select name="main_header" id="id_main_header" class="form-control">
+                    {% for header in main_headers %}
+                    <option value="{{ header.id }}" {% if header.id == form.instance.main_header.id %}selected{% endif %}>{{ header.main_heading }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+                <label for="subHeader">Sub Heading</label>
+                <input type="text" class="form-control" id="subHeader" name="sub_header" placeholder="Sub Heading" value="{{ form.sub_header.value }}">
+            </div>
+            <button type="submit" class="btn btn-primary me-2">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

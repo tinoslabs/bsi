@@ -56,6 +56,11 @@
 }
 
 </style>
+<style>
+    .your-container-class p {
+        font-family: Arial, sans-serif !important;
+    }
+</style>
         <!-- End Responsive Navbar Area -->
 
         <!-- Start Pages Banner Area -->
@@ -64,7 +69,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="pages-title">
-                            <h2>College Details</h2>
+                            <h2>Course Details</h2>
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
                                     <a class="text-decoration-none" href="{% url 'index' %}">
@@ -72,7 +77,7 @@
                                     </a>
                                 </li>
                                 <li class="d-inline-block">
-                                    College Details
+                                    Course Details
                                 </li>
                             </ul>
                         </div>
@@ -95,18 +100,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="blog-left-sidebar">
+                        <div class="blog-left-sidebar your-container-class">
                             <div class="single-blog-card">
                                 
                             </div>
                            
-                            <div class="leading-management">
+                            <div class="your-container-class">
                                 <h1>{{course.course_name}}</h1>
                                 <!-- <div class="image">
                                     <img src="{{college.college_image.url}}" alt="applications-image">
                                 </div> -->
                                 <p style="font-family: arial;">{{course.course_description | safe }}</p>
                             </div>
+
                             
                             <div class="video-image">
                                 <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
@@ -118,7 +124,7 @@
                             </div>
                            
                             <br>
-                            <p>{{course.additional_details | safe}}</p>
+                            <p class="your-container-class">{{course.additional_details | safe}}</p>
                             <div class="events-area pb-75">
                         </div>
                         <style>
@@ -321,7 +327,7 @@
             z-index: 1000;
 }
         </style> -->
-        <style>
+        {% comment %} <style>
             .pages-leave-reply {
                 width: 450px; /* Adjust as needed */
                 background-color: white;
@@ -336,6 +342,78 @@
                 right: 70px; /* Adjust as needed */
                 z-index: 950;
             }
+        </style> {% endcomment %}
+
+        <style>
+         
+
+            .events-area {
+                position: relative; /* Ensure the button is positioned relative to this container */
+            }
+            
+            .view-all-container {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                margin: 15px; /* Adjust margin as needed */
+            }
+            
+            .view-all-btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-family: Arial, sans-serif;
+            }
+            
+            .view-all-btn:hover {
+                background-color: #0056b3; /* Darken button on hover */
+            }
+            
+            /* Media Queries for Responsive Design */
+            
+            /* Adjust button size on smaller screens */
+            @media (max-width: 576px) {
+                .view-all-container {
+                    position: relative;
+                    margin: 10px 0; /* Adjust margin for better spacing on small screens */
+                    text-align: center; /* Center the button for small screens */
+                }
+            
+                .view-all-btn {
+                    width: auto; /* Allow button to resize based on content */
+                    padding: 8px 16px; /* Decrease padding */
+                    font-size: 12px; /* Smaller font size */
+                }
+            }
+            
+            /* Adjust button size for medium screens */
+            @media (min-width: 576px) and (max-width: 768px) {
+                .view-all-container {
+                    margin: 15px; /* Adjust margin for medium screens */
+                }
+            
+                .view-all-btn {
+                    padding: 10px 20px; /* Standard padding */
+                    font-size: 14px; /* Standard font size */
+                }
+            }
+            
+            /* Adjust button size for large screens */
+            @media (min-width: 768px) {
+                .view-all-container {
+                    margin: 15px; /* Standard margin */
+                }
+            
+                .view-all-btn {
+                    padding: 10px 20px; /* Standard padding */
+                    font-size: 14px; /* Standard font size */
+                }
+            }
+            
         </style>
         <!-- End Blog Pages Area -->
 

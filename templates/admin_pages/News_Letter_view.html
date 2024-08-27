@@ -1,0 +1,33 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Sub Header Headings</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>College</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for details in data %}
+        <tr>
+          <td>{{ details.email }}</td>
+          <td>{{ details.phone }}</td>
+          <td>{{ details.college }}</td>
+          <td>
+           
+            <a href="{% url 'delete_news_letter' details.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this?');">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

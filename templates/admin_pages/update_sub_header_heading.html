@@ -1,0 +1,76 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Sub Header Heading</h4>
+          <form class="forms-sample" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="input-box">
+                <label for="id_main_header">Main Header</label>
+                <select name="main_header" id="id_main_header" class="form-control">
+                  <option value="">Select Main Header</option>
+                  {% for header in main_headers %}
+                  <option value="{{ header.id }}" {% if header == selected_main_header %}selected{% endif %}>
+                    {{ header.main_heading }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-box">
+                <label for="id_sub_header">Sub Header</label>
+                <select name="sub_header" id="id_sub_header" class="form-control">
+                  <option value="">Select Sub Header</option>
+                  {% for sub_header in sub_headers %}
+                  <option value="{{ sub_header.id }}" {% if sub_header == selected_sub_header %}selected{% endif %}>
+                    {{ sub_header.sub_header }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subHeading">Sub Heading</label>
+              <input type="text" class="form-control" id="subHeading" name="sub_heading" value="{{ form.instance.sub_heading }}" placeholder="Sub Heading">
+            </div>
+
+            <button type="submit" class="btn btn-primary me-2">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  // Handle Main Header selection
+  $('#id_main_header').change(function() {
+    var mainHeaderId = $(this).val();
+    if (mainHeaderId) {
+      $.ajax({
+        url: "{% url 'get_sub_headers' %}",
+        data: {
+          'main_header_id': mainHeaderId
+        },
+        success: function(data) {
+          $('#id_sub_header').html(data);  // Update Sub Header dropdown
+        }
+      });
+    } else {
+      $('#id_sub_header').html('<option value="">Select Sub Header</option>');
+    }
+  });
+});
+</script>
+{% endblock %}

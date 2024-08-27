@@ -55,11 +55,6 @@
         content: '\1F4C3'; /* Unicode character for document icon */
     }
 </style>
-<style>
-    .your-container-class p {
-        font-family: Arial, sans-serif !important;
-    }
-</style>
 
 <!-- Start Pages Banner Area -->
 <div class="pages-banner-area">
@@ -67,7 +62,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="pages-title">
-                    <h2>Exam Details</h2>
+                    <h5 style="color:white;">{{ sub_heading.sub_heading }}</h5>
                     <ul class="list-unstyled ps-0 mb-0">
                         <li class="d-inline-block">
                             <a class="text-decoration-none" href="{% url 'index' %}">
@@ -97,9 +92,9 @@
 <div class="blog-pages-area pt-100 pb-75">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8" class="your-container-class">
-                <div class="blog-left-sidebar" class="your-container-class">
-                    <div class="single-blog-card" class="your-container-class">
+            <div class="col-lg-8">
+                <div class="blog-left-sidebar">
+                    <div class="single-blog-card">
                         <!-- Exam Details Content -->
                         <!-- <div class="card-container1">
                             {% for exam in exam %}
@@ -109,33 +104,20 @@
                     </div>
                    
                     <div class="your-container-class">
-                        <h1>{{ category_name.exam_name }}</h1>
-                        {% for details in exam_details %}
-                        <div class="image">
-                            <img src="{{ details.exam_image.url }}" alt="applications-image">
-                        </div>
-                        <p style="font-family: arial;">{{ details.details | safe }}</p>
+                        <h1>{{ sub_heading.sub_heading }}</h1>
+                        {% for details in data %}
+                        <p>{{ details.details | safe }}</p>
                         {% endfor %}
                     </div>
                     
-                    <div class="video-image">
-                        <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
-                        {% for details in exam_details %}
-                        <div class="video-btn">
-                            <a class="text-decoration-none icon" data-fslightbox="gallery" href="{{ details.videos }}">
-                                <i class="flaticon-play"></i>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-                   
-                    <br>
-                    {% for details in exam_details %}
-                    <p>{{ details.more_details | safe }}</p>
-                    {% endfor %}
-                    <div class="events-area pb-75"></div>
+                    
                 </div>
             </div>
+            <style>
+                .your-container-class p {
+                    font-family: Arial, sans-serif !important;
+                }
+            </style>
             
             <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -168,16 +150,16 @@
             </div>
             <div class="col-lg-4">
                 <div class="blog-right-sidebar">
-                    {% for details in exam_details %}
+                    {% for details in data %}
                     <div class="button-container">
                         <a href="{{ details.brochure.url }}" class="btn download-guide">
                             <i class="icon-download"></i>
-                            Download Guide
+                            Download Brochure
                         </a>
-                        <a href="{{ details.sample_papers.url }}" class="btn sample-papers">
+                        {% comment %} <a href="" class="btn sample-papers">
                             <i class="icon-sample"></i>
                             Sample Papers
-                        </a>
+                        </a> {% endcomment %}
                     </div>
                     {% endfor %}
                     
@@ -258,6 +240,7 @@
         z-index: 950;
     }
 </style> {% endcomment %}
+
 <style>
          
 

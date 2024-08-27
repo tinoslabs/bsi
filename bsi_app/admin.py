@@ -6,7 +6,7 @@ admin.site.register(Sub_Collection)
 admin.site.register(Course_Model)
 admin.site.register(SubCollectionCategory)
 admin.site.register(SliderImage)
-
+admin.site.register(Notification)
 class SliderImageAdmin(admin.ModelAdmin):
     list_display = ['caption', 'image']
 

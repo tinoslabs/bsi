@@ -1,0 +1,167 @@
+
+<style>
+    .course-section {
+        width: 100%;
+        padding: 20px;
+        background-color: #fff;
+    }
+    
+    .course-section h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .course-filters {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        border: 1px solid navy; /* Border color navy blue */
+        border-radius: 30px;
+        background-color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        color: navy; /* Text color navy blue */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .filter-btn.active, .filter-btn:hover {
+        background-color: navy; /* Background color navy blue when active or hovered */
+        color: #fff; /* Text color white when active or hovered */
+        font-weight: bold;
+    }
+    
+    
+    
+    .course-cards {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+    }
+    
+    .course-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        min-width: 280px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+        position: relative;
+    }
+    
+    .course-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-header {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #f1f1f1;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    
+    .course-type {
+        font-size: 14px;
+        color: #333;
+    }
+    
+    .course-title {
+        font-size: 20px;
+        margin: 40px 0 10px;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .course-details p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #555;
+    }
+    
+    .course-overview {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    
+    .course-overview:hover {
+        text-decoration: underline;
+    }
+    
+    
+</style>
+<div class="course-section">
+    <h2>Explore Courses</h2>
+    <div class="course-filters">
+        <button class="filter-btn active" data-filter="Bachelors">Bachelors</button>
+        <button class="filter-btn" data-filter="Masters">Masters</button>
+        <button class="filter-btn" data-filter="Doctorate">Doctorate</button>
+        <button class="filter-btn" data-filter="Diploma">Diploma</button>
+        <button class="filter-btn" data-filter="Certification">Certification</button>
+    </div>
+    <div class="course-cards">
+        <!-- Course Card Example -->
+        <div class="course-card" data-category="Bachelors">
+            <div class="card-header">
+                <span class="course-type">Full Time</span>
+            </div>
+            <h3 class="course-title">B.Ed General</h3>
+            <div class="course-details">
+                <p>Duration <strong>2 Years</strong></p>
+                <p>Total Avg. Fees <strong>84.45 K</strong></p>
+                <p>Colleges <strong>5503</strong></p>
+            </div>
+            <a href="#" class="course-overview">Course Overview</a>
+        </div>
+        <div class="course-card" data-category="Bachelors">
+            <div class="card-header">
+                <span class="course-type">Full Time</span>
+            </div>
+            <h3 class="course-title">BCA General</h3>
+            <div class="course-details">
+                <p>Duration <strong>3 Years</strong></p>
+                <p>Total Avg. Fees <strong>1.43 L</strong></p>
+                <p>Colleges <strong>5096</strong></p>
+            </div>
+            <a href="#" class="course-overview">Course Overview</a>
+        </div>
+        <!-- Add more course cards as needed -->
+    </div>
+</div>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const courseCards = document.querySelectorAll('.course-card');
+    
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+    
+                const filter = this.getAttribute('data-filter');
+    
+                courseCards.forEach(card => {
+                    if (filter === 'All' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+    
+</script>

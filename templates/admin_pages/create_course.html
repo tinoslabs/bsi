@@ -32,18 +32,26 @@
                         </div>
                         <div class="form-group">
                             <label for="courseFees">Course Fees</label>
-                            <input type="text" class="form-control" id="courseFees" name="course_fees" placeholder="Course Fees" value="{{ form.course_fees.value|default_if_none:'' }}">
+                            <input type="text" class="form-control" id="courseFees" name="course_fees" placeholder="Course Fees eg:3L" value="{{ form.course_fees.value|default_if_none:'' }}">
                         </div>
                         <div class="form-group">
-                            <label for="courseDuration">Course Duration</label>
-                            <input type="text" class="form-control" id="courseDuration" name="course_duration" placeholder="Course Duration" value="{{ form.course_duration.value|default_if_none:'' }}">
+                            <label for="courseDuration">Seat Availability(Optinal)</label>
+                            <input type="text" class="form-control" id="courseDuration" name="seat_availability" placeholder="Available Seat" value="{{ form.seat_availability.value|default_if_none:'' }}">
                         </div>
+                        <div class="form-group">
+                          <label for="courseDuration">Eligibility Criteria(Optinal) </label>
+                          <input type="text" class="form-control" id="courseDuration" name="eligibility_criteria" placeholder="Eligibility Criteria" value="{{ form.eligibility_criteria.value|default_if_none:'' }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="courseDuration">Course Duration</label>
+                        <input type="text" class="form-control" id="courseDuration" name="course_duration" placeholder="Eg:3-Year" value="{{ form.course_duration.value|default_if_none:'' }}">
+                    </div>
                         <div class="form-group">
                             <label for="brochureFile">Brochure</label>
                             <input type="file" class="form-control-file" id="brochureFile" name="brochure">
                         </div>
                         <div class="form-group">
-                            <label for="courseVideos">YouTube Videos</label>
+                            <label for="courseVideos">YouTube Videos(Optinal)</label>
                             <input type="text" class="form-control" id="courseVideos" name="course_videos" placeholder="YouTube Videos" value="{{ form.course_videos.value|default_if_none:'' }}">
                         </div>
                         <div class="form-group">
@@ -51,7 +59,7 @@
                             <textarea class="form-control" name="course_description" id="courseDescription" rows="3" style="height: 150px;" placeholder="Enter Course Description">{{ form.course_description.value|default_if_none:'' }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="additionalDetails">Additional Details</label>
+                            <label for="additionalDetails">Additional Details(Optinal)</label>
                             <textarea class="form-control" name="additional_details" id="additionalDetails" rows="3" style="height: 150px;" placeholder="Enter Additional Details">{{ form.additional_details.value|default_if_none:'' }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>

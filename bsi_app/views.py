@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage
-from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,Add_On_Course,NewsletterSubscription
+from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm,headerMainForm, SubheaderForm, SubHeaderHeadingForm, HeaderDetailsForm, HeaderDetailsForm, NotificationForm, Add_On_Course_Form,NewsletterForm
 from django.http import HttpResponseNotFound
 
 
@@ -36,12 +36,19 @@ from django.db.models import Q
 
 
 def index(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Our team will contact you soon.')
+            return redirect('index')  # Redirect to a success page
+    else:
+        form = NewsletterForm()
     search_query = request.GET.get('query','')
-    colleges = College_Model.objects.all()
+    colleges = College_Model.objects.order_by('-id')[:9]
     courses = Course_Model.objects.all()
     exams = ExamModel.objects.all()
 
-    # Initialize a flag for no results found
     no_results = False
 
     if search_query:
@@ -55,9 +62,12 @@ def index(request):
 
     clients_review = ClientReview.objects.all()
     client_logo = Client_Logo.objects.all()
-    course_collections = Course_Collection.objects.all()
-    sub_collections = Sub_Collection.objects.all()
-    sub_categories = SubCollectionCategory.objects.all()
+    unique_courses = Course_Model.objects.values('course_name').distinct()
+    # notifications = Notification.objects.all().order_by('-created_at')
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
     details = DetailsModel.objects.all()
     blog_category = Blog_Category.objects.filter(status=0)
     about = About_Video.objects.all()
@@ -71,9 +81,7 @@ def index(request):
         'clients_review': clients_review,
         'client_logo': client_logo,
         'courses': courses,
-        'course_collections': course_collections,
-        'sub_collections': sub_collections,
-        'sub_categories': sub_categories,
+        'notifications' : notifications,
         'colleges': colleges,
         'details' : details,
         'blog_category' : blog_category,
@@ -86,10 +94,27 @@ def index(request):
         'footer_courses' : footer_courses,
         'footer_exams' : footer_exams,
         'slider_images' : slider_images,
+        'main_header' : main_header,
+        'sub_headers' : sub_headers,
+        'sub_headings' : sub_headings,
+        'unique_courses': unique_courses,
+        'form':form
+        
     }
     
     return render(request, 'index.html', context)
 
+
+@login_required(login_url='user_login')
+def News_Letter_view(request):
+    data = NewsletterSubscription.objects.all()
+    return render(request, 'admin_pages/News_Letter_view.html',{'data':data})
+
+@login_required(login_url='user_login')
+def delete_news_letter(request,id):
+    contact = NewsletterSubscription.objects.get(id=id)
+    contact.delete()
+    return redirect('News_Letter_view')
 
 from django.http import JsonResponse
 from .models import ChatMessage
@@ -175,6 +200,7 @@ def delete_client_review(request,id):
     client_reviews = ClientReview.objects.get(id=id)
     client_reviews.delete()
     return redirect('view_client_reviews')
+
 
 
 @login_required(login_url='user_login')
@@ -492,13 +518,52 @@ def update_course(request, course_id):
 
 
 @login_required(login_url='user_login')
-def delete_course(request, course_id):
-    course = get_object_or_404(Course_Model, id=course_id)
+def delete_course(request, id):
+    course = get_object_or_404(Course_Model, id=id)
     course.delete()
     return redirect('view_course')
 
-# ///// Course Section End //////
+@login_required(login_url='user_login')
+def create_add_on_course(request):
+    college = College_Model.objects.all()
+    if request.method == 'POST':
+        form = Add_On_Course_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_add_on_course')  
+        else:
+            print(form.errors)  
+    else:
+        form = Add_On_Course_Form()
+    return render(request, 'admin_pages/create_add_on_course.html', {'form': form, 'college': college})
 
+@login_required(login_url='user_login')
+def view_add_on_course(request):
+    courses = Add_On_Course.objects.select_related('college').all()
+    return render(request, 'admin_pages/view_add_on_course.html', {'courses': courses})
+
+@login_required(login_url='user_login')
+def update_add_on_course(request, id):
+    course = get_object_or_404(Add_On_Course, id=id)
+    college = College_Model.objects.all() 
+    if request.method == 'POST':
+        form = Add_On_Course_Form(request.POST, request.FILES, instance=course)
+        if form.is_valid():
+            form.save()
+            return redirect('view_add_on_course')  # Redirect to the view courses page
+        else:
+            print(form.errors)  # Print form errors for debugging
+    else:
+        form = Add_On_Course_Form(instance=course)
+    
+    return render(request, 'admin_pages/update_add_on_course.html', {'form': form, 'college': college, 'course': course})
+
+
+@login_required(login_url='user_login')
+def delete_add_on_course(request, id):
+    course = get_object_or_404(Add_On_Course, id=id)
+    course.delete()
+    return redirect('view_add_on_course')
 
 @login_required(login_url='user_login')
 def create_course_collection(request):
@@ -513,6 +578,7 @@ def create_course_collection(request):
         form = CourseCollectionForm()
 
     return render(request, 'admin_pages/create_course_collection.html', {'form': form})
+
 
 
 def view_course_collection(request):
@@ -707,12 +773,12 @@ def create_featured_colleges(request):
         form = FeaturedCollegesForm()
     return render(request, 'admin_pages/create_featured_colleges.html', {'form': form})
 
+
+
 @login_required(login_url='user_login')
 def view_featured_colleges(request):
     featured_colleges = FeaturedColleges.objects.all()
     return render(request, 'admin_pages/view_featured_colleges.html', {'featured_colleges': featured_colleges})
-
-
 
 def update_featured_colleges(request, pk):
     college = get_object_or_404(FeaturedColleges, pk=pk)
@@ -732,6 +798,264 @@ def delete_featured_colleges(request, pk):
     college.delete()
     return redirect('view_featured_colleges')  # Redirect to the view after deletion
 
+@login_required(login_url='user_login')
+def create_header_main(request):
+    if request.method == 'POST':
+        form = headerMainForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('create_sub_header')  
+    else:
+        form = headerMainForm()
+    return render(request, 'admin_pages/create_header_main.html', {'form': form})
+ 
+
+@login_required(login_url='user_login')
+def view_header_main(request):
+    main_heading = headerMain.objects.all()
+    return render(request, 'admin_pages/view_header_main.html', {'main_heading': main_heading})
+
+@login_required(login_url='user_login')
+def update_header_main(request, pk):
+    main_heading = get_object_or_404(headerMain, pk=pk)
+    if request.method == 'POST':
+        form = headerMainForm(request.POST, instance=main_heading)
+        if form.is_valid():
+            form.save()
+            return redirect('view_header_main')  # Redirect to the view after saving
+    else:
+        form = headerMainForm(instance=main_heading)
+    return render(request, 'admin_pages/update_header_main.html', {'form': form})
+
+def delete_header_main(request, pk):
+    main_heading = get_object_or_404(headerMain, pk=pk)
+    main_heading.delete()
+    return redirect('view_header_main')
+
+from .forms import SubheaderFormSet
+
+@login_required(login_url='user_login')
+def create_sub_header(request):
+    if request.method == 'POST':
+        form = SubheaderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('create_sub_header_heading') 
+    else:
+        form = SubheaderForm()
+      
+    main_headers = headerMain.objects.all()
+    return render(request, 'admin_pages/create_sub_header.html', {'form': form, 'main_headers': main_headers})
+
+
+@login_required(login_url='user_login')
+def update_sub_header(request, pk):
+    subheader = get_object_or_404(SubHeader, pk=pk)
+    
+    if request.method == 'POST':
+        form = SubheaderForm(request.POST, instance=subheader)
+        if form.is_valid():
+            form.save()
+            return redirect('view_sub_header')  # Redirect to a view that lists subheaders
+    else:
+        form = SubheaderForm(instance=subheader)
+    
+    main_headers = headerMain.objects.all()
+    return render(request, 'admin_pages/update_sub_header.html', {'form': form, 'main_headers': main_headers})
+
+
+@login_required(login_url='user_login')
+def delete_sub_header(request, pk):
+    subheader = get_object_or_404(SubHeader, pk=pk) 
+    subheader.delete()
+    return redirect('view_sub_header')  # Redirect to a view that lists subheaders
+
+
+
+@login_required(login_url='user_login')
+def create_sub_header_heading(request):
+    if request.method == 'POST':
+        form = SubHeaderHeadingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_header_details')  
+    else:
+        form = SubHeaderHeadingForm()
+
+    main_headers = headerMain.objects.all()
+
+    return render(request, 'admin_pages/create_sub_header_heading.html', {
+        'form': form,
+        'main_headers': main_headers,
+    })
+
+@login_required(login_url='user_login')
+def get_sub_headers(request):
+    main_header_id = request.GET.get('main_header_id')
+    sub_headers = SubHeader.objects.filter(main_header_id=main_header_id)
+    options = '<option value="">Select Sub Header</option>'
+    for sub_header in sub_headers:
+        options += f'<option value="{sub_header.id}">{sub_header.sub_header}</option>'
+    return HttpResponse(options)
+
+@login_required(login_url='user_login')
+def get_subheaders(request, main_header_id):
+    sub_headers = SubHeader.objects.filter(main_header_id=main_header_id)
+    data = {
+        'sub_headers': list(sub_headers.values('id', 'sub_header'))
+    }
+    return JsonResponse(data)
+
+@login_required(login_url='user_login')
+def update_sub_header_heading(request, pk):
+    sub_header_heading = SubHeaderHeading.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = SubHeaderHeadingForm(request.POST, instance=sub_header_heading)
+        if form.is_valid():
+            form.save()
+            return redirect('view_sub_header_heading')
+    else:
+        form = SubHeaderHeadingForm(instance=sub_header_heading)
+
+    main_headers = headerMain.objects.all()
+    sub_headers = SubHeader.objects.filter(main_header=sub_header_heading.main_header)
+
+    return render(request, 'admin_pages/update_sub_header_heading.html', {
+        'form': form,
+        'main_headers': main_headers,
+        'sub_headers': sub_headers,
+        'selected_main_header': sub_header_heading.main_header,
+        'selected_sub_header': sub_header_heading.sub_header,
+    })
+
+
+@login_required(login_url='user_login')
+def delete_sub_header_heading(request, pk):
+    sub_header_heading = get_object_or_404(SubHeaderHeading, pk=pk)
+    sub_header_heading.delete()
+    return redirect('view_sub_header_heading')
+
+
+@login_required(login_url='user_login')
+def view_sub_header_heading(request):
+    sub_header_headings = SubHeaderHeading.objects.all()
+    return render(request, 'admin_pages/view_sub_header_heading.html', {'sub_header_headings': sub_header_headings})
+
+@login_required(login_url='user_login')
+def view_sub_header(request):
+    sub_heading = SubHeader.objects.all()
+    return render(request, 'admin_pages/view_sub_header.html', {'sub_heading': sub_heading})
+
+
+
+@login_required(login_url='user_login')
+def add_header_details(request):
+    # Query all SubHeaderHeading objects
+    sub_headings = SubHeaderHeading.objects.all()
+    
+    # Prepare a list of formatted sub_headings
+    formatted_sub_headings = []
+    for sh in sub_headings:
+        main_header = sh.main_header.main_heading
+        sub_header = sh.sub_header.sub_header
+        sub_heading = sh.sub_heading
+        formatted_sub_headings.append({
+            'id': sh.id,
+            'text': f"({main_header}) - ({sub_header}) - {sub_heading}"
+        })
+    
+    if request.method == 'POST':
+        form = HeaderDetailsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_header_details')
+    else:
+        form = HeaderDetailsForm()
+
+    return render(request, 'admin_pages/add_header_details.html', {
+        'form': form,
+        'sub_headings': formatted_sub_headings
+    })
+
+
+# @login_required(login_url='user_login')
+# def add_header_details(request):
+#     sub_headings = SubHeaderHeading.objects.all()
+    
+#     if request.method == 'POST':
+#         form = HeaderDetailsForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('view_header_details')
+#     else:
+#         form = HeaderDetailsForm()
+
+#     return render(request, 'admin_pages/add_header_details.html', {
+#         'form': form,
+#         'sub_headings': sub_headings
+#     })
+
+# @login_required(login_url='user_login')
+# def get_header_details(request):
+#     sub_heading_id = request.GET.get('sub_heading_id')
+    
+#     if sub_heading_id:
+#         try:
+#             sub_heading = SubHeaderHeading.objects.select_related('main_header', 'sub_header').get(id=sub_heading_id)
+#             data = {
+#                 'main_heading': sub_heading.main_header.main_heading,
+#                 'sub_header': sub_heading.sub_header.sub_header,
+#                 'sub_heading': sub_heading.sub_heading,
+#             }
+#             return JsonResponse(data)
+#         except SubHeaderHeading.DoesNotExist:
+#             return JsonResponse({'error': 'Sub heading not found'}, status=404)
+    
+#     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+@login_required(login_url='user_login')
+def view_header_details(request):
+    header_details = HeaderDetails.objects.all()
+    return render(request, 'admin_pages/view_header_details.html', {'header_details': header_details})
+
+@login_required(login_url='user_login')
+def update_header_details(request, pk):
+    header_detail = get_object_or_404(HeaderDetails, pk=pk)
+    
+    if request.method == 'POST':
+        form = HeaderDetailsForm(request.POST, request.FILES, instance=header_detail)
+        if form.is_valid():
+            form.save()
+            return redirect('view_header_details')
+    else:
+        form = HeaderDetailsForm(instance=header_detail)
+    
+    # Prepare a list of formatted sub_headings
+    sub_headings = SubHeaderHeading.objects.all()
+    formatted_sub_headings = []
+    for sh in sub_headings:
+        main_header = sh.main_header.main_heading
+        sub_header = sh.sub_header.sub_header
+        sub_heading = sh.sub_heading
+        formatted_sub_headings.append({
+            'id': sh.id,
+            'text': f"({main_header}) - ({sub_header}) - {sub_heading}"
+        })
+    
+    return render(request, 'admin_pages/update_header_details.html', {
+        'form': form,
+        'sub_headings': formatted_sub_headings,
+        'header_detail': header_detail
+    })
+
+@login_required(login_url='user_login')
+def delete_header_details(request, pk):
+    detail = get_object_or_404(HeaderDetails, pk=pk)
+    detail.delete()
+    return redirect('view_header_details')
+    
 
 @login_required(login_url='user_login')
 def create_slider(request):
@@ -804,13 +1128,16 @@ def blog_details(request, blog_heading):
     sub_collections = Sub_Collection.objects.all()
     sub_categories = SubCollectionCategory.objects.all()
     blog = Blog_Category.objects.all()
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
     footer_colleges = College_Model.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
     category = get_object_or_404(Blog_Category, blog_heading=blog_heading, status=False)
     if category:
         blog_details = Blog_Details.objects.filter(category=category, status=False)
-        context = {'blog_details': blog_details, 'category_name': category,'blog':blog,'courses':courses,'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'exam':exam,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams}
+        context = {'blog_details': blog_details, 'category_name': category,'blog':blog,'courses':courses,'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'exam':exam,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings}
         return render(request, "blog-details.html", context)
     else:
         messages.warning(request, "No such category found")
@@ -864,8 +1191,14 @@ def college_details(request, college_name):
     course = Course_Model.objects.all()
     courses = college.courses.all()
     course_collections = Course_Collection.objects.all()
+    clients_review = ClientReview.objects.all()
     sub_collections = Sub_Collection.objects.all()
     sub_categories = SubCollectionCategory.objects.all()
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+   
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+    sub_headings = SubHeaderHeading.objects.all()
     footer_colleges = College_Model.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -875,6 +1208,7 @@ def college_details(request, college_name):
         'courses': courses,
         'colleges': colleges,
         'course_collections': course_collections,
+        'clients_review':clients_review,
         'sub_collections': sub_collections,
         'sub_categories': sub_categories,
         'courses' : courses,
@@ -882,7 +1216,12 @@ def college_details(request, college_name):
         'course' : course,
         'footer_colleges':footer_colleges,
         'footer_courses':footer_courses,
-        'footer_exams':footer_exams
+        'footer_exams':footer_exams,
+        'main_header':main_header,
+        'sub_headers':sub_headers,
+        'sub_headings':sub_headings,
+        'notifications':notifications
+        
     })
 
 
@@ -973,6 +1312,7 @@ def course_details(request, id):
     else:
         form = Enquiry_Form()
 
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     clients_review = ClientReview.objects.all() 
     exam = ExamModel.objects.all()   
     colleges = College_Model.objects.all()
@@ -980,6 +1320,9 @@ def course_details(request, id):
     course_collections = Course_Collection.objects.all()
     sub_collections = Sub_Collection.objects.all()
     sub_categories = SubCollectionCategory.objects.all()
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
     footer_colleges = College_Model.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -996,7 +1339,11 @@ def course_details(request, id):
         'exam' : exam,
         'footer_colleges': footer_colleges,
         'footer_courses': footer_courses,
-        'footer_exams': footer_exams
+        'footer_exams': footer_exams,
+        'main_header' : main_header,
+        'sub_headers' : sub_headers,
+        'sub_headings' : sub_headings,
+        'notifications':notifications
     })
 
 
@@ -1010,11 +1357,15 @@ def exam_detail(request, exam_name):
     else:
         form = EnquiryForm()
 
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     exam = ExamModel.objects.all()  
     courses = Course_Model.objects.all()
     course_collections = Course_Collection.objects.all()
     sub_collections = Sub_Collection.objects.all()
     sub_categories = SubCollectionCategory.objects.all()
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
     exam = ExamModel.objects.filter(status=False)
     category = get_object_or_404(ExamModel, exam_name=exam_name, status=False)
     footer_colleges = College_Model.objects.order_by('-id')[:5]
@@ -1032,7 +1383,11 @@ def exam_detail(request, exam_name):
         'sub_categories': sub_categories,
         'footer_colleges': footer_colleges,
         'footer_courses': footer_courses,
-        'footer_exams': footer_exams
+        'footer_exams': footer_exams,
+        'main_header':main_header,
+        'sub_headers': sub_headers,
+        'sub_headings': sub_headings,
+        'notifications':notifications
     }
 
     return render(request, "exam_detail.html", context)
@@ -1051,6 +1406,7 @@ def details_display(request, id):
     else:
         form = EnquiryForm()
 
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     colleges = College_Model.objects.all()
     exam = ExamModel.objects.all() 
     courses = Course_Model.objects.all()
@@ -1062,8 +1418,33 @@ def details_display(request, id):
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
     data = DetailsModel.objects.filter(sub_collection_category=sub_collection_category)
-    return render(request, 'details_display.html', {'data': data, 'sub_collection_category': sub_collection_category,'courses':courses, 'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'form':form,'exam':exam, 'colleges':colleges, 'footer_colleges': footer_colleges, 'footer_courses':footer_courses, 'footer_exams':footer_exams})
+    return render(request, 'details_display.html', {'data': data, 'sub_collection_category': sub_collection_category,'courses':courses, 'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'form':form,'exam':exam, 'colleges':colleges, 'footer_colleges': footer_colleges, 'footer_courses':footer_courses, 'footer_exams':footer_exams,'notifications':notifications})
 
+def header_details(request, id):
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Our team will contact you soon.')
+            return redirect('details_display', id=id)  # Redirect to the same college details page
+    else:
+        form = EnquiryForm()
+
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+    colleges = College_Model.objects.all()
+    exam = ExamModel.objects.all() 
+    courses = Course_Model.objects.all()
+    course_collections = Course_Collection.objects.all()
+    main_header = headerMain.objects.all()
+    
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
+    sub_heading = get_object_or_404(SubHeaderHeading, id=id)
+    footer_colleges = College_Model.objects.order_by('-id')[:5]
+    footer_courses = Course_Model.objects.order_by('-id')[:7]
+    footer_exams = ExamModel.objects.order_by('-id')[:7]
+    data = HeaderDetails.objects.filter(sub_heading=sub_heading)
+    return render(request, 'header_details.html', {'data': data, 'sub_heading': sub_heading,'courses':courses, 'course_collections':course_collections,'form':form,'exam':exam, 'colleges':colleges, 'footer_colleges': footer_colleges, 'footer_courses':footer_courses, 'footer_exams':footer_exams,'main_header':main_header,'sub_headers':sub_headers,'sub_heading':sub_heading ,'sub_headings':sub_headings,'notifications':notifications})
 
 # def slider(request):
 #     return render(request,'slider.html')
@@ -1134,5 +1515,96 @@ def ckeditor_upload(request):
     
     return JsonResponse({'uploaded': False, 'error': 'No file was uploaded.'})
 
+def add_notification(request):
+    if request.method == 'POST':
+        form = NotificationForm(request.POST)
+        if form.is_valid():
+            notification = form.save(commit=False)
+            # Debug: print to check the notification_end_date value
+            print("Notification End Date:", notification.notification_end_date)
+            notification.save()
+            return redirect('notification_list')
+        else:
+            # Debug: print form errors if the form is not valid
+            print(form.errors)
+    else:
+        form = NotificationForm()
+
+    return render(request, 'admin_pages/add_notification.html', {'form': form})
+
+def update_notification(request, pk):
+    notification = get_object_or_404(Notification, pk=pk)
+    if request.method == 'POST':
+        form = NotificationForm(request.POST, instance=notification)
+        if form.is_valid():
+            form.save()
+            return redirect('notification_list')
+    else:
+        form = NotificationForm(instance=notification)
+    return render(request, 'admin_pages/update_notification.html', {'form': form})
+
+def delete_notification(request, pk):
+    notification = get_object_or_404(Notification, pk=pk)
+    
+    notification.delete()
+    return redirect('notification_list')
+    
+
+def notification_list(request):
+    notifications = Notification.objects.all().order_by('-created_at')
+    return render(request, 'admin_pages/notification_list.html', {'notifications': notifications})
+
 def notification(request):
-    return render(request,'notification.html')
+    notifications = Notification.objects.all().order_by('-created_at')
+    return render(request,'notification.html',{'notifications':notifications})
+
+def card(request):
+    return render(request,'card.html')
+
+def all_colleges(request):
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Our team will contact you soon.')
+            return redirect('all_colleges')  # Redirect to the same college details page
+    else:
+        form = EnquiryForm()
+    client_logo = Client_Logo.objects.all()
+    notifications = Notification.objects.all().order_by('-created_at')
+    colleges = College_Model.objects.all()
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
+    
+    slider_images = SliderImage.objects.all()
+    footer_colleges = College_Model.objects.order_by('-id')[:5]
+    footer_courses = Course_Model.objects.order_by('-id')[:7]
+    footer_exams = ExamModel.objects.order_by('-id')[:7]
+    return render(request,'all_colleges.html',{'client_logo':client_logo,'notifications':notifications,'colleges':colleges,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings,'slider_images':slider_images,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams})
+
+from django.utils import timezone
+
+def notification_details(request, message):
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Our team will contact you soon.')
+            return redirect('notification_details')  # Redirect to the same college details page
+    else:
+        form = EnquiryForm()
+    details = get_object_or_404(Notification, message=message)
+    # notifications = Notification.objects.all().order_by('-created_at')
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+    return render(request, 'notification_details.html', {'details': details,'form':form,'notifications':notifications})
+
+# def notification_details(request, message):
+#     details = Notification.objects.get(message=message)
+#     return render(request, 'notification_details.html', {'details':details})
+
+
+
+def course(request):
+    
+    return render(request, 'course.html')
