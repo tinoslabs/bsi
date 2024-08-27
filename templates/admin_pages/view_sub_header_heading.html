@@ -1,0 +1,33 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Sub Header Headings</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Main Header</th>
+        <th>Sub Header</th>
+        <th>Sub Heading</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for heading in sub_header_headings %}
+        <tr>
+          <td>{{ heading.main_header }}</td>
+          <td>{{ heading.sub_header }}</td>
+          <td>{{ heading.sub_heading }}</td>
+          <td>
+            <a href="{% url 'update_sub_header_heading' heading.pk %}" class="btn btn-primary btn-sm">Update</a>
+            <a href="{% url 'delete_sub_header_heading' heading.pk %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this?');">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-
+from django.utils import timezone
 
 
 # Create your models here.
@@ -61,7 +61,7 @@ class Client_Logo(models.Model):
     def __str__(self):
         return self.name
     
-
+    
 class College_Model(models.Model):
     college_name = models.CharField(max_length=200, null=True, blank=True)
     place = models.CharField(max_length=200, null=True, blank=True)
@@ -73,7 +73,8 @@ class College_Model(models.Model):
     college_description  = models.TextField() 
     youtube_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
     college_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-    more_details = models.TextField()
+    course_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+    more_details = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.college_name
@@ -83,7 +84,6 @@ class College_Model(models.Model):
         if self.min_fee and self.max_fee:
             return f"₹{self.min_fee} L - ₹{self.max_fee} L"
         return None
-    
 
 class FeaturedColleges(models.Model):
     college_details = models.ForeignKey(College_Model, on_delete=models.CASCADE, related_name='featured_in')
@@ -109,9 +109,11 @@ class Course_Model(models.Model):
     course_description = models.TextField()
     course_fees = models.CharField(max_length=100, null=True, blank=True)
     course_duration = models.CharField(max_length=100, null=True, blank=True)
+    seat_availability = models.CharField(max_length=100, null=True, blank=True)
+    eligibility_criteria = models.CharField(max_length=100, null=True, blank=True)
     brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
     course_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
-    additional_details = models.TextField()
+    additional_details = models.TextField(null=True, blank=True)
     
     def __str__(self):
         return self.course_name or 'Unnamed Course'
@@ -316,8 +318,69 @@ class SliderImage(models.Model):
     def __str__(self):
         return self.caption if self.caption else "Slider Image"
     
+    
+    
+class headerMain(models.Model):
+    main_heading = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.main_heading 
+     
+class SubHeader(models.Model):
+    main_header = models.ForeignKey(headerMain, on_delete=models.CASCADE)
+    sub_header = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.sub_header 
 
 
+    
+class SubHeaderHeading(models.Model):
+    main_header = models.ForeignKey(headerMain, on_delete=models.CASCADE)
+    sub_header = models.ForeignKey(SubHeader, on_delete=models.CASCADE)
+    sub_heading = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.sub_heading 
+    
+class HeaderDetails(models.Model):
+    
+    sub_heading = models.ForeignKey(SubHeaderHeading, on_delete=models.CASCADE)
+    details = models.TextField(null=True, blank=True)
+    brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+    def __str__(self):
+        return self.details
+    
+class Notification(models.Model):
+    message = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)    
+    notification_end_date = models.DateTimeField()
+    details = models.TextField(null=True, blank=True)
+    def is_active(self):
+        return self.notification_end_date >= timezone.now()
+    
+class Add_On_Course(models.Model):
+    college = models.ForeignKey('College_Model', on_delete=models.CASCADE, related_name='add_on_courses')
+    course_name = models.CharField(max_length=100, blank=True)
+    course_brochure = models.FileField(upload_to='brochure/', blank=True)
+    course_details = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.course_name or "No Name Provided"
+    
+class NewsletterSubscription(models.Model):
+    college = models.ForeignKey('College_Model', on_delete=models.CASCADE)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+
+    def __str__(self):
+        return f"{self.email} - {self.college} - {self.phone}"
+    
+    
+
+
+   
 
 
     

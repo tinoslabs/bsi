@@ -69,7 +69,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="pages-title">
-                            <h2>Course Details</h2>
+                            <h2>Add On Course Details</h2>
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
                                     <a class="text-decoration-none" href="{% url 'index' %}">
@@ -105,43 +105,14 @@
                                 
                             </div>
                            
-                            {% comment %} <div class="your-container-class">
-                                <h1>{{course.course_name}}</h1>
-                                
-                                <p style="font-family: arial;">{{course.course_description | safe }}</p>
-                            </div> {% endcomment %}
-
-                            <div class="events-area pb-75">
-                                <div class="events-area pb-75">
-                                    <div class="container">
-                                        <div class="your-container-class">
-                                            {% if course.course_name %}
-                                            <h1>{{course.course_name}}</h1>
-                                            {% endif %}
-                                            
-                                            {% if course.course_description %}
-                                            <p style="font-family: arial;">{{course.course_description | safe }}</p>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>        
-                            </div>
-                            <br><br>
                             
-                            <div class="video-image">
-                                <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
-                                <div class="video-btn">
-                                    <a class="text-decoration-none icon" data-fslightbox="gallery" href="{{course.course_videos}}">
-                                        <i class="flaticon-play"></i>
-                                    </a>
+                            
+                            <div class="events-area pb-75 your-container-class">
+                                <div class="your-container-class your-container-class">
+                                    <h1>{{course.course_name}}</h1>
+                                    
+                                    <p style="font-family: arial;" class="your-container-class">{{course.course_details | safe }}</p>
                                 </div>
-                            </div>
-                           
-                            <br>
-                            
-                            <div class="events-area pb-75">
-                                <p class="your-container-class">{{course.additional_details | safe}}</p>
-                            
                         </div>
                         <style>
                             
@@ -242,28 +213,20 @@
                     
                     <div class="col-lg-4">
                         <div class="blog-right-sidebar">
-                            <div class="button-container">
-                                {% for college in college %}
-                                <a href="{{ course.brochure.url }}" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
-                                    <i class="icon-download"></i>
-                                    Course Brochure
-                                </a>
-                                {% endfor %}
-                            </div>
+                            {% if course.course_brochure %}
+                            <a href="{{ course.course_brochure.url }}" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
+                                <i class="icon-download"></i>
+                                Course Brochure
+                            </a>
+                        {% else %}
+                            <a href="#" class="btn download-guide disabled" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
+                                <i class="icon-download"></i>
+                                Course Brochure (Not Available)
+                            </a>
+                        {% endif %}
                             <br><br>
                             
-                            <div class="single-pages-widget tags style-2">
-                                <h3>Popular Colleges</h3>
-                                <ul class="list-unstyled ps-0 mb-0">
-                                    {% for college in college %}
-                                    <li class="d-inline-block">
-                                        <a class="text-decoration-none d-inline-block" href="{% url 'college_details' college.college_name %}">
-                                            {{ college.college_name }}
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
+                            
                             
                             <div class="pages-leave-reply" id="contactForm">
                                 {% if messages %}
@@ -282,7 +245,7 @@
                                 <br>
                                 <form method="post">
                                     {% csrf_token %}
-                                    <input type="hidden" name="course" value="{{ course.id }}">
+                                    <input type="hidden" name="college" value="{{ college.id }}">
                                     <div class="row">
                                         <div class="form-group">
                                             <select class="form-control" name="college">

@@ -98,6 +98,7 @@ urlpatterns = [
     path('delete_details/<int:pk>/', views.delete_details, name='delete_details'),
 
     path('details/<int:id>/', views.details_display, name='details_display'),
+    path('header_details/<int:id>/',views.header_details, name='header_details'),
 
 
     path('create_exam', views.create_exam, name='create_exam'),
@@ -120,6 +121,9 @@ urlpatterns = [
     path('enquiry_view',views.enquiry_view, name='enquiry_view'),
     path('delete_enquiry/<int:id>/', views.delete_enquiry, name='delete_enquiry'),
     path('course_details/<int:id>/',views.course_details, name='course_details'),
+    
+    
+    
 
     path('exam_detail/<str:exam_name>/', views.exam_detail, name='exam_detail'),
     path('demo', views.demo, name='demo'),
@@ -136,7 +140,12 @@ urlpatterns = [
     path('view-featured-colleges/', views.view_featured_colleges, name='view_featured_colleges'),
     path('update_featured_colleges/<int:pk>/', views.update_featured_colleges, name='update_featured_colleges'),
     path('delete_featured_colleges/<int:pk>/', views.delete_featured_colleges, name='delete_featured_colleges'),
+    
+    path('notification_list', views.notification_list, name='notification_list'),
+    path('add_notification', views.add_notification, name='add_notification'),
     path('notification', views.notification, name='notification'),
+    path('update_notification/<int:pk>/', views.update_notification, name='update_notification'),
+    path('delete_notification/<int:pk>/', views.delete_notification, name='delete_notification'),
     
     path('create_slider/', views.create_slider, name='create_slider'),
     path('view_slider', views.view_slider, name='view_slider'),
@@ -144,7 +153,50 @@ urlpatterns = [
     path('delete_slider/<int:pk>/', views.delete_slider, name='delete_slider'),
 
     path('ckeditor_upload/', views.ckeditor_upload, name='ckeditor_upload'),
-
     
-
+    
+    path('create_header_main', views.create_header_main, name='create_header_main'),
+    path('view_header_main', views.view_header_main, name='view_header_main'),
+    path('update_header_main/<int:pk>/', views.update_header_main, name='update_header_main'),
+    path('delete_header_main/<int:pk>/', views.delete_header_main, name='delete_header_main'),
+    
+    path('create_header_main', views.create_header_main, name='create_header_main'),
+    path('create_sub_header', views.create_sub_header, name='create_sub_header'),
+    path('view_sub_header', views.view_sub_header, name='view_sub_header'),
+    
+    path('update_sub_header/<int:pk>/', views.update_sub_header, name='update_sub_header'),
+    path('delete_sub_header/<int:pk>/', views.delete_sub_header, name='delete_sub_header'),
+    path('create_sub_header_heading', views.create_sub_header_heading, name='create_sub_header_heading'),
+    path('get-sub-headers/', views.get_sub_headers, name='get_sub_headers'),
+    # path('get-subheaders/<int:main_header_id>/', views.get_subheaders, name='get_subheaders'),
+    # path('get-sub-header-headings/', views.get_sub_header_headings, name='get_sub_header_headings'),
+    
+    path('update_sub_header_heading/<int:pk>', views.update_sub_header_heading, name='update_sub_header_heading'),
+    path('delete_sub_header_heading/<int:pk>', views.delete_sub_header_heading, name='delete_sub_header_heading'),
+    path('view_sub_header_heading/', views.view_sub_header_heading, name='view_sub_header_heading'),
+    
+    # path('add_header_details/', views.add_header_details, name='add_header_details'),
+    # path('get-header-details/', views.get_header_details, name='get_header_details'),
+    path('add_header_details/', views.add_header_details, name='add_header_details'),
+    # path('get_header_details/', views.get_header_details, name='get_header_details'),
+    path('view_header_details/', views.view_header_details, name='view_header_details'),
+    path('update_header_details/<int:pk>/', views.update_header_details, name='update_header_details'),
+    
+    path('delete_header_details/<int:pk>/', views.delete_header_details, name='delete_header_details'),
+    
+    path('card',views.card, name='card'),
+    path('all_colleges', views.all_colleges, name='all_colleges'),
+    
+    # path('notification_details/<str:event_details>/', views.notification_details, name='notification_details'),
+    path('notification_details/<str:message>/', views.notification_details, name='notification_details'),
+    
+    path('course',views.course,name='course'),
+    path('create_add_on_course', views.create_add_on_course,name='create_add_on_course'),
+    path('view_add_on_course',views.view_add_on_course, name='view_add_on_course'),
+    path('update_add_on_course/<int:id>',views.update_add_on_course,name='update_add_on_course'),
+    path('delete_add_on_course/<int:id>',views.delete_add_on_course,name='delete_add_on_course'),
+    path('add_on_course_details/<int:id>/',views.add_on_course_details, name='add_on_course_details'),
+    
+    path('News_Letter_view',views.News_Letter_view,name='News_Letter_view'),
+    path('delete_news_letter/<int:id>', views.delete_news_letter, name='delete_news_letter'),
 ]
