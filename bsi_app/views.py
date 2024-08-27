@@ -1652,9 +1652,6 @@ def notification_details(request, message):
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     return render(request, 'notification_details.html', {'details': details,'form':form,'notifications':notifications})
 
-# def notification_details(request, message):
-#     details = Notification.objects.get(message=message)
-#     return render(request, 'notification_details.html', {'details':details})
 
 
 
