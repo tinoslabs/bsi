@@ -16,6 +16,7 @@ table {
 th, td {
   text-align: left;
   padding: 8px;
+  border: 1px solid black; /* Ensure all cells have borders */
 }
 
 th {
@@ -55,42 +56,54 @@ img {
               <td>{{ college.college_name }}</td>
               <td>{{ college.place }}</td>
               <td>{{ college.total_course }}</td>
-              <td>{{ college.total_fees_range }}</td>
+              <td>
+                {% if college.total_fees_range %}
+                  {{ college.total_fees_range }}
+                {% else %}
+                  No fees range available
+                {% endif %}
+              </td>
               <td>
                 {% if college.logo %}
-                <img src="{{ college.logo.url }}" alt="College Logo">
+                  <img src="{{ college.logo.url }}" alt="College Logo">
                 {% else %}
-                No logo available
+                  No logo available
                 {% endif %}
               </td>
               <td>
                 {% if college.college_image %}
-                <img src="{{ college.college_image.url }}" alt="College Image">
+                  <img src="{{ college.college_image.url }}" alt="College Image">
                 {% else %}
-                No image available
+                  No image available
                 {% endif %}
               </td>
-              <td>{{ college.college_description | safe }}</td>
+              <td class="college-description">{{ college.college_description | safe }}</td>
               <td>
                 {% if college.youtube_videos %}
-                <a href="{{ college.youtube_videos }}" target="_blank">View Video</a>
+                  <a href="{{ college.youtube_videos }}" target="_blank">View Video</a>
                 {% else %}
-                No video available
+                  No video available
                 {% endif %}
               </td>
               <td>
                 {% if college.college_brochure %}
-                <a href="{{ college.college_brochure.url }}" target="_blank">Download Brochure</a>
+                  <a href="{{ college.college_brochure.url }}" target="_blank">Download Brochure</a>
                 {% else %}
-                No brochure available
+                  No brochure available
                 {% endif %}
               </td>
-              <td>{{ college.more_details | safe }}</td>
+              <td class="college-description">
+                {% if college.more_details %}
+                  {{ college.more_details | safe }}
+                {% else %}
+                  No additional details available
+                {% endif %}
+              </td>
               <td>
                 <a href="{% url 'update_college' college.id %}" class="btn btn-primary btn-sm">
                   <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Update
                 </a>
-                <a href="{% url 'delete_college' college.id %}" class="btn btn-primary btn-sm">
+                <a href="{% url 'delete_college' college.id %}" class="btn btn-danger btn-sm">
                   <i class="mdi mdi-delete" aria-hidden="true"></i> Delete
                 </a>
               </td>
@@ -102,6 +115,19 @@ img {
     </div>
   </div>
 </div>
+<style>
+  .college-description {
+    max-width: 500px; /* Adjust the width as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 575.98px) {
+    .college-description {
+      max-width: 150px; /* Smaller width for smaller screens */
+    }
+  }
+</style>
 <style>
   table {
       width: 100%;
@@ -129,7 +155,5 @@ img {
           text-overflow: ellipsis;
       }
   }
-  /* Other media queries here */
 </style>
 {% endblock %}
-

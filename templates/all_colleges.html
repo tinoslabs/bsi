@@ -70,7 +70,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="pages-title">
-                            <h2>College Details</h2>
+                            <h2>All Colleges</h2>
                             <ul class="list-unstyled ps-0 mb-0">
                                 <li class="d-inline-block">
                                     <a class="text-decoration-none" href="{% url 'index' %}">
@@ -78,7 +78,7 @@
                                     </a>
                                 </li>
                                 <li class="d-inline-block">
-                                    College Details
+                                    Colleges 
                                 </li>
                             </ul>
                         </div>
@@ -107,92 +107,51 @@
                 <div class="row your-container-class">
                     <div class="col-lg-8 your-container-class">
                         <div class="blog-left-sidebar your-container-class">
-                            <div class="single-blog-card">   
-                            </div>
-                           
-                            
                             <div class="events-area pb-75">
-                                <div class="events-area pb-75">
-                                    <div class="container">
-                                        <div class="your-container-class">
-                                            {% if college.college_name %}
-                                            <h1>{{college.college_name}}</h1>
-                                            {% endif %}
-                                            <div class="image">
-                                                {% if college.college_image %}
-                                                <img src="{{college.college_image.url}}" alt="applications-image">
-                                                {% endif %}
-                                            </div>
-                                            {% if college.college_description %}
-                                            <p style="font-family: arial;">{{college.college_description | safe }}</p>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>        
-                            </div>
-                            <br><br>
-                            <div class="video-image">
-                                <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
-                                <div class="video-btn">
-                                    {% if college.youtube_videos %}
-                                    <a class="text-decoration-none icon" data-fslightbox="gallery" href="{{college.youtube_videos}}">
-                                        <i class="flaticon-play"></i>
-                                    </a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <br>
-                            
-                            
-                            
-                            <div class="events-area pb-75">
-                                <div class="events-area pb-75">
-                                    <div class="container">
-                                        {% if college.more_details %}
-                                        <p class="your-container-class">{{college.more_details | safe}}</p>
-                                        {% endif %}
-                                    </div>
-                                </div>        
-                            </div>
-                            
-                            
-                            {% comment %} <div class="events-area pb-75">
                                 <div class="events-area pb-75">
                                     <div class="container">
                                         <div class="section-title text-center m-auto" data-cues="slideInUp">
                                             <h4>Top Colleges</h4>
                                         </div>
-                                        
                                         <div class="row justify-content-center" data-cues="slideInUp">
                                             {% for college in colleges %}
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="single-events-card">
-                                                        <a class="text-decoration-none d-block image" href="{% url 'college_details' college.college_name %}">
-                                                            {% if college.college_image %}
-                                                                <img src="{{ college.college_image.url }}" alt="{{ college.college_name }}">
-                                                            {% else %}
-                                                                <img src="{% static 'assets/img/college-7.jpg' %}" alt="events-image">
-                                                            {% endif %}
+                                            <div class="college-card">
+                                                <div class="college-header">
+                                                    <img src="{{college.logo.url}}" alt="{{college.college_name}}" class="college-logo">
+                                                    <div class="college-info">
+                                                        <a href="{% url 'college_details' college.college_name %}">
+                                                        <h3>{{college.college_name}}</h3>
                                                         </a>
-                                                        <div class="content d-flex align-items-top">
-                                                            <div class="title">
-                                                                <h3 style="text-align: center;">
-                                                                    <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
-                                                                </h3>   
-                                                            </div>
-                                                        </div>
+                                                        <p class="location"><i class="material-icons">location_on</i>{{college.place}} • <span class="ranking">#2 NIRF</span></p>
                                                     </div>
                                                 </div>
+                                                <div class="college-details">
+                                                    <div>
+                                                        <span>Courses Offered</span><br>
+                                                        <a href="#">{{college.total_course}} courses</a>
+                                                    </div>
+                                                    
+                                                    <div>
+                                                        <span>Total Fees Range</span><br>
+                                                        ₹{{college.min_fee}} L - {{college.max_fee}} L
+                                                    </div>
+                                                </div>
+                                                <div class="college-actions">
+                                                    <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
+                                                    <button class="brochure-btn"  data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}"><i class="material-icons"></i> Brochure</button>  
+                                                    
+                                                </div>
+                                                
+                                            </div>
                                             {% endfor %}
                                         </div>
                                     </div>
                                 </div>        
-                            </div> {% endcomment %}
+                            </div>
                         
                         
                         </div>
                     </div>
-                    
                     
                     <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -249,18 +208,7 @@
                                
                             <br><br>
                            
-                            <div class="single-pages-widget tags style-2">
-                                <h3>Popular Courses</h3>
-                                <ul class="list-unstyled ps-0 mb-0">
-                                    {% for course in courses %}
-                                        <li class="d-inline-block">
-                                            <a class="text-decoration-none d-inline-block" href="{% url 'course_details' course.id %}">
-                                                {{ course.course_name }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
+                            
                             
                             <div class="pages-leave-reply" id="contactForm">
                                 {% if messages %}
@@ -279,16 +227,9 @@
                                 <br>
                                 <form method="post">
                                     {% csrf_token %}
-                                    <input type="hidden" name="college" value="{{ college.id }}">
+                                    
                                     <div class="row">
-                                        <div class="form-group">
-                                            <select class="form-control" name="course">
-                                                <option value="" disabled selected>Select A course</option>
-                                                {% for course in courses %}
-                                                    <option value="{{ course.course_name }}">{{ course.course_name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
+                                        
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Your name" name="name">
@@ -302,13 +243,6 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Phone Number" name="phone">
-                                                {% if form.phone.errors %}
-                                                    <div class="text-danger">
-                                                        {% for error in form.phone.errors %}
-                                                            <p>{{ error }}</p>
-                                                        {% endfor %}
-                                                    </div>
-                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -320,73 +254,17 @@
                                     <div class="form-group">
                                         <textarea class="form-control textarea" placeholder="Your comments..." name="message" style="height: 100px;"></textarea>
                                     </div>
+                                    
                                     <button type="submit">
                                         Submit
                                         <i class="flaticon-right-arrow"></i>
                                     </button>
                                 </form>
-                                
                             </div>
                             
                         </div>
-                        
                     </div>
                     
-                </div>
-            </div>
-        </div>
-        <div class="apply-area style-2 pb-75">
-            <div class="container">
-                <div class="section-title text-center m-auto">
-                    <h2>What Student’s Say</h2>
-                </div>
-                <div class="testimonial-slider-info-2">
-                    <div class="swiper testimonial-slider-2">
-                        <div class="swiper-wrapper">
-                            {% for review in clients_review %}
-                                <div class="swiper-slide">
-                                    <div class="testimonial-slider-item">
-                                        <ul class="list-unstyled ps-0 star-icon">
-                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                            <li class="d-inline-block"><i class="flaticon-star-1"></i></li>
-                                        </ul>
-                                        <p>{{ review.review }}</p>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="user d-flex align-items-center">
-                                                <div class="image">
-                                                    {% if review.client_image %}
-                                                        <img src="{{ review.client_image.url }}" alt="{{ review.client_name }}">
-                                                    {% endif %}
-                                                </div>
-                                                <div class="content">
-                                                    <h3>{{ review.client_name }}</h3>
-                                                    <span>{{ review.designation }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="quote-icon">
-                                                <i class="flaticon-quote"></i>
-                                            </div>
-                                        </div>
-                                        {% if review.review_video %}
-                                            <div class="video-wrapper">
-                                                <video controls>
-                                                    <source src="{{ review.review_video.url }}" type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="swiper-btn">
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -406,6 +284,188 @@
                 z-index: 950;
             } 
         </style> {% endcomment %}
+        <style>
+            .events-area {
+                position: relative; /* Ensure the button is positioned relative to this container */
+            }
+            
+            .view-all-container {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                margin: 15px; /* Adjust margin as needed */
+            }
+            
+            .view-all-btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #28a745;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-family: Arial, sans-serif;
+            }
+            
+            .view-all-btn:hover {
+                background-color: #0056b3;
+                color: #fff; /* Darken button on hover */
+            }
+            
+            /* Media Queries for Responsive Design */
+            
+            /* Adjust button size on smaller screens */
+            @media (max-width: 576px) {
+                .view-all-container {
+                    position: relative;
+                    margin: 10px 0; /* Adjust margin for better spacing on small screens */
+                    text-align: center; /* Center the button for small screens */
+                }
+            
+                .view-all-btn {
+                    width: auto; /* Allow button to resize based on content */
+                    padding: 8px 16px; /* Decrease padding */
+                    font-size: 12px; /* Smaller font size */
+                }
+            }
+            
+            /* Adjust button size for medium screens */
+            @media (min-width: 576px) and (max-width: 768px) {
+                .view-all-container {
+                    margin: 15px; /* Adjust margin for medium screens */
+                }
+            
+                .view-all-btn {
+                    padding: 10px 20px; /* Standard padding */
+                    font-size: 14px; /* Standard font size */
+                }
+            }
+            
+            /* Adjust button size for large screens */
+            @media (min-width: 768px) {
+                .view-all-container {
+                    margin: 15px; /* Standard margin */
+                }
+            
+                .view-all-btn {
+                    padding: 10px 20px; /* Standard padding */
+                    font-size: 14px; /* Standard font size */
+                }
+            }
+            
+        </style> 
+        <style>
+            .college-card {
+                width: 350px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin: 10px;
+                font-family: Arial, sans-serif;
+                gap : 10px;
+            }
+            
+            .college-header {
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid #e6e6e6;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .college-logo {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 15px;
+            }
+            
+            .college-info h3 {
+                font-size: 16px;
+                margin: 0;
+                color: #0d47a1;
+            }
+            
+            .location {
+                font-size: 14px;
+                color: #666;
+            }
+            
+            .location .material-icons {
+                font-size: 14px;
+                vertical-align: middle;
+            }
+            
+            .ranking {
+                color: #28a745;
+            }
+            
+            .college-details {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #e6e6e6;
+            }
+            
+            .college-details div {
+                text-align: center;
+            }
+            
+            .college-details a {
+                color: #007bff;
+                text-decoration: none;
+            }
+            
+            .college-actions {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .bookmark-btn,
+            .brochure-btn {
+                background-color: #28a745;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            
+            .bookmark-btn {
+                background-color: #f1f1f1;
+                color: #333;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .bookmark-btn .material-icons {
+                font-size: 20px;
+            }
+            
+            .brochure-btn {
+                background-color: #28a745;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .brochure-btn .material-icons {
+                margin-right: 5px;
+            }
+            .college-info a {
+                text-decoration: none; /* Removes the underline from the link */
+                color: #0d47a1; /* Optional: Ensures the link color matches the header color */
+            }
+            
+            
+            
+        </style>  
         
         <style>
          

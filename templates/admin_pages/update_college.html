@@ -97,6 +97,18 @@
                             {% endif %}
                         </div>
                         <div class="form-group">
+                            <label for="CollegeBrochure">College Brochure</label>
+                            <input type="file" class="form-control-file" id="CollegeBrochure" name="college_brochure">
+                            {% if form.course_brochure.errors %}
+                                <div class="text-danger">{{ form.course_brochure.errors }}</div>
+                            {% endif %}
+                            {% if college.college_brochure %}
+                                <p>Current Brochure: <a href="{{ college.course_brochure.url }}" target="_blank">Download</a></p>
+                            {% else %}
+                                <p>No brochure uploaded</p>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
                             <label for="MoreDetails">More Description</label>
                             <textarea class="form-control" name="more_details" id="MoreDetails" rows="3" style="height: 150px;" placeholder="Enter Your Description">{{ college.more_details }}</textarea>
                             {% if form.more_details.errors %}
@@ -111,45 +123,55 @@
     </div>
 </div>
 
-<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
-<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    CKEDITOR.replace('addblogDescription', {
-      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
-      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
-      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
-      height: 300,
-      toolbar: [
-        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
-        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
-        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
-        { name: 'tools', items: ['Maximize'] },
-        { name: 'document', items: ['Source'] },
-        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
-      ],
-      removePlugins: 'easyimage,cloudservices',
-    });
-
-    CKEDITOR.replace('MoreDetails', {
-      extraPlugins: 'uploadimage,image2,colorbutton,colordialog,table,tabletools,filebrowser',
-      filebrowserUploadUrl: '{% url "ckeditor_upload" %}',
-      filebrowserImageUploadUrl: '{% url "ckeditor_upload" %}?type=Images',
-      height: 300,
-      toolbar: [
-        { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'Undo', 'Redo'] },
-        { name: 'editing', items: ['Find', 'Replace', 'SelectAll'] },
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'TextColor', 'BGColor'] },
-        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-        { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Link', 'Unlink', 'Anchor'] },
-        { name: 'tools', items: ['Maximize'] },
-        { name: 'document', items: ['Source'] },
-        { name: 'table', items: ['Table', 'TableProperties', 'TableDelete', 'TableCell', 'TableRow', 'TableColumn'] }
-      ],
-      removePlugins: 'easyimage,cloudservices',
-    });
+    ClassicEditor
+      .create(document.querySelector('#addblogDescription'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+          'bulletedList', 'numberedList', 'blockQuote', '|',
+          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+        ],
+        ckfinder: {
+          uploadUrl: '{% url "ckeditor_upload" %}'
+        },
+        simpleUpload: {
+          uploadUrl: '{% url "ckeditor_upload" %}',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
   });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      ClassicEditor
+        .create(document.querySelector('#MoreDetails'), {
+          toolbar: [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+            'bulletedList', 'numberedList', 'blockQuote', '|',
+            'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+          ],
+          ckfinder: {
+            uploadUrl: '{% url "ckeditor_upload" %}'
+          },
+          simpleUpload: {
+            uploadUrl: '{% url "ckeditor_upload" %}',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}'
+            }
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+  </script>
 {% endblock %}

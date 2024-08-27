@@ -118,17 +118,18 @@
 }
 
 </style>
+<style>
+    .your-container-class p {
+        font-family: Arial, sans-serif !important;
+    }
+</style>
 
 
         <!-- End Responsive Navbar Area -->
 
         <div class="hero-area">
 
-            <!-- <div class="image-slider">
-                <div class="slide" style="background-image: url('{% static 'assets/img/DJI_0056.JPG' %}');"></div>
-                <div class="slide" style="background-image: url('{% static 'assets/img/DJI_0057.JPG' %}');"></div>
-                <div class="slide" style="background-image: url('{% static 'assets/img/DJI_0058.JPG' %}');"></div>
-            </div> -->
+            
             <div class="image-slider">
                 {% for image in slider_images %}
                     <div class="slide" style="background-image: url('{{ image.image.url }}');">
@@ -142,7 +143,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="search-box">
+                        <div class="search-box your-container-class">
                             <form method="get" action="{% url 'index' %}">
                                 <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
                                 {% if no_results %}
@@ -162,7 +163,7 @@
                                     </script>
                                 {% endif %}
                                 <div class="form-group">
-                                    <input type="text" name="query" class="form-control" placeholder="Search Colleges, Courses, Exams, QnA, & Articles" value="{{ search_query }}">
+                                    <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
                                     <button type="submit"><i class="ri-search-line"></i></button>
                                 </div>
                             </form>   
@@ -171,100 +172,39 @@
                 </div>
             </div>
             
-            
-            <!-- {% if no_results %}
-                <div id="no-results-message" style="text-align: center; color: white;">
-                    No results found for "{{ search_query }}". Please try another search term.
-                </div>
-                <script>
-                    
-                    setTimeout(function() {
-                        var noResultsMessage = document.getElementById('no-results-message');
-                        if (noResultsMessage) {
-                            noResultsMessage.remove(); 
-                        }
-                        
-                        window.location.href = "{% url 'index' %}";
-                    }, 3000);
-                </script>
-            {% endif %} -->
 
         </div>
         
+
         <style>
-    @media (max-width: 500px) {
-    .swiper {
-        width: 100%; /* Ensure the swiper takes full width */
-    }
-
-    .swiper-slide {
-        width: 100% !important; /* Force each slide to take up full width */
-    }
-
-    .card3 {
-        width: 100%; /* Make the card take up the full width of its container */
-        margin: 10px 0; /* Ensure spacing between cards */
-    }
-
-    .card-header3 {
-        padding: 5px; /* Reduce padding for smaller screens */
-    }
-
-    .card-header3 .logo {
-        height: 25px; /* Adjust logo size for smaller screens */
-        margin-right: 5px; /* Adjust spacing */
-    }
-
-    .card-header3 span {
-        font-size: 14px; /* Adjust font size for smaller screens */
-    }
-
-    .card-body3 {
-        padding: 5px; /* Adjust padding */
-    }
-
-    .card-body3 p {
-        font-size: 12px; /* Adjust font size */
-        white-space: normal; /* Allow text to wrap */
-    }
-}
+            .your-container-class h4 {
+                font-family: Arial, sans-serif !important;
+            }
         </style>
-        
-        
-        <div class="partner-area ptb-100 pb-75" style="margin-top: -50px;">
-            <div class="section-title text-center m-auto" data-cues="slideInUp">
+        <div class="partner-area ptb-100 pb-75" style="margin-top:-30px;">
+            {% comment %} <div class="section-title text-center m-auto " data-cues="slideInUp">
                 <h4>Featured Colleges</h4>
-            </div>
+            </div> {% endcomment %}
             <div class="container">
                 <div class="partner-slider-info">
                     <div class="swiper partner-slider">
+                        
                         <div class="swiper-wrapper" data-cues="slideInUp">
                             {% for featured in featured_colleges %}
-                                <div class="swiper-slide">
-                                    <a href="{% url 'college_details' featured.college_details %}" class="card-link3">
-                                        <div class="card3">
-                                            <div class="card-header3">
-                                                {% if featured.college_details.logo %}
-                                                    <img src="{{ featured.college_details.logo.url }}" alt="{{ featured.college_details.college_name }} Logo" class="logo">
-                                                {% else %}
-                                                    <img src="{% static 'assets/img/partner/partner-2.png' %}" alt="Default Logo" class="logo">
-                                                {% endif %}
-                                            </div>
-                                            <div class="card-body3">
-                                                <p>{{ featured.college_details.college_name }}</p>
-                                            </div>
-                                        </div>
-                                    </a>
+                            <div class="swiper-slide">
+                                <a href="{% url 'college_details' featured.college_details %}" class="card-link3">
+                                <div class="single-partner-logo">
+                                    <img src="{{ featured.college_details.logo.url }}" alt="partner-logo">
                                 </div>
+                                </a>
+                            </div>
                             
-                                        
                             {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
         
         <!-- End About Area -->
 
@@ -321,200 +261,281 @@
         </div>
         
         
+        
+        
         <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
+            <div class="container">
+                <div class="section-title text-center m-auto" data-cues="slideInUp">
+                    <h4>Top Available Colleges</h4>
+                </div>
+                <div class="row justify-content-center" data-cues="slideInUp">
+                    {% for college in colleges %}
+                    <div class="college-card">
+                        <div class="college-header">
+                            <img src="{{college.logo.url}}" alt="{{college.college_name}}" class="college-logo">
+                            <div class="college-info">
+                                <a href="{% url 'college_details' college.college_name %}">
+                                <h3>{{college.college_name}}</h3>
+                                </a>
+                                <p class="location"><i class="material-icons">location_on</i>{{college.place}} • <span class="ranking"></span></p>
+                            </div>
+                        </div>
+                        <div class="college-details">
+                            <div>
+                                <span>Courses Offered</span><br>
+                                <a href="#">{{college.total_course}} courses</a>
+                            </div>
+                            
+                           <div>
+                                <span>Total Fees Range</span><br>
+                                ₹{{college.min_fee}} L - {{college.max_fee}} L
+                            </div> 
+                        </div>
+                        <div class="college-actions">
+                            <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
+                            <button class="brochure-btn"  data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}"><i class="material-icons"></i> Brochure</button>  
+                            
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="view-all-container">
+                    <a href="{% url 'all_colleges' %}" class="view-all-btn">View All Colleges</a>
+                </div>
+            </div>
+        </div> 
+        <style>
+            .events-area {
+                position: relative; /* Ensure the button is positioned relative to this container */
+            }
+            
+            .view-all-container {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                margin: 15px; /* Adjust margin as needed */
+            }
+            
+            .view-all-btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #28a745;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-family: Arial, sans-serif;
+            }
+            
+            .view-all-btn:hover {
+                background-color: #0056b3;
+                color: #fff; /* Darken button on hover */
+            }
+            
+            /* Media Queries for Responsive Design */
+            
+            /* Adjust button size on smaller screens */
+            @media (max-width: 576px) {
+                .view-all-container {
+                    position: relative;
+                    margin: 10px 0; /* Adjust margin for better spacing on small screens */
+                    text-align: center; /* Center the button for small screens */
+                }
+            
+                .view-all-btn {
+                    width: auto; /* Allow button to resize based on content */
+                    padding: 8px 16px; /* Decrease padding */
+                    font-size: 12px; /* Smaller font size */
+                }
+            }
+            
+            /* Adjust button size for medium screens */
+            @media (min-width: 576px) and (max-width: 768px) {
+                .view-all-container {
+                    margin: 15px; /* Adjust margin for medium screens */
+                }
+            
+                .view-all-btn {
+                    padding: 10px 20px; /* Standard padding */
+                    font-size: 14px; /* Standard font size */
+                }
+            }
+            
+            /* Adjust button size for large screens */
+            @media (min-width: 768px) {
+                .view-all-container {
+                    margin: 15px; /* Standard margin */
+                }
+            
+                .view-all-btn {
+                    padding: 10px 20px; /* Standard padding */
+                    font-size: 14px; /* Standard font size */
+                }
+            }
+            
+        </style> 
+
+        {% comment %} <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
             <div class="container">
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
                     <h4>Top Colleges in your region</h4>
                 </div>
                 <div class="row justify-content-center" data-cues="slideInUp">
-                    {% for college in colleges %}
-                    <div class="card">
-                        <img src="{{college.logo.url}}" alt="{{college.college_name}}">
-                        <a href="{% url 'college_details' college.college_name %}">
-                            <h3>{{college.college_name}}</h3>
-                        </a>
-                        <p>{{college.place}}</p>
-                        <div class="details">
-                            <div>Course Offered<br><a href="{% url 'college_details' college.college_name %}">{{college.total_course}} course</a></div>
-                            <div>Total Fees<br>₹{{college.min_fee}} L</div>
+                    <div class="college-cards-container">
+                        
+                        {% for college in colleges %}
+                        <div class="college-card">
+                            <div class="college-header">
+                                <img src="{{college.logo.url}}" alt="College Logo" class="college-logo">
+                                <div class="college-info">
+                                    <h3>{{college.college_name}}</h3>
+                                    <p class="location"><i class="material-icons"></i> {{college.place}} • <span class="ranking">#2 NIRF</span></p>
+                                </div>
+                            </div>
+                            <div class="college-details">
+                                <div>
+                                    <span>Courses Offered</span><br>
+                                    <a href="#">{{college.total_course}} courses</a>
+                                </div>
+                                <div>
+                                    <span>⭐ 4.5</span>
+                                </div>
+                                <div>
+                                    <span>Total Fees Range</span><br>
+                                    ₹{{college.min_fee}} L - {{college.max_fee}} L
+                                </div>
+                            </div>
+                            <div class="college-actions">
+                                <button class="bookmark-btn"><i class="material-icons"></i></button>
+                                <button class="brochure-btn"  data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}"><i class="material-icons"></i> Brochure</button>
+                            </div>
+                            
                         </div>
-                        <div class="actions">
-                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">Brochure</button>
-                        </div>
+                        {% endfor %}
+                    
+                        
                     </div>
-                    {% endfor %}
+                    
                 </div>
             </div>
-        </div>
-         
-
-        
-        <style>
+        </div>  {% endcomment %}
+       
+       
+      <style>
+            .college-card {
+                width: 350px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin: 10px;
+                font-family: Arial, sans-serif;
+                gap : 10px;
+            }
             
-            .card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            padding: 20px;
-            margin: 10px; /* Adds gap between card */
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-        
-        .card img {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-        }
-        .card h3 {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-        .card p {
-            color: #888;
-            font-size: 14px;
-            margin: 5px 0;
-        }
-        .card .details {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-        }
-        .card .details div {
-            font-size: 14px;
-        }
-        .card .details a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .card .details a:hover {
-            text-decoration: underline;
-        }
-        .card .actions {
-            margin-top: 20px;
-        }
-        .card .actions .btn {
-            background-color: #28a745;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .card .actions .btn:hover {
-            background-color: #218838;
-        }
-        .card:hover .details a {
-            color: #fff;
-        }
-        </style>
-        <style>
-    
-        @media (max-width: 300px) {
-            .card {
-                width: 100%; /* Make the card take full width of the container */
-                padding: 10px;
-                height: 100%;
+            .college-header {
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid #e6e6e6;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
             }
-
-            .card img {
-                width: 30px; /* Further reduces the image size */
-                height: 30px;
+            
+            .college-logo {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 15px;
             }
-
-            .card h3 {
+            
+            .college-info h3 {
+                font-size: 16px;
+                margin: 0;
+                color: #0d47a1;
+            }
+            
+            .location {
                 font-size: 14px;
-                margin: 6px 0;
+                color: #666;
             }
-
-            .card p {
-                font-size: 10px;
+            
+            .location .material-icons {
+                font-size: 14px;
+                vertical-align: middle;
             }
-
-            .card .details div {
-                font-size: 10px;
+            
+            .ranking {
+                color: #28a745;
             }
-
-            .card .actions .btn {
-                padding: 6px 12px;
-                font-size: 12px;
+            
+            .college-details {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #e6e6e6;
             }
-        }
+            
+            .college-details div {
+                text-align: center;
+            }
+            
+            .college-details a {
+                color: #007bff;
+                text-decoration: none;
+            }
+            
+            .college-actions {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .bookmark-btn,
+            .brochure-btn {
+                background-color: #28a745;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            
+            .bookmark-btn {
+                background-color: #f1f1f1;
+                color: #333;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .bookmark-btn .material-icons {
+                font-size: 20px;
+            }
+            
+            .brochure-btn {
+                background-color: #28a745;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .brochure-btn .material-icons {
+                margin-right: 5px;
+            }
+            .college-info a {
+                text-decoration: none; /* Removes the underline from the link */
+                color: #0d47a1; /* Optional: Ensures the link color matches the header color */
+            }
+            
+            
+            
+        </style>  
 
-        @media (min-width: 300px) and (max-width: 500px) {
-        .card {
-            width: 90%; /* Adjusts the card width to 90% of the container */
-            padding: 15px;
-            height: auto;
-            margin: 10px auto; /* Centers the cards and provides a margin */
-        }
-
-        .card img {
-            width: 40px; /* Adjusts the image size */
-            height: 40px;
-        }
-
-        .card h3 {
-            font-size: 16px; /* Slightly larger font size */
-            margin: 8px 0;
-        }
-
-        .card p {
-            font-size: 12px; /* Adjusts the font size */
-        }
-
-        .card .details div {
-            font-size: 12px; /* Adjusts the font size */
-        }
-
-        .card .actions .btn {
-            padding: 8px 16px; /* Adjusts button padding */
-            font-size: 14px; /* Slightly larger font size */
-        }
-    }
-
-    @media (min-width: 500px) and (max-width: 769px) {
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .card {
-        width: 45%; /* Sets each card to 45% of the container width */
-        padding: 15px;
-        height: auto;
-        margin: 10px; /* Adds space between cards */
-        box-sizing: border-box; /* Ensures padding and border are included in the width */
-    }
-
-    .card img {
-        width: 50px; /* Adjusts the image size */
-        height: 50px;
-    }
-
-    .card h3 {
-        font-size: 18px; /* Slightly larger font size */
-        margin: 10px 0;
-    }
-
-    .card p {
-        font-size: 14px; /* Adjusts the font size */
-    }
-
-    .card .details div {
-        font-size: 14px; /* Adjusts the font size */
-    }
-
-    .card .actions .btn {
-        padding: 10px 20px; /* Adjusts button padding */
-        font-size: 16px; /* Slightly larger font size */
-    }
-}
-        </style>
+        
         
         <!-- End Graduets Area -->
 
@@ -559,18 +580,305 @@
             </div>
         </div>
   
-        <!-- End Funfact Area -->
-        <!-- Start Apply Area -->
-        <div class='container' id="courses-section">
-            <h1 style="margin-top: -100;text-align: center;">Trending Courses</h1>
-            <br> 
-        <div class="exam-list">
-            {% for data in courses %}
-            <a href="{% url 'course_details' data.id %}" class="exam-button">{{ data.course_name }}</a>   
-            {% endfor %}  
+       
+        <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="brochureForm" method="post" action="{% url 'download_brochure' %}">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="brochureModalLabel">Download Brochure</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="college_id" id="college_id">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Your email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Phone Number" name="phone" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>    
+        
+    <div class='container' id="courses-section">
+        
+        <div class="course-section">
+            <h2>Explore Trending Courses</h2>
+            
+             <div class="course-filters">
+                
+                {% for course in unique_courses %}
+                    <button class="filter-btn {% if forloop.first %}active{% endif %}" data-filter="{{ course.course_name }}">
+                        {{ course.course_name }}
+                    </button>
+                {% endfor %}
+            </div>
+            <div class="course-cards">
+                
+                {% for course in courses %}
+                    <div class="course-card your-container-class" data-category="{{ course.course_name }}">
+                    
+                        
+                        <a href="{% url 'course_details' course.id %}" class="course-title-link">
+                            <h3 class="course-title">{{ course.college.college_name }}</h3>
+                        </a>
+                        {% comment %} <h3 class="course-title">{{ course.college.college_name }}</h3> {% endcomment %}
+                        <hr>
+                        <div class="course-details your-container-class">
+                            <p>Course Duration: <strong>{{ course.course_duration }}</strong></p>
+                            
+
+                            {% if course.course_fees %}
+                            <p>Total Avg. Fees: <strong>{{ course.course_fees }}</strong></p>
+                            {% endif %}
+
+                            {% if course.seat_availability %}
+                            <p>Seat Availability: <strong>{{ course.seat_availability }}</strong></p>
+                            {% endif %}
+
+                            {% if course.eligibility_criteria %}
+                            <p>Eligibility Criteria: <strong>{{ course.eligibility_criteria }}</strong></p>
+                            {% endif %}
+                             
+                            <p>Course Type: <strong>{{ course.get_course_type_display }}</strong></p>
+
+                        </div>
+                        <hr>
+                        
+                        {% if course.brochure %}
+                            {% comment %} <a href="{{ course.brochure.url }}" class="course-overview">Download Brochure</a> {% endcomment %}
+                            <a href="{{ course.brochure.url }}" class="course-overview brochure-link" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ course.id }}">
+                                <i class="mdi mdi-download"></i> Download Brochure
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
         
-    </div>  
+    </div> 
+    <br><br>
+    <div class='container your-container-class' id="courses-section">
+        <h5 style="margin-top: -100;text-align: center;">ADD ON COURSES</h5>
+        <br> 
+    <div class="exam-list">
+        {% for data in add_on %}
+        <a href="{% url 'add_on_course_details' data.id %}" class="exam-button">{{ data.course_name }}</a>   
+        {% endfor %}  
+        
+    </div>
+    
+    
+    
+</div> 
+
+<style>
+    .course-title-link {
+        text-decoration: none;
+        color: inherit; /* Inherit color from course title */
+    }
+</style>
+<style>
+    /* Media queries for responsiveness */
+@media (max-width: 767px) {
+    .course-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .course-filters {
+        justify-content: space-around;
+    }
+
+    .filter-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (min-width: 992px) {
+    .course-filters {
+        justify-content: flex-start;
+    }
+
+    .filter-btn {
+        flex-basis: auto;
+    }
+}
+</style>
+
+    <style>
+        .course-section {
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        .course-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .course-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: 1px solid navy; /* Border color navy blue */
+            border-radius: 30px;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            color: navy; /* Text color navy blue */
+            font-family: Arial, sans-serif !important; /* Font family Arial, sans-serif */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: navy; /* Background color navy blue when active or hovered */
+            color: #fff; /* Text color white when active or hovered */
+            font-weight: bold;
+        }
+        
+        
+        
+        .course-cards {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+        }
+        
+        .course-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 280px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .course-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #f1f1f1;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .course-type {
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .course-title {
+            font-size: 20px;
+            margin: 40px 0 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .course-details p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .course-overview {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .course-overview:hover {
+            text-decoration: underline;
+        }
+        
+        
+    </style>
+    <style>
+        .course-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: 280px; /* Fixed width */
+            height: 340px; /* Fixed height */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensure the content is spaced out evenly */
+        }
+        
+        .course-title {
+            font-size: 18px;
+            margin: 20px 0 10px; /* Adjust margins */
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap; /* Prevent text from wrapping */
+            overflow: hidden; /* Hide overflowed text */
+            text-overflow: ellipsis; /* Display ellipsis for overflowed text */
+
+        }
+   
+        .brochure-link {
+            display: inline-flex;
+            align-items: center;
+            
+            font-size: 14px;
+            font-weight: bold;
+            color: navy; /* Navy blue text color */
+            text-decoration a: none;
+            border-radius: 5px;
+            transition: color 0.3s ease;
+        }
+        
+        .brochure-link i {
+            margin-right: 8px; /* Space between icon and text */
+            font-size: 16px;
+            color: navy; /* Match the icon color to the text */
+        }
+        
+        
+    </style>
+    <style>
+        
+    </style>
     <br><br>
         <!-- End Apply Area -->
 
@@ -619,7 +927,7 @@
             }
         </style>
         <div id="exam-section">
-            <h1 style="margin-top: -80px;text-align: center;">Top Exams </h1>
+            <h1 style="margin-top: -50px;text-align: center;">Top Exams </h1>
             <br>  
             <div class="card-container1">
                 {% for exam in exam %}
@@ -631,7 +939,7 @@
         <br><br>
 
 
-        <div class="video-area">
+        {% comment %} <div class="video-area">
             <div class="container">
                 <div class="video-wrapper">
                     {% for video in about %}
@@ -646,7 +954,7 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
 
         
               
@@ -682,9 +990,11 @@
                 </div>
             </div>
         </div>
+
+        
             
         <br><br>
-        
+  
 
         <div class="apply-area style-2 pb-75">
             <div class="container">
@@ -741,7 +1051,128 @@
                 </div>
             </div>
         </div>
+
         
+        <div class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-header">
+                    <h2>Subscribe To Our News Letter</h2>
+                    <p>Get College Notifications, Exam Notifications, and News Updates</p>
+                </div>
+                <form method="post" class="newsletter-form">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <div class="input-item">
+                            <i class="mdi mdi-email-outline"></i>
+                            <input type="email" placeholder="Enter your email id" name="email" required>
+                        </div>
+                        <div class="input-item">
+                            <i class="mdi mdi-phone-outline"></i>
+                            <input type="tel" placeholder="Enter your mobile no" name="phone" required>
+                        </div>
+                        <div class="input-item">
+                            <i class="mdi mdi-school-outline"></i>
+                            <select name="college" required>
+                                <option value="" disabled selected>Choose your College</option>
+                                {% for college in colleges %}
+                                    <option value="{{ college.id }}">{{ college.college_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="submit-item">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        
+        <style>
+            .newsletter-section {
+                padding: 40px 0;
+                background-color: #fff;
+                text-align: center;
+            }
+            
+            .newsletter-header h2 {
+                font-size: 24px;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-header p {
+                font-size: 16px;
+                color: #777;
+                margin-bottom: 30px;
+            }
+            
+            .newsletter-form {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .input-group {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .input-item {
+                position: relative;
+                display: flex;
+                align-items: center;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 10px;
+                background-color: #fff;
+                width: 250px;
+            }
+            
+            .input-item i {
+                margin-right: 8px;
+                font-size: 18px;
+                color: #777;
+            }
+            
+            .input-item input, .input-item select {
+                border: none;
+                outline: none;
+                width: 100%;
+                font-size: 14px;
+                color: #333;
+            }
+            
+            .submit-item button {
+                background-color: #ff6600;
+                color: #fff;
+                font-size: 16px;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            
+            .submit-item button:hover {
+                background-color: #e65c00;
+            }
+            
+            @media screen and (max-width: 768px) {
+                .newsletter-form {
+                    flex-direction: column;
+                    gap: 15px;
+                }
+            
+                .input-item, .submit-item button {
+                    width: 100%;
+                }
+            }
+            
+        </style>
         <style>
             .video-area {
             position: relative;
@@ -857,6 +1288,29 @@
         });
         </script>
     
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const courseCards = document.querySelectorAll('.course-card');
+    
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+    
+                const filter = this.getAttribute('data-filter');
+    
+                courseCards.forEach(card => {
+                    if (filter === 'All' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+</script>
 
        
         <script src="{% static 'assets/js/buttons.js' %}"></script>

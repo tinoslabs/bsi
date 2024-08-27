@@ -5,24 +5,24 @@
     gap: 10px; /* Smaller gap for smaller cards */
 }
 
-.card2 {
+/* .card2 {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
-    border: 1px solid #0074a2; /* Slightly thinner border */
+    border: 1px solid #0074a2; 
     border-radius: 5px;
-    padding: 10px 20px; /* Adjusted padding for smaller size */
+    padding: 10px 20px;
     text-align: center;
-    font-size: 14px; /* Smaller font size */
+    font-size: 14px; 
     font-weight: bold;
     color: #0074a2;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 200px; /* Fixed width for consistent size */
-    height: 60px; /* Fixed height for consistent size */
+    width: 200px; 
+    height: 60px; 
     box-sizing: border-box;
     transition: transform 0.3s ease-in-out;
-    text-decoration: none; /* Ensures the link text has no underline */
+    text-decoration: none; 
 }
 
 .card:hover {
@@ -31,16 +31,16 @@
 
 @media (max-width: 768px) {
     .card {
-        width: 180px; /* Adjusted width for smaller screens */
-        height: 50px; /* Adjusted height for smaller screens */
-        font-size: 12px; /* Smaller font size for smaller screens */
+        width: 180px; 
+        height: 50px; 
+        font-size: 12px; 
     }
 }
 
 @media (max-width: 480px) {
     .card2 {
-        width: 160px; /* Adjusted width for very small screens */
-        height: 40px; /* Adjusted height for very small screens */
-        font-size: 10px; /* Smaller font size for very small screens */
+        width: 160px; 
+        height: 40px; 
+        font-size: 10px; 
     }
-}
+} */

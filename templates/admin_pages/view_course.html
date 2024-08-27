@@ -41,6 +41,8 @@ img {
               <th>Course Type</th>
               <th>Course Fees</th>
               <th>Course Duration</th>
+              <th>Seat Availability</th>
+              <th>Eligibility Criteria</th>
               <th>Brochure</th>
               <th>Course Videos</th>
               <th>Course Description</th>
@@ -57,21 +59,40 @@ img {
               <td>{{ course.course_fees }}</td>
               <td>{{ course.course_duration }}</td>
               <td>
-                {% if course.brochure %}
-                <a href="{{ course.brochure.url }}" target="_blank">Download Brochure</a>
+                {% if course.seat_availability %}
+                  {{ course.seat_availability }}
                 {% else %}
-                No brochure available
+                  Data not found
+                {% endif %}
+              </td>
+              <td>
+                {% if course.eligibility_criteria %}
+                  {{ course.eligibility_criteria }}
+                {% else %}
+                  Data not found
+                {% endif %}
+              </td>
+              <td>
+                {% if course.brochure %}
+                  <a href="{{ course.brochure.url }}" target="_blank">Download Brochure</a>
+                {% else %}
+                  No brochure available
                 {% endif %}
               </td>
               <td>
                 {% if course.course_videos %}
-                <a href="{{ course.course_videos }}" target="_blank">View Video</a>
+                  <a href="{{ course.course_videos }}" target="_blank">View Video</a>
                 {% else %}
-                No video available
+                  No video available
                 {% endif %}
               </td>
               <td>{{ course.course_description | safe }}</td>
+              
+              {% if course.additional_details %}
               <td>{{ course.additional_details | safe }}</td>
+              {% else %}
+                  No data available
+              {% endif %}
               <td>
                 <a href="{% url 'update_course' course.id %}" class="btn btn-primary btn-sm">
                   <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Edit
@@ -83,7 +104,7 @@ img {
             </tr>
             {% empty %}
             <tr>
-              <td colspan="10">No courses available.</td>
+              <td colspan="12">No courses available.</td>
             </tr>
             {% endfor %}
           </tbody>

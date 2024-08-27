@@ -1,0 +1,75 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Update Course for {{ course.course_name }}</h4>
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_category">College Name</label>
+                            <select name="college" id="id_category" class="form-control">
+                                {% for c in college %}
+                                    <option value="{{ c.id }}" {% if c.id == course.college.id %}selected{% endif %}>{{ c.college_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseName">Course Name</label>
+                            <input type="text" class="form-control" id="courseName" name="course_name" placeholder="Course Name" value="{{ form.course_name.value|default_if_none:'' }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="brochureFile">Brochure</label>
+                            <input type="file" class="form-control-file" id="brochureFile" name="course_brochure">
+                            {% if course.brochure %}
+                                <a href="{{ course.brochure.url }}" target="_blank">Current Brochure</a>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="courseDescription">Course Description</label>
+                            <textarea class="form-control" name="course_details" id="courseDescription" rows="3" style="height: 150px;" placeholder="Enter Course Description">{{ form.course_details.value|default_if_none:'' }}</textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CKEditor Script -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector('#courseDescription'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
+          'bulletedList', 'numberedList', 'blockQuote', '|',
+          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+        ],
+        ckfinder: {
+          uploadUrl: '{% url "ckeditor_upload" %}'
+        },
+        simpleUpload: {
+          uploadUrl: '{% url "ckeditor_upload" %}',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+</script>
+
+{% endblock %}

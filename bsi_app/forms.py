@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,Add_On_Course
 from django.core.exceptions import ValidationError
 import re
 
@@ -32,7 +32,6 @@ class Client_Logo_Form(forms.ModelForm):
 
 
 class CollegeModelForm(forms.ModelForm):
-    
     class Meta:
         model = College_Model
         fields = '__all__'
@@ -134,3 +133,71 @@ class EnquirySubmissionForm(forms.ModelForm):
     class Meta:
          model = EnquirySubmission
          fields = '__all__'
+         
+      
+class headerMainForm(forms.ModelForm):
+    class Meta:
+        model = headerMain
+        fields = ['main_heading']
+       
+from django.forms import formset_factory
+
+
+class SubheaderForm(forms.ModelForm):
+    class Meta:
+        model = SubHeader
+        fields = '__all__'
+
+SubheaderFormSet = formset_factory(SubheaderForm, extra=1)  
+
+class SubHeaderHeadingForm(forms.ModelForm):
+    class Meta:
+        model = SubHeaderHeading
+        fields = '__all__'
+
+SubheaderFormSet = formset_factory(SubheaderForm, extra=1)  
+
+
+class SubHeaderHeadingForm(forms.ModelForm):
+    class Meta:
+        model = SubHeaderHeading
+        fields = ['main_header', 'sub_header', 'sub_heading']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['main_header'].queryset = headerMain.objects.all()
+        self.fields['sub_header'].queryset = SubHeader.objects.all()
+
+class HeaderDetailsForm(forms.ModelForm):
+    class Meta:
+        model = HeaderDetails
+        fields = '__all__'
+        
+
+class NotificationForm(forms.ModelForm):
+    class Meta:
+        model = Notification
+        fields = ['message', 'read','notification_end_date','details']
+        
+class Add_On_Course_Form(forms.ModelForm):
+    class Meta:
+        model = Add_On_Course
+        fields = '__all__'
+    
+    
+from .models import NewsletterSubscription
+
+class NewsletterForm(forms.ModelForm):
+    class Meta:
+        model = NewsletterSubscription
+        fields = ['college', 'email', 'phone']
+        widgets = {
+            'college': forms.Select(attrs={'id': 'college-select'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter your email id'}),
+            'phone': forms.TextInput(attrs={'placeholder': 'Enter your mobile no'}),
+        }
+    
+    
+    
+ 
+

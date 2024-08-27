@@ -1,35 +1,39 @@
 {% extends "admin_pages/base.html" %}
 {% load static %}
-{% block content %}
 
+{% block content %}
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Add Details</h4>
+          <h4 class="card-title">Add Header Details</h4>
           <form class="forms-sample" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+
+            <!-- Sub Heading Field -->
             <div class="form-group">
-              <label for="id_sub_collection_category">Sub Collection Category</label>
-              <select name="sub_collection_category" id="id_sub_collection_category" class="form-control">
-                {% for category in sub_collection_categories %}
-                <option value="{{ category.id }}">{{ category }}</option>
+              <label for="id_sub_heading">Sub Heading</label>
+              <select name="sub_heading" id="id_sub_heading" class="form-control">
+                {% for heading in sub_headings %}
+                <option value="{{ heading.id }}">{{ heading.text }}</option>
                 {% endfor %}
               </select>
             </div>
+
+            <!-- Details Field -->
             <div class="form-group">
               <label for="id_details">Details</label>
-              <textarea class="form-control" name="details" id="id_details" rows="3" style="height: 150px;" placeholder="Enter Details"></textarea>
+              <textarea class="form-control" name="details" id="id_details" rows="3" style="height: 150px;" placeholder="Enter Details" ></textarea>
             </div>
+
+            <!-- Brochure Field -->
             <div class="form-group">
-              <label for="id_videos">YouTube Video URL</label>
-              <input type="url" class="form-control" id="id_videos" name="videos" placeholder="Enter YouTube Video URL">
+              <label for="id_brochure">Brochure(Optional)</label>
+              <input type="file" class="form-control" id="id_brochure" name="brochure">
             </div>
-            <div class="form-group">
-              <label for="id_more_details">More Details</label>
-              <textarea class="form-control" name="more_details" id="id_more_details" rows="3" style="height: 150px;" placeholder="Enter More Details"></textarea>
-            </div>
+
+            <!-- Submit Button -->
             <button type="submit" class="btn btn-primary me-2">Submit</button>
           </form>
         </div>
@@ -38,6 +42,30 @@
   </div>
 </div>
 
+<!-- CKEditor Integration -->
+{% comment %} <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ClassicEditor
+      .create(document.querySelector('#id_details'), {
+        toolbar: [
+          'heading', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'link', '|',
+          'bulletedList', 'numberedList', 'blockQuote', '|',
+          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
+        ],
+        simpleUpload: {
+          uploadUrl: '{% url "ckeditor_upload" %}',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+</script> {% endcomment %}
 
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 <script>
@@ -65,30 +93,4 @@
       });
   });
 </script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    ClassicEditor
-      .create(document.querySelector('#id_more_details'), {
-        toolbar: [
-          'heading', '|',
-          'bold', 'italic', 'underline', 'strikethrough', 'link', 'uploadFile', '|',
-          'bulletedList', 'numberedList', 'blockQuote', '|',
-          'insertTable', 'imageUpload', 'mediaEmbed', 'undo', 'redo'
-        ],
-        ckfinder: {
-          uploadUrl: '{% url "ckeditor_upload" %}'
-        },
-        simpleUpload: {
-          uploadUrl: '{% url "ckeditor_upload" %}',
-          headers: {
-            'X-CSRFToken': '{{ csrf_token }}'
-          }
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  });
-</script>
 {% endblock %}
-

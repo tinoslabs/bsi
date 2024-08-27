@@ -1,0 +1,87 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+/* Responsive CSS styles for the table */
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+img {
+  width: 80px;
+  height: 80px;
+}
+</style>
+
+<div class="col-lg-10 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">View Courses</h4>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>College Name</th>
+              <th>Course Name</th>
+             
+              <th>Brochure</th>
+             
+              <th>Course Description</th>
+             
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for course in courses %}
+            <tr>
+              <td>{{ course.college.college_name }}</td>
+              <td>{{ course.course_name }}</td>
+              
+              <td>
+                {% if course.course_brochure %}
+                  <a href="{{ course.course_brochure.url }}" target="_blank">Download Brochure</a>
+                {% else %}
+                  No brochure available
+                {% endif %}
+              </td>
+              
+              
+              <td>{{ course.course_details | safe }}</td>
+              
+              ]
+              <td>
+                <a href="{% url 'update_add_on_course' course.id %}" class="btn btn-primary btn-sm">
+                  <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Edit
+                </a>
+                <a href="{% url 'delete_add_on_course' course.id %}" class="btn btn-danger btn-sm">
+                  <i class="mdi mdi-delete" aria-hidden="true"></i> Delete
+                </a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="12">No courses available.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
