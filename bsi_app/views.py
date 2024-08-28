@@ -31,9 +31,7 @@ def logout_user(request):
 def admin_dashboard(request):
     return render(request, 'admin_pages/admin_dashboard.html')
 
-
 from django.db.models import Q
-
 
 def index(request):
     if request.method == 'POST':
@@ -41,11 +39,18 @@ def index(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Our team will contact you soon.')
-            return redirect('index')  # Redirect to a success page
+            return redirect('index')
     else:
         form = NewsletterForm()
-    search_query = request.GET.get('query','')
-    colleges = College_Model.objects.order_by('-id')[:9]
+
+    search_query = request.GET.get('query', '')
+    
+    # Filter first, then slice
+    colleges = College_Model.objects.order_by('-id')
+    if search_query:
+        colleges = colleges.filter(Q(college_name__icontains=search_query) | Q(place__icontains=search_query))
+    colleges = colleges[:9]  # Apply slicing after filtering
+
     courses = Course_Model.objects.all()
     exams = ExamModel.objects.all()
     add_on = Add_On_Course.objects.all()
@@ -53,18 +58,15 @@ def index(request):
     no_results = False
 
     if search_query:
-        colleges = colleges.filter(Q(college_name__icontains=search_query) | Q(place__icontains=search_query))
         courses = courses.filter(Q(course_name__icontains=search_query))
         exams = exams.filter(Q(exam_name__icontains=search_query))
 
-        # Check if all results are empty
         if not colleges.exists() and not courses.exists() and not exams.exists():
             no_results = True
 
     clients_review = ClientReview.objects.all()
     client_logo = Client_Logo.objects.all()
     unique_courses = Course_Model.objects.values('course_name').distinct()
-    # notifications = Notification.objects.all().order_by('-created_at')
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
@@ -77,35 +79,34 @@ def index(request):
     footer_colleges = College_Model.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
-    
-    
+
     context = {
         'clients_review': clients_review,
         'client_logo': client_logo,
         'courses': courses,
-        'notifications' : notifications,
+        'notifications': notifications,
         'colleges': colleges,
-        'details' : details,
-        'blog_category' : blog_category,
-        'exam' : exams,
-        'add_on':add_on,
-        'about' : about,
-        'featured_colleges' : featured_colleges,
+        'details': details,
+        'blog_category': blog_category,
+        'exam': exams,
+        'add_on': add_on,
+        'about': about,
+        'featured_colleges': featured_colleges,
         'search_query': search_query,
-        'no_results': no_results,  # Pass the flag to the context
-        'footer_colleges' : footer_colleges,
-        'footer_courses' : footer_courses,
-        'footer_exams' : footer_exams,
-        'slider_images' : slider_images,
-        'main_header' : main_header,
-        'sub_headers' : sub_headers,
-        'sub_headings' : sub_headings,
+        'no_results': no_results,
+        'footer_colleges': footer_colleges,
+        'footer_courses': footer_courses,
+        'footer_exams': footer_exams,
+        'slider_images': slider_images,
+        'main_header': main_header,
+        'sub_headers': sub_headers,
+        'sub_headings': sub_headings,
         'unique_courses': unique_courses,
-        'form':form
-        
+        'form': form
     }
-    
+
     return render(request, 'index.html', context)
+
 
 
 @login_required(login_url='user_login')
