@@ -77,14 +77,14 @@
             </div>
             <div class="col-lg-6">
                 <div class="pages-image">
-                    <img src="{% static 'assets/img/pages/pages-2.jpg' %}" alt="pages-image">
+                    <img src="{% static 'assets/img/collage_bsi_colleges.png' %}" alt="pages-image">
                 </div>
             </div>
         </div>
     </div>
-    <div class="shape-7">
-        <img src="{% static 'assets/img/shape/shape-7.png' %}" alt="shape">
-    </div>
+    {% comment %} <div class="shape-7">
+        <img src="{% static 'assets/img/abc.jpg' %}" alt="shape">
+    </div> {% endcomment %}
 </div>
 <!-- End Pages Banner Area -->
 
@@ -152,10 +152,12 @@
                 <div class="blog-right-sidebar">
                     {% for details in data %}
                     <div class="button-container">
+                        {% if details.brochure %}
                         <a href="{{ details.brochure.url }}" class="btn download-guide">
                             <i class="icon-download"></i>
                             Download Brochure
                         </a>
+                        {% endif %}
                         {% comment %} <a href="" class="btn sample-papers">
                             <i class="icon-sample"></i>
                             Sample Papers
