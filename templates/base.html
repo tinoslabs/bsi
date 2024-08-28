@@ -522,7 +522,7 @@
                                     {% for sub_heading in sub_headings %}
                                     {% if sub_heading.sub_header == sub_header %}
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">{{ sub_heading.sub_heading }}</a>
+                                        <a href="{% url 'header_details' sub_heading.id %}" class="nav-link">{{ sub_heading.sub_heading }}</a>
                                     </li>
                                     {% endif %}
                                     {% endfor %}
