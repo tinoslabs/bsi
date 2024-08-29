@@ -102,7 +102,7 @@
                             {% if form.course_brochure.errors %}
                                 <div class="text-danger">{{ form.course_brochure.errors }}</div>
                             {% endif %}
-                            {% if college.college_brochure %}
+                            {% if college.course_brochure %}
                                 <p>Current Brochure: <a href="{{ college.course_brochure.url }}" target="_blank">Download</a></p>
                             {% else %}
                                 <p>No brochure uploaded</p>
