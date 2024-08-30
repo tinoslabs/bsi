@@ -40,7 +40,7 @@ class CollegeModelForm(forms.ModelForm):
 class FeaturedCollegesForm(forms.ModelForm):
     class Meta:
         model = FeaturedColleges
-        fields = ['college_details']
+        fields = ['college_details','college_logo']
         
 
 class CourseForm(forms.ModelForm):

@@ -8,13 +8,17 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Update Featured College</h4>
-          <form class="forms-sample" method="POST">
+          <form class="forms-sample" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
               <div class="input-box">
                 {{ form.college_details.label_tag }}
                 {{ form.college_details }}
               </div>
+              <div class="form-group">
+                <label for="brochureFile">College Logo</label>
+                {{ form.college_logo }}
+            </div>
             </div>
             <button type="submit" class="btn btn-primary me-2">Update Featured College</button>
           </form>
