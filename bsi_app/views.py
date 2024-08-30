@@ -766,17 +766,29 @@ def delete_details(request, pk):
     return redirect('view_details') 
 
 
-@login_required(login_url='user_login')
+# @login_required(login_url='user_login')
+# def create_featured_colleges(request):
+#     if request.method == 'POST':
+#         form = FeaturedCollegesForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('view_featured_colleges')  
+#     else:
+#         form = FeaturedCollegesForm()
+#     return render(request, 'admin_pages/create_featured_colleges.html', {'form': form})
+
 def create_featured_colleges(request):
     if request.method == 'POST':
-        form = FeaturedCollegesForm(request.POST)
+        print(request.FILES)  # Debug: Check what files are being uploaded
+        form = FeaturedCollegesForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('view_featured_colleges')  # Redirect to the view after saving
+            return redirect('view_featured_colleges')
+        else:
+            print(form.errors)  # Debug: Print form errors if any
     else:
         form = FeaturedCollegesForm()
     return render(request, 'admin_pages/create_featured_colleges.html', {'form': form})
-
 
 
 @login_required(login_url='user_login')
@@ -787,7 +799,7 @@ def view_featured_colleges(request):
 def update_featured_colleges(request, pk):
     college = get_object_or_404(FeaturedColleges, pk=pk)
     if request.method == 'POST':
-        form = FeaturedCollegesForm(request.POST, instance=college)
+        form = FeaturedCollegesForm(request.POST, request.FILES, instance=college)
         if form.is_valid():
             form.save()
             return redirect('view_featured_colleges')  # Redirect to the view after saving

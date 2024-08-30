@@ -15,7 +15,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-   height: 600px;
+    height: 800px;
     padding-top: 190px;
     padding-bottom: 225px;
 
@@ -194,7 +194,7 @@
                             <div class="swiper-slide">
                                 <a href="{% url 'college_details' featured.college_details %}" class="card-link3">
                                 <div class="single-partner-logo">
-                                    <img src="{{ featured.college_details.logo.url }}" alt="partner-logo">
+                                    <img src="{{ featured.college_logo.url }}" alt="partner-logo">
                                 </div>
                                 </a>
                             </div>
@@ -286,14 +286,19 @@
                                 <a href="#">{{college.total_course}} courses</a>
                             </div>
                             
+                            
                            <div>
                                 <span>Total Fees Range</span><br>
+                                {% if college.min_fee and college.max_fee %}
                                 ₹{{college.min_fee}} L - {{college.max_fee}} L
+                                {% else %}
+                                ₹00 L - ₹00 L
+                                {% endif %}
                             </div> 
                         </div>
                         <div class="college-actions">
                             <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
-                            <button class="brochure-btn"  data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}"><i class="material-icons"></i> Brochure</button>  
+                            <button class="brochure-btn"  data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}"><i class="material-icons"></i>College Brochure</button>  
                             
                         </div>
                         
@@ -961,7 +966,7 @@
         <br><br>
 
         
-        <div class="events-area pb-75">
+        {% comment %} <div class="events-area pb-75">
             <div class="container">
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
                     <h4>Top Colleges</h4>
@@ -989,8 +994,60 @@
                     {% endfor %}
                 </div>
             </div>
+        </div> {% endcomment %}
+        <div class="events-area pb-75">
+    <div class="container">
+        <div class="section-title text-center m-auto" data-cues="slideInUp">
+            <h4>Top Colleges</h4>
         </div>
-
+        <div class="row justify-content-center" data-cues="slideInUp">
+            {% for college in colleges %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-events-card">
+                        <a class="text-decoration-none d-block image" href="{% url 'college_details' college.college_name %}">
+                            {% if college.college_image %}
+                                <img src="{{ college.college_image.url }}" alt="{{ college.college_name }}" class="card-img">
+                            {% else %}
+                                <img src="{% static 'assets/img/college-7.jpg' %}" alt="events-image" class="card-img">
+                            {% endif %}
+                        </a>
+                        <div class="content d-flex align-items-top">
+                            <div class="title">
+                                <h3 class="college-title">
+                                    <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
+                                </h3>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+        
+        <style>
+            .single-events-card {
+                margin-bottom: 30px;
+            }
+            
+            .single-events-card .image {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                height: 250px; /* Set the desired height */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .single-events-card .image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Maintain aspect ratio, fill the container */
+                border-radius: 8px; /* Optional: add rounded corners */
+            }
+            
+        </style>
         
             
         <br><br>

@@ -87,12 +87,15 @@ class College_Model(models.Model):
 
 class FeaturedColleges(models.Model):
     college_details = models.ForeignKey(College_Model, on_delete=models.CASCADE, related_name='featured_in')
+    college_logo = models.ImageField(upload_to='college_logos/')
     def __str__(self):
         return f"{self.college_details.college_name} (Featured)"
 
     class Meta:
         verbose_name = "Featured College"
         verbose_name_plural = "Featured Colleges"
+        
+
 
 
 class Course_Model(models.Model):

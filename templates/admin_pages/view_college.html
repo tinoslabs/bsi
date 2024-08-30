@@ -45,7 +45,8 @@ img {
               <th>College Image</th>
               <th>College Description</th>
               <th>YouTube Videos</th>
-              <th>Brochure</th>
+              <th>College Brochure</th>
+              <th>Course Brochure</th>
               <th>More Details</th>
               <th>Actions</th>
             </tr>
@@ -88,6 +89,13 @@ img {
               <td>
                 {% if college.college_brochure %}
                   <a href="{{ college.college_brochure.url }}" target="_blank">Download Brochure</a>
+                {% else %}
+                  No brochure available
+                {% endif %}
+              </td>
+              <td>
+                {% if college.course_brochure %}
+                  <a href="{{ college.course_brochure.url }}" target="_blank">Download Brochure</a>
                 {% else %}
                   No brochure available
                 {% endif %}
