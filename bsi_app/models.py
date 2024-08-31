@@ -95,8 +95,7 @@ class FeaturedColleges(models.Model):
         verbose_name = "Featured College"
         verbose_name_plural = "Featured Colleges"
         
-
-
+    
 
 class Course_Model(models.Model):
     PROFESSIONAL_COURSE = 'Professional'
@@ -379,6 +378,8 @@ class NewsletterSubscription(models.Model):
 
     def __str__(self):
         return f"{self.email} - {self.college} - {self.phone}"
+    
+    
     
     
 
