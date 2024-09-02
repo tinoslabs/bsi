@@ -45,8 +45,8 @@ img {
               <th>Eligibility Criteria</th>
               <th>Brochure</th>
               <th>Course Videos</th>
-              <th>Course Description</th>
-              <th>Additional Details</th>
+              {% comment %} <th>Course Description</th> {% endcomment %}
+              {% comment %} <th>Additional Details</th> {% endcomment %}
               <th>Actions</th>
             </tr>
           </thead>
@@ -86,13 +86,13 @@ img {
                   No video available
                 {% endif %}
               </td>
-              <td>{{ course.course_description | safe }}</td>
+              {% comment %} <td>{{ course.course_description | safe }}</td> {% endcomment %}
               
-              {% if course.additional_details %}
+              {% comment %} {% if course.additional_details %}
               <td>{{ course.additional_details | safe }}</td>
               {% else %}
                   No data available
-              {% endif %}
+              {% endif %} {% endcomment %}
               <td>
                 <a href="{% url 'update_course' course.id %}" class="btn btn-primary btn-sm">
                   <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Edit

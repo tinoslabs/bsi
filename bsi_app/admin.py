@@ -17,6 +17,7 @@ admin.site.register(Add_On_Course)
 admin.site.register(ExamCategory)
 admin.site.register(FeaturedColleges)
 admin.site.register(College_Model)
+admin.site.register(ApplicationModel)
 
 class SliderImageAdmin(admin.ModelAdmin):
     list_display = ['caption', 'image']
@@ -26,4 +27,5 @@ class EnquirySubmissionAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'college', 'submitted_at')
     search_fields = ('name', 'email', 'phone', 'college__college_name')
     list_filter = ('submitted_at', 'college')
+    
 
