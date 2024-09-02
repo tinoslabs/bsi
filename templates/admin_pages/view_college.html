@@ -42,12 +42,12 @@ img {
               <th>Total Courses</th>
               <th>Total Fees Range</th>
               <th>Logo</th>
-              <th>College Image</th>
+              {% comment %} <th>College Image</th> {% endcomment %}
               <th>College Description</th>
               <th>YouTube Videos</th>
               <th>College Brochure</th>
               <th>Course Brochure</th>
-              <th>More Details</th>
+              {% comment %} <th>More Details</th> {% endcomment %}
               <th>Actions</th>
             </tr>
           </thead>
@@ -78,7 +78,7 @@ img {
                   No image available
                 {% endif %}
               </td>
-              <td class="college-description">{{ college.college_description | safe }}</td>
+              {% comment %} <td class="college-description">{{ college.college_description | safe }}</td> {% endcomment %}
               <td>
                 {% if college.youtube_videos %}
                   <a href="{{ college.youtube_videos }}" target="_blank">View Video</a>
@@ -100,13 +100,13 @@ img {
                   No brochure available
                 {% endif %}
               </td>
-              <td class="college-description">
+              {% comment %} <td class="college-description">
                 {% if college.more_details %}
                   {{ college.more_details | safe }}
                 {% else %}
                   No additional details available
                 {% endif %}
-              </td>
+              </td> {% endcomment %}
               <td>
                 <a href="{% url 'update_college' college.id %}" class="btn btn-primary btn-sm">
                   <i class="mdi mdi-cloud-upload" aria-hidden="true"></i> Update

@@ -18,7 +18,7 @@
                   <th>Main Header</th>
                   <th>Sub Header</th>
                   <th>Sub Heading</th>
-                  <th>Details</th>
+                  {% comment %} <th>Details</th> {% endcomment %}
                   <th>Brochure</th>
                   <th>Actions</th>
                 </tr>
@@ -30,7 +30,7 @@
                   <td>{{ detail.sub_heading.main_header.main_heading }}</td>
                   <td>{{ detail.sub_heading.sub_header.sub_header }}</td>
                   <td>{{ detail.sub_heading.sub_heading }}</td>
-                  <td>{{ detail.details | safe }}</td>
+                  {% comment %} <td>{{ detail.details | safe }}</td> {% endcomment %}
                   <td>
                     {% if detail.brochure %}
                     <a href="{{ detail.brochure.url }}" target="_blank">Download</a>

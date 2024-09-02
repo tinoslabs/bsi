@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,Add_On_Course
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,Add_On_Course,ApplicationModel
 from django.core.exceptions import ValidationError
 import re
 
@@ -196,5 +196,35 @@ class NewsletterForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'placeholder': 'Enter your email id'}),
             'phone': forms.TextInput(attrs={'placeholder': 'Enter your mobile no'}),
         }
+        
+        
+class ApplicationForm(forms.ModelForm):
+    class Meta:
+        model = ApplicationModel
+        fields = [
+            'college', 
+            'first_name', 
+            'last_name', 
+            'email', 
+            'phone', 
+            'state', 
+            'pin_code', 
+            'dob', 
+            'student_type', 
+            'degree',
+            'message',
+            'course'
+        ]
+        widgets = {
+            'dob': forms.DateInput(attrs={'type': 'date'}),
+            'student_type': forms.Select(choices=ApplicationModel.STUDENT_TYPE_CHOICES),
+        }
+    
+    def clean_pin_code(self):
+        pin_code = self.cleaned_data.get('pin_code')
+        if not pin_code.isdigit() or len(pin_code) != 6:
+            raise forms.ValidationError('Enter a valid 6-digit pin code.')
+        return pin_code
+
     
 

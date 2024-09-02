@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,Add_On_Course,NewsletterSubscription
-from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm,headerMainForm, SubheaderForm, SubHeaderHeadingForm, HeaderDetailsForm, HeaderDetailsForm, NotificationForm, Add_On_Course_Form,NewsletterForm
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,Add_On_Course,NewsletterSubscription,ApplicationModel
+from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm,headerMainForm, SubheaderForm, SubHeaderHeadingForm, HeaderDetailsForm, HeaderDetailsForm, NotificationForm, Add_On_Course_Form,NewsletterForm,ApplicationForm
 from django.http import HttpResponseNotFound
 
 
@@ -32,6 +32,7 @@ def admin_dashboard(request):
     return render(request, 'admin_pages/admin_dashboard.html')
 
 from django.db.models import Q
+
 
 def index(request):
     if request.method == 'POST':
@@ -1191,17 +1192,79 @@ def service(request):
 def exam(request):
     return render(request,'exam.html')
 
+# def college_details(request, college_name):
+#     college = get_object_or_404(College_Model, college_name=college_name)
+#     if request.method == 'POST':
+#         form = Enquiry_Form(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Our team will contact you soon.')
+#             return redirect('college_details', college_name=college_name)
+#     else:
+#         form = Enquiry_Form()
+        
+#     exam = ExamModel.objects.all()
+#     colleges = College_Model.objects.all()
+#     course = Course_Model.objects.all()
+#     courses = college.courses.all()
+#     course_collections = Course_Collection.objects.all()
+#     clients_review = ClientReview.objects.all()
+#     sub_collections = Sub_Collection.objects.all()
+#     sub_categories = SubCollectionCategory.objects.all()
+#     main_header = headerMain.objects.all()
+#     sub_headers = SubHeader.objects.all()
+   
+#     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+#     sub_headings = SubHeaderHeading.objects.all()
+#     footer_colleges = College_Model.objects.order_by('-id')[:5]
+#     footer_courses = Course_Model.objects.order_by('-id')[:7]
+#     footer_exams = ExamModel.objects.order_by('-id')[:7]
+#     return render(request, 'college_details.html', {
+#         'form': form,
+       
+#         'college': college,
+#         'courses': courses,
+#         'colleges': colleges,
+#         'course_collections': course_collections,
+#         'clients_review':clients_review,
+#         'sub_collections': sub_collections,
+#         'sub_categories': sub_categories,
+#         'courses' : courses,
+#         'exam' : exam,
+#         'course' : course,
+#         'footer_colleges':footer_colleges,
+#         'footer_courses':footer_courses,
+#         'footer_exams':footer_exams,
+#         'main_header':main_header,
+#         'sub_headers':sub_headers,
+#         'sub_headings':sub_headings,
+#         'notifications':notifications
+        
+#     })
+
+
 def college_details(request, college_name):
     college = get_object_or_404(College_Model, college_name=college_name)
+    
     if request.method == 'POST':
-        form = Enquiry_Form(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Our team will contact you soon.')
-            return redirect('college_details', college_name=college_name)
+        # Determine which form was submitted
+        if 'first_name' in request.POST:  # Assuming 'first_name' is unique to ApplicationForm
+            application_form = ApplicationForm(request.POST)
+            if application_form.is_valid():
+                application_form.save()
+                messages.success(request, 'Your application has been submitted successfully.')
+                return redirect('college_details', college_name=college_name)
+        else:
+            form = Enquiry_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Our team will contact you soon.')
+                return redirect('college_details', college_name=college_name)
     else:
         form = Enquiry_Form()
+        application_form = ApplicationForm()
 
+    # other context data
     exam = ExamModel.objects.all()
     colleges = College_Model.objects.all()
     course = Course_Model.objects.all()
@@ -1212,14 +1275,15 @@ def college_details(request, college_name):
     sub_categories = SubCollectionCategory.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-   
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     sub_headings = SubHeaderHeading.objects.all()
     footer_colleges = College_Model.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
+    
     return render(request, 'college_details.html', {
         'form': form,
+        'application_form': application_form,
         'college': college,
         'courses': courses,
         'colleges': colleges,
@@ -1227,7 +1291,6 @@ def college_details(request, college_name):
         'clients_review':clients_review,
         'sub_collections': sub_collections,
         'sub_categories': sub_categories,
-        'courses' : courses,
         'exam' : exam,
         'course' : course,
         'footer_colleges':footer_colleges,
@@ -1236,10 +1299,8 @@ def college_details(request, college_name):
         'main_header':main_header,
         'sub_headers':sub_headers,
         'sub_headings':sub_headings,
-        'notifications':notifications
-        
+        'notifications':notifications,
     })
-
 
 def download_brochure(request):
     if request.method == 'POST':
@@ -1263,6 +1324,10 @@ def download_brochure(request):
 
     return JsonResponse({'success': False, 'message': 'Invalid request'})
 
+@login_required(login_url='user_login')
+def Application_view(request):
+    data = ApplicationModel.objects.all()
+    return render(request,'admin_pages/Application_view.html',{'data':data})
 
 @login_required(login_url='user_login')
 def enquiry_submition_view(request):
