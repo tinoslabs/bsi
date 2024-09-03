@@ -202,7 +202,7 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = ApplicationModel
         fields = [
-            'college', 
+            
             'first_name', 
             'last_name', 
             'email', 

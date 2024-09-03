@@ -310,161 +310,70 @@
         <!-- Start Navbar Area --> 
         <nav class="navbar navbar-expand-lg" id="navbar">
             <div class="container-fluid">
-
-                
-                    {% comment %} <a class="text-decoration-none" href="{% url 'index' %}">
-                        <img src="{% static 'assets/img/bsi-logo-01.png' %}" alt="black-logo">
-                    </a> {% endcomment %}
-                
-                
-                {% comment %} <a class="navbar-brand" href="{% url 'index' %}">
-                    <img class="black-logo" src="{% static 'assets/img/bsi-logo-01.png' %}" alt="black-logo" > 
                     
-                </a> {% endcomment %}
-            
-                
-                {% comment %} <div class="collapse navbar-collapse" style="margin-right: 420px;">
-                    <ul class="navbar-nav ms-auto">
-                        {% for course_collection in course_collections %}
-                        <li class="nav-item dropdown">
-                            <a href="#" class="dropdown-toggle nav-link">
-                                {{ course_collection }}
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% for sub_collection in sub_collections %}
-                                    {% if sub_collection.course.id == course_collection.id %}
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            {{ sub_collection.get_course_type_display }}
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            {% for sub_category in sub_categories %}
-                                                {% if sub_category.sub_collection.id == sub_collection.id %}
-                                                <li class="nav-item">
-                                                    <a href="{% url 'details_display' sub_category.id %}" class="nav-link">
-                                                        {{ sub_category.sub_category }}
-                                                    </a>
-                                                </li>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </li>
+               
+                <div class="collapse navbar-collapse" style="margin-right: 250px;">
+                    <ul class="navbar-nav ms-auto your-container-class">
+                        {% for main in main_header %}
+                            <li class="nav-item your-container-class">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                    {{ main.main_heading }}
+                                </a>
+                                <ul class="dropdown-menu your-container-class">
+                                    {% for sub in sub_headers %}
+                                        {% if sub.main_header == main %}
+                                            <li class="nav-item your-container-class">
+                                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                                    {{ sub.sub_header }}
+                                                </a>
+                                                <ul class="dropdown-menu your-container-class">
+                                                    {% for sub_heading in sub_headings %}
+                                                        {% if sub_heading.sub_header == sub %}
+                                                            <li class="nav-item your-container-class">
+                                                                <a href="{% url 'header_details' sub_heading.id %}" class="nav-link">
+                                                                    {{ sub_heading.sub_heading }}
+                                                                </a>
+                                                            </li>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         {% endfor %}
+                        
                     </ul>
                     
-                </div>
-            </div> {% endcomment %}
-
-            {% comment %} <div class="collapse navbar-collapse" style="margin-right: 420px;">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                            Pages
-                        </a>
-                        <ul class="dropdown-menu">
-                            
-                            <li class="nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                    Blog
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="blog-style-one.html" class="nav-link">
-                                            Blog Style One
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
-                            </li>                
-                        </ul>
-                    </li>
-                </ul>
-                
-            </div> {% endcomment %}
-            <div class="collapse navbar-collapse" style="margin-right: 250px;">
-                <ul class="navbar-nav ms-auto your-container-class">
-                    {% for main in main_header %}
-                        <li class="nav-item your-container-class">
-                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                {{ main.main_heading }}
-                            </a>
-                            <ul class="dropdown-menu your-container-class">
-                                {% for sub in sub_headers %}
-                                    {% if sub.main_header == main %}
-                                        <li class="nav-item your-container-class">
-                                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">
-                                                {{ sub.sub_header }}
-                                            </a>
-                                            <ul class="dropdown-menu your-container-class">
-                                                {% for sub_heading in sub_headings %}
-                                                    {% if sub_heading.sub_header == sub %}
-                                                        <li class="nav-item your-container-class">
-                                                            <a href="{% url 'header_details' sub_heading.id %}" class="nav-link">
-                                                                {{ sub_heading.sub_heading }}
-                                                            </a>
-                                                        </li>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </ul>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
-                
-                {% comment %} <div class="notification-container">
-                    <div class="notification-icon" onclick="toggleNotifications()">
-                        <i class="material-icons dp48">notifications</i>
-                        <span class="num-count">{{ notifications.count }}</span>
-                    </div>
-                    <div class="notifications" id="notificationDropdown">
-                        <div class="notification-header">
-                            <span>NOTIFICATIONS</span>
-                            <i class="material-icons settings-icon">settings</i>
-                        </div>
                     
-                        {% for notification in notifications %}
-                            <div class="notification-item your-container-class">
-                                <span class="count">{{ forloop.counter }}</span>
-                                <a href="{% url 'notification_details' message=notification.message %}">{{ notification.message }}</a>
-                                <span class="close" onclick="removeNotification({{ notification.id }})">&times;</span>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div> {% endcomment %}
-                <a class="text-decoration-none" href="{% url 'index' %}">
-                    <img src="{% static 'assets/img/bsi-logo-01.png' %}" alt="black-logo" style="margin-left:180px;">
-                </a>
-            </div>
-            <style>
-                .notification-item a {
-                    text-decoration: none;
-                    color: inherit; /* Optional: ensures the link color matches the surrounding text */
-                }
-                
-                .notification-item a:hover {
-
-                    text-decoration: none; /* Optional: adds underline on hover for better UX */
-                }
-            </style>
+                </div>
+            
            
-            <a class="navbar-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
-                <span class="burger-menu">
-                    <span class="top-bar"></span>
-                    <span class="middle-bar"></span> 
-                    <span class="bottom-bar"></span>
-                </span>
-            </a>
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'assets/img/BSI-LOGO-3.png' %}" style="margin-left:40px; width:150px;height:60px;" class="img-responsive">
+                </a>
+                <a class="navbar-toggler text-decoration-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                    <span class="burger-menu">
+                        <span class="top-bar"></span>
+                        <span class="middle-bar"></span> 
+                        <span class="bottom-bar"></span>
+                    </span>
+                </a>  
         </div>
-        </nav>  
+    </nav>  
                 
+        <style>
+            .notification-item a {
+                text-decoration: none;
+                color: inherit; /* Optional: ensures the link color matches the surrounding text */
+            }
+            
+            .notification-item a:hover {
 
+                text-decoration: none; /* Optional: adds underline on hover for better UX */
+            }
+        </style>
         <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -490,7 +399,7 @@
         <div class="responsive-navbar offcanvas offcanvas-end border-0" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
             <div class="offcanvas-header">
                 <a href="{% url 'index' %}" class="logo d-inline-block">
-                    <img src="{% static 'assets/img/BSI_LOGO_WHITE.png' %}" alt="logo">
+                    <img src="{% static 'assets/img/BSI-LOG-White-3.png' %}" alt="logo" style="width:170px;height:70px">
                 </a>
                 <button type="button" class="close-btn bg-transparent position-relative lh-1 p-0 border-0" data-bs-dismiss="offcanvas" aria-label="Close">
                     <i class="ri-close-fill"></i>
@@ -630,7 +539,7 @@
                                 </div>
                             </div>
                            
-                            <div class="col-lg-4 col-sm-4">
+                            {% comment %} <div class="col-lg-4 col-sm-4">
                                 <div class="single-footer-widget your-container-class">
                                     <h3>Colleges</h3>
                                     <ul class="list-unstyled ps-0 mb-0 your-container-class">
@@ -641,13 +550,13 @@
                                         {% endfor %}
                                     </ul>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="row" data-cues="slideInUp">
-                            <div class="col-lg-4 col-sm-6 col-md-4">
+                            {% comment %} <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget quick">
                                     <h3>Courses</h3>
                                     
@@ -659,9 +568,9 @@
                                         {% endfor %}
                                     </ul>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             
-                            <div class="col-lg-4 col-sm-6 col-md-4">
+                            {% comment %} <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget quick">
                                     <h3>Exams</h3>
                                     
@@ -673,7 +582,7 @@
                                         {% endfor %}
                                     </ul>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
 
                             <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget contact">
@@ -715,7 +624,7 @@
                     <div class="col-lg-2 col-sm-12">
                         <div class="copyright-logo">
                             <a class="text-decoration-none" href="{% url 'index' %}">
-                                <img src="{% static 'assets/img/bsi-logo-01.png' %}" alt="black-logo">
+                                <img src="{% static 'assets/img/BSI-LOGO-3.png' %}" alt="black-logo">
                             </a>
                         </div>
                     </div>
