@@ -199,12 +199,7 @@
                                 {% endif %}
                             </div> {% endcomment %}
                             <div class="button-container">
-                                {% comment %} {% if college.college_brochure %}
-                                <a href="#" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}" data-brochure-url="{{ college.college_brochure.url }}">
-                                    <i class="icon-download"></i>
-                                    Brochure
-                                </a>
-                                {% endif %} {% endcomment %}
+                                
                                 {% if college.course_brochure %}
                                 <a href="#" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}" data-brochure-url="{{ college.course_brochure.url }}">
                                     <i class="icon-download"></i>
