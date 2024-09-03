@@ -199,4 +199,8 @@ urlpatterns = [
     
     path('News_Letter_view',views.News_Letter_view,name='News_Letter_view'),
     path('delete_news_letter/<int:id>', views.delete_news_letter, name='delete_news_letter'),
+    
+    path('Application_view', views.Application_view, name='Application_view'),
+    path('delete_application/<int:pk>/', views.delete_application, name='delete_application'),
+    path('application', views.application, name='application'),
 ]

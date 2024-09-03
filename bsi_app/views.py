@@ -1330,6 +1330,12 @@ def Application_view(request):
     return render(request,'admin_pages/Application_view.html',{'data':data})
 
 @login_required(login_url='user_login')
+def delete_application(request, pk):
+    data = get_object_or_404(ApplicationModel, id=pk)
+    data.delete()
+    return redirect('Application_view') 
+
+@login_required(login_url='user_login')
 def enquiry_submition_view(request):
     data = EnquirySubmission.objects.all()
     return render(request,'admin_pages/enquiry_submition_view.html',{'data':data})
@@ -1730,6 +1736,33 @@ def notification_details(request, message):
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     return render(request, 'notification_details.html', {'details': details,'form':form,'notifications':notifications})
 
+
+def application(request):
+    
+    if request.method == 'POST':
+        application_form = ApplicationForm(request.POST)
+        if application_form.is_valid():
+            application_form.save()
+            messages.success(request, 'Our team will contact you soon.')
+            return redirect('application')
+    else:
+        application_form = ApplicationForm()
+    
+    course = Course_Model.objects.all()
+    # courses = college.courses.all()
+    client_logo = Client_Logo.objects.all()
+    notifications = Notification.objects.all().order_by('-created_at')
+    colleges = College_Model.objects.all()
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
+    
+    slider_images = SliderImage.objects.all()
+    footer_colleges = College_Model.objects.order_by('-id')[:5]
+    footer_courses = Course_Model.objects.order_by('-id')[:7]
+    footer_exams = ExamModel.objects.order_by('-id')[:7]
+    
+    return render(request,'application.html',{'application_form':application_form,'course':course,'client_logo':client_logo,'notifications':notifications,'colleges':colleges,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings,'slider_images':slider_images,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams})
 
 
 

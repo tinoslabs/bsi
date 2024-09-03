@@ -145,7 +145,7 @@
                             
                             
                             
-                            <div class="events-area pb-75">
+                            {% comment %} <div class="events-area pb-75">
                                 <div class="events-area pb-75">
                                     <div class="container">
                                         {% if college.more_details %}
@@ -153,7 +153,7 @@
                                         {% endif %}
                                     </div>
                                 </div>        
-                            </div>
+                            </div> {% endcomment %}
                             
                             
                             {% comment %} <div class="events-area pb-75">
@@ -349,13 +349,13 @@
                 </div>
             </div>
         </div>
-       {% comment %} <div class="application-details-area ptb-100">
+       <div class="application-details-area ptb-100">
             <div class="container" >
                 
                 <form class="application-form-details" method="post">
                     {% csrf_token %}
                     <h3>Applicant Details</h3>
-                    <input type="hidden" name="college" value="{{ college.id }}">
+                   
                     
                     <div class="row">
                         <div class="col-lg-6">
@@ -428,10 +428,16 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label">Select area of study</label>
-                                <select class="form-select" aria-label="Select area of study" name="course" required>
+                                {% comment %} <select class="form-select" aria-label="Select area of study" name="course" required>
                                     <option value="" selected>Select area of study</option>
                                     {% for course in course %}
                                         <option value="{{ course.id }}">{{ course.course_name }}</option>
+                                    {% endfor %}
+                                </select> {% endcomment %}
+                                <select class="form-select" aria-label="Select area of study" name="course" required>
+                                    <option value="" selected>Select area of study</option>
+                                    {% for course in course %}
+                                        <option value="{{ course.id }}">{{ course.course_name }} - ({{ course.college.college_name }})</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -439,8 +445,8 @@
                         
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Degree level</label>
-                                <input type="text" class="form-control" placeholder="Degree level here" name="degree" required>
+                                <label class="form-label">Educational Qualification</label>
+                                <input type="text" class="form-control" placeholder="qualification" name="degree" required>
                             </div>
                         </div>
                     </div>
@@ -456,7 +462,7 @@
                         Submit Application
                         <i class="flaticon-right-arrow"></i>
                     </button>
-                </form> {% endcomment %}
+                </form> 
             </div>
         </div> 
 
