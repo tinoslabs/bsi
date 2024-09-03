@@ -203,4 +203,7 @@ urlpatterns = [
     path('Application_view', views.Application_view, name='Application_view'),
     path('delete_application/<int:pk>/', views.delete_application, name='delete_application'),
     path('application', views.application, name='application'),
+    
+    
+    path('search_results',views.search_results, name='search_results'),
 ]

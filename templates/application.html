@@ -1,171 +1,399 @@
-{% extends "base.html" %}
-{% load static %}
+<style>
 
-{% block content %}
-        <!-- End Responsive Navbar Area -->
+    * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      html,
+      body,
+      ul,
+      table,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: sans-serif;
+        color: #1e1e1e;
+      }
+      div,
+      header,
+      footer,
+      aside,
+      section {
+        position: relative;
+        top: 0;
+        left: 0;
+      }
+      input,
+      button,
+      textarea {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      section {
+        height: 482px;
+      }
+      input {
+        padding: 10px 10px 10px 10px;
+      }
+      input:focus,
+      button:focus,
+      textarea:focus {
+        outline: none;
+      }
+      input:focus {
+        background-color: transparent;
+        color: white;
+        border-color: #2FD8B3;
+      }
+      button {
+        color: black;
+        cursor: pointer;
+        background-color: #2FE7BE;
+      }
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      .open-btn {
+        display: block;
+        width: 30%;
+        margin: 30px auto 0 auto;
+        border: 1px solid transparent;
+        background-color: #2FE7BE;
+        -webkit-box-shadow: 0 4px 0 #18cda6;
+        box-shadow: 0 4px 0 #18cda6;
+        color: white;
+      }
+      .open-btn:active {
+        transform: translateY(2px);
+        -webkit-box-shadow: 0 2px 0 #18cda6;
+        box-shadow: 0 2px 0 #18cda6;
+      }
+      .whole,
+      .left,
+      .right {
+       position: relative;
+       padding-left: 5px;
+       padding-right: 5px;
+       overflow: hidden; 
+       float: left;
+      }
+      .whole {
+        width: 100%;
+      }
+      .left {
+        width: 60%;
+      }
+      .right {
+        width: 40%;
+      }
+      .show {
+        display: block;
+      }
+      .fake-hide {
+        opacity: 0;
+      }
+      .hide {
+        display: none;
+      }
+      .popup-wrapper {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.2);
+        perspective: 1000;
+        z-index: 20;
+        transition: all 0.4s ease 0s;
+      }
+      .popup-box {
+        width: 40%;
+        height: 300px;
+        background-color: #2B2F3E;
+        margin: 100px auto 0 auto;
+        border-radius: 4px;
+        padding: 20px 0 30px 0;
+        transition: all 0.1s ease 0s;
+      }
+      .popup-box:after {
+        content: "";
+        position: absolute;
+        border-width: 25px;
+        left: 0;
+        top: 0;
+        border-style: solid;
+        border-color: #ccc white white #ccc;
+        border-radius: 0 0 4px 0;
+      }
+      .popup-box .close-btn {
+        position: absolute;
+        font-size: 40px;
+        left: auto;
+        right: 20px;
+        top: 10px;
+        color: white;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .springgreen {
+        color: #2FD8B3 !important;
+      }
+      .popup-box h1 {
+        text-align: center;
+        color: white;
+        font-size: 65px;
+        transition: all 0.4s ease 0s;
+      }
+      .popup-box p {
+        text-align: center;
+        padding: 10px 0 10px 0;
+        font-size: 12px;
+        color: #6d6d6d;
+      }
+      .popup-box input,
+      .popup-box button {
+        width: 70%;
+        margin: 15px 0 0 0;
+      }
+      .popup-box button {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 12px 10px;
+      }
+      .popup-box button:hover {
+        background-color: transparent;
+        color: white;
+        border: 1px solid #2FD8B3;
+      }
+      .popup-box input {
+        float: right;
+        width: 80%;
+      }
+      .popup-box a {
+        display: block;
+        margin: 0 auto;
+        width: 50%;
+        border: 0px solid white;
+        color: white;
+        font-size: 12px;
+        padding: 20px 0 10px 0;
+        text-align: center;
+      }
+      .popup-box h2 {
+        color: white;
+        text-align: center;
+        margin-top: 17%;
+        padding: 0 10px;
+      }
+      .entry {
+        animation: entry 1 1s 0s;
+      }
+      footer {
+        width: 100%;
+        height: auto;
+        background-color: #1e1e1e; 
+      }
+      footer p {
+        text-align: center;
+        margin: 0;
+        color: white;
+        padding: 10px 0px;
+        font-size: 12px;
+      }
+      .heart {
+        font-size: 18px;
+        margin: 0 4px;
+        color: crimson;
+      }
+      @keyframes entry {
+        0% {transform: rotateX(90deg) translateY(-200px);}
+        100% {transform: rotateX(0deg) translateY(0px);}
+      }
+      @media (max-width: 992px){
+        .popup-box {
+          width: 60%;
+        }
+      }
+      @media (max-width: 768px){
+        .popup-box {
+          width: 80%;
+        }
+        .popup-box h1 {
+          font-size: 55px;
+        }
+      }
+      @media (max-width: 501px){
+        .popup-box {
+          width: 90%;
+          height: 335px;
+        }
+        .left {
+          width: 100%;
+        }
+        .right {
+          width: 100%;
+        }
+        .popup-box h1 {
+          font-size: 50px;
+        }
+        .popup-box input {
+          display: block;
+          width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+          float: none;
+        }
+        .popup-box button {
+          display: block;
+          width: 90%;
+          float: none;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .open-btn {
+          width: 40%;
+        }
+      }
+      @media (max-width: 320px){
+        .close-btn {
+          font-size: 35px;
+        }
+        .popup-box:after {
+          border-width: 20px;
+        }
+        .popup-box h1 {
+          font-size: 40px;
+        }
+        .popup-box p {
+          font-size: 10px;
+        }
+        .popup-box input {
+          padding: 7px;
+        }
+        .popup-box button {
+          padding: 9px;
+        }
+      }
+</style>
 
-        <!-- Start Pages Banner Area -->
-        <div class="pages-banner-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="pages-title">
-                            <h2>Application Form</h2>
-                            <ul class="list-unstyled ps-0 mb-0">
-                                <li class="d-inline-block">
-                                    <a class="text-decoration-none" href="{% url 'index' %}">
-                                        Home
-                                    </a>
-                                </li>
-                                <li class="d-inline-block">
-                                    Application Form
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="pages-image">
-                            <img src="{% static 'assets/img/collage_bsi_colleges.png' %}" alt="pages-image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="shape-7">
-                <img src="{% static 'assets/img/shape/shape-7.png' %}" alt="shape">
-            </div>
-        </div>
-        <!-- End Pages Banner Area -->
-        
-        <!-- Start Application Area -->
-        <div class="application-details-area ptb-100">
-            <div class="container" >
+<section>
+    <button class = "open-btn">Open Popup</button>
+  </section>
+  <div class = "popup-wrapper show">
+    <div class = "popup-box entry">
+      <span class = "close-btn">&times;</span>
+      <div class = "popup-text show">
+      <div class = "whole">
+      <p class = "springgreen">ENTER YOUR EMAIL AND GET</p>
+      <h1>10% OFF*</h1>
+      <p>with order of $25 or more</p>
+      </div>
+      <div class = "left">
+        <input type = "text" placeholder = "Enter your email here"/>
+      </div>
+      <div class = "right">
+        <button>GET MY $10 OFF</button>
+      </div>
+      <div class = "whole">
+         <a href = "#">No Thanks! I am Rich</a>
+         <p>*Terms and Conditions Apply</p>
+      </div>
+      </div>
+      <div class = "final-popup hide">
+        <h2>Thanks for registering with us</h2>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>Made with <span class = "heart">&hearts;</span> from <a href = "https://www.quora.com/profile/Amir-Saleem-15" target = "_blank">Amir Saleem</a></p>
+      </footer>
 
-                {% if messages %}
-                <div class="alert alert-success" role="alert">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </div>
-                <script>
-                    setTimeout(function(){
-                        window.location.reload();
-                    }, 5000);
-                </script>
-                {% endif %}
-                
-                <form class="application-form-details" method="post">
-                    {% csrf_token %}
-                    <h3>Applicant Details</h3>
-                   
-                    
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="First name here" name="first_name" required>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Last name here" name="last_name" required>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Email address</label>
-                                <input type="email" class="form-control" placeholder="Email address here" name="email" required>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Phone number</label>
-                                <input type="text" class="form-control" placeholder="Phone number here" name="phone" required>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">State name</label>
-                                <input type="text" class="form-control" placeholder="State name here" name="state" required>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Zip code</label>
-                                <input type="text" class="form-control" placeholder="Zip code here" name="pin_code" required>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Date of birth</label>
-                                <input type="date" class="form-control" name="dob" required>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Student type</label>
-                                <select class="form-select" aria-label="Select student type" name="student_type" required>
-                                    <option value="" selected>Select student type</option>
-                                    {% for key, value in application_form.fields.student_type.choices %}
-                                        <option value="{{ key }}">{{ value }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="m-30"></div>
-                    
-                    <h3>Education Details</h3>
-                    
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Select area of study</label>
-                                {% comment %} <select class="form-select" aria-label="Select area of study" name="course" required>
-                                    <option value="" selected>Select area of study</option>
-                                    {% for course in course %}
-                                        <option value="{{ course.id }}">{{ course.course_name }}</option>
-                                    {% endfor %}
-                                </select> {% endcomment %}
-                                <select class="form-select" aria-label="Select area of study" name="course" required>
-                                    <option value="" selected>Select area of study</option>
-                                    {% for course in course %}
-                                        <option value="{{ course.id }}">{{ course.course_name }} - ({{ course.college.college_name }})</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label">Educational Qualification</label>
-                                <input type="text" class="form-control" placeholder="qualification" name="degree" required>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Additional information</label>
-                        <textarea class="form-control" name="message" placeholder="Questions? Anything you’d like to know or ask..."></textarea>
-                    </div>
-                    
-                    
-                    
-                    <button type="submit" class="default-btn border-0">
-                        Submit Application
-                        <i class="flaticon-right-arrow"></i>
-                    </button>
-                </form> 
-            </div>
-        </div> 
-        <!-- End Application Area -->
-
-        {% endblock %}   
+<script>
+    //function to bind events to elements
+function bindEvent(elem,event_name,event_handler){
+    if(elem.addEventListener){
+      elem.addEventListener(event_name, event_handler, false);
+    } else if(elem.attachEvent) {
+      elem.attachEvent('on' + event_name, event_handler);
+    }
+  }
+  function close_popup(){
+    var popup_box = document.getElementsByClassName('popup-wrapper')[0]; 
+    //hide temporarily
+    popup_box.className = 'popup-wrapper fake-hide';
+    //after sometime, set display to none
+    setTimeout(real_hide,250);
+    function real_hide(){
+      popup_box.className = 'popup-wrapper hide';
+    }
+  }
+  function open_popup(){
+    var popup_box = document.getElementsByClassName('popup-wrapper')[0]; 
+    var first = document.getElementsByClassName('popup-text')[0];
+    var second = document.getElementsByClassName('final-popup')[0];
+    popup_box.className = 'popup-wrapper show';
+    first.className = 'popup-text show'
+    second.className = 'final-popup hide';
+  }
+  function calls(){
+    var close_btn = document.getElementsByClassName('close-btn')[0];
+    var btn = document.getElementsByTagName('button')[0];
+    var no = document.getElementsByTagName('a')[0];
+    var btn2 = document.getElementsByTagName('button')[1]; 
+    var wrapper = document.getElementsByClassName('popup-wrapper')[0];
+    var box = document.getElementsByClassName('popup-box')[0];
+    bindEvent(close_btn,'click',function(){
+      close_popup();
+    });
+    bindEvent(no,'click',function(){
+      close_popup();
+    });
+    bindEvent(btn,'click',function(){
+      open_popup();
+    });
+    bindEvent(btn2,'click',function(){
+      validate_email(0);
+    });
+    bindEvent(box,'mousemove',function(event){
+     
+      if(window.event){
+      event = window.event; // IE fix
+    }
+    var mouseX = event.clientX; // get mouse X-coordinates
+    var mouseY = event.clientY; // get mouse Y-coordinates
+    var target = document.getElementsByClassName('popup-box')[0];
+    target.style.transform = 'rotateX('+ -mouseY/30 +'deg) rotateY('+ -mouseX/35 +'deg)';
+    });
+    bindEvent(wrapper,'mouseover',function(){
+      var target = document.getElementsByClassName('popup-box')[0];
+    target.style.transform = 'rotateX('+ 0 +'deg) rotateY('+ 0 +'deg)';
+    });
+  }
+  function validate_email(index){
+    var email_input = document.getElementsByTagName('input')[index];
+    var popup_box = document.getElementsByClassName('popup-wrapper')[0]; 
+    var first = document.getElementsByClassName('popup-text')[0];
+    var second = document.getElementsByClassName('final-popup')[0];
+    var pattern = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+    if(email_input.value == null || email_input.value == ''){
+      alert('Email is required');
+    } else if(!email_input.value.match(pattern)) {
+      alert('Email is invalid');      
+      email_input.value = '';
+    } else {
+      first.className = 'popup-text hide'
+      second.className = 'final-popup show';
+      email_input.value = '';
+    }
+  }
+  calls();
+</script>

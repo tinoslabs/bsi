@@ -140,7 +140,7 @@
                 {% endfor %}
             </div>
             
-            <div class="container">
+            {% comment %} <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div class="search-box your-container-class">
@@ -162,6 +162,53 @@
                                         }, 3000);
                                     </script>
                                 {% endif %}
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
+                                    <button type="submit"><i class="ri-search-line"></i></button>
+                                </div>
+                            </form>   
+                        </div>    
+                    </div>
+                </div>
+            </div> {% endcomment %}
+
+            {% comment %} <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="search-box your-container-class">
+                            <form method="get" action="{% url 'search_results' %}">
+                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
+                                    <button type="submit"><i class="ri-search-line"></i></button>
+                                </div>
+                            </form>   
+                        </div>    
+                    </div>
+                </div>
+            </div> {% endcomment %}
+
+            {% comment %} <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="search-box your-container-class">
+                            <form method="get" action="{% url 'search_results' %}">
+                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
+                                    <button type="submit"><i class="ri-search-line"></i></button>
+                                </div>
+                            </form>   
+                        </div>    
+                    </div>
+                </div>
+            </div> {% endcomment %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="search-box your-container-class">
+                            <form method="get" action="{% url 'search_results' %}">
+                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
                                 <div class="form-group">
                                     <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
                                     <button type="submit"><i class="ri-search-line"></i></button>
@@ -277,7 +324,7 @@
                                 <a href="{% url 'college_details' college.college_name %}">
                                 <h3>{{college.college_name}}</h3>
                                 </a>
-                                <p class="location"><i class="material-icons">location_on</i>{{college.place}} • <span class="ranking"></span></p>
+                                <p class="location"><i class="material-icons">location_on</i>{{college.place}}  <span class="ranking"></span></p>
                             </div>
                         </div>
                         <div class="college-details">
@@ -300,10 +347,10 @@
                             <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
                             {% if college.college_brochure %}
                             <button class="brochure-btn"  data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}"><i class="material-icons"></i>College Brochure</button> 
-                            {% else %} 
+                            {% comment %} {% else %} 
                             <button class="brochure-btn" disabled>
                                 <i class="material-icons"></i>Brochure Not Available
-                            </button>
+                            </button> {% endcomment %}
                             {% endif %}
                             
                         </div>

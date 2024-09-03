@@ -131,7 +131,7 @@
                                 </div>        
                             </div>
                             <br><br>
-                            <div class="video-image">
+                            {% comment %} <div class="video-image">
                                 <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
                                 <div class="video-btn">
                                     {% if college.youtube_videos %}
@@ -140,56 +140,9 @@
                                     </a>
                                     {% endif %}
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             <br>
                             
-                            
-                            
-                            {% comment %} <div class="events-area pb-75">
-                                <div class="events-area pb-75">
-                                    <div class="container">
-                                        {% if college.more_details %}
-                                        <p class="your-container-class">{{college.more_details | safe}}</p>
-                                        {% endif %}
-                                    </div>
-                                </div>        
-                            </div> {% endcomment %}
-                            
-                            
-                            {% comment %} <div class="events-area pb-75">
-                                <div class="events-area pb-75">
-                                    <div class="container">
-                                        <div class="section-title text-center m-auto" data-cues="slideInUp">
-                                            <h4>Top Colleges</h4>
-                                        </div>
-                                        
-                                        <div class="row justify-content-center" data-cues="slideInUp">
-                                            {% for college in colleges %}
-                                                <div class="col-lg-4 col-md-6">
-                                                    <div class="single-events-card">
-                                                        <a class="text-decoration-none d-block image" href="{% url 'college_details' college.college_name %}">
-                                                            {% if college.college_image %}
-                                                                <img src="{{ college.college_image.url }}" alt="{{ college.college_name }}">
-                                                            {% else %}
-                                                                <img src="{% static 'assets/img/college-7.jpg' %}" alt="events-image">
-                                                            {% endif %}
-                                                        </a>
-                                                        <div class="content d-flex align-items-top">
-                                                            <div class="title">
-                                                                <h3 style="text-align: center;">
-                                                                    <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
-                                                                </h3>   
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>        
-                            </div> {% endcomment %}
-                        
-                        
                         </div>
                     </div>
                     
@@ -354,6 +307,7 @@
                 
                 <form class="application-form-details" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="college" value="{{ college.id }}">
                     <h3>Applicant Details</h3>
                    
                     
@@ -427,19 +381,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label">Select area of study</label>
-                                {% comment %} <select class="form-select" aria-label="Select area of study" name="course" required>
-                                    <option value="" selected>Select area of study</option>
-                                    {% for course in course %}
-                                        <option value="{{ course.id }}">{{ course.course_name }}</option>
-                                    {% endfor %}
-                                </select> {% endcomment %}
+                                {% comment %} <label class="form-label">Select area of study</label>
+                                
                                 <select class="form-select" aria-label="Select area of study" name="course" required>
                                     <option value="" selected>Select area of study</option>
                                     {% for course in course %}
                                         <option value="{{ course.id }}">{{ course.course_name }} - ({{ course.college.college_name }})</option>
                                     {% endfor %}
-                                </select>
+                                </select> {% endcomment %}
+                                <div class="form-group">
+                                    <label class="form-label">Applying Course</label>
+                                    <input type="text" class="form-control" placeholder="course name" name="course" required>
+                                </div>
                             </div>
                         </div>
                         

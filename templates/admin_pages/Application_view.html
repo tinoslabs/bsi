@@ -85,7 +85,8 @@
                                 <td>{{ details.first_name }}</td>
                                 <td>{{ details.last_name }}</td>
                                 {% comment %} <td>{{ details.college.college_name }}</td> {% endcomment %}
-                                <td>{{ details.course.course_name }} - ({{ details.course.college.college_name }})</td>
+                                {% comment %} <td>{{ details.course.course_name }} - ({{ details.course.college.college_name }})</td> {% endcomment %}
+                                <td>{{details.course}}</td>
                                 <td>{{ details.email }}</td>
                                 
                                 <td>{{ details.phone }}</td>
