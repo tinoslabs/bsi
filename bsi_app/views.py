@@ -1732,9 +1732,22 @@ def notification_details(request, message):
     else:
         form = EnquiryForm()
     details = get_object_or_404(Notification, message=message)
+    course = Course_Model.objects.all()
+    # courses = college.courses.all()
+
+    
+    colleges = College_Model.objects.all()
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
+    
+    slider_images = SliderImage.objects.all()
+    footer_colleges = College_Model.objects.order_by('-id')[:5]
+    footer_courses = Course_Model.objects.order_by('-id')[:7]
+    footer_exams = ExamModel.objects.order_by('-id')[:7]
     # notifications = Notification.objects.all().order_by('-created_at')
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
-    return render(request, 'notification_details.html', {'details': details,'form':form,'notifications':notifications})
+    return render(request, 'notification_details.html', {'details': details,'form':form,'notifications':notifications,'course':course,'colleges':colleges,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings,'slider_images':slider_images,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams})
 
 
 def application(request):
