@@ -52,19 +52,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="your-container-class">
-                                {% if category_name %}
-                                    <h1>{{ category_name.blog_heading }}</h1>
-                                {% endif %}
-                                {% for details in blog_details %}
-                                    <p style="text-align: justify;">{{ details.blog_description | safe }}</p>
-                                {% endfor %}
-                            </div>
-                            <style>
-                                .your-container-class p {
-                                    font-family: Arial, sans-serif !important;
-                                }
-                            </style>
                             <div class="applications-info">
                                 {% for details in blog_details %}
                                     <div class="image">
@@ -72,6 +59,22 @@
                                     </div>
                                 {% endfor %}
                             </div>
+                            <div class="events-area pb-75">
+                                <div class="your-container-class">
+                                    {% if category_name %}
+                                        <h1>{{ category_name.blog_heading }}</h1>
+                                    {% endif %}
+                                    {% for details in blog_details %}
+                                        <p style="text-align: justify;">{{ details.blog_description | safe }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <style>
+                                .your-container-class p {
+                                    font-family: Arial, sans-serif !important;
+                                }
+                            </style>
+                            
                             
                             <div class="pages-share-and-tags">
                                 <div class="row">

@@ -422,24 +422,7 @@
                 <button type="button" class="close-btn bg-transparent position-relative lh-1 p-0 border-0" data-bs-dismiss="offcanvas" aria-label="Close">
                     <i class="ri-close-fill"></i>
                 </button>
-                 {% comment %} <div class="notification-container">
-                    <div class="notification-icon" onclick="toggleNotifications()">
-                        <i class="material-icons dp48">notifications</i>
-                        <span class="num-count">{{ notifications.count }}</span>
-                    </div>
-                    <div class="notifications" id="notificationDropdown">
-                        <div class="notification-header">
-                            <span>NOTIFICATIONS</span>
-                            <i class="material-icons settings-icon">settings</i>
-                        </div>
-                        {% for notification in notifications %}
-                        <div class="notification-item">
-                            <span class="count">{{ forloop.counter }}</span> {{ notification.message }}</span> 
-                            <span class="close" onclick="removeNotification({{ notification.id }})">&times;</span>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>  {% endcomment %}
+               
                 <div class="notification-container">
                     <div class="notification-icon" onclick="toggleResponsiveNotifications()">
                         <i class="material-icons dp48">notifications</i>

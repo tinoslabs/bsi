@@ -1337,10 +1337,12 @@ def blog_details(request, blog_heading):
     footer_colleges = College_Model.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+    
     category = get_object_or_404(Blog_Category, blog_heading=blog_heading, status=False)
     if category:
         blog_details = Blog_Details.objects.filter(category=category, status=False)
-        context = {'blog_details': blog_details, 'category_name': category,'blog':blog,'courses':courses,'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'exam':exam,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings}
+        context = {'blog_details': blog_details, 'category_name': category,'blog':blog,'courses':courses,'course_collections':course_collections,'sub_collections':sub_collections,'sub_categories':sub_categories,'exam':exam,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings,'notifications':notifications}
         return render(request, "blog-details.html", context)
     else:
         messages.warning(request, "No such category found")
