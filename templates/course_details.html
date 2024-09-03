@@ -244,10 +244,12 @@
                         <div class="blog-right-sidebar">
                             <div class="button-container">
                                 {% for college in college %}
+                                {% if college.brochure %}
                                 <a href="{{ course.brochure.url }}" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
                                     <i class="icon-download"></i>
                                     Course Brochure
                                 </a>
+                                {% endif %}
                                 {% endfor %}
                             </div>
                             <br><br>

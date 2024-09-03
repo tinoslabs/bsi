@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,Add_On_Course,ApplicationModel
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,Add_On_Course,Application_Model
 from django.core.exceptions import ValidationError
 import re
 
@@ -200,9 +200,9 @@ class NewsletterForm(forms.ModelForm):
         
 class ApplicationForm(forms.ModelForm):
     class Meta:
-        model = ApplicationModel
+        model = Application_Model
         fields = [
-            
+            'college',
             'first_name', 
             'last_name', 
             'email', 
@@ -217,7 +217,7 @@ class ApplicationForm(forms.ModelForm):
         ]
         widgets = {
             'dob': forms.DateInput(attrs={'type': 'date'}),
-            'student_type': forms.Select(choices=ApplicationModel.STUDENT_TYPE_CHOICES),
+            'student_type': forms.Select(choices=Application_Model.STUDENT_TYPE_CHOICES),
         }
     
     def clean_pin_code(self):

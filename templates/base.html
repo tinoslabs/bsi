@@ -316,14 +316,14 @@
                     <ul class="navbar-nav ms-auto your-container-class">
                         {% for main in main_header %}
                             <li class="nav-item your-container-class">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                <a href="" class="dropdown-toggle nav-link">
                                     {{ main.main_heading }}
                                 </a>
                                 <ul class="dropdown-menu your-container-class">
                                     {% for sub in sub_headers %}
                                         {% if sub.main_header == main %}
                                             <li class="nav-item your-container-class">
-                                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
+                                                <a href="" class="dropdown-toggle nav-link">
                                                     {{ sub.sub_header }}
                                                 </a>
                                                 <ul class="dropdown-menu your-container-class">
@@ -422,7 +422,7 @@
                 <button type="button" class="close-btn bg-transparent position-relative lh-1 p-0 border-0" data-bs-dismiss="offcanvas" aria-label="Close">
                     <i class="ri-close-fill"></i>
                 </button>
-                 <div class="notification-container">
+                 {% comment %} <div class="notification-container">
                     <div class="notification-icon" onclick="toggleNotifications()">
                         <i class="material-icons dp48">notifications</i>
                         <span class="num-count">{{ notifications.count }}</span>
@@ -439,7 +439,29 @@
                         </div>
                         {% endfor %}
                     </div>
+                </div>  {% endcomment %}
+                <div class="notification-container">
+                    <div class="notification-icon" onclick="toggleResponsiveNotifications()">
+                        <i class="material-icons dp48">notifications</i>
+                        <span class="num-count">{{ notifications.count }}</span>
+                    </div>
+                    <div class="notifications" id="responsiveNotificationDropdown">
+                        <div class="notification-header">
+                            <span>NOTIFICATIONS</span>
+                            <i class="material-icons settings-icon">settings</i>
+                        </div>
+                        {% for notification in notifications %}
+                        
+                        <div class="notification-item">
+                            <span class="count">{{ forloop.counter }}</span> 
+                            {{ notification.message }}</span> 
+                            <a href="{% url 'notification_details' message=notification.message %}">{{ notification.message }}</a>
+                            <span class="close" onclick="removeNotification({{ notification.id }})">&times;</span>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div> 
+                
             </div>
             
             <!-- Offcanvas Menu Section -->
@@ -663,7 +685,20 @@
         <!-- End Back to Top -->
 
         <!-- Js Files -->
-       
+
+
+       <style>
+        @media (max-width: 992px) {
+            #responsiveNotificationDropdown {
+                top: 60px;
+                right: -100px;
+                width: 300px;
+                position: absolute;
+                z-index: 1050;
+                
+            }
+        }
+       </style>
                 
                        
         <style>
@@ -844,6 +879,21 @@
                         });
                     });
                 </script> {% endcomment %}
+                <script>
+                    function toggleResponsiveNotifications() {
+                        const notificationDropdown = document.getElementById('responsiveNotificationDropdown');
+                        notificationDropdown.style.display = notificationDropdown.style.display === 'block' ? 'none' : 'block';
+                    }
+                    
+                    window.onclick = function(event) {
+                        const notificationDropdown = document.getElementById('responsiveNotificationDropdown');
+                        if (!event.target.matches('.notification-icon') && !event.target.closest('.notification-icon')) {
+                            if (notificationDropdown.style.display === 'block') {
+                                notificationDropdown.style.display = 'none';
+                            }
+                        }
+                    }
+                </script>
 
     </body>
 

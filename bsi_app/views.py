@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,Add_On_Course,NewsletterSubscription,ApplicationModel
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,Add_On_Course,NewsletterSubscription,Application_Model
 from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm,headerMainForm, SubheaderForm, SubHeaderHeadingForm, HeaderDetailsForm, HeaderDetailsForm, NotificationForm, Add_On_Course_Form,NewsletterForm,ApplicationForm
 from django.http import HttpResponseNotFound
 
@@ -34,6 +34,83 @@ def admin_dashboard(request):
 from django.db.models import Q
 
 
+# def index(request):
+#     if request.method == 'POST':
+#         form = NewsletterForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Our team will contact you soon.')
+#             return redirect('index')
+#     else:
+#         form = NewsletterForm()
+
+#     search_query = request.GET.get('query', '')
+    
+   
+#     colleges = College_Model.objects.order_by('-id')
+#     if search_query:
+#         colleges = colleges.filter(Q(college_name__icontains=search_query) | Q(place__icontains=search_query))
+#     colleges = colleges[:9] 
+
+#     courses = Course_Model.objects.all()
+#     exams = ExamModel.objects.all()
+#     add_on = Add_On_Course.objects.all()
+
+#     no_results = False
+
+#     if search_query:
+#         courses = courses.filter(Q(course_name__icontains=search_query))
+#         exams = exams.filter(Q(exam_name__icontains=search_query))
+
+#         if not colleges.exists() and not courses.exists() and not exams.exists():
+#             no_results = True
+
+#     clients_review = ClientReview.objects.all()
+#     client_logo = Client_Logo.objects.all()
+#     unique_courses = Course_Model.objects.values('course_name').distinct()
+#     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+#     main_header = headerMain.objects.all()
+#     sub_headers = SubHeader.objects.all()
+#     sub_headings = SubHeaderHeading.objects.all()
+#     details = DetailsModel.objects.all()
+#     blog_category = Blog_Category.objects.filter(status=0)
+#     about = About_Video.objects.all()
+#     featured_colleges = FeaturedColleges.objects.all()
+#     slider_images = SliderImage.objects.all()
+#     footer_colleges = College_Model.objects.order_by('-id')[:5]
+#     footer_courses = Course_Model.objects.order_by('-id')[:7]
+#     footer_exams = ExamModel.objects.order_by('-id')[:7]
+
+#     context = {
+#         'clients_review': clients_review,
+#         'client_logo': client_logo,
+#         'courses': courses,
+#         'notifications': notifications,
+#         'colleges': colleges,
+#         'details': details,
+#         'blog_category': blog_category,
+#         'exam': exams,
+#         'add_on': add_on,
+#         'about': about,
+#         'featured_colleges': featured_colleges,
+#         'search_query': search_query,
+#         'no_results': no_results,
+#         'footer_colleges': footer_colleges,
+#         'footer_courses': footer_courses,
+#         'footer_exams': footer_exams,
+#         'slider_images': slider_images,
+#         'main_header': main_header,
+#         'sub_headers': sub_headers,
+#         'sub_headings': sub_headings,
+#         'unique_courses': unique_courses,
+#         'form': form
+#     }
+
+#     return render(request, 'index.html', context)
+
+
+from django.urls import reverse
+
 def index(request):
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
@@ -45,29 +122,17 @@ def index(request):
         form = NewsletterForm()
 
     search_query = request.GET.get('query', '')
-    
-    # Filter first, then slice
-    colleges = College_Model.objects.order_by('-id')
-    if search_query:
-        colleges = colleges.filter(Q(college_name__icontains=search_query) | Q(place__icontains=search_query))
-    colleges = colleges[:9]  # Apply slicing after filtering
 
+    if search_query:
+        return redirect(f'{reverse("search_results")}?query={search_query}') # Redirect to the search results page
+
+    colleges = College_Model.objects.order_by('-id')[:9]  # Only display a limited number of colleges
     courses = Course_Model.objects.all()
     exams = ExamModel.objects.all()
     add_on = Add_On_Course.objects.all()
 
-    no_results = False
-
-    if search_query:
-        courses = courses.filter(Q(course_name__icontains=search_query))
-        exams = exams.filter(Q(exam_name__icontains=search_query))
-
-        if not colleges.exists() and not courses.exists() and not exams.exists():
-            no_results = True
-
     clients_review = ClientReview.objects.all()
     client_logo = Client_Logo.objects.all()
-    unique_courses = Course_Model.objects.values('course_name').distinct()
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
@@ -93,8 +158,6 @@ def index(request):
         'add_on': add_on,
         'about': about,
         'featured_colleges': featured_colleges,
-        'search_query': search_query,
-        'no_results': no_results,
         'footer_colleges': footer_colleges,
         'footer_courses': footer_courses,
         'footer_exams': footer_exams,
@@ -102,11 +165,134 @@ def index(request):
         'main_header': main_header,
         'sub_headers': sub_headers,
         'sub_headings': sub_headings,
-        'unique_courses': unique_courses,
+        'unique_courses': Course_Model.objects.values('course_name').distinct(),
         'form': form
     }
 
     return render(request, 'index.html', context)
+
+# def search_results(request):
+#     search_query = request.GET.get('query', '')
+#     no_results = False
+
+#     colleges = College_Model.objects.none()
+#     courses = Course_Model.objects.none()
+#     exams = ExamModel.objects.none()
+#     add_on = Add_On_Course.objects.none()
+    
+#     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+#     main_header = headerMain.objects.all()
+#     sub_headers = SubHeader.objects.all()
+#     sub_headings = SubHeaderHeading.objects.all()
+#     details = DetailsModel.objects.all()
+    
+   
+#     slider_images = SliderImage.objects.all()
+#     footer_colleges = College_Model.objects.order_by('-id')[:5]
+#     footer_courses = Course_Model.objects.order_by('-id')[:7]
+#     footer_exams = ExamModel.objects.order_by('-id')[:7]
+    
+#     if search_query:
+#         colleges = College_Model.objects.filter(
+#             Q(college_name__icontains=search_query) | Q(place__icontains=search_query)
+#         )
+#         courses = Course_Model.objects.filter(
+#             Q(course_name__icontains=search_query)
+#         )
+#         exams = ExamModel.objects.filter(
+#             Q(exam_name__icontains=search_query)
+#         )
+#         add_on = Add_On_Course.objects.filter(
+#             Q(course_name__icontains=search_query)
+#         )
+        
+       
+#         if not colleges.exists() and not courses.exists() and not exams.exists():
+#             no_results = True
+
+#     context = {
+#         'colleges': colleges,
+#         'courses': courses,
+#         'exams': exams,
+#         'add_on':add_on,
+#         'search_query': search_query,
+#         'no_results': no_results,
+#         'notifications':notifications,
+#         'main_header':main_header,
+#         'sub_headers':sub_headers,
+#         'sub_headings':sub_headings,
+#         'details':details,
+#         'slider_images':slider_images,
+#         'footer_colleges':footer_colleges,
+#         'footer_courses':footer_courses,
+#         'footer_exams':footer_exams
+        
+        
+#     }
+
+#     return render(request, 'search_results.html', context)
+
+def search_results(request):
+    search_query = request.GET.get('query', '')
+    no_results = False
+
+    colleges = College_Model.objects.none()
+    courses = Course_Model.objects.none()
+    exams = ExamModel.objects.none()
+    add_on = Add_On_Course.objects.none()
+    
+    notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
+    main_header = headerMain.objects.all()
+    sub_headers = SubHeader.objects.all()
+    sub_headings = SubHeaderHeading.objects.all()
+    details = DetailsModel.objects.all()
+    
+    slider_images = SliderImage.objects.all()
+    footer_colleges = College_Model.objects.order_by('-id')[:5]
+    footer_courses = Course_Model.objects.order_by('-id')[:7]
+    footer_exams = ExamModel.objects.order_by('-id')[:7]
+    
+    if search_query:
+        colleges = College_Model.objects.filter(
+            Q(college_name__icontains=search_query) | Q(place__icontains=search_query)
+        )
+        courses = Course_Model.objects.filter(
+            Q(course_name__icontains=search_query)
+        )
+        exams = ExamModel.objects.filter(
+            Q(exam_name__icontains=search_query)
+        )
+        add_on = Add_On_Course.objects.filter(
+            Q(course_name__icontains=search_query)
+        )
+        
+        # Check if there are any results
+        if not colleges.exists() and not courses.exists() and not exams.exists() and not add_on.exists():
+            no_results = True
+
+    context = {
+        'colleges': colleges,
+        'courses': courses,
+        'exams': exams,
+        'add_on': add_on,
+        'search_query': search_query,
+        'no_results': no_results,
+        'notifications': notifications,
+        'main_header': main_header,
+        'sub_headers': sub_headers,
+        'sub_headings': sub_headings,
+        'details': details,
+        'slider_images': slider_images,
+        'footer_colleges': footer_colleges,
+        'footer_courses': footer_courses,
+        'footer_exams': footer_exams,
+    }
+
+    return render(request, 'search_results.html', context)
+
+
+
+
 
 
 
@@ -1326,12 +1512,12 @@ def download_brochure(request):
 
 @login_required(login_url='user_login')
 def Application_view(request):
-    data = ApplicationModel.objects.all()
+    data = Application_Model.objects.all()
     return render(request,'admin_pages/Application_view.html',{'data':data})
 
 @login_required(login_url='user_login')
 def delete_application(request, pk):
-    data = get_object_or_404(ApplicationModel, id=pk)
+    data = get_object_or_404(Application_Model, id=pk)
     data.delete()
     return redirect('Application_view') 
 

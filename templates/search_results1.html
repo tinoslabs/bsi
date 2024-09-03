@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Search Results for "{{ search_query }}"</h1>
+
+    <div id="colleges-section">
+        <h2>Colleges</h2>
+        {% if colleges %}
+            <div class="events-area">
+                <div class="row">
+                    {% for college in colleges %}
+                    <div class="card">
+                        <img src="{{college.logo.url}}" alt="{{college.college_name}}">
+                        <a href="{% url 'college_details' college.college_name %}">
+                            <h3>{{college.college_name}}</h3>
+                        </a>
+                        <p>{{college.place}}</p>
+                        <div class="details">
+                            <div>Course Offered<br><a href="{% url 'college_details' college.college_name %}">{{college.total_course}} course</a></div>
+                            <div>Total Fees<br>₹{{college.min_fee}} L</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <p>No colleges found.</p>
+        {% endif %}
+    </div>
+
+    <div id="courses-section">
+        <h2>Courses</h2>
+        {% if courses %}
+            <div class="exam-list">
+                {% for course in courses %}
+                <a href="{% url 'course_details' course.id %}" class="exam-button">{{ course.course_name }}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No courses found.</p>
+        {% endif %}
+    </div>
+
+    <div id="exam-section">
+        <h2>Exams</h2>
+        {% if exams %}
+            <div class="card-container1">
+                {% for exam in exams %}
+                <a href="{% url 'exam_detail' exam.exam_name %}" class="card">{{ exam.exam_name }}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No exams found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

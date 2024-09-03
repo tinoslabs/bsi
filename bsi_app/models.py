@@ -380,9 +380,35 @@ class NewsletterSubscription(models.Model):
         return f"{self.email} - {self.college} - {self.phone}"
     
     
-class ApplicationModel(models.Model):
+# class ApplicationModel(models.Model):
    
-    course = models.ForeignKey('Course_Model', on_delete=models.CASCADE)
+#     course = models.ForeignKey('Course_Model', on_delete=models.CASCADE)
+#     first_name = models.CharField(max_length=100)
+#     last_name = models.CharField(max_length=100)
+#     email = models.EmailField()
+#     phone = models.CharField(max_length=15)  # Adjusted max_length for flexibility
+#     state = models.CharField(max_length=100)
+#     pin_code = models.CharField(max_length=6)
+#     dob = models.DateField()  # Using DateField
+
+#     STUDENT_TYPE_CHOICES = [
+#         ('full-time', 'Full-time'),
+#         ('part-time', 'Part-time'),
+#         ('online', 'Online'),
+#         ('on-campus', 'On-campus'),
+#     ]
+    
+#     student_type = models.CharField(max_length=50, choices=STUDENT_TYPE_CHOICES)
+#     degree = models.CharField(max_length=100)
+#     message = models.TextField(blank=True, null=True)
+
+#     def __str__(self):
+#         return f"{self.first_name} {self.last_name} - {self.course.course_name}"
+    
+    
+class Application_Model(models.Model):
+    college = models.ForeignKey('College_Model', on_delete=models.CASCADE)
+    course = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -403,7 +429,7 @@ class ApplicationModel(models.Model):
     message = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.course.course_name}"
+        return f"{self.first_name} {self.last_name} - {self.course}"
     
     
     
