@@ -147,7 +147,7 @@
                     </div>
                     
                     
-                    {% comment %} <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <form id="brochureForm" method="post" action="{% url 'download_brochure' %}">
@@ -178,52 +178,34 @@
                                 </form>
                             </div>
                         </div>
-                    </div> {% endcomment %}
-
-                    <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form id="brochureForm" method="post" action="{% url 'download_brochure' %}">
-                                    {% csrf_token %}
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="brochureModalLabel">Download Brochure</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <input type="hidden" name="college_id" id="college_id">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Your name" name="name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your email" name="email" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Phone Number" name="phone" required>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                     </div>
             
                     <div class="col-lg-4">
                         <div class="blog-right-sidebar">
-                            
-                            
+                            {% comment %} <div class="button-container">
+                                {% if college.college_brochure %}
+                                <a href="{{ college.college_brochure.url }}" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
+                                    <i class="icon-download"></i>
+                                    Brochure
+                                </a>
+                                {% else %}
+                                {% endif %}
+                                {% if college.course_brochure %}
+                                <a href="{{ college.course_brochure.url }}" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
+                                    <i class="icon-download"></i>
+                                    Course List
+                                </a>
+                                {% else %}
+                                {% endif %}
+                            </div> {% endcomment %}
                             <div class="button-container">
                                 
                                 {% if college.course_brochure %}
-                                <a href="{{ college.course_brochure.url }}" class="btn download-guide">
+                                <a href="#" class="btn download-guide" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}" data-brochure-url="{{ college.course_brochure.url }}">
                                     <i class="icon-download"></i>
                                     Course List
                                 </a>
                                 {% endif %}
-                                
-                           
                             </div>
                             
                                
