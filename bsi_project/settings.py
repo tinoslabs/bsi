@@ -156,6 +156,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 
+
 # Allow file types to be uploaded
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
 
