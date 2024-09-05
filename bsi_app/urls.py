@@ -17,6 +17,8 @@ Including another URLconf
 from .import views
 from django.urls import path
 
+from ckeditor_uploader import views as ckeditor_views
+
 urlpatterns = [
     path('',views.index,name='index'),
 
@@ -153,6 +155,10 @@ urlpatterns = [
     path('delete_slider/<int:pk>/', views.delete_slider, name='delete_slider'),
 
     path('ckeditor_upload/', views.ckeditor_upload, name='ckeditor_upload'),
+    # path('ckeditor/upload/', views.ckeditor_views.upload, name='ckeditor_upload'),
+    # path('ckeditor/browse/', views.ckeditor_views.browse, name='ckeditor_browse'),
+    path('ckeditor/upload/', ckeditor_views.upload, name='ckeditor_upload'),
+    path('ckeditor/browse/', ckeditor_views.browse, name='ckeditor_browse'),
     
     
     path('create_header_main', views.create_header_main, name='create_header_main'),

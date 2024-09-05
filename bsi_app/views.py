@@ -1490,6 +1490,7 @@ def college_details(request, college_name):
         'notifications':notifications,
     })
 
+
 def download_brochure(request):
     if request.method == 'POST':
         college_id = request.POST.get('college_id')
@@ -1916,7 +1917,7 @@ def notification_details(request, message):
         if form.is_valid():
             form.save()
             messages.success(request, 'Our team will contact you soon.')
-            return redirect('notification_details')  # Redirect to the same college details page
+            return redirect('notification_details', message=message)  # Redirect to the same college details page
     else:
         form = EnquiryForm()
     details = get_object_or_404(Notification, message=message)

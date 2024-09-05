@@ -82,7 +82,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="pages-image">
-                    <img src="{% static 'assets/img/collage_bsi_colleges.png' %}" alt="pages-image">
+                    <img src="{% static 'assets/img/Untitled-2.jpg' %}" alt="pages-image">
                 </div>
             </div>
         </div>
@@ -112,7 +112,9 @@
                         <h1>{{ category_name.exam_name }}</h1>
                         {% for details in exam_details %}
                         <div class="image">
+                            {% if details.exam_image %}
                             <img src="{{ details.exam_image.url }}" alt="applications-image">
+                            {% endif %}
                         </div>
                         <p style="font-family: arial;">{{ details.details | safe }}</p>
                         {% endfor %}
@@ -122,9 +124,11 @@
                         <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
                         {% for details in exam_details %}
                         <div class="video-btn">
+                            {% if details.videos %}
                             <a class="text-decoration-none icon" data-fslightbox="gallery" href="{{ details.videos }}">
                                 <i class="flaticon-play"></i>
                             </a>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -170,14 +174,19 @@
                 <div class="blog-right-sidebar">
                     {% for details in exam_details %}
                     <div class="button-container">
+                        {% if details.brochure %}
                         <a href="{{ details.brochure.url }}" class="btn download-guide">
                             <i class="icon-download"></i>
                             Download Guide
                         </a>
+                        {% endif %}
+
+                        {% if details.sample_papers %}
                         <a href="{{ details.sample_papers.url }}" class="btn sample-papers">
                             <i class="icon-sample"></i>
                             Sample Papers
                         </a>
+                        {% endif %}
                     </div>
                     {% endfor %}
                     
