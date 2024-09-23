@@ -33,10 +33,7 @@ def admin_dashboard(request):
 
 from django.db.models import Q
 
-
-
-
-
+    
 from django.urls import reverse
 
 # def index(request):

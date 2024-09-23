@@ -204,6 +204,7 @@ class NewsletterForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'placeholder': 'Enter your mobile no'}),
         }
         
+
         
 class ApplicationForm(forms.ModelForm):
     class Meta:

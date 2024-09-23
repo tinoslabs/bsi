@@ -473,6 +473,16 @@
                                 </form>
                                 
                             </div>
+
+                            {% comment %} <div class="container">
+                                <div class="popup">
+                                  <div class="popup-content">
+                                    <h2 class="popup-title">Awesome!</h2>
+                                    <p class="popup-body">You just found my pastel gradient button.<br> Now, let's see what else it does. :P </p>
+                                    <a href="#0" class="popup-button">Hover me</a>
+                                  </div>  
+                                </div>   
+                            </div  {% endcomment %}
                             
                         </div>
                         
@@ -481,8 +491,7 @@
                 </div>
             </div>
         </div>
-       
-
+      
         <div class="apply-area style-2 pb-75">
             <div class="container">
                 <div class="section-title text-center m-auto">
@@ -539,6 +548,90 @@
             </div>
         </div>
         
+         {% comment %} <style>
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+        /* Mobile first */
+        *, *::before, *::after { 
+        box-sizing: border-box;
+        }
+
+        /* Styling */
+        html {
+        background-color: #F5F6FA;
+        }
+        
+        
+        /* Flexbox container */
+        .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        padding: 6%;
+        margin: 0;
+        }
+
+        /* Popup UI */
+        .popup {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        background-color: #fff;
+        border-radius: 6px;
+        padding: 3rem 2rem;
+        box-shadow: 0 10px 40px -14px rgba(0,0,0,0.25);
+        text-align: center;
+        }
+
+        /* Popup Texts & button */
+        .popup-content {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        }
+
+        .popup-title {
+        color: #32325d;
+        font-size: 1.8em;
+        line-height: 1.5em;
+        font-weight: 900;
+        margin-top: 0;
+        }
+
+        .popup-body {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        color: #6b7c93;
+        font-weight: 500;
+        margin-bottom: 2.1em;
+        }
+
+        /* Button Link */
+        .popup-button {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1em;
+        text-transform: uppercase;
+        color: #fff;
+        border-radius: 6px;
+        margin: 10px;
+        padding: 1em 3em;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+        background-image: linear-gradient(to right, #895cf2 0%, #ffabf4 50%, #895cf2 100%);
+        transition: 0.5s;
+        }
+
+        .popup-button:hover {
+        background-position: right center;
+        }
+
+       </style> {% endcomment %}
+
         
         <style>
          
@@ -703,6 +796,120 @@
             color: #fff;
         }
         </style>
+        
+            <style>
+                .college-card {
+                    width: 350px;
+                    background-color: #fff;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    padding: 20px;
+                    margin: 10px;
+                    font-family: Arial, sans-serif;
+                    gap : 10px;
+                }
+                
+                .college-header {
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 1px solid #e6e6e6;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                }
+                
+                .college-logo {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    margin-right: 15px;
+                }
+                
+                .college-info h3 {
+                    font-size: 16px;
+                    margin: 0;
+                    color: #0d47a1;
+                }
+                
+                .location {
+                    font-size: 14px;
+                    color: #666;
+                }
+                
+                .location .material-icons {
+                    font-size: 14px;
+                    vertical-align: middle;
+                }
+                
+                .ranking {
+                    color: #28a745;
+                }
+                
+                .college-details {
+                    display: flex;
+                    justify-content: space-between;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                    border-bottom: 1px solid #e6e6e6;
+                }
+                
+                .college-details div {
+                    text-align: center;
+                }
+                
+                .college-details a {
+                    color: #007bff;
+                    text-decoration: none;
+                }
+                
+                .college-actions {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                
+                .bookmark-btn,
+                .brochure-btn {
+                    background-color: #28a745;
+                    color: #fff;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+                
+                .bookmark-btn {
+                    background-color: #f1f1f1;
+                    color: #333;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                }
+                
+                .bookmark-btn .material-icons {
+                    font-size: 20px;
+                }
+                
+                .brochure-btn {
+                    background-color: #28a745;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                
+                .brochure-btn .material-icons {
+                    margin-right: 5px;
+                }
+                .college-info a {
+                    text-decoration: none; /* Removes the underline from the link */
+                    color: #0d47a1; /* Optional: Ensures the link color matches the header color */
+                }
+                
+                
+                
+            </style>  
+        
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const form = document.getElementById('contactForm');
