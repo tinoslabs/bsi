@@ -16,8 +16,9 @@ admin.site.register(HeaderDetails)
 admin.site.register(Add_On_Course)
 admin.site.register(ExamCategory)
 admin.site.register(FeaturedColleges)
-admin.site.register(College_Model)
+# admin.site.register(CollegeModel)
 admin.site.register(Application_Model)
+# admin.site.register(StateCategory)
 
 class SliderImageAdmin(admin.ModelAdmin):
     list_display = ['caption', 'image']

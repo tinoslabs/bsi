@@ -19,6 +19,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                          <label for="header_image">Header Image</label>
+                          <input type="file" class="form-control" id="header_image" name="header_image" placeholder="Header Image">
+                        </div>
+                        <div class="form-group">
                             <label for="courseName">Course Name</label>
                             <input type="text" class="form-control" id="courseName" name="course_name" placeholder="Course Name" value="{{ form.course_name.value|default_if_none:'' }}">
                         </div>

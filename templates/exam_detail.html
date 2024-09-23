@@ -108,18 +108,19 @@
                         </div> -->
                     </div>
                    
-                    <div class="your-container-class">
-                        <h1>{{ category_name.exam_name }}</h1>
-                        {% for details in exam_details %}
-                        <div class="image">
-                            {% if details.exam_image %}
-                            <img src="{{ details.exam_image.url }}" alt="applications-image">
-                            {% endif %}
+                    <div class="events-area pb-75">
+                        <div class="your-container-class">
+                            <h1>{{ category_name.exam_name }}</h1>
+                            {% for details in exam_details %}
+                            <div class="image">
+                                {% if details.exam_image %}
+                                <img src="{{ details.exam_image.url }}" alt="applications-image">
+                                {% endif %}
+                            </div>
+                            <p style="font-family: arial;">{{ details.details | safe }}</p>
+                            {% endfor %}
                         </div>
-                        <p style="font-family: arial;">{{ details.details | safe }}</p>
-                        {% endfor %}
                     </div>
-                    
                     <div class="video-image">
                         <img src="{% static 'assets/img/video-1.jpg' %}" alt="video-image">
                         {% for details in exam_details %}

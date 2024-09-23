@@ -1,0 +1,54 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+      
+
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Update State Category</h4>
+                      <!-- <p class="card-description">
+                        Basic form layout
+                      </p> -->
+                      <form class="forms-sample" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                        <div class="form-group">
+                          <label for="CategoryName">State Name</label>
+                          <input type="text" class="form-control" id="CategoryName" name="state_name" placeholder="Category Name" value="{{category.state_name}}">
+                        </div>
+                        
+                          <div class="form-group">
+                            <label>Current State Image</label><br>
+                            {% if category.state_image %}
+                                <img src="{{ category.state_image.url }}" alt="Current Image" style="width: 150px; height: 150px;">
+                                <br>
+                                <!-- <input type="checkbox" name="remove_image"> Remove Current Image -->
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif %}
+                        </div>
+
+                      <div class="form-group">
+                        <label for="imageFile">State Image</label>
+                        <input type="file" class="form-control-file" id="imageFile" name="state_image" accept="image/*" value="{{category.state_image}}">
+                    </div>
+
+                        <div class="form-check form-check-flat form-check-primary">
+                          <label class="form-check-label">
+                            <!-- <input type="checkbox" class="form-check-input">
+                            Remember me -->
+                          </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <!-- <button class="btn btn-light">Cancel</button> -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          
+            {% endblock %}

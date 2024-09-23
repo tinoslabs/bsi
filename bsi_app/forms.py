@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, College_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,Add_On_Course,Application_Model
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo,  Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel,  Enquiry_Model,EnquirySubmission,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,Add_On_Course,Application_Model,StateCategory,CollegeModel
 from django.core.exceptions import ValidationError
 import re
 
@@ -31,9 +31,15 @@ class Client_Logo_Form(forms.ModelForm):
         fields = '__all__'
 
 
+class State_Form(forms.ModelForm):
+    class Meta:
+        model = StateCategory
+        fields = '__all__'
+        
+
 class CollegeModelForm(forms.ModelForm):
     class Meta:
-        model = College_Model
+        model = CollegeModel
         fields = '__all__'
 
 
@@ -168,6 +174,7 @@ class SubHeaderHeadingForm(forms.ModelForm):
         self.fields['main_header'].queryset = headerMain.objects.all()
         self.fields['sub_header'].queryset = SubHeader.objects.all()
 
+
 class HeaderDetailsForm(forms.ModelForm):
     class Meta:
         model = HeaderDetails
@@ -208,7 +215,7 @@ class ApplicationForm(forms.ModelForm):
             'email', 
             'phone', 
             'state', 
-            'pin_code', 
+            # 'pin_code', 
             'dob', 
             'student_type', 
             'degree',
@@ -220,11 +227,11 @@ class ApplicationForm(forms.ModelForm):
             'student_type': forms.Select(choices=Application_Model.STUDENT_TYPE_CHOICES),
         }
     
-    def clean_pin_code(self):
-        pin_code = self.cleaned_data.get('pin_code')
-        if not pin_code.isdigit() or len(pin_code) != 6:
-            raise forms.ValidationError('Enter a valid 6-digit pin code.')
-        return pin_code
+    # def clean_pin_code(self):
+    #     pin_code = self.cleaned_data.get('pin_code')
+    #     if not pin_code.isdigit() or len(pin_code) != 6:
+    #         raise forms.ValidationError('Enter a valid 6-digit pin code.')
+    #     return pin_code
 
     
 

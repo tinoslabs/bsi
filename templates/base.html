@@ -29,6 +29,10 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.materialdesignicons.com/7.2.96/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="{% static 'assets/css/gallery.css' %}"> 
+        <link rel="stylesheet" href="{% static 'assets/css/gal.css' %}"> 
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
         
         <style>
@@ -245,12 +249,72 @@
                 font-family: Arial, sans-serif !important;
             }
         </style>
+
         
+        <style>
+            .load {
+                width: 100%;
+                height: 100vh; /* Full viewport height */
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center; /* Ensures vertical centering */
+                position: fixed; /* Ensure it covers the entire viewport */
+                top: 0;
+                left: 0;
+                z-index: 9999; /* High z-index to ensure it's above other elements */
+            }
+        
+            .load div {
+                width: 25px;
+                height: 25px;
+                background-color: #0232a0;
+                margin-left: 5px;
+                border-radius: 50%;
+                animation-name: loading;
+                animation-duration: 1.2s;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+            }
+        
+            .load-two {
+                animation-delay: 0.4s;
+            }
+        
+            .load-three {
+                animation-delay: 0.8s;
+            }
+        
+            @keyframes loading {
+                to {
+                    opacity: 0.3;
+                    transform: translateY(-25px);
+                }
+            }
+        </style>
 
     </head>
-
+    
     <body>
-
+        
+        
+        <!-- Loading section -->
+        {% comment %} <div class="load" id="loadingScreen">
+            <div class="load-one"></div>
+            <div class="load-two"></div>
+            <div class="load-three"></div>
+        </div>
+        
+        <script>
+            
+            window.onload = function() {
+                setTimeout(function() {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 1000); 
+            }
+        </script>
+         {% endcomment %}
+       
         <!-- Start Top Header Area -->
         <div class="top-header-area">
             <div class="container-fluid">
@@ -290,11 +354,18 @@
                                                 <i class="flaticon-instagram"></i>
                                             </a>
                                         </li>
-                                        <li class="d-inline-block">
+                                        {% comment %} <li class="d-inline-block">
                                             <a class="text-decoration-none" href="" target="_blank">
                                                 <i class="flaticon-twitter"></i>
                                             </a>
-                                        </li>
+                                        </li>   {% endcomment %}
+                                        {% comment %} <li class="d-inline-block">
+                                            <a class="text-decoration-none" href="https://twitter.com/" target="_blank">
+                                                <i class="x-icon"></i>
+                                            </a>
+                                        </li> {% endcomment %}
+                                       
+                                        
                                         
                                     </ul>
                                     
@@ -305,6 +376,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- End Top Header Area -->
 
         <!-- Start Navbar Area --> 
@@ -333,7 +405,7 @@
                                                                 <a href="{% url 'header_details' sub_heading.id %}" class="nav-link">
                                                                     {{ sub_heading.sub_heading }}
                                                                 </a>
-                                                            </li>
+                                                            </li> 
                                                         {% endif %}
                                                     {% endfor %}
                                                 </ul>
@@ -974,6 +1046,12 @@
                     }
                 </script>
 
+                {% comment %} <script>
+                    window.onload = function() {
+                        document.querySelector('.page-loading').style.display = 'none';
+                    };
+                </script> {% endcomment %}
+
     </body>
 
 
@@ -984,6 +1062,7 @@
 <script src="{% static 'assets/js/scrollCue.min.js' %}"></script>
 <script src="{% static 'assets/js/custom.js' %}"></script>
 <script src="{% static 'assets/js/messenger.js' %}"></script>
+<script src="{% static 'assets/js/gallery.js' %}"></script>
 
     
 </html>
