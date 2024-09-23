@@ -1,0 +1,166 @@
+<style>
+    /* Add styles for the slider */
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      max-width: 100rem;
+      margin: 0 auto;
+    }
+    
+    .slider-wrapper {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item {
+      position: relative; /* Needed for text overlay */
+      flex: 0 0 calc(33.33% - 2rem); /* Ensure 3 images per row */
+      margin: 0 1rem;
+    }
+    
+    .gallery-image {
+      display: block;
+      width: 100%;
+      height: 100%; /* Fix the height for uniformity */
+      object-fit: cover;
+    }
+    
+    /* Text overlay styles */
+    .place-name {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); /* Center horizontally and vertically */
+      color: white;
+      font-size: 1.8rem;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.6); /* Dark background for readability */
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      text-align: center; /* Center the text */
+    }
+    
+    .listings-count {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      font-size: 1rem;
+      background-color: rgba(0, 0, 0, 0.5); /* Dark background for readability */
+      padding: 0.3rem;
+      border-radius: 3px;
+    }
+    
+    /* Slider navigation */
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+    }
+    
+    .slider-nav.prev {
+      left: 0;
+    }
+    
+    .slider-nav.next {
+      right: 0;
+    }
+    
+    /* Ensure images are displayed properly on smaller screens */
+    @media (max-width: 768px) {
+      .gallery-item {
+        flex: 0 0 calc(50% - 2rem); /* 2 images per row on tablets */
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .gallery-item {
+        flex: 0 0 calc(100% - 2rem); /* 1 image per row on mobile */
+      }
+    }
+    
+</style>
+
+<div class="container">
+    <h1 class="heading">Image Gallery with CSS Grid <span>& Slider</span></h1>
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            <div class="gallery-item">
+                <a href="#link1"> <!-- Add your link here -->
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=500&h=500&fit=crop" alt="Image 1">
+                    <div class="place-name">Bangalore</div>
+                    <div class="listings-count">107 Listings</div>
+                </a>
+            </div>
+            <div class="gallery-item">
+                <a href="#link2"> <!-- Add your link here -->
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1515260268569-9271009adfdb?w=500&h=500&fit=crop" alt="Image 2">
+                    <div class="place-name">Delhi</div>
+                    <div class="listings-count">85 Listings</div>
+                </a>
+            </div>
+            <div class="gallery-item">
+                <a href="#link3"> <!-- Add your link here -->
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1506045412240-22980140a405?w=500&h=500&fit=crop" alt="Image 3">
+                    <div class="place-name">Mumbai</div>
+                    <div class="listings-count">150 Listings</div>
+                </a>
+            </div>
+            <div class="gallery-item">
+                <a href="#link4"> 
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1514041181368-bca62cceffcd?w=500&h=500&fit=crop" alt="Image 4">
+                    <div class="place-name">Chennai</div>
+                    <div class="listings-count">67 Listings</div>
+                </a>
+            </div>
+            <div class="gallery-item">
+                <a href="#link5"> 
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1445810694374-0a94739e4a03?w=500&h=500&fit=crop" alt="Image 5">
+                    <div class="place-name">Hyderabad</div>
+                    <div class="listings-count">95 Listings</div>
+                </a>
+            </div>
+        </div>
+        <button class="slider-nav prev">‹</button>
+        <button class="slider-nav next">›</button>
+    </div>
+</div>
+  <script>
+    // JavaScript for slider functionality
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const sliderItems = document.querySelectorAll('.gallery-item');
+    const prevBtn = document.querySelector('.slider-nav.prev');
+    const nextBtn = document.querySelector('.slider-nav.next');
+
+    let currentIndex = 0;
+
+    nextBtn.addEventListener('click', () => {
+    if (currentIndex < sliderItems.length - 3) {
+        currentIndex++;
+        sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+    }
+    });
+
+    prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+        sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+    }
+    });
+
+    // Optionally, you can add an automatic slider feature
+    setInterval(() => {
+    if (currentIndex < sliderItems.length - 3) {
+        currentIndex++;
+    } else {
+        currentIndex = 0;
+    }
+    sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+    }, 3000); // Adjust the interval as needed
+
+  </script>

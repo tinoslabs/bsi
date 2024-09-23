@@ -37,6 +37,7 @@ img {
           <thead>
             <tr>
               <th>College Name</th>
+              <th>Header Image</th>
               <th>Course Name</th>
              
               <th>Brochure</th>
@@ -50,6 +51,13 @@ img {
             {% for course in courses %}
             <tr>
               <td>{{ course.college.college_name }}</td>
+              <td>
+                {% if course.header_image %}
+                  <img src="{{ course.header_image.url }}" alt="Header Image">
+                {% else %}
+                  Image Not Available
+                {% endif %}
+              </td>
               <td>{{ course.course_name }}</td>
               
               <td>

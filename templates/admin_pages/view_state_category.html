@@ -1,0 +1,68 @@
+{% extends "admin_pages/base.html" %}
+{% load static %}
+
+{% block content %}
+ 
+            <div class="col-lg-11 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">View State Category</h4>
+                  <!-- <p class="card-description">
+                    Add class <code>.table-striped</code>
+                  </p> -->
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>
+                           State Name
+                          </th>
+                          
+                          <th>
+                            State Image
+                          </th>
+                          <th>
+                            Update
+                          </th>
+                          <th>
+                            Delete
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for category in state_category %}
+                        <tr>
+                          <td style="width: 150px; ">
+                            {{ category.state_name }}
+                          </td>
+                          
+                        
+                          <td style="width: 150px; ">
+                            {% if category.state_image %}
+                            <img src="{{ category.state_image.url }}" alt="Current Image" style="width: 80px; height: 80px;">
+                            <br>
+                            <!-- <input type="checkbox" name="remove_image"> Remove Current Image -->
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+                          </td>
+                          <td style="width: 150px; ">
+                            <a href="{% url 'update_state_category' category.id  %}"><button><i class="mdi mdi-cloud-upload" aria-hidden="true"></i> </button></a>
+                          </td>
+                          <td style="width: 150px; ">
+                            <a href="{% url 'delete_state_category' category.id  %}"><button><i class="mdi mdi-delete" aria-hidden="true"></i> </button></a>
+                           
+                          </td>
+                          
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endblock %}

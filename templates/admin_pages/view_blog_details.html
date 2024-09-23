@@ -159,6 +159,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                    <th>Header Image</th>
                   <th>Blog Category</th>
                   <th>Blog Description</th>
                   <th>Blog Image</th>
@@ -169,6 +170,13 @@
               <tbody>
                 {% for blog_details in blog_details %}
                   <tr>
+                    <td>
+                        {% if blog_details.header_image %}
+                          <img src="{{ blog_details.header_image.url }}" alt="Header Image">
+                        {% else %}
+                          Image Not Available
+                        {% endif %}
+                      </td>
                     <td style="width: 150px;">{{ blog_details.category }}</td>
                     <td style="width: 600px; height: 200px;  white-space: inherit; word-wrap: break-word;">{{ blog_details.blog_description | safe }}</td>
                     <td style="width: 150px;">

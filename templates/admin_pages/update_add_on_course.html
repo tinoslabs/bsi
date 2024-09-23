@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Update Course for {{ course.course_name }}</h4>
-                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                    {% comment %} <form class="forms-sample" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="id_category">College Name</label>
@@ -18,6 +18,7 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        
                         <div class="form-group">
                             <label for="courseName">Course Name</label>
                             <input type="text" class="form-control" id="courseName" name="course_name" placeholder="Course Name" value="{{ form.course_name.value|default_if_none:'' }}">
@@ -37,7 +38,57 @@
                         </div>
                         
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    </form>
+                    </form> {% endcomment %}
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+
+                      <!-- College Selection -->
+                     <!-- College Selection -->
+                    <div class="form-group">
+                      <label for="id_category">College Name</label>
+                      <select name="college" id="id_category" class="form-control">
+                          {% for c in college %}
+                              <option value="{{ c.id }}" {% if c.id == course.college.id %}selected{% endif %}>{{ c.college_name }}</option>
+                          {% endfor %}
+                      </select>
+                    </div>
+
+                    <!-- Header Image -->
+                    <div class="form-group">
+                      <label for="header_image">Header Image</label>
+                      <input type="file" class="form-control" id="header_image" name="header_image">
+                      {% if course.header_image %}
+                        <div class="mt-2">
+                          <img src="{{ course.header_image.url }}" alt="Header Image" style="max-width: 200px; height: auto;">
+                          <p><a href="{{ course.header_image.url }}" target="_blank">Current Header Image</a></p>
+                        </div>
+                      {% endif %}
+                    </div>
+
+                    <!-- Course Name -->
+                    <div class="form-group">
+                      <label for="courseName">Course Name</label>
+                      <input type="text" class="form-control" id="courseName" name="course_name" value="{{ form.course_name.value|default_if_none:'' }}">
+                    </div>
+
+                    <!-- Brochure -->
+                    <div class="form-group">
+                      <label for="brochureFile">Brochure</label>
+                      <input type="file" class="form-control-file" id="brochureFile" name="course_brochure">
+                      {% if course.course_brochure %}
+                          <a href="{{ course.course_brochure.url }}" target="_blank">View Current Brochure</a>
+                      {% endif %}
+                    </div>
+
+                    <!-- Course Description -->
+                    <div class="form-group">
+                      <label for="courseDescription">Course Description</label>
+                      <textarea class="form-control" name="course_details" id="courseDescription" rows="3">{{ form.course_details.value|default_if_none:'' }}</textarea>
+                    </div>
+
+                      <!-- Submit Button -->
+                      <button type="submit" class="btn btn-primary me-2">Submit</button>
+                  </form>
                 </div>
             </div>
         </div>

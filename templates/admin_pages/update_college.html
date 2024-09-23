@@ -12,12 +12,62 @@
                     <form class="forms-sample" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
+                            <div class="input-box">
+                              <label for="id_category">State Category</label>
+                             
+                              {% comment %} <select name="category" id="id_category" class="form-control">
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if category.id == college.category.id %}selected{% endif %}>{{ category.state_name }}</option>
+                                {% endfor %}
+                              </select> {% endcomment %}
+                              <select name="category" id="id_category" class="form-control">
+                                {% for category in categories %}
+                                    <!-- Check if the college's current category matches the one in the loop -->
+                                    <option value="{{ category.id }}" {% if category.id == college.category.id %}selected{% endif %}>
+                                        {{ category.state_name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            </div>
+                          </div>
+                        <div class="form-group">
                             <label for="CollegeName">College Name</label>
                             <input type="text" class="form-control" id="CollegeName" name="college_name" placeholder="College Name" value="{{ college.college_name }}">
                             {% if form.college_name.errors %}
                                 <div class="text-danger">{{ form.college_name.errors }}</div>
                             {% endif %}
                         </div>
+
+                        <div class="form-group">
+                            <label for="header_image">Header Image</label>
+                            <input type="file" class="form-control-file" id="header_image" name="header_image">
+                            {% if form.header_image.errors %}
+                                <div class="text-danger">{{ form.header_image.errors }}</div>
+                            {% endif %}
+                            {% if college.header_image %}
+                                <img src="{{ college.header_image.url }}" alt="Current Header Image" style="max-width: 200px;">
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" name="state" placeholder="State" value="{{ college.state }}">
+                            {% if form.state.errors %}
+                                <div class="text-danger">{{ form.state.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="place_image">Place Image</label>
+                            <input type="file" class="form-control-file" id="place_image" name="place_image">
+                            {% if form.place_image.errors %}
+                                <div class="text-danger">{{ form.place_image.errors }}</div>
+                            {% endif %}
+                            {% if college.place_image %}
+                                <img src="{{ college.place_image.url }}" alt="Current Place Image" style="max-width: 200px;">
+                            {% endif %}
+                        </div>
+
                         <div class="form-group">
                             <label for="Place">Place</label>
                             <input type="text" class="form-control" id="Place" name="place" placeholder="Place" value="{{ college.place }}">
@@ -25,13 +75,15 @@
                                 <div class="text-danger">{{ form.place.errors }}</div>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
                             <label for="TotalCourse">Total Course</label>
-                            <input type="text" class="form-control" id="TotalCourse" name="total_course" placeholder="Total Course" value="{{ college.total_course }}">
+                            <input type="number" class="form-control" id="TotalCourse" name="total_course" placeholder="Total Course" value="{{ college.total_course }}">
                             {% if form.total_course.errors %}
                                 <div class="text-danger">{{ form.total_course.errors }}</div>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
                             <label for="LogoFile">College Logo</label>
                             <input type="file" class="form-control-file" id="LogoFile" name="logo">
@@ -40,22 +92,20 @@
                             {% endif %}
                             {% if college.logo %}
                                 <img src="{{ college.logo.url }}" alt="Current Logo" style="max-width: 200px;">
-                            {% else %}
-                                <p>No logo uploaded</p>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
-                            <label for="CollegeImageFile">College Images</label>
+                            <label for="CollegeImageFile">College Image</label>
                             <input type="file" class="form-control-file" id="CollegeImageFile" name="college_image">
                             {% if form.college_image.errors %}
                                 <div class="text-danger">{{ form.college_image.errors }}</div>
                             {% endif %}
                             {% if college.college_image %}
-                                <img src="{{ college.college_image.url }}" alt="Current Image" style="max-width: 200px;">
-                            {% else %}
-                                <p>No image uploaded</p>
+                                <img src="{{ college.college_image.url }}" alt="Current College Image" style="max-width: 200px;">
                             {% endif %}
                         </div>
+
                         <div class="form-group">
                             <label for="MinFee">Minimum Fee</label>
                             <input type="text" class="form-control" id="MinFee" name="min_fee" placeholder="Minimum Fee" value="{{ college.min_fee }}">
@@ -63,6 +113,7 @@
                                 <div class="text-danger">{{ form.min_fee.errors }}</div>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
                             <label for="MaxFee">Maximum Fee</label>
                             <input type="text" class="form-control" id="MaxFee" name="max_fee" placeholder="Maximum Fee" value="{{ college.max_fee }}">
@@ -70,6 +121,7 @@
                                 <div class="text-danger">{{ form.max_fee.errors }}</div>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
                             <label for="addblogDescription">College Description</label>
                             <textarea class="form-control" name="college_description" id="addblogDescription" rows="3" style="height: 150px;" placeholder="Enter Your Description">{{ college.college_description }}</textarea>
@@ -77,45 +129,43 @@
                                 <div class="text-danger">{{ form.college_description.errors }}</div>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
-                            <label for="YouTubeVideos">YouTube Videos</label>
+                            <label for="YouTubeVideos">YouTube Videos (Optional)</label>
                             <input type="text" class="form-control" id="YouTubeVideos" name="youtube_videos" placeholder="YouTube Videos" value="{{ college.youtube_videos }}">
                             {% if form.youtube_videos.errors %}
                                 <div class="text-danger">{{ form.youtube_videos.errors }}</div>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
-                            <label for="CollegeBrochure">College Brochure</label>
+                            <label for="CollegeBrochure">College Brochure (Optional)</label>
                             <input type="file" class="form-control-file" id="CollegeBrochure" name="college_brochure">
                             {% if form.college_brochure.errors %}
                                 <div class="text-danger">{{ form.college_brochure.errors }}</div>
                             {% endif %}
                             {% if college.college_brochure %}
-                                <p>Current Brochure: <a href="{{ college.college_brochure.url }}" target="_blank">Download</a></p>
-                            {% else %}
-                                <p>No brochure uploaded</p>
+                                <a href="{{ college.college_brochure.url }}" target="_blank">View current brochure</a>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
-                            <label for="CollegeBrochure">Course Brochure</label>
-                            <input type="file" class="form-control-file" id="CollegeBrochure" name="college_brochure">
+                            <label for="CourseBrochure">Course Brochure (Optional)</label>
+                            <input type="file" class="form-control-file" id="CourseBrochure" name="course_brochure">
                             {% if form.course_brochure.errors %}
                                 <div class="text-danger">{{ form.course_brochure.errors }}</div>
                             {% endif %}
                             {% if college.course_brochure %}
-                                <p>Current Brochure: <a href="{{ college.course_brochure.url }}" target="_blank">Download</a></p>
-                            {% else %}
-                                <p>No brochure uploaded</p>
+                                <a href="{{ college.course_brochure.url }}" target="_blank">View current course brochure</a>
                             {% endif %}
                         </div>
+
                         <div class="form-group">
-                            <label for="MoreDetails">More Description</label>
-                            <textarea class="form-control" name="more_details" id="MoreDetails" rows="3" style="height: 150px;" placeholder="Enter Your Description">{{ college.more_details }}</textarea>
-                            {% if form.more_details.errors %}
-                                <div class="text-danger">{{ form.more_details.errors }}</div>
-                            {% endif %}
+                            <label for="MoreDetails">More Details (Optional)</label>
+                            <textarea class="form-control" name="more_details" id="MoreDetails" rows="3" style="height: 150px;" placeholder="More details about the college">{{ college.more_details }}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary me-2">Update</button>
+
+                        <button type="submit" class="btn btn-primary me-2">Update College</button>
                     </form>
                 </div>
             </div>

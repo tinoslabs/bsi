@@ -30,10 +30,20 @@
                           </div>
                         </div>
                         <div class="form-group">
+                          <label for="header_image">Header Image</label>
+                          <input type="file" class="form-control" id="header_image" name="header_image">
+                          {% if blog_details.header_image %}
+                            <div class="mt-2">
+                              <img src="{{ blog_details.header_image.url }}" alt="Header Image" style="max-width: 200px; height: auto;">
+                              <p><a href="{{ blog_details.header_image.url }}" target="_blank">Current Header Image</a></p>
+                            </div>
+                          {% endif %}
+                        </div>
+                        <div class="form-group">
                           <label for="addblogDescription">Blog Description</label>
                           <textarea class="form-control" name="blog_description" id="addblogDescription" rows="3" style="height: 150px;" placeholder="Enter Your Description">{{blog_details.blog_description|safe}}</textarea>
                         </div>
-                        <div class="form-group">
+                        {% comment %} <div class="form-group">
                           <label>Current Blog Image</label><br>
                           {% if blog_details.blog_image %}
                               <img src="{{ blog_details.blog_image.url }}" alt="Current Image" style="width: 150px; height: 150px;">
@@ -41,6 +51,16 @@
                              
                           {% else %}
                               <p>No image available</p>
+                          {% endif %}
+                        </div> {% endcomment %}
+                        <div class="form-group">
+                          <label for="blog_image">Current Blog Image</label>
+                          <input type="file" class="form-control" id="blog_image" name="blog_image">
+                          {% if blog_details.blog_image %}
+                            <div class="mt-2">
+                              <img src="{{ blog_details.blog_image.url }}" alt="Header Image" style="max-width: 200px; height: auto;">
+                              <p><a href="{{ blog_details.blog_image.url }}" target="_blank">Current Header Image</a></p>
+                            </div>
                           {% endif %}
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>

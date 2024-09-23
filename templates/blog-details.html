@@ -23,9 +23,18 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    {% comment %} <div class="col-lg-6">
                         <div class="pages-image">
                             <img src="{% static 'assets/img/Untitled-2.jpg' %}" alt="pages-image">
+                        </div>
+                    </div> {% endcomment %}
+                    <div class="col-lg-6">
+                        <div class="pages-image">
+                            {% if blog_details.header_image %}
+                                <img src="{{ blog_details.header_image.url }}" alt="{{ blog_details.blog_description }}">
+                            {% else %}
+                                <img src="{% static 'assets/img/Untitled-2.jpg' %}" alt="default-image">
+                            {% endif %}
                         </div>
                     </div>
                 </div>

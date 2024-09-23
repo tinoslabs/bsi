@@ -60,6 +60,11 @@ urlpatterns = [
     path('service', views.service, name='service'),
 
 
+    path('add_state_category', views.add_state_category, name='add_state_category'),
+    path('view_state_category',views.view_state_category,name='view_state_category'),
+    path('update_state_category/<int:id>/',views.update_state_category,name='update_state_category'),
+    path('delete_state_category/<int:id>/', views.delete_state_category, name='delete_state_category'),
+    
     path('create_college', views.create_college, name='create_college'),
     path('view_college', views.view_college, name='view_college'),
     path('update_college/<int:college_id>/', views.update_college, name='update_college'),
@@ -212,4 +217,9 @@ urlpatterns = [
     
     
     path('search_results',views.search_results, name='search_results'),
+    path('gallery', views.gallery, name='gallery'),
+    path('gal',views.gal,name='gal'),
+    path('college_filter/<int:id>/', views.college_filter, name='college_filter'),
+    
+    path('button', views.button, name='button'),
 ]

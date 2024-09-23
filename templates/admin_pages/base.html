@@ -30,50 +30,50 @@
 
   <style>
     * {
-  margin:0px;
-}
-.load {
-  width:100%;
-  height:100vh;
-   background-color: #fff;
-    display: flex;
-    margin-top: -30px;
-    justify-content: center;
-    align-items: center;
-}
-.load div {
-    width: 25px;
-    height: 25px;
-    background-color: #0232a0;
-    margin-left: 5px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    margin-top: calc(50px - 12.5px);
-    animation-name: loading;
-    animation-duration: 1.2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-.load-two {
-    animation-delay: 0.4s;
-}
-.load-three {
-    animation-delay: 0.8s;
-}
-@keyframes loading {
-    to {
-        opacity: 0.3;
-        transform: translateY(-25px);
-        -webkit-transform: translateY(-25px);
-        -moz-transform: translateY(-25px);
-        -ms-transform: translateY(-25px);
-        -o-transform: translateY(-25px);
-}
+    margin:0px;
+  }
+  .load {
+    width:100%;
+    height:100vh;
+    background-color: #fff;
+      display: flex;
+      margin-top: -30px;
+      justify-content: center;
+      align-items: center;
+  }
+  .load div {
+      width: 25px;
+      height: 25px;
+      background-color: #0232a0;
+      margin-left: 5px;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      margin-top: calc(50px - 12.5px);
+      animation-name: loading;
+      animation-duration: 1.2s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+  }
+  .load-two {
+      animation-delay: 0.4s;
+  }
+  .load-three {
+      animation-delay: 0.8s;
+  }
+  @keyframes loading {
+      to {
+          opacity: 0.3;
+          transform: translateY(-25px);
+          -webkit-transform: translateY(-25px);
+          -moz-transform: translateY(-25px);
+          -ms-transform: translateY(-25px);
+          -o-transform: translateY(-25px);
+  }
 
-}
+  }
 
   </style>
 </head>
@@ -228,6 +228,22 @@
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{% url 'add_client_reviews' %}"> Add Student Review</a></li>
           <li class="nav-item"> <a class="nav-link" href="{% url 'view_client_reviews' %}"> View Student Review</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item nav-category">College States</li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#state" aria-expanded="false" aria-controls="college">
+        <i class="menu-icon mdi mdi-home-modern"></i>
+        <span class="menu-title">College States</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="state">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add_state_category' %}"> Add States</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'view_state_category' %}"> View State</a></li>
+         
         </ul>
       </div>
     </li>

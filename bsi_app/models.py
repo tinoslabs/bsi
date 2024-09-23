@@ -48,6 +48,7 @@ class Blog_Category(models.Model):
     
 class Blog_Details(models.Model):
     category = models.ForeignKey(Blog_Category,on_delete=models.CASCADE)
+    header_image = models.ImageField(upload_to='header_image/')
     blog_description = RichTextField(max_length=60000)
     blog_image = models.ImageField(upload_to='images/')
     status = models.BooleanField(default=False,help_text="0-default,1-Hidden")
@@ -60,14 +61,28 @@ class Client_Logo(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class StateCategory(models.Model):
+    state_name = models.CharField(max_length=100)
     
+    state_image = models.ImageField(upload_to='images/')
+    status = models.BooleanField(default=False,help_text="0-default,1-Hidden")
+
+    def __str__(self):
+        return self.state_name  
     
-class College_Model(models.Model):
+
+    
+class CollegeModel(models.Model):
+    category = models.ForeignKey(StateCategory,on_delete=models.CASCADE)
     college_name = models.CharField(max_length=200, null=True, blank=True)
+    header_image = models.ImageField(upload_to='header_image/')
     place = models.CharField(max_length=200, null=True, blank=True)
     logo = models.ImageField(upload_to='college_logos/')
     college_image = models.ImageField(upload_to='college_image/')
     total_course = models.PositiveIntegerField(null=True, blank=True)
+    rating = models.FloatField(null=True,blank=True)
     min_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     max_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     college_description  = models.TextField() 
@@ -84,9 +99,40 @@ class College_Model(models.Model):
         if self.min_fee and self.max_fee:
             return f"₹{self.min_fee} L - ₹{self.max_fee} L"
         return None
+    
+    
+
+    
+class College_Model(models.Model):
+    college_name = models.CharField(max_length=200, null=True, blank=True)
+    header_image = models.ImageField(upload_to='header_image/')
+    state = models.CharField(max_length=100, null=True,blank=True)
+    place_image = models.ImageField(upload_to='place_image/')
+    place = models.CharField(max_length=200, null=True, blank=True)
+    logo = models.ImageField(upload_to='college_logos/')
+    college_image = models.ImageField(upload_to='college_image/')
+    total_course = models.PositiveIntegerField(null=True, blank=True)
+    rating = models.FloatField(null=True,blank=True)
+    min_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    max_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    college_description  = models.TextField() 
+    youtube_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
+    college_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+    course_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+    more_details = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.college_name
+
+    @property
+    def total_fees_range(self):
+        if self.min_fee and self.max_fee:
+            return f"₹{self.min_fee} L - ₹{self.max_fee} L"
+        return None
+    
 
 class FeaturedColleges(models.Model):
-    college_details = models.ForeignKey(College_Model, on_delete=models.CASCADE, related_name='featured_in')
+    college_details = models.ForeignKey(CollegeModel, on_delete=models.CASCADE, related_name='featured_in')
     college_logo = models.ImageField(upload_to='college_logos/')
     def __str__(self):
         return f"{self.college_details.college_name} (Featured)"
@@ -105,7 +151,7 @@ class Course_Model(models.Model):
         (OPEN_COURSE, 'Open Course'),
     ]
     
-    college = models.ForeignKey(College_Model, on_delete=models.CASCADE, related_name='courses')
+    college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE, related_name='courses')
     course_name = models.CharField(max_length=100, null=True, blank=True)
     course_type = models.CharField(max_length=15, choices=COURSE_TYPE_CHOICES, default=PROFESSIONAL_COURSE)
     course_description = models.TextField()
@@ -348,6 +394,7 @@ class SubHeaderHeading(models.Model):
 class HeaderDetails(models.Model):
     
     sub_heading = models.ForeignKey(SubHeaderHeading, on_delete=models.CASCADE)
+    header_image = models.ImageField(upload_to='header_image/')
     details = models.TextField(null=True, blank=True)
     brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
     def __str__(self):
@@ -364,6 +411,7 @@ class Notification(models.Model):
     
 class Add_On_Course(models.Model):
     college = models.ForeignKey('College_Model', on_delete=models.CASCADE, related_name='add_on_courses')
+    header_image = models.ImageField(upload_to='header_image/')
     course_name = models.CharField(max_length=100, blank=True)
     course_brochure = models.FileField(upload_to='brochure/', blank=True)
     course_details = models.TextField(blank=True)
@@ -372,7 +420,7 @@ class Add_On_Course(models.Model):
         return self.course_name or "No Name Provided"
     
 class NewsletterSubscription(models.Model):
-    college = models.ForeignKey('College_Model', on_delete=models.CASCADE)
+    college = models.ForeignKey('CollegeModel', on_delete=models.CASCADE)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
 
@@ -414,7 +462,7 @@ class Application_Model(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)  # Adjusted max_length for flexibility
     state = models.CharField(max_length=100)
-    pin_code = models.CharField(max_length=6)
+    # pin_code = models.CharField(max_length=6)
     dob = models.DateField()  # Using DateField
 
     STUDENT_TYPE_CHOICES = [

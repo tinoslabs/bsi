@@ -209,9 +209,13 @@
                         <div class="search-box your-container-class">
                             <form method="get" action="{% url 'search_results' %}">
                                 <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
-                                <div class="form-group">
+                                {% comment %} <div class="form-group">
                                     <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
                                     <button type="submit"><i class="ri-search-line"></i></button>
+                                </div> {% endcomment %}
+                                <div class="form-group d-flex justify-content-center align-items-center">
+                                    <input type="text" name="query" class="form-control text-center" placeholder="Find Your Future" value="{{ search_query }}">
+                                    <button type="submit" class="btn btn-search"><i class="ri-search-line"></i></button>
                                 </div>
                             </form>   
                         </div>    
@@ -221,7 +225,24 @@
             
 
         </div>
-        
+        <style>
+            .form-group {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .form-control {
+                text-align: center; /* Center the placeholder text */
+                width: 70%; /* Adjust width as needed */
+                margin-right: 10px; /* Space between input and button */
+            }
+            
+            .btn-search {
+                padding: 10px 15px;
+            }
+            
+        </style>
 
         <style>
             .your-container-class h4 {
@@ -309,9 +330,10 @@
         
         
         
-        
+       
         <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
             <div class="container">
+                <br><br>
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
                     <h4>Top Available Colleges</h4>
                 </div>
@@ -333,15 +355,19 @@
                                 <a href="{% url 'college_details' college.college_name %}">{{college.total_course}} courses</a>
                             </div>
                             
-                            
-                           <div>
+                            <div>
+                                {% if college.rating %}
+                                <span>⭐ {{college.rating}}</span>
+                                {% endif %}
+                            </div>
+                           {% comment %} <div>
                                 <span>Total Fees Range</span><br>
                                 {% if college.min_fee and college.max_fee %}
                                 ₹{{college.min_fee}} L - {{college.max_fee}} L
                                 {% else %}
                                 ₹00 L - ₹00 L
                                 {% endif %}
-                            </div> 
+                            </div>  {% endcomment %}
                         </div>
                         <div class="college-actions">
                             <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
@@ -363,6 +389,7 @@
                 </div>
             </div>
         </div> 
+
         <style>
             .events-area {
                 position: relative; /* Ensure the button is positioned relative to this container */
@@ -727,6 +754,71 @@
         
     </div> 
     <br><br>
+
+    
+    {% comment %} <div class="container">
+        <h1 class="heading">Top Study Places</h1>
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                {% for college in unique_states %}
+                <div class="gallery-item">
+                    <a href="{% url 'college_filter' %}?place={{ college.state }}"> 
+                        <img class="gallery-image" src="{{ college.place_image.url }}" alt="Image of {{ college.state }}">
+                        <div class="place-name">{{ college.state }}</div>
+                        
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="slider-nav prev">‹</button>
+            <button class="slider-nav next">›</button>
+        </div>
+    </div>  {% endcomment %}
+
+    {% comment %} <div class="container">
+        <h1 class="heading">Top Study Places</h1>
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                {% for college in colleges %}
+                <div class="gallery-item">
+                    <a href="{% url 'college_filter' %}?place={{ college.state }}"> 
+                        <img class="gallery-image" src="{{ college.place_image.url }}" alt="Image of {{ college.state }}">
+                        <div class="place-name">{{ college.state }}</div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="slider-nav prev">‹</button>
+            <button class="slider-nav next">›</button>
+        </div>
+    </div> {% endcomment %}
+
+    <div class="container">
+        <h1 class="heading">Top Study Places</h1>
+        <br>
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                {% for state in states %}
+                <div class="gallery-item">
+                    <a href="{% url 'college_filter' state.id %}"> 
+                        <img class="gallery-image" src="{{ state.state_image.url }}" alt="Image of {{ state.state_image }}">
+                        <div class="place-name">{{ state.state_name }}</div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="slider-nav prev">‹</button>
+            <button class="slider-nav next">›</button>
+        </div>
+    </div>
+    
+    
+    
+
+    
+    
+    
+    <br><br>
     <div class='container your-container-class' id="courses-section">
         <h5 style="margin-top: -100;text-align: center;">Top available add-on course campuses</h5>
         <br> 
@@ -737,6 +829,39 @@
         
     </div>
     
+    {% comment %} <div class="container">
+
+        <h1 class="heading">Image Gallery with CSS Grid <span>& Flexbox Fallback</span></h1>
+    
+        <div class="gallery">
+    
+            <div class="gallery-item">
+                <img class="gallery-image" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=500&h=500&fit=crop" alt="person writing in a notebook beside by an iPad, laptop, printed photos, spectacles, and a cup of coffee on a saucer">
+            </div>
+    
+            <div class="gallery-item">
+                <img class="gallery-image" src="https://images.unsplash.com/photo-1515260268569-9271009adfdb?w=500&h=500&fit=crop" alt="sunset behind San Francisco city skyline">
+            </div>
+    
+            <div class="gallery-item">
+                <img class="gallery-image" src="https://images.unsplash.com/photo-1506045412240-22980140a405?w=500&h=500&fit=crop" alt="people holding umbrellas on a busy street at night lit by street lights and illuminated signs in Tokyo, Japan">
+            </div>
+    
+            <div class="gallery-item">
+                <img class="gallery-image" src="https://images.unsplash.com/photo-1514041181368-bca62cceffcd?w=500&h=500&fit=crop" alt="car interior from central back seat position showing driver and blurred view through windscreen of a busy road at night">
+            </div>
+    
+            <div class="gallery-item">
+                <img class="gallery-image" src="https://images.unsplash.com/photo-1445810694374-0a94739e4a03?w=500&h=500&fit=crop" alt="back view of woman wearing a backpack and beanie waiting to cross the road on a busy street at night in New York City, USA">
+            </div>
+    
+            <div class="gallery-item">
+                <img class="gallery-image" src="https://images.unsplash.com/photo-1486334803289-1623f249dd1e?w=500&h=500&fit=crop" alt="man wearing a black jacket, white shirt, blue jeans, and brown boots, playing a white electric guitar while sitting on an amp">
+            </div>
+    
+        </div>
+    
+    </div> {% endcomment %}
     
     
 </div> 
@@ -946,6 +1071,7 @@
         <!-- Start Events Area -->
         <div class="events-area pb-75">
             <div class="container">
+                <br><br>
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
                     <h4>Latest News & Articles</h4>
                 </div>
@@ -1530,6 +1656,40 @@
         });
     });
 </script>
+{% comment %} <script>
+	
+const sliderWrapper = document.querySelector('.slider-wrapper');
+const sliderItems = document.querySelectorAll('.gallery-item');
+const prevBtn = document.querySelector('.slider-nav.prev');
+const nextBtn = document.querySelector('.slider-nav.next');
+
+let currentIndex = 0;
+
+nextBtn.addEventListener('click', () => {
+  if (currentIndex < sliderItems.length - 3) {
+    currentIndex++;
+    sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+  }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+  }
+});
+
+
+setInterval(() => {
+  if (currentIndex < sliderItems.length - 3) {
+    currentIndex++;
+  } else {
+    currentIndex = 0;
+  }
+  sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
+}, 3000); 
+
+</script>   {% endcomment %}
 
        
         <script src="{% static 'assets/js/buttons.js' %}"></script>
