@@ -79,12 +79,12 @@
         
         
         
-       
+       <br><br>
         <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
             <div class="container">
                 <br><br>
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
-                    <h4>Top Available Colleges</h4>
+                    <h4>Colleges in {{ category_name.state_name }}</h4>
                 </div>
                 
 
@@ -122,7 +122,7 @@
                 </div> {% endcomment %}
 
                 <div class="container">
-                    <h1 class="heading">Colleges in {{ category_name.state_name }}</h1>
+                    {% comment %} <h1 class="heading">Colleges in {{ category_name.state_name }}</h1> {% endcomment %}
                     <div class="row justify-content-center">
                         {% for college in college_details %}
                         <div class="college-card">

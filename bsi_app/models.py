@@ -369,17 +369,18 @@ class EnquirySubmission(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.college.college_name}"    
+    
+    
 class Enquiry_Submission(models.Model):
     college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15) 
     submitted_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return f"{self.name} - {self.college.college_name}"
-    
 
+    
 class SliderImage(models.Model):
     image = models.ImageField(upload_to='slider_images/')
     caption = models.CharField(max_length=255, blank=True, null=True)
@@ -387,8 +388,7 @@ class SliderImage(models.Model):
     def __str__(self):
         return self.caption if self.caption else "Slider Image"
     
-    
-    
+        
 class headerMain(models.Model):
     main_heading = models.CharField(max_length=100)
     
@@ -402,7 +402,6 @@ class SubHeader(models.Model):
     def __str__(self):
         return self.sub_header 
 
-
     
 class SubHeaderHeading(models.Model):
     main_header = models.ForeignKey(headerMain, on_delete=models.CASCADE)
@@ -413,7 +412,6 @@ class SubHeaderHeading(models.Model):
         return self.sub_heading 
     
 class HeaderDetails(models.Model):
-    
     sub_heading = models.ForeignKey(SubHeaderHeading, on_delete=models.CASCADE)
     header_image = models.ImageField(upload_to='header_image/')
     details = models.TextField(null=True, blank=True)
@@ -440,7 +438,7 @@ class AddOnCourse(models.Model):
 
     def __str__(self):
         return self.course_name or "No Name Provided"
-    
+        
 class NewsletterSubscription(models.Model):
     college = models.ForeignKey('CollegeModel', on_delete=models.CASCADE)
     email = models.EmailField()
@@ -448,10 +446,7 @@ class NewsletterSubscription(models.Model):
 
     def __str__(self):
         return f"{self.email} - {self.college} - {self.phone}"
-    
-    
- 
-    
+        
 class ApplicationModel(models.Model):
     college = models.ForeignKey('CollegeModel', on_delete=models.CASCADE)
     course = models.CharField(max_length=100)
