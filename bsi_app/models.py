@@ -332,6 +332,17 @@ class Enquiry_Model(models.Model):
     def __str__(self):
         return self.name
     
+# class EnquiryModel(models.Model):  
+#     college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
+#     course = models.CharField(max_length=100)
+#     name = models.CharField(max_length=100, blank=True, null=True)   
+#     phone = models.CharField(max_length=20, blank=True, null=True)
+#     email = models.EmailField(blank=True, null=True)
+#     Place = models.CharField(max_length=20, blank=True, null=True)
+#     message = models.TextField(blank=True, null=True)
+#     def __str__(self):
+#         return self.name
+    
     
 class About_Video(models.Model):
     video_link = models.URLField(max_length=200, unique=True, null=True, blank=True)
@@ -347,9 +358,19 @@ class OTPVerification(models.Model):
 
     def is_valid(self):
         return self.created_at >= timezone.now() - timedelta(minutes=5) 
-    
+
+
 class EnquirySubmission(models.Model):
-    college = models.ForeignKey(College_Model, on_delete=models.CASCADE)
+    college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15) 
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.college.college_name}"    
+class Enquiry_Submission(models.Model):
+    college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15) 
@@ -409,8 +430,9 @@ class Notification(models.Model):
     def is_active(self):
         return self.notification_end_date >= timezone.now()
     
-class Add_On_Course(models.Model):
-    college = models.ForeignKey('College_Model', on_delete=models.CASCADE, related_name='add_on_courses')
+    
+class AddOnCourse(models.Model):
+    college = models.ForeignKey('CollegeModel', on_delete=models.CASCADE, related_name='add_on_courses')
     header_image = models.ImageField(upload_to='header_image/')
     course_name = models.CharField(max_length=100, blank=True)
     course_brochure = models.FileField(upload_to='brochure/', blank=True)
@@ -428,34 +450,10 @@ class NewsletterSubscription(models.Model):
         return f"{self.email} - {self.college} - {self.phone}"
     
     
-# class ApplicationModel(models.Model):
-   
-#     course = models.ForeignKey('Course_Model', on_delete=models.CASCADE)
-#     first_name = models.CharField(max_length=100)
-#     last_name = models.CharField(max_length=100)
-#     email = models.EmailField()
-#     phone = models.CharField(max_length=15)  # Adjusted max_length for flexibility
-#     state = models.CharField(max_length=100)
-#     pin_code = models.CharField(max_length=6)
-#     dob = models.DateField()  # Using DateField
-
-#     STUDENT_TYPE_CHOICES = [
-#         ('full-time', 'Full-time'),
-#         ('part-time', 'Part-time'),
-#         ('online', 'Online'),
-#         ('on-campus', 'On-campus'),
-#     ]
+ 
     
-#     student_type = models.CharField(max_length=50, choices=STUDENT_TYPE_CHOICES)
-#     degree = models.CharField(max_length=100)
-#     message = models.TextField(blank=True, null=True)
-
-#     def __str__(self):
-#         return f"{self.first_name} {self.last_name} - {self.course.course_name}"
-    
-    
-class Application_Model(models.Model):
-    college = models.ForeignKey('College_Model', on_delete=models.CASCADE)
+class ApplicationModel(models.Model):
+    college = models.ForeignKey('CollegeModel', on_delete=models.CASCADE)
     course = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

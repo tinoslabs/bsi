@@ -13,17 +13,17 @@ admin.site.register(headerMain)
 admin.site.register(SubHeader)
 admin.site.register(SubHeaderHeading)
 admin.site.register(HeaderDetails)
-admin.site.register(Add_On_Course)
+admin.site.register(AddOnCourse)
 admin.site.register(ExamCategory)
 admin.site.register(FeaturedColleges)
 # admin.site.register(CollegeModel)
-admin.site.register(Application_Model)
+admin.site.register(ApplicationModel)
 # admin.site.register(StateCategory)
 
 class SliderImageAdmin(admin.ModelAdmin):
     list_display = ['caption', 'image']
 
-@admin.register(EnquirySubmission)
+@admin.register(Enquiry_Submission)
 class EnquirySubmissionAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'college', 'submitted_at')
     search_fields = ('name', 'email', 'phone', 'college__college_name')

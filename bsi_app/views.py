@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, EnquiryModel, Enquiry_Model,EnquirySubmission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,Add_On_Course,NewsletterSubscription,Application_Model,CollegeModel,StateCategory
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, Enquiry_Model, Enquiry_Model,Enquiry_Submission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,NewsletterSubscription,CollegeModel,StateCategory,AddOnCourse,ApplicationModel
 from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm,headerMainForm, SubheaderForm, SubHeaderHeadingForm, HeaderDetailsForm, HeaderDetailsForm, NotificationForm, Add_On_Course_Form,NewsletterForm,ApplicationForm,State_Form
 from django.http import HttpResponseNotFound
 
@@ -134,7 +134,7 @@ def index(request):
 
     courses = Course_Model.objects.all()
     exams = ExamModel.objects.all()
-    add_on = Add_On_Course.objects.all()
+    add_on = AddOnCourse.objects.all()
     clients_review = ClientReview.objects.all()
     client_logo = Client_Logo.objects.all()
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
@@ -185,7 +185,7 @@ def search_results(request):
     colleges = CollegeModel.objects.none()
     courses = Course_Model.objects.none()
     exams = ExamModel.objects.none()
-    add_on = Add_On_Course.objects.none()
+    add_on = AddOnCourse.objects.none()
     
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     main_header = headerMain.objects.all()
@@ -208,7 +208,7 @@ def search_results(request):
         exams = ExamModel.objects.filter(
             Q(exam_name__icontains=search_query)
         )
-        add_on = Add_On_Course.objects.filter(
+        add_on = AddOnCourse.objects.filter(
             Q(course_name__icontains=search_query)
         )
         
@@ -270,13 +270,13 @@ def delete_message(request,id):
 
 @login_required(login_url='user_login')
 def contact_view(request):
-    contacts = EnquiryModel.objects.all().order_by('-id')
+    contacts = Enquiry_Model.objects.all().order_by('-id')
     return render(request, 'admin_pages/contact_view.html', {'contacts': contacts})
 
 
 @login_required(login_url='user_login')
 def delete_contact(request,id):
-    contact = EnquiryModel.objects.get(id=id)
+    contact = Enquiry_Model.objects.get(id=id)
     contact.delete()
     return redirect('contact_view')
 
@@ -295,7 +295,7 @@ def demo(request):
 
 @login_required(login_url='user_login')
 def delete_enquiry(request,id):
-    enquiry = Enquiry_Model.objects.get(id=id)
+    enquiry = EnquiryModel.objects.get(id=id)
     enquiry.delete()
     return redirect('enquiry_view')
 
@@ -714,12 +714,12 @@ def create_add_on_course(request):
 
 @login_required(login_url='user_login')
 def view_add_on_course(request):
-    courses = Add_On_Course.objects.select_related('college').all()
+    courses = AddOnCourse.objects.select_related('college').all()
     return render(request, 'admin_pages/view_add_on_course.html', {'courses': courses})
 
 @login_required(login_url='user_login')
 def update_add_on_course(request, id):
-    course = get_object_or_404(Add_On_Course, id=id)
+    course = get_object_or_404(AddOnCourse, id=id)
     college = CollegeModel.objects.all() 
     if request.method == 'POST':
         form = Add_On_Course_Form(request.POST, request.FILES, instance=course)
@@ -736,7 +736,7 @@ def update_add_on_course(request, id):
 
 @login_required(login_url='user_login')
 def delete_add_on_course(request, id):
-    course = get_object_or_404(Add_On_Course, id=id)
+    course = get_object_or_404(AddOnCourse, id=id)
     course.delete()
     return redirect('view_add_on_course')
 
@@ -1485,7 +1485,7 @@ def download_brochure(request):
 
         try:
             college = CollegeModel.objects.get(id=college_id)
-            EnquirySubmission.objects.create(
+            Enquiry_Submission.objects.create(
                 college=college,
                 name=name,
                 email=email,
@@ -1500,23 +1500,23 @@ def download_brochure(request):
 
 @login_required(login_url='user_login')
 def Application_view(request):
-    data = Application_Model.objects.all()
+    data = ApplicationModel.objects.all()
     return render(request,'admin_pages/Application_view.html',{'data':data})
 
 @login_required(login_url='user_login')
 def delete_application(request, pk):
-    data = get_object_or_404(Application_Model, id=pk)
+    data = get_object_or_404(ApplicationModel, id=pk)
     data.delete()
     return redirect('Application_view') 
 
 @login_required(login_url='user_login')
 def enquiry_submition_view(request):
-    data = EnquirySubmission.objects.all()
+    data = Enquiry_Submission.objects.all()
     return render(request,'admin_pages/enquiry_submition_view.html',{'data':data})
 
 @login_required(login_url='user_login')
 def delete_enquiry_submition(request, pk):
-    data = get_object_or_404(EnquirySubmission, id=pk)
+    data = get_object_or_404(Enquiry_Submission, id=pk)
     data.delete()
     return redirect('enquiry_submition_view') 
 
@@ -1609,7 +1609,7 @@ def course_details(request, id):
 
 
 def add_on_course_details(request, id):
-    course = get_object_or_404(Add_On_Course, id=id)
+    course = get_object_or_404(AddOnCourse, id=id)
     
     if request.method == 'POST':
         if 'first_name' in request.POST:  # Assuming 'first_name' is unique to ApplicationForm
@@ -1631,7 +1631,7 @@ def add_on_course_details(request, id):
         application_form = ApplicationForm()
 
     # Context data
-    add_on = Add_On_Course.objects.all()
+    add_on = AddOnCourse.objects.all()
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     clients_review = ClientReview.objects.all() 
     exam = ExamModel.objects.all()   
