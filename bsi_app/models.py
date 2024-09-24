@@ -332,16 +332,7 @@ class Enquiry_Model(models.Model):
     def __str__(self):
         return self.name
     
-# class EnquiryModel(models.Model):  
-#     college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
-#     course = models.CharField(max_length=100)
-#     name = models.CharField(max_length=100, blank=True, null=True)   
-#     phone = models.CharField(max_length=20, blank=True, null=True)
-#     email = models.EmailField(blank=True, null=True)
-#     Place = models.CharField(max_length=20, blank=True, null=True)
-#     message = models.TextField(blank=True, null=True)
-#     def __str__(self):
-#         return self.name
+
     
     
 class About_Video(models.Model):
@@ -360,15 +351,15 @@ class OTPVerification(models.Model):
         return self.created_at >= timezone.now() - timedelta(minutes=5) 
 
 
-class EnquirySubmission(models.Model):
-    college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15) 
-    submitted_at = models.DateTimeField(auto_now_add=True)
+# class EnquirySubmission(models.Model):
+#     college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=100)
+#     email = models.EmailField()
+#     phone = models.CharField(max_length=15) 
+#     submitted_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.name} - {self.college.college_name}"    
+#     def __str__(self):
+#         return f"{self.name} - {self.college.college_name}"    
     
     
 class Enquiry_Submission(models.Model):
@@ -401,8 +392,7 @@ class SubHeader(models.Model):
     
     def __str__(self):
         return self.sub_header 
-
-    
+  
 class SubHeaderHeading(models.Model):
     main_header = models.ForeignKey(headerMain, on_delete=models.CASCADE)
     sub_header = models.ForeignKey(SubHeader, on_delete=models.CASCADE)

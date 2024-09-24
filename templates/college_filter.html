@@ -47,6 +47,38 @@
  
         <!-- Modal for brochure form -->
          
+        
+        {% comment %} <div class="pages-banner-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="pages-title">
+                            <h2>Colleges in {{ category_name.state_name }}</h2>
+                            <ul class="list-unstyled ps-0 mb-0">
+                                <li class="d-inline-block">
+                                    <a class="text-decoration-none" href="{% url 'index' %}">
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="d-inline-block">
+                                    College Details
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pages-image">
+                            <img src="{% static 'assets/img/pages/pages-2.jpg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="shape-7">
+                <img src="{% static 'assets/img/shape/shape-7.png' %}" alt="shape">
+            </div>
+        </div> {% endcomment %}
+
+         
         <div class="modal fade" id="brochureModal" tabindex="-1" aria-labelledby="brochureModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -77,10 +109,24 @@
             </div>
         </div>
         
+        {% comment %} <div class="col-lg-4">
+            <div class="blog-right-sidebar">
+                <div class="single-pages-widget form">
+                    <h3>Search</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search"> 
+                            <button type="submit"><i class="ri-search-line"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>  {% endcomment %}
         
-        
-       <br><br>
+       <br><br><br>
+       
         <div class="events-area pb-75" style="margin-top: -40px;" id="colleges-section">
+            
             <div class="container">
                 <br><br>
                 <div class="section-title text-center m-auto" data-cues="slideInUp">
@@ -90,36 +136,7 @@
 
                 
                 
-                {% comment %} <div class="row justify-content-center" data-cues="slideInUp">
-                    {% for college in colleges %}
-                    <div class="college-card">
-                        <div class="college-header">
-                            <img src="{{ college.logo.url }}" alt="{{ college.college_name }}" class="college-logo">
-                            <div class="college-info">
-                                <a href="{% url 'college_details' college.college_name %}">
-                                    <h3>{{ college.college_name }}</h3>
-                                </a>
-                                <p class="location"><i class="material-icons">location_on</i>{{ college.place }} <span class="ranking"></span></p>
-                            </div>
-                        </div>
-                        <div class="college-details">
-                            <div>
-                                <span>Courses Offered</span><br>
-                                <a href="{% url 'college_details' college.college_name %}">{{ college.total_course }} courses</a>
-                            </div>
-                            <div>
-                                <span>⭐ {{ college.rating }}</span>
-                            </div>
-                        </div>
-                        <div class="college-actions">
-                            <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
-                            <button class="brochure-btn" data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}">
-                                <i class="material-icons"></i>College Brochure
-                            </button>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div> {% endcomment %}
+                
 
                 <div class="container">
                     {% comment %} <h1 class="heading">Colleges in {{ category_name.state_name }}</h1> {% endcomment %}
