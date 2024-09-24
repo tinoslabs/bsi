@@ -88,9 +88,19 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    {% comment %} <div class="col-lg-6">
                         <div class="pages-image">
                             <img src="{{ college.header_image.url }}" alt="{{ college.college_name }}">
+                        </div>
+                    </div> {% endcomment %}
+
+                    <div class="col-lg-6">
+                        <div class="pages-image">
+                            {% if data.exists %}
+                                <img src="{{ college.header_image.url }}" alt="{{ sub_heading.sub_heading }}">
+                            {% else %}
+                                <img src="{% static 'assets/img/collage_bsi_colleges.png' %}" alt="default image">
+                            {% endif %}
                         </div>
                     </div>
                 </div>

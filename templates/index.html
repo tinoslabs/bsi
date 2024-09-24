@@ -260,11 +260,23 @@
                         <div class="swiper-wrapper" data-cues="slideInUp">
                             {% for featured in featured_colleges %}
                             <div class="swiper-slide">
-                                <a href="{% url 'college_details' featured.college_details %}" class="card-link3">
+                                 {% comment %} <a href="{% url 'college_details' featured.college_details %}" class="card-link3">
                                 <div class="single-partner-logo">
                                     <img src="{{ featured.college_logo.url }}" alt="partner-logo">
                                 </div>
-                                </a>
+                                </a>  {% endcomment %}
+                                 {% if featured.college_details.college_name %}
+                                    <a href="{% url 'college_details' featured.college_details.college_name %}" class="card-link3">
+                                        <div class="single-partner-logo">
+                                            <img src="{{ featured.college_logo.url }}" alt="partner-logo">
+                                        </div>
+                                    </a>
+                                {% else %}
+                                    <div class="single-partner-logo">
+                                        <img src="{{ featured.college_logo.url }}" alt="partner-logo">
+                                        <p>No details available</p>
+                                    </div>
+                                {% endif %} 
                             </div>
                             
                             {% endfor %}
