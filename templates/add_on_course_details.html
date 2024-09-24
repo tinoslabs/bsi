@@ -442,8 +442,8 @@
                                 {% endif %}
                                 <h2>Talk To Our Experts</h2>
                                 <br>
-                                <form method="post">
-                                    {% csrf_token %}
+                                <form >
+                                    
                                     <input type="hidden" name="college" value="{{ college.id }}">
                                     <div class="row">
                                         <div class="form-group">
@@ -486,7 +486,15 @@
                                 </form>
                                 
                             </div>
-                            
+                            <div class="application-container">
+                                <div id="applicationPopup" class="application-popup">
+                                    <div class="application-popup-content">
+                                        <h2 class="application-popup-title">Apply to Top Colleges Now!</h2>
+                                        <p class="application-popup-body">Start your journey by applying to the best colleges. Don’t miss out on the opportunity to shape your future!</p>
+                                        <a href="javascript:void(0);" onclick="toggleApplicationForm()" class="application-popup-button">Apply Now</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -521,6 +529,113 @@
                 z-index: 950;
             }
         </style> {% endcomment %}
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+            /* Mobile first */
+            *, *::before, *::after { 
+                box-sizing: border-box;
+            }
+
+            html {
+                background-color: #F5F6FA;
+            }
+
+            body {
+                padding: 1rem 0.5rem;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+                font-family: 'Raleway', Sans-serif;
+            }
+
+            .application-container {
+                position: relative;
+            }
+
+            .sticky {
+                position: fixed;
+                top: 70px; /* Adjust this value to the height of your navbar */
+                width: 370px; /* Maintain the original width of the card */
+                z-index: 1000; /* Ensure it stays below the navbar */
+                margin-top: 50px; /* Adds margin to prevent overlap with navbar */
+            }
+
+            .application-popup {
+                transition: all 0.3s ease-in-out; /* Smooth transition when changing position */
+                width: 100%;
+                max-width: 370px; /* Ensure fixed width */
+            }
+
+            /* Flexbox container */
+            .application-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-content: center;
+                padding: 6%;
+                margin: 0;
+            }
+
+            /* Popup UI */
+            .application-popup {
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                background-color: #fff;
+                border-radius: 6px;
+                padding: 3rem 2rem;
+                box-shadow: 0 10px 40px -14px rgba(0,0,0,0.25);
+                text-align: center;
+            }
+
+            /* Popup Texts & button */
+            .application-popup-content {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+            }
+
+            .application-popup-title {
+                color: #32325d;
+                font-size: 1.8em;
+                line-height: 1.5em;
+                font-weight: 900;
+                margin-top: 0;
+            }
+
+            .application-popup-body {
+                font-size: 1.1em;
+                line-height: 1.6em;
+                color: #6b7c93;
+                font-weight: 500;
+                margin-bottom: 2.1em;
+            }
+
+            /* Button Link */
+            .application-popup-button {
+                display: block;
+                text-align: center;
+                text-decoration: none;
+                font-weight: 800;
+                font-size: 1em;
+                text-transform: uppercase;
+                color: #fff;
+                border-radius: 6px;
+                margin: 10px;
+                padding: 1em 3em;
+                background-size: 200% auto;
+                color: white;
+                box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+                background-image: linear-gradient(to right, #895cf2 0%, #ffabf4 50%, #895cf2 100%);
+                transition: 0.5s;
+            }
+
+            .application-popup-button:hover {
+                background-position: right center;
+            }
+            
+    </style>
 
         <style>
          
@@ -684,6 +799,27 @@
             const formContainer = document.getElementById('application-form');
             formContainer.style.display = formContainer.style.display === 'none' ? 'flex' : 'none';
         }
+    </script>
+    <script>
+        window.addEventListener('scroll', function() {
+            fixCardOnScroll();
+        });
+        
+        let card = document.getElementById("applicationPopup");
+        let originalPosition = card.getBoundingClientRect().top + window.pageYOffset;
+        
+        function fixCardOnScroll() {
+            if (window.pageYOffset > originalPosition) {
+                card.classList.add("sticky");
+            } else {
+                card.classList.remove("sticky");
+            }
+        }
+        
+        // Recalculate the original position on window resize
+        window.addEventListener('resize', function() {
+            originalPosition = card.getBoundingClientRect().top + window.pageYOffset;
+        });
     </script>
         
 
