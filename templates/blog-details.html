@@ -194,7 +194,7 @@
                                 </div>
                             </div> -->
 
-                            <div class="single-pages-widget latest">
+                            {% comment %} <div class="single-pages-widget latest">
                                 <h3>Latest News</h3>
                                 {% for blog in blog %}
                                 <div class="latest-card d-flex align-items-center">
@@ -216,6 +216,15 @@
                                     </div>
                                 </div>
                                 {% endfor %}
+                            </div> {% endcomment %}
+                            <div class="application-container">
+                                <div id="applicationPopup" class="application-popup">
+                                    <div class="application-popup-content">
+                                        <h2 class="application-popup-title">Apply to Top Colleges Now!</h2>
+                                        <p class="application-popup-body">Start your journey by applying to the best colleges. Don’t miss out on the opportunity to shape your future!</p>
+                                        <a href="javascript:void(0);" onclick="toggleApplicationForm()" class="application-popup-button">Apply Now</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -223,6 +232,301 @@
                 </div>
             </div>
         </div>
+        <div id="application-form" class="application-form-container" style="display:none;">
+            <div class="application-form">
+                <h3>Applicant Details</h3>
+                <span class="close-btn" onclick="toggleApplicationForm()">&times;</span>
+                <form class="application-form-details" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <!-- First Name -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" placeholder="Full Name" name="first_name" required>
+                            </div>
+                        </div>
+        
+                        <!-- Last Name -->
+                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last name here" name="last_name" required>
+                            </div>
+                        </div> 
+        
+                        <!-- Email -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Email address</label>
+                                <input type="email" class="form-control" placeholder="Email address here" name="email" required>
+                            </div>
+                        </div>
+        
+                        <!-- Phone Number -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Phone number</label>
+                                <input type="text" class="form-control" placeholder="Phone number here" name="phone" required>
+                            </div>
+                        </div>
+        
+                        <!-- State -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">State name</label>
+                                <input type="text" class="form-control" placeholder="State name here" name="state" required>
+                            </div>
+                        </div>
+        
+                        <!-- Date of Birth -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Date of birth</label>
+                                <input type="date" class="form-control" name="dob" required>
+                            </div>
+                        </div>
+        
+                        <!-- College Selection -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">College</label>
+                                <select class="form-select" aria-label="Select Colleges" name="college" required>
+                                    <option value="" selected>Select College</option>
+                                    {% for college in colleges %}
+                                        <option value="{{ college.id }}">{{ college.college_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+        
+                        <!-- Student Type -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Student type</label>
+                                <select class="form-select" aria-label="Select student type" name="student_type" required>
+                                    <option value="" selected>Select student type</option>
+                                    {% for key, value in application_form.fields.student_type.choices %}
+                                        <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <h3>Education Details</h3>
+        
+                    <div class="row">
+                        <!-- Applying Course -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Applying Course</label>
+                                <input type="text" class="form-control" placeholder="Course name" name="course" required>
+                            </div>
+                        </div>
+        
+                        <!-- Educational Qualification -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label">Educational Qualification</label>
+                                <input type="text" class="form-control" placeholder="Qualification" name="degree" required>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Additional Information -->
+                    <div class="form-group">
+                        <label class="form-label">Additional information</label>
+                        <textarea class="form-control" name="message" placeholder="Questions? Anything you’d like to know or ask..."></textarea>
+                    </div>
+        
+                    <!-- Submit Button -->
+                    <button type="submit" class="default-btn border-0">
+                        Submit Application
+                        <i class="flaticon-right-arrow"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        
+        <style>
+            /* Form container */
+            .application-form-container {
+                background-color: rgba(0, 0, 0, 0.5);
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+            
+            /* Form box */
+            .application-form {
+                background-color: white;
+                padding: 30px;
+                border-radius: 10px;
+                width: 90%;
+                max-width: 700px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                overflow-y: auto;
+                max-height: 90%;
+                position: relative; /* Added for close button positioning */
+            }
+            
+            /* Close button */
+            .close-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                font-size: 24px;
+                font-weight: bold;
+                color: #333;
+                cursor: pointer;
+            }
+            
+            .close-btn:hover {
+                color: #ff0000;
+            }
+            
+            /* Form header */
+            .application-form h3 {
+                text-align: left;
+                margin-bottom: 20px;
+                color: #333;
+            }
+            
+            /* Dropdown (Select box) */
+            .form-select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+                color: #333;  /* Ensure text color is visible */
+                background-color: white;  /* Ensure background is white */
+            }
+            
+            /* Dropdown options */
+            .form-select option {
+                color: #333;  /* Ensure option text color is visible */
+                background-color: white;  /* Ensure background is white */
+            }
+            
+            
+        </style>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+            /* Mobile first */
+            *, *::before, *::after { 
+                box-sizing: border-box;
+            }
+
+            html {
+                background-color: #F5F6FA;
+            }
+
+            body {
+                padding: 1rem 0.5rem;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+                font-family: 'Raleway', Sans-serif;
+            }
+
+            .application-container {
+                position: relative;
+            }
+
+            .sticky {
+                position: fixed;
+                top: 70px; /* Adjust this value to the height of your navbar */
+                width: 370px; /* Maintain the original width of the card */
+                z-index: 1000; /* Ensure it stays below the navbar */
+                margin-top: 50px; /* Adds margin to prevent overlap with navbar */
+            }
+
+            .application-popup {
+                transition: all 0.3s ease-in-out; /* Smooth transition when changing position */
+                width: 100%;
+                max-width: 370px; /* Ensure fixed width */
+            }
+
+            /* Flexbox container */
+            .application-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-content: center;
+                padding: 6%;
+                margin: 0;
+            }
+
+            /* Popup UI */
+            .application-popup {
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                background-color: #fff;
+                border-radius: 6px;
+                padding: 3rem 2rem;
+                box-shadow: 0 10px 40px -14px rgba(0,0,0,0.25);
+                text-align: center;
+            }
+
+            /* Popup Texts & button */
+            .application-popup-content {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+            }
+
+            .application-popup-title {
+                color: #32325d;
+                font-size: 1.8em;
+                line-height: 1.5em;
+                font-weight: 900;
+                margin-top: 0;
+            }
+
+            .application-popup-body {
+                font-size: 1.1em;
+                line-height: 1.6em;
+                color: #6b7c93;
+                font-weight: 500;
+                margin-bottom: 2.1em;
+            }
+
+            /* Button Link */
+            .application-popup-button {
+                display: block;
+                text-align: center;
+                text-decoration: none;
+                font-weight: 800;
+                font-size: 1em;
+                text-transform: uppercase;
+                color: #fff;
+                border-radius: 6px;
+                margin: 10px;
+                padding: 1em 3em;
+                background-size: 200% auto;
+                color: white;
+                box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+                background-image: linear-gradient(to right, #895cf2 0%, #ffabf4 50%, #895cf2 100%);
+                transition: 0.5s;
+            }
+
+            .application-popup-button:hover {
+                background-position: right center;
+            }
+            
+    </style>
         <style>
             .latest {
             width: 500px; /* Adjust the width according to your layout */
@@ -285,5 +589,33 @@
             }
             /* Other media queries here */
           </style>
+
+          <script>
+            function toggleApplicationForm() {
+                const formContainer = document.getElementById('application-form');
+                formContainer.style.display = formContainer.style.display === 'none' ? 'flex' : 'none';
+            }
+        </script>
+        <script>
+            window.addEventListener('scroll', function() {
+                fixCardOnScroll();
+            });
+            
+            let card = document.getElementById("applicationPopup");
+            let originalPosition = card.getBoundingClientRect().top + window.pageYOffset;
+            
+            function fixCardOnScroll() {
+                if (window.pageYOffset > originalPosition) {
+                    card.classList.add("sticky");
+                } else {
+                    card.classList.remove("sticky");
+                }
+            }
+            
+            // Recalculate the original position on window resize
+            window.addEventListener('resize', function() {
+                originalPosition = card.getBoundingClientRect().top + window.pageYOffset;
+            });
+        </script>
     {% endblock %}   
     
