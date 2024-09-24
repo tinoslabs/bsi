@@ -419,7 +419,7 @@ class Notification(models.Model):
         return self.notification_end_date >= timezone.now()
     
     
-class AddOnCourse(models.Model):
+class AddOn_Course(models.Model):
     college = models.ForeignKey('CollegeModel', on_delete=models.CASCADE, related_name='add_on_courses')
     header_image = models.ImageField(upload_to='header_image/')
     course_name = models.CharField(max_length=100, blank=True)
