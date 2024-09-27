@@ -36,74 +36,7 @@ from django.db.models import Q
     
 from django.urls import reverse
 
-# def index(request):
-#     if request.method == 'POST':
-#         form = NewsletterForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Our team will contact you soon.')
-#             return redirect('index')
-#     else:
-#         form = NewsletterForm()
 
-#     search_query = request.GET.get('query', '')
-
-#     if search_query:
-#         return redirect(f'{reverse("search_results")}?query={search_query}') 
-
-#     colleges = College_Model.objects.order_by('-id')[:9]  
-    
-   
-#     # unique_states = College_Model.objects.order_by('state').distinct('state')
-    
-#     college_filter = College_Model.objects.filter(state__iexact="Kerala").order_by('-id')[:9] 
-#     courses = Course_Model.objects.all()
-#     exams = ExamModel.objects.all()
-#     add_on = Add_On_Course.objects.all()
-#     add_on = Add_On_Course.objects.all()
-#     clients_review = ClientReview.objects.all()
-#     client_logo = Client_Logo.objects.all()
-#     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
-#     main_header = headerMain.objects.all()
-#     sub_headers = SubHeader.objects.all()
-#     sub_headings = SubHeaderHeading.objects.all()
-#     details = DetailsModel.objects.all()
-#     blog_category = Blog_Category.objects.filter(status=0)
-#     about = About_Video.objects.all()
-#     featured_colleges = FeaturedColleges.objects.all()
-#     slider_images = SliderImage.objects.all()
-#     footer_colleges = College_Model.objects.order_by('-id')[:5]
-#     footer_courses = Course_Model.objects.order_by('-id')[:7]
-#     footer_exams = ExamModel.objects.order_by('-id')[:7]
-
-#     context = {
-#         'clients_review': clients_review,
-#         'client_logo': client_logo,
-#         'courses': courses,
-#         'notifications': notifications,
-#         'colleges': colleges,
-#         # 'unique_states': unique_states,
-#         'college_filter':college_filter,
-#         'details': details,
-#         'blog_category': blog_category,
-#         'exam': exams,
-        
-#         'add_on': add_on,
-#         'about': about,
-#         'featured_colleges': featured_colleges,
-#         'footer_colleges': footer_colleges,
-#         'footer_courses': footer_courses,
-#         'footer_exams': footer_exams,
-#         'slider_images': slider_images,
-#         'main_header': main_header,
-#         'sub_headers': sub_headers,
-#         'sub_headings': sub_headings,
-#         'unique_courses': Course_Model.objects.values('course_name').distinct(),
-        
-#         'form': form
-#     }
-
-#     return render(request, 'index.html', context)
 
 
 from django.db.models import OuterRef, Subquery, F
@@ -137,7 +70,7 @@ def index(request):
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     details = DetailsModel.objects.all()
     blog_category = Blog_Category.objects.filter(status=0)
     about = About_Video.objects.all()
@@ -187,7 +120,7 @@ def search_results(request):
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     details = DetailsModel.objects.all()
     
     slider_images = SliderImage.objects.all()
@@ -232,9 +165,6 @@ def search_results(request):
     }
 
     return render(request, 'search_results.html', context)
-
-
-
 
 
 
@@ -1217,7 +1147,7 @@ def update_header_details(request, pk):
         form = HeaderDetailsForm(instance=header_detail)
     
     # Prepare a list of formatted sub_headings
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     formatted_sub_headings = []
     for sh in sub_headings:
         main_header = sh.main_header.main_heading
@@ -1314,7 +1244,7 @@ def blog_details(request, blog_heading):
     blog = Blog_Category.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -1446,7 +1376,7 @@ def college_details(request, college_name):
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -1580,7 +1510,7 @@ def course_details(request, id):
     sub_categories = SubCollectionCategory.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -1638,7 +1568,7 @@ def add_on_course_details(request, id):
     sub_categories = SubCollectionCategory.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -1682,7 +1612,7 @@ def exam_detail(request, exam_name):
     sub_categories = SubCollectionCategory.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     exam = ExamModel.objects.filter(status=False)
     category = get_object_or_404(ExamModel, exam_name=exam_name, status=False)
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
@@ -1792,7 +1722,7 @@ def header_details(request, id):
     course_collections = Course_Collection.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
@@ -1947,7 +1877,7 @@ def all_colleges(request):
     colleges = CollegeModel.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     
     slider_images = SliderImage.objects.all()
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
@@ -1974,7 +1904,7 @@ def notification_details(request, message):
     colleges = CollegeModel.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     
     slider_images = SliderImage.objects.all()
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
@@ -2003,7 +1933,7 @@ def application(request):
     colleges = CollegeModel.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     
     slider_images = SliderImage.objects.all()
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
@@ -2046,7 +1976,7 @@ def college_filter(request):
     notifications = Notification.objects.all().order_by('-created_at')
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     return render(request, 'college_filter.html', {'colleges': colleges, 'notifications': notifications,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings})
 
 
@@ -2069,7 +1999,7 @@ def college_filter(request, id):
     blog = Blog_Category.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
-    sub_headings = SubHeaderHeading.objects.all()
+    sub_headings = SubHeaderHeading.objects.all().order_by('-id')
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
     footer_exams = ExamModel.objects.order_by('-id')[:7]
