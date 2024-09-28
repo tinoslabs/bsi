@@ -103,32 +103,32 @@ class CollegeModel(models.Model):
     
 
     
-class College_Model(models.Model):
-    college_name = models.CharField(max_length=200, null=True, blank=True)
-    header_image = models.ImageField(upload_to='header_image/')
-    state = models.CharField(max_length=100, null=True,blank=True)
-    place_image = models.ImageField(upload_to='place_image/')
-    place = models.CharField(max_length=200, null=True, blank=True)
-    logo = models.ImageField(upload_to='college_logos/')
-    college_image = models.ImageField(upload_to='college_image/')
-    total_course = models.PositiveIntegerField(null=True, blank=True)
-    rating = models.FloatField(null=True,blank=True)
-    min_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    max_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    college_description  = models.TextField() 
-    youtube_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
-    college_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-    course_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-    more_details = models.TextField(null=True, blank=True)
+# class College_Model(models.Model):
+#     college_name = models.CharField(max_length=200, null=True, blank=True)
+#     header_image = models.ImageField(upload_to='header_image/')
+#     state = models.CharField(max_length=100, null=True,blank=True)
+#     place_image = models.ImageField(upload_to='place_image/')
+#     place = models.CharField(max_length=200, null=True, blank=True)
+#     logo = models.ImageField(upload_to='college_logos/')
+#     college_image = models.ImageField(upload_to='college_image/')
+#     total_course = models.PositiveIntegerField(null=True, blank=True)
+#     rating = models.FloatField(null=True,blank=True)
+#     min_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+#     max_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+#     college_description  = models.TextField() 
+#     youtube_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
+#     college_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+#     course_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
+#     more_details = models.TextField(null=True, blank=True)
 
-    def __str__(self):
-        return self.college_name
+#     def __str__(self):
+#         return self.college_name
 
-    @property
-    def total_fees_range(self):
-        if self.min_fee and self.max_fee:
-            return f"₹{self.min_fee} L - ₹{self.max_fee} L"
-        return None
+#     @property
+#     def total_fees_range(self):
+#         if self.min_fee and self.max_fee:
+#             return f"₹{self.min_fee} L - ₹{self.max_fee} L"
+#         return None
     
 
 class FeaturedColleges(models.Model):
@@ -322,7 +322,7 @@ class EnquiryModel(models.Model):
 
 
 class Enquiry_Model(models.Model):  
-    college = models.ForeignKey(College_Model, on_delete=models.CASCADE)
+    college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
     course = models.CharField(max_length=100)
     name = models.CharField(max_length=100, blank=True, null=True)   
     phone = models.CharField(max_length=20, blank=True, null=True)
@@ -351,18 +351,10 @@ class OTPVerification(models.Model):
         return self.created_at >= timezone.now() - timedelta(minutes=5) 
 
 
-# class EnquirySubmission(models.Model):
-#     college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=100)
-#     email = models.EmailField()
-#     phone = models.CharField(max_length=15) 
-#     submitted_at = models.DateTimeField(auto_now_add=True)
-
-#     def __str__(self):
-#         return f"{self.name} - {self.college.college_name}"    
+  
     
     
-class Enquiry_Submission(models.Model):
+class EnquirySubmission(models.Model):
     college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
