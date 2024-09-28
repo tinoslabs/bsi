@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bsi_app.collegemodel'),
         ),
         migrations.AlterField(
-            model_name='enquirysubmission',
+            model_name='enquiry_submission',
             name='college',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bsi_app.collegemodel'),
         ),
