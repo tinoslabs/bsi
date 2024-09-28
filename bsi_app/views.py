@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import ChatMessage
 from django.contrib.auth.decorators import login_required
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, Enquiry_Model, EnquiryModel,Enquiry_Submission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,NewsletterSubscription,CollegeModel,StateCategory,AddOn_Course,ApplicationModel
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo, Course_Model, Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, Enquiry_Model, EnquiryModel,Enquiry_Submission, About_Video, FeaturedColleges, SliderImage, headerMain, SubHeader, SubHeaderHeading,HeaderDetails, Notification,NewsletterSubscription,CollegeModel,StateCategory,AddOnCourse,ApplicationModel
 from .forms import  ContactModelForm, ClientReviewForm, Blog_Category_Form, Blog_Details_Form, Client_Logo_Form, CollegeModelForm,CourseForm,CourseCollectionForm, Sub_Collection_Form, SubCollectionCategoryForm, DetailsModelForm, ExamForm, ExamCategoryForm, ExamDetailsForm,EnquiryForm, Enquiry_Form,EnquirySubmissionForm,AboutVideoForm, FeaturedCollegesForm, SliderImageForm,headerMainForm, SubheaderForm, SubHeaderHeadingForm, HeaderDetailsForm, HeaderDetailsForm, NotificationForm, Add_On_Course_Form,NewsletterForm,ApplicationForm,State_Form
 from django.http import HttpResponseNotFound
 
@@ -62,7 +62,7 @@ def index(request):
 
     courses = Course_Model.objects.all()
     exams = ExamModel.objects.all()
-    add_on = AddOn_Course.objects.all()
+    add_on = AddOnCourse.objects.all()
     clients_review = ClientReview.objects.all()
     client_logo = Client_Logo.objects.all()
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
@@ -114,7 +114,7 @@ def search_results(request):
     colleges = CollegeModel.objects.none()
     courses = Course_Model.objects.none()
     exams = ExamModel.objects.none()
-    add_on = AddOn_Course.objects.none()
+    add_on = AddOnCourse.objects.none()
     
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     main_header = headerMain.objects.all()
@@ -137,7 +137,7 @@ def search_results(request):
         exams = ExamModel.objects.filter(
             Q(exam_name__icontains=search_query)
         )
-        add_on = AddOn_Course.objects.filter(
+        add_on = AddOnCourse.objects.filter(
             Q(course_name__icontains=search_query)
         )
         
@@ -640,12 +640,12 @@ def create_add_on_course(request):
 
 @login_required(login_url='user_login')
 def view_add_on_course(request):
-    courses = AddOn_Course.objects.select_related('college').all()
+    courses = AddOnCourse.objects.select_related('college').all()
     return render(request, 'admin_pages/view_add_on_course.html', {'courses': courses})
 
 @login_required(login_url='user_login')
 def update_add_on_course(request, id):
-    course = get_object_or_404(AddOn_Course, id=id)
+    course = get_object_or_404(AddOnCourse, id=id)
     college = CollegeModel.objects.all() 
     if request.method == 'POST':
         form = Add_On_Course_Form(request.POST, request.FILES, instance=course)
@@ -662,7 +662,7 @@ def update_add_on_course(request, id):
 
 @login_required(login_url='user_login')
 def delete_add_on_course(request, id):
-    course = get_object_or_404(AddOn_Course, id=id)
+    course = get_object_or_404(AddOnCourse, id=id)
     course.delete()
     return redirect('view_add_on_course')
 
@@ -1535,7 +1535,7 @@ def course_details(request, id):
 
 
 def add_on_course_details(request, id):
-    course = get_object_or_404(AddOn_Course, id=id)
+    course = get_object_or_404(AddOnCourse, id=id)
     
     if request.method == 'POST':
         if 'first_name' in request.POST:  # Assuming 'first_name' is unique to ApplicationForm
@@ -1557,7 +1557,7 @@ def add_on_course_details(request, id):
         application_form = ApplicationForm()
 
     # Context data
-    add_on = AddOn_Course.objects.all()
+    add_on = AddOnCourse.objects.all()
     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
     clients_review = ClientReview.objects.all() 
     exam = ExamModel.objects.all()   
