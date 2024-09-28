@@ -24,7 +24,7 @@ class SliderImageAdmin(admin.ModelAdmin):
     list_display = ['caption', 'image']
 
 # @admin.register(Enquiry_Submission)
-# class EnquirySubmissionAdmin(admin.ModelAdmin):
+# class Enquiry_SubmissionAdmin(admin.ModelAdmin):
 #     list_display = ('name', 'email', 'phone', 'college', 'submitted_at')
 #     search_fields = ('name', 'email', 'phone', 'college__college_name')
 #     list_filter = ('submitted_at', 'college')

@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo,  Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, Enquiry_Model,  Enquiry_Model,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,StateCategory,CollegeModel,AddOnCourse,ApplicationModel,EnquirySubmission
+from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo,  Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, Enquiry_Model,  Enquiry_Model,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,StateCategory,CollegeModel,AddOnCourse,ApplicationModel,Enquiry_Submission
 from django.core.exceptions import ValidationError
 import re
 
@@ -135,9 +135,9 @@ class Enquiry_Form(forms.ModelForm):
 class OTPVerificationForm(forms.Form):
     otp = forms.CharField(max_length=6, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter OTP'}))
 
-class EnquirySubmissionForm(forms.ModelForm):
+class Enquiry_SubmissionForm(forms.ModelForm):
     class Meta:
-         model = EnquirySubmission
+         model = Enquiry_Submission
          fields = '__all__'
          
       
