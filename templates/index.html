@@ -367,9 +367,26 @@
                                 <a href="{% url 'college_details' college.college_name %}">{{college.total_course}} courses</a>
                             </div>
                             
-                            <div>
+                            {% comment %} <div>
                                 {% if college.rating %}
                                 <span>⭐ {{college.rating}}</span>
+                                {% endif %}
+                            </div> {% endcomment %}
+                            <div>
+                                <span>Rating</span><br>
+                                {% if college.rating %}
+                                
+                                <span>
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= college.rating %}
+                                            <i class="material-icons" style="color: gold;font-size: 18px;">star</i>
+                                        
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                </span>
+                                {% else %}
+                                <span>No rating available</span>
                                 {% endif %}
                             </div>
                            {% comment %} <div>
