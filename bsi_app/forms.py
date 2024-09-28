@@ -135,7 +135,7 @@ class Enquiry_Form(forms.ModelForm):
 class OTPVerificationForm(forms.Form):
     otp = forms.CharField(max_length=6, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter OTP'}))
 
-class Enquiry_SubmissionForm(forms.ModelForm):
+class EnquirySubmissionForm(forms.ModelForm):
     class Meta:
          model = Enquiry_Submission
          fields = '__all__'
