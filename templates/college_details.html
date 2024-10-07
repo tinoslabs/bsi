@@ -88,24 +88,35 @@
                             </ul>
                         </div>
                     </div>
-                    {% comment %} <div class="col-lg-6">
-                        <div class="pages-image">
-                            <img src="{{ college.header_image.url }}" alt="{{ college.college_name }}">
-                        </div>
-                    </div> {% endcomment %}
 
-                    <div class="col-lg-6">
+
+                    {% comment %} <div class="col-lg-6">
                         <div class="pages-image">
                            
                                 <img src="{{ college.header_image.url }}" alt="{{ sub_heading.sub_heading }}">
                            
                         </div>
+                    </div> {% endcomment %}
+
+                    <div class="col-lg-6">
+                        <div class="pages-image">
+                            <img src="{{ college.header_image.url }}" alt="{{ sub_heading.sub_heading }}" class="fixed-size-image">
+                        </div>
                     </div>
+                    
                 </div>
             </div> 
             <div class="shape-7">
                 <img src="{% static 'assets/img/shape/shape-7.png' %}" alt="shape">
             </div>
+           <style>
+                .fixed-size-image {
+                    width: 100%; /* Make the image take up the full width of the container */
+                    height: auto; /* Maintain the aspect ratio */
+                    object-fit: cover; /* Ensures the image covers the container without distortion */
+                    max-height: 400px; /* Optional: Set a maximum height for the image */
+                }
+            </style> 
         </div>
         <!-- End Pages Banner Area -->
 

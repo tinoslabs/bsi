@@ -142,7 +142,7 @@
                     {% comment %} <h1 class="heading">Colleges in {{ category_name.state_name }}</h1> {% endcomment %}
                     <div class="row justify-content-center">
                         {% for college in college_details %}
-                        <div class="college-card">
+                        {% comment %} <div class="college-card">
                             <div class="college-header">
                                 <img src="{{ college.logo.url }}" alt="{{ college.college_name }} Logo" class="college-logo">
                                 <div class="college-info">
@@ -155,14 +155,25 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="college-details">
-                                <div>
-                                    <span>Courses Offered</span><br>
-                                    <a href="{% url 'college_details' college.college_name %}">View Courses</a>
-                                </div>
-                                <div>
-                                    <span>⭐ {{ college.rating }}</span>
-                                </div>
+                            
+                            
+                            <div>
+                                
+                                <span>Rating</span><br>
+                                {% if college.rating %}
+                                
+                                <span>
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= college.rating %}
+                                            <i class="material-icons" style="color: gold;font-size: 18px;">star</i>
+                                        
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                </span>
+                                {% else %}
+                                <span>No rating available</span>
+                                {% endif %}
                             </div>
                             <div class="college-actions">
                                 <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
@@ -170,6 +181,66 @@
                                     <i class="material-icons"></i>College Brochure
                                 </button>
                             </div>
+                        </div> {% endcomment %}
+                        <div class="college-card">
+                            <div class="college-header">
+                                <img src="{{college.logo.url}}" alt="{{college.college_name}}" class="college-logo">
+                                <div class="college-info">
+                                    <a href="{% url 'college_details' college.college_name %}">
+                                    <h3>{{college.college_name}}</h3>
+                                    </a>
+                                    <p class="location"><i class="material-icons">location_on</i>{{college.place}}  <span class="ranking"></span></p>
+                                </div>
+                            </div>
+                            <div class="college-details">
+                                <div>
+                                    <span>Courses Offered</span><br>
+                                    <a href="{% url 'college_details' college.college_name %}">{{college.total_course}} courses</a>
+                                </div>
+                                
+                                {% comment %} <div>
+                                    {% if college.rating %}
+                                    <span>⭐ {{college.rating}}</span>
+                                    {% endif %}
+                                </div> {% endcomment %}
+                                <div>
+                                    <span>Rating</span><br>
+                                    {% if college.rating %}
+                                    
+                                    <span>
+                                        {% for i in "12345" %}
+                                            {% if forloop.counter <= college.rating %}
+                                                <i class="material-icons" style="color: gold;font-size: 18px;">star</i>
+                                            
+                                            {% endif %}
+                                        {% endfor %}
+                                        
+                                    </span>
+                                    {% else %}
+                                    <span>No rating available</span>
+                                    {% endif %}
+                                </div>
+                               {% comment %} <div>
+                                    <span>Total Fees Range</span><br>
+                                    {% if college.min_fee and college.max_fee %}
+                                    ₹{{college.min_fee}} L - {{college.max_fee}} L
+                                    {% else %}
+                                    ₹00 L - ₹00 L
+                                    {% endif %}
+                                </div>  {% endcomment %}
+                            </div>
+                            <div class="college-actions">
+                                <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
+                                {% if college.college_brochure %}
+                                <button class="brochure-btn"  data-bs-toggle="modal" data-bs-target="#brochureModal" data-college-id="{{ college.id }}"><i class="material-icons"></i>College Brochure</button> 
+                                 {% else %} 
+                                <button class="brochure-btn" disabled>
+                                    <i class="material-icons"></i>Brochure Not Available
+                                </button> 
+                                {% endif %}
+                                
+                            </div>
+                            
                         </div>
                         {% empty %}
                         <p>No colleges found in this category.</p>
