@@ -220,14 +220,7 @@
                                     <span>No rating available</span>
                                     {% endif %}
                                 </div>
-                               {% comment %} <div>
-                                    <span>Total Fees Range</span><br>
-                                    {% if college.min_fee and college.max_fee %}
-                                    ₹{{college.min_fee}} L - {{college.max_fee}} L
-                                    {% else %}
-                                    ₹00 L - ₹00 L
-                                    {% endif %}
-                                </div>  {% endcomment %}
+                               
                             </div>
                             <div class="college-actions">
                                 <button class="bookmark-btn"><i class="material-icons">bookmark_border</i></button>
@@ -667,34 +660,7 @@
         
         <div class="events-area pb-75">
     
-    {% comment %} <div class="container">
-        <div class="section-title text-center m-auto" data-cues="slideInUp">
-            <h4>Top Colleges</h4>
-        </div>
-        <div class="row justify-content-center" data-cues="slideInUp">
-            {% for college in colleges %}
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-events-card">
-                        <a class="text-decoration-none d-block image" href="{% url 'college_details' college.college_name %}">
-                            {% if college.college_image %}
-                                <img src="{{ college.college_image.url }}" alt="{{ college.college_name }}" class="card-img">
-                            {% else %}
-                                <img src="{% static 'assets/img/college-7.jpg' %}" alt="events-image" class="card-img">
-                            {% endif %}
-                        </a>
-                        <div class="content d-flex align-items-top">
-                            <div class="title">
-                                <h3 class="college-title">
-                                    <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
-                                </h3>   
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</div> {% endcomment %}
+    
 
 <style>
     .single-events-card {
@@ -991,41 +957,6 @@
         });
     });
 </script>
-{% comment %} <script>
-	
-const sliderWrapper = document.querySelector('.slider-wrapper');
-const sliderItems = document.querySelectorAll('.gallery-item');
-const prevBtn = document.querySelector('.slider-nav.prev');
-const nextBtn = document.querySelector('.slider-nav.next');
 
-let currentIndex = 0;
-
-nextBtn.addEventListener('click', () => {
-  if (currentIndex < sliderItems.length - 3) {
-    currentIndex++;
-    sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
-  }
-});
-
-prevBtn.addEventListener('click', () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
-  }
-});
-
-
-setInterval(() => {
-  if (currentIndex < sliderItems.length - 3) {
-    currentIndex++;
-  } else {
-    currentIndex = 0;
-  }
-  sliderWrapper.style.transform = `translateX(-${currentIndex * 33.33}%)`;
-}, 3000); 
-
-</script>   {% endcomment %}
-
-       
         <script src="{% static 'assets/js/buttons.js' %}"></script>
         {% endblock %}

@@ -290,7 +290,7 @@ class EnquiryModel(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)   
     phone = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    Place = models.CharField(max_length=20, blank=True, null=True)
+    place = models.CharField(max_length=20, blank=True, null=True)
     message = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -304,7 +304,6 @@ class ApplicationModel(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)  # Adjusted max_length for flexibility
     state = models.CharField(max_length=100)
-    # pin_code = models.CharField(max_length=6)
     dob = models.DateField()  # Using DateField
 
     STUDENT_TYPE_CHOICES = [

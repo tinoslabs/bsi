@@ -55,18 +55,6 @@ class CourseForm(forms.ModelForm):
         fields = '__all__'
 
 
-
-
-
-# class Sub_Collection_Form(forms.ModelForm):
-#     class Meta:
-#         model = Sub_Collection
-#         fields = '__all__'
-
-
-
-
-
 class ExamForm(forms.ModelForm):
     class Meta:
          model = ExamModel
@@ -188,7 +176,6 @@ class ApplicationForm(forms.ModelForm):
             'email', 
             'phone', 
             'state', 
-            # 'pin_code', 
             'dob', 
             'student_type', 
             'degree',
@@ -200,11 +187,7 @@ class ApplicationForm(forms.ModelForm):
             'student_type': forms.Select(choices=ApplicationModel.STUDENT_TYPE_CHOICES),
         }
     
-    # def clean_pin_code(self):
-    #     pin_code = self.cleaned_data.get('pin_code')
-    #     if not pin_code.isdigit() or len(pin_code) != 6:
-    #         raise forms.ValidationError('Enter a valid 6-digit pin code.')
-    #     return pin_code
+
 
     
 

@@ -666,213 +666,6 @@ def delete_add_on_course(request, id):
     course.delete()
     return redirect('view_add_on_course')
 
-# @login_required(login_url='user_login')
-# def create_course_collection(request):
-#     if request.method == 'POST':
-#         form = CourseCollectionForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('create_sub_collection')
-#         else:
-#             print(form.errors)
-#     else:
-#         form = CourseCollectionForm()
-
-#     return render(request, 'admin_pages/create_course_collection.html', {'form': form})
-
-
-
-# def view_course_collection(request):
-#     collections = Course_Collection.objects.all()
-#     return render(request,'admin_pages/view_course_collection.html',{'collections':collections})
-
-
-
-# @login_required(login_url='user_login')
-# def update_course_collection(request, id):
-#     print(f"Fetching Course_Collection with id: {id}")  # Debugging statement
-#     collection = get_object_or_404(Course_Collection, id=id)
-#     print(f"Found Course_Collection: {collection}")  # Debugging statement
-    
-#     if request.method == 'POST':
-#         form = CourseCollectionForm(request.POST, request.FILES, instance=collection)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('view_course_collection')  # Replace with your view name for viewing all collections
-#     else:
-#         form = CourseCollectionForm(instance=collection)
-    
-#     return render(request, 'admin_pages/update_course_collection.html', {'form': form, 'collection': collection})
-
-
-# @login_required(login_url='user_login')
-# def delete_course_collection(request, id):
-#     collection = get_object_or_404(Course_Collection, id=id)
-#     collection.delete()
-#     return redirect('view_course_collection')
-    
-
-
-# @login_required(login_url='user_login')
-# def create_sub_collection(request):
-#     course_collections = Course_Collection.objects.all()
-#     if request.method == 'POST':
-#         form = Sub_Collection_Form(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('create_subcollection_category')  # Replace 'view_courses' with your view name
-#         else:
-#             print(form.errors)  # Print form errors for debugging
-#     else:
-#         form = Sub_Collection_Form()
-
-#     return render(request, 'admin_pages/create_sub_collection.html', {
-#         'form': form,
-#         'course_collections': course_collections,
-#     })
-
-# @login_required(login_url='user_login')
-# def load_courses(request):
-#     collection_id = request.GET.get('collection')
-#     if collection_id:
-#         try:
-#             course_collection = Course_Collection.objects.get(id=collection_id)
-#             courses = course_collection.courses.values('id', 'course_name')
-#             return JsonResponse(list(courses), safe=False)
-#         except Course_Collection.DoesNotExist:
-#             return JsonResponse({'error': 'Invalid Collection ID'}, status=400)
-#     return JsonResponse({'error': 'Invalid Collection ID'}, status=400)
-
-
-# @login_required(login_url='user_login')
-# def view_sub_collection(request):
-#     sub_courses = Sub_Collection.objects.select_related('course').all()
-#     return render(request, 'admin_pages/view_sub_collection.html', {'sub_courses': sub_courses})
-
-
-# @login_required(login_url='user_login')
-# def update_sub_collection(request, pk):
-#     sub_collection = get_object_or_404(Sub_Collection, pk=pk)
-#     if request.method == 'POST':
-#         form = Sub_Collection_Form(request.POST, instance=sub_collection)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('view_sub_collection')  # Replace with your view name
-#     else:
-#         form = Sub_Collection_Form(instance=sub_collection)
-
-#     return render(request, 'admin_pages/update_sub_collection.html', {
-#         'form': form,
-#     })
-
-# @login_required(login_url='user_login')
-# def delete_sub_collection(request,pk):
-#     collections = get_object_or_404(Sub_Collection, id=pk)
-#     collections.delete()
-#     return redirect('view_sub_collection')
-
-
-# @login_required(login_url='user_login')
-# def create_subcollection_category(request):
-#     if request.method == 'POST':
-#         form = SubCollectionCategoryForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('add_details')  
-#     else:
-#         form = SubCollectionCategoryForm()
-
-#     return render(request, 'admin_pages/create_subcollection_category.html', {'form': form})
-
-
-# @login_required(login_url='user_login')
-# def view_subcollection_category(request):
-#     subcollection_categories = SubCollectionCategory.objects.all()
-#     return render(request, 'admin_pages/view_subcollection_category.html', {'subcollection_categories': subcollection_categories})
-
-
-# @login_required(login_url='user_login')
-# def update_subcollection_category(request, pk):
-#     # Fetch the existing SubCollectionCategory instance
-#     subcollection_category = get_object_or_404(SubCollectionCategory, pk=pk)
-    
-#     if request.method == 'POST':
-#         form = SubCollectionCategoryForm(request.POST, instance=subcollection_category)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('view_subcollection_category')  
-#     else:
-#         form = SubCollectionCategoryForm(instance=subcollection_category)
-    
-#     return render(request, 'admin_pages/update_subcollection_category.html', {'form': form})
-
-
-# @login_required(login_url='user_login')
-# def delete_subcollection_category(request, pk):
-#     # Fetch the SubCollectionCategory instance to delete
-#     subcollection_category = get_object_or_404(SubCollectionCategory, pk=pk) 
-#     subcollection_category.delete()
-#     return redirect('view_subcollection_category')  # Redirect to a list or detail view
-
-
-# @login_required(login_url='user_login')
-# def add_details(request):
-#     sub_collection_categories = SubCollectionCategory.objects.all()
-#     if request.method == 'POST':
-#         form = DetailsModelForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('view_details') 
-#     else:
-#         form = DetailsModelForm()
-    
-#     return render(request, 'admin_pages/add_details.html', {
-#         'form': form,
-#         'sub_collection_categories': sub_collection_categories,
-#     })
-
-
-# @login_required(login_url='user_login')
-# def view_details(request):
-#     details = DetailsModel.objects.all()
-#     return render(request,'admin_pages/view_details.html',{'details':details})
-
-
-# @login_required(login_url='user_login')
-# def update_details(request, pk):
-#     details_instance = get_object_or_404(DetailsModel, pk=pk)
-#     sub_collection_categories = SubCollectionCategory.objects.all()
-    
-#     if request.method == 'POST':
-#         form = DetailsModelForm(request.POST, instance=details_instance)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('view_details')  # Replace 'details_list' with the name of your view that lists the details
-#     else:
-#         form = DetailsModelForm(instance=details_instance)
-#     return render(request, 'admin_pages/update_details.html', {
-#         'form': form,
-#         'sub_collection_categories': sub_collection_categories,
-#     })
-
-
-# @login_required(login_url='user_login')
-# def delete_details(request, pk):
-#     collection = get_object_or_404(DetailsModel, id=pk)
-#     collection.delete()
-#     return redirect('view_details') 
-
-
-# @login_required(login_url='user_login')
-# def create_featured_colleges(request):
-#     if request.method == 'POST':
-#         form = FeaturedCollegesForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('view_featured_colleges')  
-#     else:
-#         form = FeaturedCollegesForm()
-#     return render(request, 'admin_pages/create_featured_colleges.html', {'form': form})
 
 def create_featured_colleges(request):
     if request.method == 'POST':
@@ -1092,40 +885,6 @@ def add_header_details(request):
     })
 
 
-# @login_required(login_url='user_login')
-# def add_header_details(request):
-#     sub_headings = SubHeaderHeading.objects.all()
-    
-#     if request.method == 'POST':
-#         form = HeaderDetailsForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('view_header_details')
-#     else:
-#         form = HeaderDetailsForm()
-
-#     return render(request, 'admin_pages/add_header_details.html', {
-#         'form': form,
-#         'sub_headings': sub_headings
-#     })
-
-# @login_required(login_url='user_login')
-# def get_header_details(request):
-#     sub_heading_id = request.GET.get('sub_heading_id')
-    
-#     if sub_heading_id:
-#         try:
-#             sub_heading = SubHeaderHeading.objects.select_related('main_header', 'sub_header').get(id=sub_heading_id)
-#             data = {
-#                 'main_heading': sub_heading.main_header.main_heading,
-#                 'sub_header': sub_heading.sub_header.sub_header,
-#                 'sub_heading': sub_heading.sub_heading,
-#             }
-#             return JsonResponse(data)
-#         except SubHeaderHeading.DoesNotExist:
-#             return JsonResponse({'error': 'Sub heading not found'}, status=404)
-    
-#     return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
 @login_required(login_url='user_login')
@@ -1208,15 +967,7 @@ def view_slider(request):
     slider = SliderImage.objects.all()
     return render(request, 'admin_pages/view_slider.html', {'slider': slider})
 
-# def exam_detail(request, id):
-#     courses = Course_Model.objects.all()   
-#     exam = get_object_or_404(ExamModel, id=id)
-#     categories = ExamCategory.objects.filter(exam_name=exam)
-#     details = ExamDetails.objects.filter(exam=exam)
-#     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
-#     footer_courses = Course_Model.objects.order_by('-id')[:7]
-#     footer_exams = ExamModel.objects.order_by('-id')[:7]
-#     return render(request, 'exam_details.html', {'exam': exam, 'categories': categories, 'details':details,'courses':courses,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams})
+
 
 
 
@@ -1276,56 +1027,6 @@ def blog_details(request, blog_heading):
     else:
         messages.warning(request, "No such category found")
         return render(request, 'blog-details.html')
-
-# def college_details(request, college_name):
-#     college = get_object_or_404(College_Model, college_name=college_name)
-#     if request.method == 'POST':
-#         form = Enquiry_Form(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Our team will contact you soon.')
-#             return redirect('college_details', college_name=college_name)
-#     else:
-#         form = Enquiry_Form()
-        
-#     exam = ExamModel.objects.all()
-#     colleges = College_Model.objects.all()
-#     course = Course_Model.objects.all()
-#     courses = college.courses.all()
-#     course_collections = Course_Collection.objects.all()
-#     clients_review = ClientReview.objects.all()
-#     sub_collections = Sub_Collection.objects.all()
-#     sub_categories = SubCollectionCategory.objects.all()
-#     main_header = headerMain.objects.all()
-#     sub_headers = SubHeader.objects.all()
-   
-#     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
-#     sub_headings = SubHeaderHeading.objects.all()
-#     footer_colleges = College_Model.objects.order_by('-id')[:5]
-#     footer_courses = Course_Model.objects.order_by('-id')[:7]
-#     footer_exams = ExamModel.objects.order_by('-id')[:7]
-#     return render(request, 'college_details.html', {
-#         'form': form,
-       
-#         'college': college,
-#         'courses': courses,
-#         'colleges': colleges,
-#         'course_collections': course_collections,
-#         'clients_review':clients_review,
-#         'sub_collections': sub_collections,
-#         'sub_categories': sub_categories,
-#         'courses' : courses,
-#         'exam' : exam,
-#         'course' : course,
-#         'footer_colleges':footer_colleges,
-#         'footer_courses':footer_courses,
-#         'footer_exams':footer_exams,
-#         'main_header':main_header,
-#         'sub_headers':sub_headers,
-#         'sub_headings':sub_headings,
-#         'notifications':notifications
-        
-#     })
 
 
 
@@ -1654,32 +1355,7 @@ def details_display(request, id):
 
     return render(request, 'details_display.html', {'application_form':application_form,'courses':courses,'form':form,'exam':exam, 'colleges':colleges, 'footer_colleges': footer_colleges, 'footer_courses':footer_courses, 'footer_exams':footer_exams,'notifications':notifications})
 
-# def header_details(request, id):
-#     if request.method == 'POST':
-#         form = EnquiryForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Our team will contact you soon.')
-#             return redirect('details_display', id=id)  # Redirect to the same college details page
-#     else:
-#         form = EnquiryForm()
-        
-    
-#     notifications = Notification.objects.filter(notification_end_date__gte=timezone.now())
-#     colleges = College_Model.objects.all()
-#     exam = ExamModel.objects.all() 
-#     courses = Course_Model.objects.all()
-#     course_collections = Course_Collection.objects.all()
-#     main_header = headerMain.objects.all()
-    
-#     sub_headers = SubHeader.objects.all()
-#     sub_headings = SubHeaderHeading.objects.all()
-#     sub_heading = get_object_or_404(SubHeaderHeading, id=id)
-#     footer_colleges = College_Model.objects.order_by('-id')[:5]
-#     footer_courses = Course_Model.objects.order_by('-id')[:7]
-#     footer_exams = ExamModel.objects.order_by('-id')[:7]
-#     data = HeaderDetails.objects.filter(sub_heading=sub_heading)
-#     return render(request, 'header_details.html', {'data': data, 'sub_heading': sub_heading,'courses':courses, 'course_collections':course_collections,'form':form,'exam':exam, 'colleges':colleges, 'footer_colleges': footer_colleges, 'footer_courses':footer_courses, 'footer_exams':footer_exams,'main_header':main_header,'sub_headers':sub_headers,'sub_heading':sub_heading ,'sub_headings':sub_headings,'notifications':notifications})
+
 
 def header_details(request, id):
     sub_heading = get_object_or_404(SubHeaderHeading, id=id)
@@ -1733,14 +1409,6 @@ def header_details(request, id):
         'data': data
     })
 
-
-
-# def slider(request):
-#     return render(request,'slider.html')
-
-
-# def exam_details(request):
-#     return render(request,'exam_details.html')
 
 
 
@@ -1839,27 +1507,7 @@ def notification(request):
 def card(request):
     return render(request,'card.html')
 
-# def all_colleges(request):
-#     if request.method == 'POST':
-#         form = EnquiryForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Our team will contact you soon.')
-#             return redirect('all_colleges')  
-#     else:
-#         form = EnquiryForm()
-#     client_logo = Client_Logo.objects.all()
-#     notifications = Notification.objects.all().order_by('-created_at')
-#     colleges = CollegeModel.objects.all()
-#     main_header = headerMain.objects.all()
-#     sub_headers = SubHeader.objects.all()
-#     sub_headings = SubHeaderHeading.objects.all()
-    
-#     slider_images = SliderImage.objects.all()
-#     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
-#     footer_courses = Course_Model.objects.order_by('-id')[:7]
-#     footer_exams = ExamModel.objects.order_by('-id')[:7]
-#     return render(request,'all_colleges.html',{'client_logo':client_logo,'notifications':notifications,'colleges':colleges,'main_header':main_header,'sub_headers':sub_headers,'sub_headings':sub_headings,'slider_images':slider_images,'footer_colleges':footer_colleges,'footer_courses':footer_courses,'footer_exams':footer_exams})
+
 
 def all_colleges(request):
     if request.method == 'POST':
@@ -2040,29 +1688,10 @@ def college_filter(request, id):
     return render(request, "college_filter.html", context)
 
 
-# def college_filter(request):
-#     return render(request, 'college_filter.html')
-
-
 
 def button(request):
     return render(request,'button.html')
 
 
-# def college_filter(request):
-#     place = request.GET.get('place', None)  
-#     print(f"Filtering colleges for place: '{place}'")  
-    
-    
-#     all_colleges = College_Model.objects.all()
-#     all_places = all_colleges.values_list('place', flat=True).distinct()
-#     print(f"Available places in database: {list(all_places)}")
-    
-#     colleges = all_colleges  
 
-#     if place:  
-#         colleges = colleges.filter(place__icontains=place)  
-#         print(f"Filtered colleges: {list(colleges)}")  
-#     notifications = Notification.objects.all().order_by('-created_at')
-#     return render(request, 'college_filter.html', {'colleges': colleges, 'notifications': notifications})
 

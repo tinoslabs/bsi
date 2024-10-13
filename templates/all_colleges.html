@@ -268,7 +268,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Place" name="Place">
+                                                <input type="text" class="form-control" placeholder="Place" name="place">
                                             </div>
                                         </div>
                                     </div>
@@ -592,113 +592,7 @@
                 </div>
             </div>
         </div>
-        {% comment %} <div class="contact-area pt-100 pb-75">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="contact-form">
-                            
-                            <h1>Talk To Our Experts</h1>
-                            {% if messages %}
-                                <div class="alert alert-success" role="alert">
-                                    {% for message in messages %}
-                                        {{ message }}
-                                    {% endfor %}
-                                </div>
-                                <script>
-                                    setTimeout(function(){
-                                        window.location.reload();
-                                    }, 5000);
-                                </script>
-                                {% endif %}
-                            <form method="POST">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Your name" name="name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Your email" name="email">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Phone Number" name="phone">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Place" name="Place">
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control textarea" placeholder="Your comments..." name="message" style="height: 100px;"></textarea>
-                                </div>
-                                
-                                <button type="submit" class="default-btn border-0">
-                                    Send Message
-                                    <i class="flaticon-right-arrow"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="contact-information">
-                            <h3>Contact Information</h3>
-                            <div class="information-card d-flex align-items-center">
-                                <div class="icon">
-                                    <i class="ri-phone-line"></i>
-                                </div>
-                                <div class="content">
-                                    <span>Call Us:</span>
-                                    <a class="d-block text-decoration-none" href="tel:45993939990">+91 80892 18594</a>
-                                </div>
-                            </div>
-                            <div class="information-card d-flex align-items-center">
-                                <div class="icon">
-                                    <i class="ri-message-line"></i>
-                                </div>
-                                <div class="content">
-                                    <span>Mail Us:</span>
-                                    <a class="d-block text-decoration-none" href="mailto:admasupport@gmail.com">support@badgerskillsinternational.com</a>
-                                </div>
-                            </div>
-                           
-                            <div class="information-card d-flex align-items-center">
-                                <div class="icon">
-                                    <i class="ri-map-pin-line"></i>
-                                </div>
-                                <div class="content">
-                                    <span class="d-block">Location:</span>
-                                    <p>2nd Floor, KJK BUILDING, BASIL JUNCTION, Kothamangalam, Ernakulam, Kerala 686691</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> {% endcomment %}
-        {% comment %} <style>
-            .pages-leave-reply {
-                width: 450px; /* Adjust as needed */
-                background-color: white;
-                padding: 20px;
-                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-                transition: top 0.3s ease-in-out; /* Smooth transition */
-            }
-
-            .pages-leave-reply.fixed {
-                position: fixed;
-                top: 130px; /* Adjust as needed */
-                right: 70px; /* Adjust as needed */
-                z-index: 950;
-            } 
-        </style> {% endcomment %}
+        
         <style>
             .events-area {
                 position: relative; /* Ensure the button is positioned relative to this container */
