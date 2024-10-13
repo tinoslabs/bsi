@@ -1,19 +1,8 @@
 from django import forms
-from .models import ContactModel, ClientReview, Blog_Category, Blog_Details, Client_Logo,  Course_Model, Course_Collection, Sub_Collection, SubCollectionCategory, DetailsModel, ExamModel, ExamCategory, ExamDetails, Enquiry_Model,  Enquiry_Model,About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,StateCategory,CollegeModel,AddOn_Course,ApplicationModel,Enquiry_Submission
+from .models import  ClientReview, Blog_Category, Blog_Details, Client_Logo,  Course_Model,  ExamModel, ExamCategory, Enquiry_Submission, ExamDetails, About_Video, FeaturedColleges, SliderImage, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification,StateCategory,CollegeModel,AddOn_Course,ApplicationModel,EnquiryModel
 from django.core.exceptions import ValidationError
 import re
 
-
-
-class ContactModelForm(forms.ModelForm):
-    class Meta:
-        model = ContactModel
-        fields = '__all__'
-
-class ClientReviewForm(forms.ModelForm):
-    class Meta:
-        model = ClientReview
-        fields = '__all__'
 
 class Blog_Category_Form(forms.ModelForm):
     class Meta:
@@ -24,6 +13,17 @@ class Blog_Details_Form(forms.ModelForm):
     class Meta:
         model = Blog_Details
         fields = '__all__'
+
+
+class ClientReviewForm(forms.ModelForm):
+    class Meta:
+        model = ClientReview
+        fields = '__all__'
+
+class EnquirySubmissionForm(forms.ModelForm):
+    class Meta:
+         model = Enquiry_Submission
+         fields = '__all__'
 
 class Client_Logo_Form(forms.ModelForm):
     class Meta:
@@ -55,34 +55,6 @@ class CourseForm(forms.ModelForm):
         fields = '__all__'
 
 
-class CourseCollectionForm(forms.ModelForm):
-    class Meta:
-        model = Course_Collection
-        fields = '__all__'
-
-
-# class Sub_Collection_Form(forms.ModelForm):
-#     class Meta:
-#         model = Sub_Collection
-#         fields = '__all__'
-
-class Sub_Collection_Form(forms.ModelForm):
-    class Meta:
-        model = Sub_Collection
-        fields = ['course', 'course_type']
-
-
-class SubCollectionCategoryForm(forms.ModelForm):
-    class Meta:
-         model = SubCollectionCategory
-         fields = '__all__'
-
-
-class DetailsModelForm(forms.ModelForm):
-    class Meta:
-         model = DetailsModel
-         fields = '__all__'
-
 class ExamForm(forms.ModelForm):
     class Meta:
          model = ExamModel
@@ -101,7 +73,7 @@ class ExamDetailsForm(forms.ModelForm):
 
 class EnquiryForm(forms.ModelForm):
     class Meta:
-         model = Enquiry_Model
+         model = EnquiryModel
          fields = '__all__'
 
 class AboutVideoForm(forms.ModelForm):
@@ -114,33 +86,21 @@ class SliderImageForm(forms.ModelForm):
          model = SliderImage
          fields = '__all__'
 
-# class Enquiry_Form(forms.ModelForm):
-#     class Meta:
-#          model = Enquiry_Model
-#          fields = '__all__'
+
 
 
 def validate_indian_phone_number(value):
     if not re.match(r'^[789]\d{9}$', value):
         raise ValidationError('Invalid Phone Number')
 
-class Enquiry_Form(forms.ModelForm):
-    phone = forms.CharField(validators=[validate_indian_phone_number])
 
-    class Meta:
-        model = Enquiry_Model
-        fields = '__all__'
 
 
 class OTPVerificationForm(forms.Form):
     otp = forms.CharField(max_length=6, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter OTP'}))
 
-class EnquirySubmissionForm(forms.ModelForm):
-    class Meta:
-         model = Enquiry_Submission
-         fields = '__all__'
-         
-      
+
+           
 class headerMainForm(forms.ModelForm):
     class Meta:
         model = headerMain
@@ -216,7 +176,6 @@ class ApplicationForm(forms.ModelForm):
             'email', 
             'phone', 
             'state', 
-            # 'pin_code', 
             'dob', 
             'student_type', 
             'degree',
@@ -228,11 +187,7 @@ class ApplicationForm(forms.ModelForm):
             'student_type': forms.Select(choices=ApplicationModel.STUDENT_TYPE_CHOICES),
         }
     
-    # def clean_pin_code(self):
-    #     pin_code = self.cleaned_data.get('pin_code')
-    #     if not pin_code.isdigit() or len(pin_code) != 6:
-    #         raise forms.ValidationError('Enter a valid 6-digit pin code.')
-    #     return pin_code
+
 
     
 

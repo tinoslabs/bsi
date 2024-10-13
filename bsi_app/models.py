@@ -15,16 +15,7 @@ class ChatMessage(models.Model):
     def __str__(self):
         return f"Message from {self.name}"
     
-
-class ContactModel(models.Model):
-    first_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
-    
+   
     
 class ClientReview(models.Model):
     client_name = models.CharField(max_length=100, null=True, blank=True)
@@ -100,36 +91,7 @@ class CollegeModel(models.Model):
             return f"₹{self.min_fee} L - ₹{self.max_fee} L"
         return None
     
-    
-
-    
-# class College_Model(models.Model):
-#     college_name = models.CharField(max_length=200, null=True, blank=True)
-#     header_image = models.ImageField(upload_to='header_image/')
-#     state = models.CharField(max_length=100, null=True,blank=True)
-#     place_image = models.ImageField(upload_to='place_image/')
-#     place = models.CharField(max_length=200, null=True, blank=True)
-#     logo = models.ImageField(upload_to='college_logos/')
-#     college_image = models.ImageField(upload_to='college_image/')
-#     total_course = models.PositiveIntegerField(null=True, blank=True)
-#     rating = models.FloatField(null=True,blank=True)
-#     min_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-#     max_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-#     college_description  = models.TextField() 
-#     youtube_videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
-#     college_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-#     course_brochure = models.FileField(upload_to='brochure/', null=True, blank=True)
-#     more_details = models.TextField(null=True, blank=True)
-
-#     def __str__(self):
-#         return self.college_name
-
-#     @property
-#     def total_fees_range(self):
-#         if self.min_fee and self.max_fee:
-#             return f"₹{self.min_fee} L - ₹{self.max_fee} L"
-#         return None
-    
+       
 
 class FeaturedColleges(models.Model):
     college_details = models.ForeignKey(CollegeModel, on_delete=models.CASCADE, related_name='featured_in')
@@ -170,84 +132,6 @@ class Course_Model(models.Model):
         verbose_name = "Course"
         verbose_name_plural = "Courses"
         ordering = ['course_name']
-
-
-class Course_Collection(models.Model):
-    courses = models.ManyToManyField(Course_Model, related_name='collections')
-
-    def __str__(self):
-        return ", ".join([course.course_name for course in self.courses.all()])
-
-    class Meta:
-        verbose_name = "Course Collection"
-        verbose_name_plural = "Course Collections"
-
-
-class Sub_Collection(models.Model):
-    TOP_RANKED_COLLEGES = 'Top Ranked Colleges'
-    POPULAR_COURSES = 'Popular Courses'
-    POPULAR_SPECIALIZATION = 'Popular Specialization'
-    COLLEGES_BY_LOCATION = 'Colleges By Location'
-    COMPARE_COLLEGES = 'Compare Colleges'
-    COLLEGE_REVIEWS = 'College Reviews'
-    EXAMS = 'Exams'
-    COLLEGE_PREDICTORS = 'College Predictors'
-    ASK_CURRENT_STUDENTS = 'Ask Current Students'
-    RANK_PREDICTORS = 'Rank Predictors'
-    RESOURCES = 'Resources'
-    CAT_PERCENTILE_PREDICTOR = 'CAT Percentile Predictor'
-    
-    COURSE_TYPE_CHOICES = [
-        (TOP_RANKED_COLLEGES, 'Top Ranked Colleges'),
-        (POPULAR_COURSES, 'Popular Courses'),
-        (POPULAR_SPECIALIZATION, 'Popular Specialization'),
-        (COLLEGES_BY_LOCATION, 'Colleges By Location'),
-        (COMPARE_COLLEGES, 'Compare Colleges'),
-        (COLLEGE_REVIEWS, 'College Reviews'),
-        (EXAMS, 'Exams'),
-        (COLLEGE_PREDICTORS, 'College Predictors'),
-        (ASK_CURRENT_STUDENTS, 'Ask Current Students'),
-        (RANK_PREDICTORS, 'Rank Predictors'),
-        (RESOURCES, 'Resources'),
-        (CAT_PERCENTILE_PREDICTOR, 'CAT Percentile Predictor'),
-    ]
-
-    course = models.ForeignKey(Course_Collection, on_delete=models.CASCADE)
-    course_type = models.CharField(max_length=50, choices=COURSE_TYPE_CHOICES, default=TOP_RANKED_COLLEGES)
-
-    def __str__(self):
-        return f"{self.course} ({self.get_course_type_display()})"
-
-    class Meta:
-        verbose_name = "Sub Collection"
-        verbose_name_plural = "Sub Collections"
-
-
-class SubCollectionCategory(models.Model):
-    course = models.ForeignKey(Course_Collection, on_delete=models.CASCADE)
-    sub_collection = models.ForeignKey(Sub_Collection, on_delete=models.CASCADE)
-    sub_category = models.CharField(max_length=100, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.sub_collection} - {self.sub_category}"
-
-    class Meta:
-        verbose_name = "Sub Collection Category" 
-        verbose_name_plural = "Sub Collection Categories"
-
-
-class DetailsModel(models.Model):
-    sub_collection_category = models.ForeignKey(SubCollectionCategory, on_delete=models.CASCADE)
-    details = models.TextField(null=True, blank=True)
-    videos = models.URLField(max_length=200, unique=True, null=True, blank=True)
-    more_details = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.sub_collection_category.sub_category  # Assuming 'name' is a field in SubCollectionCategory
-
-    class Meta:
-        verbose_name = "Details Model"
-        verbose_name_plural = "Details Models"
 
 
 class ExamModel(models.Model):
@@ -310,30 +194,6 @@ class ExamCategory(models.Model):
         return f"{self.exam_name} - {self.exam_type}"
     
 
-class EnquiryModel(models.Model):  
-    name = models.CharField(max_length=100, blank=True, null=True)   
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    Place = models.CharField(max_length=20, blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Enquiry_Model(models.Model):  
-    college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
-    course = models.CharField(max_length=100)
-    name = models.CharField(max_length=100, blank=True, null=True)   
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    Place = models.CharField(max_length=20, blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
-    def __str__(self):
-        return self.name
-    
-
-    
     
 class About_Video(models.Model):
     video_link = models.URLField(max_length=200, unique=True, null=True, blank=True)
@@ -351,9 +211,6 @@ class OTPVerification(models.Model):
         return self.created_at >= timezone.now() - timedelta(minutes=5) 
 
 
-  
-    
-    
 class Enquiry_Submission(models.Model):
     college = models.ForeignKey(CollegeModel, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -428,6 +285,16 @@ class NewsletterSubscription(models.Model):
 
     def __str__(self):
         return f"{self.email} - {self.college} - {self.phone}"
+    
+class EnquiryModel(models.Model):  
+    name = models.CharField(max_length=100, blank=True, null=True)   
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    place = models.CharField(max_length=20, blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
         
 class ApplicationModel(models.Model):
     college = models.ForeignKey('CollegeModel', on_delete=models.CASCADE)
@@ -437,7 +304,6 @@ class ApplicationModel(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)  # Adjusted max_length for flexibility
     state = models.CharField(max_length=100)
-    # pin_code = models.CharField(max_length=6)
     dob = models.DateField()  # Using DateField
 
     STUDENT_TYPE_CHOICES = [
