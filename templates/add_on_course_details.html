@@ -444,16 +444,9 @@
                                 <br>
                                 <form >
                                     
-                                    <input type="hidden" name="college" value="{{ college.id }}">
+                                    
                                     <div class="row">
-                                        <div class="form-group">
-                                            <select class="form-control" name="college">
-                                                <option value="" disabled selected>Select A College</option>
-                                                {% for college in college %}
-                                                    <option value="{{ college.id }}">{{ college.college_name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
+                                        
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Your name" name="name">

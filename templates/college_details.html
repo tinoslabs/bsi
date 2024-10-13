@@ -442,18 +442,11 @@
                                 {% endif %}
                                 <h2>Talk To Our Experts</h2>
                                 <br>
-                                <form >
-                                    
-                                    <input type="hidden" name="college" value="{{ college.id }}">
+                                <form method="post">
+                                    {% csrf_token %}
+                                   
                                     <div class="row">
-                                        <div class="form-group">
-                                            <select class="form-control" name="course">
-                                                <option value="" disabled selected>Select A course</option>
-                                                {% for course in courses %}
-                                                    <option value="{{ course.course_name }}">{{ course.course_name }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
+                                        
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Your name" name="name">

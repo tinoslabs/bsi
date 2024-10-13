@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import *
 # Register your models here.
-admin.site.register(Course_Collection)
-admin.site.register(Sub_Collection)
+# admin.site.register(Course_Collection)
+# admin.site.register(Sub_Collection)
 admin.site.register(Course_Model)
-admin.site.register(SubCollectionCategory)
+# admin.site.register(SubCollectionCategory)
 admin.site.register(SliderImage)
 admin.site.register(Notification)
 admin.site.register(About_Video)
