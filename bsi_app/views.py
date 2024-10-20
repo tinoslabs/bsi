@@ -337,7 +337,6 @@ def delete_client_review(request,id):
     return redirect('view_client_reviews')
 
 
-
 @login_required(login_url='user_login')
 def create_exam(request):
     if request.method == 'POST':
@@ -389,6 +388,7 @@ def create_exam_category(request):
 
     return render(request, 'admin_pages/create_exam_category.html', {'form': form})
 
+
 @login_required(login_url='user_login')
 def view_exam_category(request):
     category = ExamCategory.objects.all().order_by('-id')
@@ -415,7 +415,7 @@ def delete_exam_category(request, pk):
     exam_category.delete()
     return redirect('some_view_name')  # Replace with your view name
     
-
+    
 @login_required(login_url='user_login')
 def create_exam_details(request):
     if request.method == 'POST':
@@ -457,14 +457,12 @@ def update_exam_details(request, id):
     }
     return render(request, 'admin_pages/update_exam_details.html', context)
 
+
 @login_required(login_url='user_login')
 def delete_exam_details(request,id):
     exam_detail = ExamDetails.objects.get(id=id)
     exam_detail.delete()
     return redirect('view_exam_details')
-
-
-
 
 
 @login_required(login_url='user_login')
@@ -578,7 +576,6 @@ def delete_college(request, college_id):
     college = get_object_or_404(CollegeModel, id=college_id)
     college.delete()
     return redirect('view_college')  # Replace 'view_colleges' with your view name for viewing all colleges
-
 
 # ///// Course Section Start //////
 @login_required(login_url='user_login')
@@ -1509,6 +1506,53 @@ def card(request):
 
 
 
+# def all_colleges(request):
+#     if request.method == 'POST':
+#         if 'first_name' in request.POST:  # Assuming 'first_name' is unique to ApplicationForm
+#             application_form = ApplicationForm(request.POST)
+#             if application_form.is_valid():
+#                 application_form.save()
+#                 messages.success(request, 'Your application has been submitted successfully.')
+#                 return redirect('all_colleges')
+#         else:
+#             form = EnquiryForm(request.POST)
+#             if form.is_valid():
+#                 form.save()
+#                 messages.success(request, 'Our team will contact you soon.')
+#                 return redirect('all_colleges')
+#     else:
+#         form = EnquiryForm()
+#         application_form = ApplicationForm()
+
+#     client_logo = Client_Logo.objects.all()
+#     notifications = Notification.objects.all().order_by('-created_at')
+#     colleges = CollegeModel.objects.all()
+#     main_header = headerMain.objects.all()
+#     sub_headers = SubHeader.objects.all()
+#     sub_headings = SubHeaderHeading.objects.all()
+    
+#     slider_images = SliderImage.objects.all()
+#     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
+#     footer_courses = Course_Model.objects.order_by('-id')[:7]
+#     footer_exams = ExamModel.objects.order_by('-id')[:7]
+    
+#     return render(request, 'all_colleges.html', {
+#         'client_logo': client_logo,
+#         'notifications': notifications,
+#         'colleges': colleges,
+#         'main_header': main_header,
+#         'sub_headers': sub_headers,
+#         'sub_headings': sub_headings,
+#         'slider_images': slider_images,
+#         'footer_colleges': footer_colleges,
+#         'footer_courses': footer_courses,
+#         'footer_exams': footer_exams,
+#         'form': form,
+#         'application_form': application_form,
+#     })
+
+
+
 def all_colleges(request):
     if request.method == 'POST':
         if 'first_name' in request.POST:  # Assuming 'first_name' is unique to ApplicationForm
@@ -1527,13 +1571,18 @@ def all_colleges(request):
         form = EnquiryForm()
         application_form = ApplicationForm()
 
+    # Filtering for Kerala State Colleges
+    try:
+        kerala_category = StateCategory.objects.get(state_name="Kerala")  # Fetch the Kerala state category
+        colleges = CollegeModel.objects.filter(category=kerala_category)  # Filter colleges in Kerala
+    except StateCategory.DoesNotExist:
+        colleges = CollegeModel.objects.none()  # If no Kerala category is found, return an empty queryset
+
     client_logo = Client_Logo.objects.all()
     notifications = Notification.objects.all().order_by('-created_at')
-    colleges = CollegeModel.objects.all()
     main_header = headerMain.objects.all()
     sub_headers = SubHeader.objects.all()
     sub_headings = SubHeaderHeading.objects.all()
-    
     slider_images = SliderImage.objects.all()
     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
     footer_courses = Course_Model.objects.order_by('-id')[:7]
@@ -1542,7 +1591,7 @@ def all_colleges(request):
     return render(request, 'all_colleges.html', {
         'client_logo': client_logo,
         'notifications': notifications,
-        'colleges': colleges,
+        'colleges': colleges,  # Kerala colleges
         'main_header': main_header,
         'sub_headers': sub_headers,
         'sub_headings': sub_headings,
