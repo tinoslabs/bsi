@@ -1,53 +1,58 @@
 from django.shortcuts import render
 from rest_framework import generics
-from bsi_app.models import StateCategory,CollegeModel,ExamModel,ExamDetails, headerMain,SubHeader,SubHeaderHeading,HeaderDetails
-from .serializers import StateCategorySerializer,CollegeModelSerializer,ExamModelSerializer,ExamDetailsSerializer, HeaderMainSerializer,SubHeaderSerializer,SubHeaderHeadingSerializer,HeaderDetailsSerializer
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
+from bsi_app.models import StateCategory,CollegeModel,ExamModel,ExamDetails, headerMain,SubHeader,SubHeaderHeading,HeaderDetails,Notification
+from .serializers import StateCategorySerializer,CollegeModelSerializer,ExamModelSerializer,ExamDetailsSerializer, HeaderMainSerializer,SubHeaderSerializer,SubHeaderHeadingSerializer,HeaderDetailsSerializer,NotificationSerializer
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
 
 # Create your views here.
 
 
-class statecategoryListCreate(generics.ListCreateAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+
     
+class StateCategoryViewSet(ReadOnlyModelViewSet):
+    """
+    A read-only viewset for viewing StateCategory instances.
+    """
     queryset = StateCategory.objects.all()
-    serializer_class  = StateCategorySerializer 
+    serializer_class = StateCategorySerializer
     
     
-class CollegeModelViewSet(generics.ListCreateAPIView):
+class CollegeModelViewSet(ReadOnlyModelViewSet):
     queryset = CollegeModel.objects.all()
     serializer_class = CollegeModelSerializer
     
     
-class ExamCategoryViewSet(generics.ListCreateAPIView):
+class ExamCategoryViewSet(ReadOnlyModelViewSet):
     queryset = ExamModel.objects.all()
     serializer_class = ExamModelSerializer
     
     
-class ExamDetailsListCreateAPIView(generics.ListCreateAPIView):
+class ExamDetailsViewSet(ReadOnlyModelViewSet):
     queryset = ExamDetails.objects.all()
     serializer_class = ExamDetailsSerializer
     
 
-class HeaderMainListCreateAPIView(generics.ListCreateAPIView):
+class HeaderMainViewSet(ReadOnlyModelViewSet):
     queryset = headerMain.objects.all()
     serializer_class = HeaderMainSerializer
     
     
-class SubHeaderListCreateAPIView(generics.ListCreateAPIView):
+class SubHeaderViewSet(ReadOnlyModelViewSet):
     queryset = SubHeader.objects.all()
     serializer_class = SubHeaderSerializer
     
     
-class SubHeaderHeadingListCreateAPIView(generics.ListCreateAPIView):
+class SubHeaderHeadingViewSet(ReadOnlyModelViewSet):
     queryset = SubHeaderHeading.objects.all()
     serializer_class = SubHeaderHeadingSerializer
     
     
-class HeaderDetailsListCreateAPIView(generics.ListCreateAPIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+class HeaderDetailsViewSet(ReadOnlyModelViewSet):
     queryset = HeaderDetails.objects.all()
     serializer_class = HeaderDetailsSerializer
+    
+    
+class NotificationViewSet(ReadOnlyModelViewSet):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer

@@ -1,14 +1,19 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import StateCategoryViewSet,CollegeModelViewSet,ExamCategoryViewSet,ExamDetailsViewSet,HeaderMainViewSet,SubHeaderViewSet,SubHeaderHeadingViewSet,HeaderDetailsViewSet,NotificationViewSet
 
-urlpatterns = [
-    path('statecategoryListCreate/', views.statecategoryListCreate.as_view(), name='statecategoryListCreate'),
-    path('CollegeModelViewSet/', views.CollegeModelViewSet.as_view(), name='CollegeModelViewSet'),
-    path('ExamCategoryViewSet/', views.ExamCategoryViewSet.as_view(), name='ExamCategoryViewSet'),
-    path('ExamDetailsListCreateAPIView/', views.ExamDetailsListCreateAPIView.as_view(), name='ExamDetailsListCreateAPIView'),
-    path('header-main/', views.HeaderMainListCreateAPIView.as_view(), name='header-main'),
-    path('sub-header/', views.SubHeaderListCreateAPIView.as_view(), name='sub-header'),
-    path('subheader-heading/', views.SubHeaderHeadingListCreateAPIView.as_view(), name='subheader-heading-list-create'),
-    path('header-details/', views.HeaderDetailsListCreateAPIView.as_view(), name='header-details-list-create'),
-    
+# Create a router and register the StateCategoryViewSet
+router = DefaultRouter()
+router.register(r'statecategory', StateCategoryViewSet, basename='statecategory')
+router.register(r'college', CollegeModelViewSet, basename='college')
+router.register(r'exam-category', ExamCategoryViewSet, basename='exam-category')
+router.register(r'exam-details', ExamDetailsViewSet, basename='exam-details')
+router.register(r'header-main', HeaderMainViewSet, basename='header-main')
+router.register(r'sub-header', SubHeaderViewSet, basename='sub-header')
+router.register(r'subheader-heading', SubHeaderHeadingViewSet, basename='subheader-heading')
+router.register(r'header-details', HeaderDetailsViewSet, basename='header-details')
+router.register(r'notifications', NotificationViewSet, basename='notifications')
+
+urlpatterns = [   
+    path('', include(router.urls)),  # DefaultRouter-generated endpoints
 ]
