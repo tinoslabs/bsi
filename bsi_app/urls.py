@@ -53,7 +53,6 @@ urlpatterns = [
     path('blog_details/<str:blog_heading>/', views.blog_details,name='blog_details'),
 
 
-
     path('add_clients_logo', views.add_clients_logo, name='add_clients_logo'),
     path('view_clients_logo', views.view_clients_logo, name='view_clients_logo'),
     path('update_clients_logo/<int:id>/',views.update_clients_logo, name='update_clients_logo'),
@@ -77,34 +76,13 @@ urlpatterns = [
     path('update_course/<int:course_id>/', views.update_course, name='update_course'),
     path('delete_course/<int:id>/', views.delete_course, name='delete_course'),
 
-    # path('create_course_collection', views.create_course_collection, name='create_course_collection'),
-    # path('view_course_collection',views.view_course_collection, name='view_course_collection'),
-    # path('update_course_collection/<int:id>/', views.update_course_collection, name='update_course_collection'),
-    # path('delete_course_collection/<int:id>/', views.delete_course_collection, name='delete_course_collection'),
-
-    # path('load-courses/', views.load_courses, name='load_courses'),
-    # path('create_sub_collection/', views.create_sub_collection, name='create_sub_collection'),
-    # path('view_sub_collection',views.view_sub_collection,name='view_sub_collection'),
-    # path('update_sub_collection/<int:pk>/', views.update_sub_collection, name='update_sub_collection'),
-    # path('delete_sub_collection/<int:pk>/', views.delete_sub_collection, name='delete_sub_collection'),
-
-    # path('create_subcollection_category',views.create_subcollection_category,name='create_subcollection_category'),
-    # path('view_subcollection_category/', views.view_subcollection_category, name='view_subcollection_category'),
-    # path('update-subcollection-category/<int:pk>/', views.update_subcollection_category, name='update_subcollection_category'),
-    # path('delete_subcollection_category/<int:pk>/', views.delete_subcollection_category, name='delete_subcollection_category'),
-
-
     path('exam', views.exam, name='exam'),
     path('college_details/<str:college_name>/', views.college_details, name='college_details'),
    
     path('download-brochure/', views.download_brochure, name='download_brochure'),
     path('enquiry_submition_view', views.enquiry_submition_view, name='enquiry_submition_view'),
     path('delete_enquiry_submition/<int:pk>/', views.delete_enquiry_submition, name='delete_enquiry_submition'),
-    
-    # path('add_details',views.add_details,name='add_details'),
-    # path('view_details', views.view_details, name='view_details'),
-    # path('update-details/<int:pk>/', views.update_details, name='update_details'),
-    # path('delete_details/<int:pk>/', views.delete_details, name='delete_details'),
+
 
     path('details/<int:id>/', views.details_display, name='details_display'),
     path('header_details/<int:id>/',views.header_details, name='header_details'),

@@ -41,7 +41,13 @@ INSTALLED_APPS = [
     'bsi_app',
     'ckeditor',
     'ckeditor_uploader',
+    'api',
+    'rest_framework',
+    
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
