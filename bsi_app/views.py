@@ -1501,56 +1501,6 @@ def notification(request):
     notifications = Notification.objects.all().order_by('-created_at')
     return render(request,'notification.html',{'notifications':notifications})
 
-def card(request):
-    return render(request,'card.html')
-
-
-
-# def all_colleges(request):
-#     if request.method == 'POST':
-#         if 'first_name' in request.POST:  # Assuming 'first_name' is unique to ApplicationForm
-#             application_form = ApplicationForm(request.POST)
-#             if application_form.is_valid():
-#                 application_form.save()
-#                 messages.success(request, 'Your application has been submitted successfully.')
-#                 return redirect('all_colleges')
-#         else:
-#             form = EnquiryForm(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#                 messages.success(request, 'Our team will contact you soon.')
-#                 return redirect('all_colleges')
-#     else:
-#         form = EnquiryForm()
-#         application_form = ApplicationForm()
-
-#     client_logo = Client_Logo.objects.all()
-#     notifications = Notification.objects.all().order_by('-created_at')
-#     colleges = CollegeModel.objects.all()
-#     main_header = headerMain.objects.all()
-#     sub_headers = SubHeader.objects.all()
-#     sub_headings = SubHeaderHeading.objects.all()
-    
-#     slider_images = SliderImage.objects.all()
-#     footer_colleges = CollegeModel.objects.order_by('-id')[:5]
-#     footer_courses = Course_Model.objects.order_by('-id')[:7]
-#     footer_exams = ExamModel.objects.order_by('-id')[:7]
-    
-#     return render(request, 'all_colleges.html', {
-#         'client_logo': client_logo,
-#         'notifications': notifications,
-#         'colleges': colleges,
-#         'main_header': main_header,
-#         'sub_headers': sub_headers,
-#         'sub_headings': sub_headings,
-#         'slider_images': slider_images,
-#         'footer_colleges': footer_colleges,
-#         'footer_courses': footer_courses,
-#         'footer_exams': footer_exams,
-#         'form': form,
-#         'application_form': application_form,
-#     })
-
 
 
 def all_colleges(request):
@@ -1667,14 +1617,6 @@ def course(request):
     
     return render(request, 'course.html')
 
-def gallery(request):
-    return render(request,'gallery.html')
-
-def gal(request):
-    return render(request,'gallery-2.html')
-
-
-
 
 def college_filter(request):
     
@@ -1737,9 +1679,6 @@ def college_filter(request, id):
     return render(request, "college_filter.html", context)
 
 
-
-def button(request):
-    return render(request,'button.html')
 
 
 

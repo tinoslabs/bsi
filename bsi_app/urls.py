@@ -109,9 +109,6 @@ urlpatterns = [
     path('delete_enquiry/<int:id>/', views.delete_enquiry, name='delete_enquiry'),
     path('course_details/<int:id>/',views.course_details, name='course_details'),
     
-    
-    
-
     path('exam_detail/<str:exam_name>/', views.exam_detail, name='exam_detail'),
     path('demo', views.demo, name='demo'),
     path('page_404', views.page_404, name='page_404'),
@@ -174,8 +171,6 @@ urlpatterns = [
     path('update_header_details/<int:pk>/', views.update_header_details, name='update_header_details'),
     
     path('delete_header_details/<int:pk>/', views.delete_header_details, name='delete_header_details'),
-    
-    path('card',views.card, name='card'),
     path('all_colleges', views.all_colleges, name='all_colleges'),
     
     # path('notification_details/<str:event_details>/', views.notification_details, name='notification_details'),
@@ -195,11 +190,9 @@ urlpatterns = [
     path('delete_application/<int:pk>/', views.delete_application, name='delete_application'),
     path('application', views.application, name='application'),
     
-    
     path('search_results',views.search_results, name='search_results'),
-    path('gallery', views.gallery, name='gallery'),
-    path('gal',views.gal,name='gal'),
+
     path('college_filter/<int:id>/', views.college_filter, name='college_filter'),
     
-    path('button', views.button, name='button'),
+    
 ]
