@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-<!-- <link rel="stylesheet" href="{% static 'assets/css/button.css' %}"> -->
-         <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/> -->
+
 {% block content %}
 
 
@@ -140,69 +138,7 @@
                 {% endfor %}
             </div>
             
-            {% comment %} <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="search-box your-container-class">
-                            <form method="get" action="{% url 'index' %}">
-                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
-                                {% if no_results %}
-                                    <div id="no-results-message" style="text-align: center; color: white;">
-                                        No results found for "{{ search_query }}". Please try another search term.
-                                    </div>
-                                    <script>
-                                        
-                                        setTimeout(function() {
-                                            var noResultsMessage = document.getElementById('no-results-message');
-                                            if (noResultsMessage) {
-                                                noResultsMessage.remove(); 
-                                            }
-                                            
-                                            window.location.href = "{% url 'index' %}";
-                                        }, 3000);
-                                    </script>
-                                {% endif %}
-                                <div class="form-group">
-                                    <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
-                                    <button type="submit"><i class="ri-search-line"></i></button>
-                                </div>
-                            </form>   
-                        </div>    
-                    </div>
-                </div>
-            </div> {% endcomment %}
-
-            {% comment %} <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="search-box your-container-class">
-                            <form method="get" action="{% url 'search_results' %}">
-                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
-                                <div class="form-group">
-                                    <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
-                                    <button type="submit"><i class="ri-search-line"></i></button>
-                                </div>
-                            </form>   
-                        </div>    
-                    </div>
-                </div>
-            </div> {% endcomment %}
-
-            {% comment %} <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="search-box your-container-class">
-                            <form method="get" action="{% url 'search_results' %}">
-                                <h3 style="color: #fff; text-align: center;">Find Colleges, Courses & Exams that are Best for You</h3>
-                                <div class="form-group">
-                                    <input type="text" name="query" class="form-control" placeholder="Find Your Future" value="{{ search_query }}">
-                                    <button type="submit"><i class="ri-search-line"></i></button>
-                                </div>
-                            </form>   
-                        </div>    
-                    </div>
-                </div>
-            </div> {% endcomment %}
+            
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">

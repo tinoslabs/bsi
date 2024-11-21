@@ -3,7 +3,13 @@
 <html lang="zxx">
     <head>
        
-
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-WQ35RXSM');</script>
+        <!-- End Google Tag Manager -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BSI-Badger Skills International </title>
@@ -127,31 +133,7 @@
         }
         </style>
 
-        {% comment %} <style>
-            .notification-icon {
-            position: relative;
-            display: inline-block;
-        }
         
-        .material-icons {
-            font-size: 48px;
-            background: linear-gradient(to bottom, #7befff, #6e8cff);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        
-        .num-count {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        </style> {% endcomment %}
         <style>
             .notification-container {
                 position: relative;
@@ -305,6 +287,10 @@
     </head>
     
     <body class="with-welcome-text">
+        <!-- Google Tag Manager (noscript) -->
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQ35RXSM"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
         <div class="load" id="loadingScreen">
             <div class="load-one"></div>
             <div class="load-two"></div>
@@ -359,17 +345,6 @@
                                                 <i class="flaticon-instagram"></i>
                                             </a>
                                         </li>
-                                        {% comment %} <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="" target="_blank">
-                                                <i class="flaticon-twitter"></i>
-                                            </a>
-                                        </li>   {% endcomment %}
-                                        {% comment %} <li class="d-inline-block">
-                                            <a class="text-decoration-none" href="https://twitter.com/" target="_blank">
-                                                <i class="x-icon"></i>
-                                            </a>
-                                        </li> {% endcomment %}
-                                       
                                         
                                         
                                     </ul>
@@ -422,26 +397,7 @@
                         {% endfor %}
                         
                     </ul>
-                    {% comment %} <div class="notification-container">
-                        <div class="notification-icon" onclick="toggleNotifications()">
-                            <i class="material-icons dp48">notifications</i>
-                            <span class="num-count">{{ notifications.count }}</span>
-                        </div>
-                        <div class="notifications" id="notificationDropdown">
-                            <div class="notification-header">
-                                <span>NOTIFICATIONS</span>
-                                <i class="material-icons settings-icon">settings</i>
-                            </div>
-                        
-                            {% for notification in notifications %}
-                                <div class="notification-item your-container-class">
-                                    <span class="count">{{ forloop.counter }}</span>
-                                    <a href="{% url 'notification_details' message=notification.message %}">{{ notification.message }}</a>
-                                    <span class="close" onclick="removeNotification({{ notification.id }})">&times;</span>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div> {% endcomment %}
+                    
                     <div class="notification-container">
                         <div class="notification-icon" onclick="toggleNotifications()">
                             <i class="material-icons dp48">notifications</i>
@@ -540,27 +496,7 @@
                     <i class="ri-close-fill"></i>
                 </button>
                
-                {% comment %} <div class="notification-container">
-                    <div class="notification-icon" onclick="toggleResponsiveNotifications()">
-                        <i class="material-icons dp48">notifications</i>
-                        <span class="num-count">{{ notifications.count }}</span>
-                    </div>
-                    <div class="notifications" id="responsiveNotificationDropdown">
-                        <div class="notification-header">
-                            <span>NOTIFICATIONS</span>
-                            <i class="material-icons settings-icon">settings</i>
-                        </div>
-                        {% for notification in notifications %}
-                        
-                        <div class="notification-item">
-                            <span class="count">{{ forloop.counter }}</span> 
-                            {{ notification.message }}</span> 
-                            <a href="{% url 'notification_details' message=notification.message %}" </a>
-                            <span class="close" onclick="removeNotification({{ notification.id }})">&times;</span>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>  {% endcomment %}
+                
                 <div class="notification-container">
                     <div class="notification-icon" onclick="toggleResponsiveNotifications()">
                         <i class="material-icons dp48">notifications</i>
@@ -700,50 +636,13 @@
                                 </div>
                             </div>
                            
-                            {% comment %} <div class="col-lg-4 col-sm-4">
-                                <div class="single-footer-widget your-container-class">
-                                    <h3>Colleges</h3>
-                                    <ul class="list-unstyled ps-0 mb-0 your-container-class">
-                                        {% for college in footer_colleges %}
-                                            <li>
-                                                <a class="text-decoration-none" href="{% url 'college_details' college.college_name %}">{{ college.college_name }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div> {% endcomment %}
+                            
                             
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="row" data-cues="slideInUp">
-                            {% comment %} <div class="col-lg-4 col-sm-6 col-md-4">
-                                <div class="single-footer-widget quick">
-                                    <h3>Courses</h3>
-                                    
-                                    <ul class="list-unstyled ps-0 mb-0 your-container-class">
-                                        {% for course in footer_courses %}
-                                            <li>
-                                                <a class="text-decoration-none" href="{% url 'course_details' course.id %}">{{ course.course_name }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div> {% endcomment %}
                             
-                            {% comment %} <div class="col-lg-4 col-sm-6 col-md-4">
-                                <div class="single-footer-widget quick">
-                                    <h3>Exams</h3>
-                                    
-                                    <ul class="list-unstyled ps-0 mb-0 your-container-class">
-                                        {% for exams in footer_exams %}
-                                            <li>
-                                                <a class="text-decoration-none" href="{% url 'exam_detail' exams.exam_name %}">{{ exams.exam_name }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div> {% endcomment %}
 
                             <div class="col-lg-4 col-sm-6 col-md-4">
                                 <div class="single-footer-widget contact">
@@ -808,18 +707,7 @@
         <!-- Js Files -->
 
 
-       {% comment %} <style>
-        @media (max-width: 992px) {
-            #responsiveNotificationDropdown {
-                top: 60px;
-                right: -100px;
-                width: 300px;
-                position: absolute;
-                z-index: 1050;
-                
-            }
-        }
-       </style> {% endcomment %}
+      
 
        <style>
         /* Responsive style */
@@ -1006,35 +894,7 @@
                     }
                     
                 </script>
-                {% comment %} <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        const notificationIcon = document.querySelector('.notification-icon');
-                        const notificationDropdown = document.getElementById('notificationDropdown');
-                    
-                        notificationIcon.addEventListener('click', function(event) {
-                            event.stopPropagation();  // Prevent the event from bubbling up
-                            if (notificationDropdown.style.display === 'block') {
-                                notificationDropdown.style.display = 'none';
-                            } else {
-                                notificationDropdown.style.display = 'block';
-                            }
-                        });
-                    
-                        document.addEventListener('click', function(event) {
-                            if (!notificationDropdown.contains(event.target) && event.target !== notificationIcon) {
-                                notificationDropdown.style.display = 'none';
-                            }
-                        });
-                    
-                        const closeButtons = document.querySelectorAll('.close');
-                        closeButtons.forEach(button => {
-                            button.addEventListener('click', function() {
-                                const notification = this.parentElement;
-                                notification.style.display = 'none';
-                            });
-                        });
-                    });
-                </script> {% endcomment %}
+                
                 <script>
                     function toggleResponsiveNotifications() {
                         const notificationDropdown = document.getElementById('responsiveNotificationDropdown');
@@ -1051,11 +911,7 @@
                     }
                 </script>
 
-                {% comment %} <script>
-                    window.onload = function() {
-                        document.querySelector('.page-loading').style.display = 'none';
-                    };
-                </script> {% endcomment %}
+                
 
     </body>
 
